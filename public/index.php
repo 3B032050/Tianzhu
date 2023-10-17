@@ -10,35 +10,36 @@
 <header class="page-header">
     <nav>
         <ul class="nav-list">
-            <li class="nav-item dropdown">
-            <li class='nav-item'><a href='login.php' style='color:black'>登入</a></li>
-                <a href="mailto:antory040512@gmail.com" style="color: black;">聯絡我們</a>
-                <ul class="dropdown-content">
-                    <?php
-                        session_start();
+            <li class="nav-item">
 
-                        if (isset($_SESSION["login_session"])) 
+                <?php
+                    session_start();
+
+                    if (isset($_SESSION["login_session"])) 
+                    {
+                        if ($_SESSION["login_session"] != true) 
                         {
-                            if ($_SESSION["login_session"] != true) 
-                            {
-                                echo "<li class='nav-item'><a href='login.php' style='color:black'>登入</a></li>";
-                            } 
-                            else if ($_SESSION["manager_login_session"] == true )
-                            {
-                                echo "<li class='nav-item'><a href='manager.php' style='color: black'>回主頁</a></li>";
-                            }
-                            else
-                            {
-                                echo "<li class='nav-item'><a href='user.php' style='color: black'>回主頁</a></li>";
-                            }
+                            echo "<li class='nav-item'><a href='login.php' style='color:black'>登入</a></li>";
                         } 
-                        else 
+                        else if ($_SESSION["manager_login_session"] == true )
                         {
-                            echo "<li class='nav-item'><a href='login.php' style='color: black'>登入</a></li>";
+                            echo "<li class='nav-item'><a href='manager.php' style='color: black'>管理者</a></li>";
+                            echo "<li class='nav-item'><a href='logout.php' style='color: black'>登出</a></li>";
                         }
-                    ?>
-                </ul>
+                        else
+                        {
+                            echo "<li class='nav-item'><a href='user.php' style='color: black'>會員</a></li>";
+                            echo "<li class='nav-item'><a href='logout.php' style='color: black'>登出</a></li>";
+                        }
+                    } 
+                    else 
+                    {
+                        echo "<li class='nav-item'><a href='login.php' style='color: black'>登入</a></li>";
+                    }
+                ?>
+               
             </li>
+            <li class="nav-item"><a href="mailto:antory040512@gmail.com" style="color: black;">聯絡我們</a></li>
             <li class="nav-item"><a href='history.php' style="color: black;">歷史公告</a></li>
             <li class="nav-item"><a href='home.php' style="color: black;">弘化利生</a></li>
         </ul>

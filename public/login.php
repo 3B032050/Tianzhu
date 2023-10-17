@@ -69,27 +69,11 @@ session_start();
                             exit;
 
                         }
-                        if ($row['authority'] == '1')
-                        {
-                            echo "<script>alert('登入成功')</script>";
-                            $_SESSION["login_session"] = true;
-                            $_SESSION["authority"] = '1';
-                            $_SESSION["manager_login_session"] = true;
-                            header('Refresh:1,manager.php');
-                        }
-                        elseif ($row['authority'] == '2')
-                        {
-                            echo "<script>alert('登入成功')</script>";
-                            $_SESSION["login_session"] = true;
-                            $_SESSION["authority"] = '2';
-                            $_SESSION["manager_login_session"] = true;
-                            header('Refresh:1,manager.php');
-                        }
+                       
                         else
                         {
                             echo "<script>alert('登入成功')</script>";
-                            $_SESSION["login_session"] = true;
-                            $_SESSION["manager_login_session"] = false;
+                           
                             header('Refresh:1,user.php');
                         }
                     }
