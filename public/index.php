@@ -21,16 +21,20 @@
                         {
                             echo "<li class='nav-item'><a href='login.php' style='color:black'>登入</a></li>";
                         } 
-                        else if ($_SESSION["manager_login_session"] == true )
-                        {
-                            echo "<li class='nav-item'><a href='manager.php' style='color: black'>管理者</a></li>";
-                            echo "<li class='nav-item'><a href='logout.php' style='color: black'>登出</a></li>";
-                        }
                         else
                         {
-                            echo "<li class='nav-item'><a href='user.php' style='color: black'>會員</a></li>";
-                            echo "<li class='nav-item'><a href='logout.php' style='color: black'>登出</a></li>";
-                        }
+                            if ($_SESSION["manager_login_session"] != true )
+                            {
+                                echo "<li class='nav-item'><a href='user.php' style='color: black'>會員</a></li>";
+                                echo "<li class='nav-item'><a href='logout.php' style='color: black'>登出</a></li>";
+                            }
+                            else
+                            {
+                                echo "<li class='nav-item'><a href='manager.php' style='color: black'>管理者</a></li>";
+                                echo "<li class='nav-item'><a href='logout.php' style='color: black'>登出</a></li>";
+                                
+                            }
+                        }   
                     } 
                     else 
                     {

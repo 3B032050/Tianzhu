@@ -58,6 +58,7 @@ session_start();
                 {
                     while ($row = mysqli_fetch_assoc($result))
                     {
+                        /*
                         $suspension_time = strtotime($row['suspension_time']);
                         $suspension_date = date("Y-m-d", $suspension_time);
                         $current_date = date("Y-m-d", time());
@@ -69,13 +70,21 @@ session_start();
                             exit;
 
                         }
-                       
                         else
-                        {
-                            echo "<script>alert('登入成功')</script>";
-                           
-                            header('Refresh:1,user.php');
-                        }
+                        {*/
+                           if($row['authority']=='1' || $row['authority']=='2')
+                           {
+                            $_SESSION["login_session"] = true;
+                            $_SESSION["authority"] = '1';
+                            $_SESSION["manager_login_session"] = true;
+                           }
+                           else
+                           {
+                            $_SESSION["login_session"] = true;
+                            $_SESSION["manager_login_session"] = false;
+                           }
+                           echo "<script>alert('登入成功'); setTimeout(function() { window.location.href = 'index.php'; }, 1000);</script>";
+                        
                     }
                 }
                 else
