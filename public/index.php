@@ -11,6 +11,7 @@
     <nav>
         <ul class="nav-list">
             <li class="nav-item dropdown">
+            <li class='nav-item'><a href='login.php' style='color:black'>登入</a></li>
                 <a href="mailto:antory040512@gmail.com" style="color: black;">聯絡我們</a>
                 <ul class="dropdown-content">
                     <?php
