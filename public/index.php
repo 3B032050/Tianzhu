@@ -49,6 +49,9 @@
             <ul class="dropdown">
                 <li><a href='home.php' style="color: black;">弘化利生</a>
                     <ul class="dropdown-content">
+                        <li><a href='video_list.php' style="color: black;">課程講義</a></li>
+                        <li><a href='video_list.php' style="color: black;">佛們小常識</a></li>
+                        <li><a href='LBSB.php' style="color: black;">居士學佛</a></li>
                         <li><a href='video_list.php' style="color: black;">法音流佈</a></li>
                     </ul>
                 </li>
