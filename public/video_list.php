@@ -39,7 +39,7 @@ if (mysqli_num_rows($result) > 0)
             if (isset($_GET["per"]))
             { 
                 $per = intval($_GET["per"]); //確認頁數只能夠是數值資料 
-                $sql_update = "UPDATE setting SET show_per = ? WHERE setting = '1'";
+                $sql_update = "UPDATE setting SET show_per = ? WHERE setting_id = '1'";
                 $stmt = mysqli_prepare($link, $sql_update);
                 mysqli_stmt_bind_param($stmt, "i", $show_per); // "i" 表示整數
                 $updateResult = mysqli_stmt_execute($stmt);
@@ -175,7 +175,7 @@ if (mysqli_num_rows($result) > 0)
      echo " 頁 <a href=?page=".$pages.">末頁</a>";  
      echo " 每頁顯示項目數量".$per;
      echo "
-     <form method=get action=video.php>
+     <form method=get action=video_list.php>
          <label for=per>每頁顯示比數：</label>
          <select name=per id=per>";
          foreach ($drop_per as $value) {
