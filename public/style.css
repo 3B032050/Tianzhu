@@ -15,31 +15,21 @@ img{
 
 /*標題*/
 header {
-    position:top;
+    position: absolute; /* 使用適當的position值 */
     top: 0;
     left: 0;
     width: 100%;
-    height:5%;
-<<<<<<< HEAD
-    background-color: #DEB887;
-    color: black;
-=======
-    background-color: #d28555de;
+    height: 5%;
+    background-color: rgba(210, 133, 85, 0.5); /* 使用rgba色彩以實現背景半透明 */
     color: rgb(182, 147, 98);
->>>>>>> origin/master
     padding: 5px;
     text-align: center;
     z-index: 1000;
-    opacity:0.5;
-
 }
 page-header {
     text-align: center;
-<<<<<<< HEAD
-    background-color: #DEB887; /* 設置背景顏色 */
-=======
-    background-color: #e9b393; /* 設置背景顏色 */
->>>>>>> origin/master
+    background-color: #e0ba14; /* 設置背景顏色 */
+
     color: rgb(23, 21, 21); /* 設置文字顏色 */
     padding: 10px;
     z-index: 1000;
@@ -57,37 +47,40 @@ page-header {
     vertical-align: top; /* 垂直對齊顶部 */
    
 }
-
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+/* 初始下拉選單樣式 */
 .dropdown {
     position: relative;
     display: inline-block;
 }
 
-/* 原始下拉菜單樣式*/
+ /* 滑鼠懸停時顯示下拉選單 */
+ .dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* 下拉選單樣式 */
 .dropdown-content {
     display: none;
     position: absolute;
     background-color: #f1f1f1;
     min-width: 160px;
     z-index: 1;
-    
-
-}
-/* 鼠標停下时顯示下拉菜单 */
-.dropdown:hover .dropdown-content {
-    display: block; 
 }
 
-/* 下拉 */
+/* 下拉選單中的項目樣式 */
 .dropdown-content li {
+    list-style-type: none;
     padding: 10px;
-    
 }
 
-/* 鼠標停下時的下拉菜單樣式 */
+/* 滑鼠懸停時的下拉選單項目樣式 */
 .dropdown-content li:hover {
     background-color: #ccc;
-    
 }
 /* 設定標題文字的顏色和字體大小 */
 h1 

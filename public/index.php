@@ -46,7 +46,14 @@
             <li class="nav-item"><a href="mailto:antory040512@gmail.com" style="color: black;">聯絡我們</a></li>
             
             <li class="nav-item"><a href='history.php' style="color: black;">歷史公告</a></li>
-            <li class="nav-item"><a href='home.php' style="color: black;">弘化利生</a></li>
+            <ul class="dropdown">
+                <li><a href='home.php' style="color: black;">弘化利生</a>
+                    <ul class="dropdown-content">
+                        <li><a href='video_list.php' style="color: black;">法音流佈</a></li>
+                    </ul>
+                </li>
+            </ul> 
+
         </ul>
     </nav>
 </header>
