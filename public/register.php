@@ -26,7 +26,7 @@ echo"
 <input type='radio' name='sex' value='男'>男性
 <input type='radio' name='sex' value='女'>女性
 <br>
-使用者電話:<input type='telephone' name='phone' value='" . (isset($_POST['phone']) ? htmlspecialchars($_POST['phone']) : '') . "' placeholder='請輸入您的電話' required><br>
+使用者電話:<input type='tel' name='phone' value='" . (isset($_POST['phone']) ? htmlspecialchars($_POST['phone']) : '') . "' placeholder='請輸入您的電話' required><br>
 使用者地址 : <input type='address' name='address' value='" . (isset($_POST['address']) ? htmlspecialchars($_POST['address']) : '') . "' placeholder='請輸入您的郵件' required><br>
 會員電子郵件 : <input type='email' name='email' value='" . (isset($_POST['email']) ? htmlspecialchars($_POST['email']) : '') . "' placeholder='請輸入您的郵件' required><br>
 使用者生日 :<input type='date' value='$currentDate' min='2022-01-01' max='9999-12-31' step='1' name='birthday'><br>

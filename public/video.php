@@ -87,7 +87,7 @@ if($_SESSION["manager_login_session"] == true)
                 <form action=video.php method=POST enctype=multipart/form-data accept-charset=UTF-8>
                     影片描述:<input type=text name=video_desc required><br>
                     選擇要上傳的MP4或mp3文件：<input type=file name=file><br>
-                    選擇youtube連結：<input type=text name=video_link>
+                    選擇youtube連結：<input type=url name=video_link>
                     <input type=submit value=上傳 required>
                 </form>
                 <hr>
