@@ -33,22 +33,25 @@ ini_set('session.gc_maxlifetime', 5);
    if($_SESSION["manager_login_session"] == true)
    {
 
-        $link=@mysqli_connect('localhost','root','A@asdfgh123','project');
+        $link=@mysqli_connect('localhost:33060','root','root','tianzhu');
         mysqli_query($link,'SET CHARACTER SET utf8');
-        $sql_search = "SELECT * FROM `setting` WHERE setting='1'";
+        $sql_search = "SELECT * FROM `setting` WHERE setting_id='1'";
         $result = mysqli_query($link, $sql_search);
 
         if (mysqli_num_rows($result) > 0)
         {  
             while ($row = mysqli_fetch_assoc($result))
             {
-                $setting=$row['setting'];
-                $idleTimeout = $row['idleTimeout'];
-                $per = $row['per'];
-                $time = $row['time'];
+                $setting=$row['setting_id'];
+                $expire_time = $row['expire_time'];
+                $show_per = $row['show_per'];
+                $drop_per = $row['drop_per'];
+                $drop_per = explode(",", $drop_per);
+                $sus_day = $row['sus_day'];
+                $ann_date= $row['ann_date'];
             }
         }
-        $idleTimeout = $idleTimeout * 60 * 1000; // 超過時間的毫秒數
+        $idleTimeout = $expire_time * 60 * 1000; // 超過時間的毫秒數
          // 將閒置時間值傳遞給 JavaScript 變數
          echo '<script>var idleTimeout = ' . $idleTimeout . ';</script>';
          echo "<table>";
@@ -104,11 +107,11 @@ ini_set('session.gc_maxlifetime', 5);
          ";
          
         echo "<table>";
-        $sql="SELECT * FROM `user` WHERE `level` = 1 OR `level` = 2";
+        $sql="SELECT * FROM `user` WHERE `authority` = 1 OR `authority` = 2";
         $result = mysqli_query($link,$sql);
         $data_nums = mysqli_num_rows($result); //統計總比數
         
-        $pages = ceil($data_nums/$per); //取得不小於值的下一個整數
+        $pages = ceil($data_nums/$show_per); //取得不小於值的下一個整數
         if (!isset($_GET["page"]))
         { 
             $page=1; //則在此設定起始頁數
@@ -116,8 +119,8 @@ ini_set('session.gc_maxlifetime', 5);
         {
             $page = intval($_GET["page"]); //確認頁數只能夠是數值資料
         }
-        $start = ($page-1)*$per; //每一頁開始的資料序號
-        $result = mysqli_query($link, $sql . ' LIMIT ' . $start . ', ' . $per);
+        $start = ($page-1)*$show_per; //每一頁開始的資料序號
+        $result = mysqli_query($link, $sql . ' LIMIT ' . $start . ', ' . $show_per);
         if(@mysqli_num_rows($result)>0)
         {
             echo "<td>"."<font size=5>"."管理者帳號"."</td>";
@@ -125,7 +128,7 @@ ini_set('session.gc_maxlifetime', 5);
             echo "<td>"."<font size=5>"."使用者電話"."</td>";
             echo "<td>"."<font size=5>"."電子郵件"."</td>";
             echo "<td>"."<font size=5>"."註冊時間"."</td>";   
-            if($_SESSION["level"]=='1')
+            if($_SESSION["authority"]=='1')
             {
                 while($row = mysqli_fetch_assoc($result))
                 {

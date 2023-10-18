@@ -44,6 +44,7 @@
                
             </li>
             <li class="nav-item"><a href="mailto:antory040512@gmail.com" style="color: black;">聯絡我們</a></li>
+            
             <li class="nav-item"><a href='history.php' style="color: black;">歷史公告</a></li>
             <li class="nav-item"><a href='home.php' style="color: black;">弘化利生</a></li>
         </ul>

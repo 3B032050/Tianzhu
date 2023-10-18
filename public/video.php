@@ -47,11 +47,11 @@ if($_SESSION["manager_login_session"] == true)
                 $show_per = $row['show_per'];
                 $drop_per = $row['drop_per'];
                 $drop_per = explode(",", $drop_per);
-                $sus_day = $row['time'];
+                $sus_day = $row['sus_day'];
                 $ann_date= $row['ann_date'];
              }
          }
-          $idleTimeout = $idleTimeout * 60 * 1000; // 超過時間的毫秒數
+          $idleTimeout = $expire_time * 60 * 1000; // 超過時間的毫秒數
              // 將閒置時間值傳遞給 JavaScript 變數
              $sql = "select * from `video`";
              $result = mysqli_query($link,$sql);
@@ -62,13 +62,13 @@ if($_SESSION["manager_login_session"] == true)
                  $per = intval($_GET["per"]); //確認頁數只能夠是數值資料 
                  $sql_update = "UPDATE setting SET show_per = ? WHERE setting = '1'";
                  $stmt = mysqli_prepare($link, $sql_update);
-                 mysqli_stmt_bind_param($stmt, "i", $per); // "i" 表示整數
+                 mysqli_stmt_bind_param($stmt, "i", $show_per); // "i" 表示整數
                  $updateResult = mysqli_stmt_execute($stmt);
                  mysqli_stmt_close($stmt);
              } 
              else 
              {
-                 $per=$per;
+                 $per=$show_per;
              }
                  $pages = ceil($data_nums/$per); //取得不小於值的下一個整數
              if (isset($_GET["page"]))
@@ -84,10 +84,10 @@ if($_SESSION["manager_login_session"] == true)
              echo "
             <table>
                 <td>
-                <form action=video.php method=POST enctype=multipart/form-data>
-                    影片描述:<input type=text name=text required><br>
-                    選擇要上傳的MP4或mp3文件：<input type=file name=file ><br>
-                    選擇youtube連結：<input type=text name=videolink>
+                <form action=video.php method=POST enctype=multipart/form-data accept-charset=UTF-8>
+                    影片描述:<input type=text name=video_desc required><br>
+                    選擇要上傳的MP4或mp3文件：<input type=file name=file><br>
+                    選擇youtube連結：<input type=text name=video_link>
                     <input type=submit value=上傳 required>
                 </form>
                 <hr>
@@ -99,12 +99,12 @@ if($_SESSION["manager_login_session"] == true)
             ";
             echo "<table>";
         echo "<td>";  
-        if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['text']))
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['video_desc']))
         {
-            if(isset($_FILES["file"]) && !empty($_FILES["file"]["name"]) || isset($_POST["videolink"]) && !empty($_POST['videolink'])) 
+            if(isset($_FILES["file"]) && !empty($_FILES["file"]["name"]) || isset($_POST["video_link"]) && !empty($_POST['video_link'])) 
             {
-                $text=$_POST['text'];
-                $videolink=$_POST['videolink'];
+                $video_desc=$_POST['video_desc'];
+                $video_link=$_POST['video_link'];
                 $file_name = $_FILES["file"]["name"];
                 $file_tmp_name = $_FILES["file"]["tmp_name"];
                 $file_type = $_FILES["file"]["type"];
@@ -120,11 +120,12 @@ if($_SESSION["manager_login_session"] == true)
                     if (move_uploaded_file($file_tmp_name, $file_path)) 
                     {
                         // 檢查是否文件名已存在於資料庫中
-                        $sql_check = "SELECT * FROM video WHERE text = ?";
+                        $sql_check = "SELECT * FROM video WHERE  video_desc= ?";
                         $stmt = mysqli_prepare($link, $sql_check);
                         if ($stmt) 
                         {
-                            mysqli_stmt_bind_param($stmt, "s", $text);
+                            mysqli_set_charset($link, "utf8mb4");
+                            mysqli_stmt_bind_param($stmt, "s", $video_desc);
                             mysqli_stmt_execute($stmt);
                             $result = mysqli_stmt_get_result($stmt);
                             mysqli_stmt_close($stmt);
@@ -136,11 +137,11 @@ if($_SESSION["manager_login_session"] == true)
                             else 
                             {
                                 // 將文件信息存儲到資料庫
-                                $sql_insert = "INSERT INTO video (text,file_name,file_path,videolink) VALUES (?,?,?,?)";
+                                $sql_insert = "INSERT INTO video (video_desc,file_name,file_path,video_link) VALUES (?,?,?,?)";
                                 $stmt = mysqli_prepare($link, $sql_insert);
                                 if ($stmt) 
                                 {
-                                    mysqli_stmt_bind_param($stmt, "ssss",$text,$file_name,$file_path,$videolink);
+                                    mysqli_stmt_bind_param($stmt, "ssss",$video_desc,$file_name,$file_path,$video_link);
                                     if (mysqli_stmt_execute($stmt)) 
                                     {
                                         echo "<script>alert('上傳成功'); setTimeout(function() { window.location.href = 'video.php'; }, 1000);</script>";
@@ -159,16 +160,17 @@ if($_SESSION["manager_login_session"] == true)
                         }
                     } 
                 }
-                else if(!empty($_POST['videolink']))
+                else if(!empty($_POST['video_link']))
                 {
                     $file_name="";
                     $file_path="";
                     // 檢查是否文件名已存在於資料庫中
-                    $sql_check = "SELECT * FROM video WHERE text = ?";
+                    mysqli_set_charset($link, "utf8mb4");
+                    $sql_check = "SELECT * FROM video WHERE video_desc = ?";
                     $stmt = mysqli_prepare($link, $sql_check);
                     if ($stmt) 
                     {
-                        mysqli_stmt_bind_param($stmt, "s", $text);
+                        mysqli_stmt_bind_param($stmt, "s", $video_desc);
                         mysqli_stmt_execute($stmt);
                         $result = mysqli_stmt_get_result($stmt);
                         mysqli_stmt_close($stmt);
@@ -180,14 +182,16 @@ if($_SESSION["manager_login_session"] == true)
                         else 
                         {
                             // 將文件信息存儲到資料庫
-                            $sql_insert = "INSERT INTO video (text,file_name,file_path,videolink) VALUES (?,?,?,?)";
+                            $sql_insert = "INSERT INTO video (video_desc,file_name,file_path,video_link) VALUES (?,?,?,?)";
                             $stmt = mysqli_prepare($link, $sql_insert);
                             if ($stmt) 
                             {
-                                mysqli_stmt_bind_param($stmt, "ssss",$text,$file_name,$file_path,$videolink);
+                                mysqli_stmt_bind_param($stmt, "ssss", $video_desc, $file_name, $file_path, $video_link);
+
                                 if (mysqli_stmt_execute($stmt)) 
                                 {
-                                    echo "<script>alert('上傳成功'); setTimeout(function() { window.location.href = 'video.php'; }, 1000);</script>";
+                                    //echo "<script>alert('上傳成功'); setTimeout(function() { window.location.href = 'video.php'; }, 1000);</script>";
+                                    echo $video_desc;
                                 } 
                                 else 
                                 {
@@ -246,17 +250,17 @@ if($_SESSION["manager_login_session"] == true)
             echo "<tr>";
             if($fileData['file_name']!="")
             {
-                echo "<td><a href='video.php?text=" .  urlencode($fileData['text']) ."'>" . $fileData['text'] . "</a></td>";
+                echo "<td><a href='video.php?file_name=" .  urlencode($fileData['file_name']) ."'>" . $fileData['file_name'] . "</a></td>";
             }
             else
             {
-                echo "<td>".$fileData['text']."</td><br>";
+                echo "<td>".$fileData['video_desc']."</td><br>";
             }
            
-            $videolink=$fileData['videolink'];
-            if (strpos($videolink, 'youtube.com') !== false)
+            $video_link=$fileData['video_link'];
+            if (strpos($video_link, 'youtube.com') !== false)
             {
-                echo "<td><a href='$videolink' target='_blank'>$videolink</a><br></td>";
+                echo "<td><a href='$video_link' target='_blank'>$video_link</a><br></td>";
             }
             else
             {
@@ -279,15 +283,15 @@ if($_SESSION["manager_login_session"] == true)
     }
     echo "</font></td></table>";
     echo "<table>";
-    if (isset($_GET['text'])) 
+    if (isset($_GET['video_desc'])) 
     {
-        $text = $_GET['text'];
+        $video_desc = $_GET['video_desc'];
         
-        // 使用 mysqli_real_escape_string 處理 $text 變數以避免 SQL 注入
-        $text = mysqli_real_escape_string($link, $text);
+        // 使用 mysqli_real_escape_string 處理 $video_desc 變數以避免 SQL 注入
+        $video_desc = mysqli_real_escape_string($link, $video_desc);
     
         // 查詢資料庫以獲取檔案路徑
-        $sql_search = "SELECT * FROM video WHERE text = '$text'";
+        $sql_search = "SELECT * FROM video WHERE video_desc = '$video_desc'";
         $result = mysqli_query($link, $sql_search);
     
         if (mysqli_num_rows($result) > 0) {  
