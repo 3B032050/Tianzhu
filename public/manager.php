@@ -138,7 +138,7 @@ ini_set('session.gc_maxlifetime', 5);
                         echo "<tr>";
                         echo "<td>".$row['account']."</td>";
                         echo "<td>"."******"."</td>";
-                        echo "<td>".$row['telephone']."</td>";
+                        echo "<td>".$row['phone']."</td>";
                         echo "<td>".$row['email']."</td>";
                         echo "<td>".$row['date']."</td>";
                         echo "<td>
@@ -167,7 +167,7 @@ ini_set('session.gc_maxlifetime', 5);
                         echo "<tr>";
                         echo "<td align =center heigh=500 width=500>"."<font size=5>".$row['account']."</td>";
                         echo "<td align =center heigh=500 width=500>"."<font size=5>"."******"."</td>";
-                        echo "<td align =center heigh=500 width=500>"."<font size=5>".$row['telephone']."</td>";
+                        echo "<td align =center heigh=500 width=500>"."<font size=5>".$row['phone']."</td>";
                         echo "<td align =center heigh=500 width=500>"."<font size=5>".$row['email']."</td>";
                         echo "<td align =center heigh=500 width=500>"."<font size=5>".$row['date']."</td>";
                         echo "</tr>";  
