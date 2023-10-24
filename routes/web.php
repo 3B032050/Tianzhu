@@ -14,8 +14,14 @@ use App\Http\Controllers\LoginController;
 |
 */
 
+//回首頁
 Route::get('/', function () {
     return view('index');
 });
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home.index');
 
+//登入頁面
 Route::get('login',[LoginController::class,'index'])->name('login.index');
+Auth::routes();
+
+
