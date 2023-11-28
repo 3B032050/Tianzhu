@@ -12,9 +12,7 @@
 {{--        <strong>完成！</strong> 成功儲存用戶--}}
 {{--        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>--}}
 {{--    </div>--}}
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <a class="btn btn-success btn-sm" href="{{ route('admins.posts.create') }}">新增用戶</a>
-    </div>
+    <br>
     <table class="table">
         <thead>
 {{--        <tr>--}}
@@ -28,12 +26,21 @@
 {{--        </tr>--}}
         </thead>
         <tbody>
-
+        @php
+            $data = [];
+        @endphp
+        @foreach($web_hierarchies as $web_hierarchy)
+            @php
+                $data[] = array(
+                    'web_id'=>$web_hierarchy->web_id,
+                    'parent_id'=>$web_hierarchy->parent_id,
+                    'web_title'=>$web_hierarchy->title,
+                );
+            @endphp
+        @endforeach
         @php
             $controller = App::make('App\Http\Controllers\AdminWebHierarchiesController');
-            $controller->web_print($webs);
-            @foreach($webs as $web)
-            @endforeach
+            $controller->web_print($data);
         @endphp
 {{--        @foreach($admins as $admin)--}}
 {{--            <tr>--}}

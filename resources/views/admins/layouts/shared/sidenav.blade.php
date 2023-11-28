@@ -11,9 +11,9 @@
                 <a class="nav-link" href="{{ route('admins.users.index') }}">
                     用戶管理
                 </a>
-{{--                <a class="nav-link" href="{{ route('admins.posts.index') }}">--}}
-{{--                    公告管理--}}
-{{--                </a>--}}
+                <a class="nav-link" href="{{ route('admins.posts.index') }}">
+                    公告管理
+                </a>
                 <a class="nav-link" href="{{ route('admins.admins.index') }}">
                     管理員管理
                 </a>

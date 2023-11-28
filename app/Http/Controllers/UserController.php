@@ -31,7 +31,7 @@ class UserController extends Controller
         return redirect()->route('admins.users.index');
     }
 
-    public function edit(Post $user)
+    public function edit(User $user)
     {
         $data = [
             'user'=> $user,

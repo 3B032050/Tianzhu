@@ -4,21 +4,14 @@
 
 @section('page-content')
 <div class="container-fluid px-4">
-    <h1 class="mt-4">管理員資料管理</h1>
-    <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item active">新增管理員</li>
-    </ol>
+    <h1 class="mt-4">新增子階層，目前階層：</h1>
     @include('admins.layouts.shared.errors')
     <form action="{{ route('admins.users.store') }}" method="POST" role="form">
         @method('POST')
         @csrf
         <div class="form-group">
-            <label for="account" class="form-label">選擇使用者帳號</label>
-            <select id="account" name="account" class="form-control" onclick="{{route('admins.admins.create_selected')}}">
-            @foreach($users as $user)
-                <option value="{{$user->account}}">{{$user->account}}</option>
-            @endforeach
-            </select>
+            <label for="account" class="form-label">帳號</label>
+            <input id="account" name="account" type="text" class="form-control" value="{{ old('account') }}" placeholder="請輸入帳號">
         </div>
         <div class="form-group">
             <label for="name" class="form-label">姓名</label>

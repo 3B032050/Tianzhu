@@ -60,7 +60,7 @@ Route::group(['middleware' => 'admin'], function(){
 
         Route::get('/admins',[App\Http\Controllers\AdminAdminsController::class,'index'])->name('admins.index');
         Route::get('/admins/create',[App\Http\Controllers\AdminAdminsController::class,'create'])->name('admins.create');
-        Route::get('/admins/create_selcted',[App\Http\Controllers\AdminAdminsController::class,'create'])->name('admins.create_selected');
+        Route::get('/admins/create_selected',[App\Http\Controllers\AdminAdminsController::class,'create'])->name('admins.create_selected');
         Route::post('/admins', [App\Http\Controllers\AdminAdminsController::class, 'store'])->name("admins.store");
         Route::get('/admins/{admin}/edit', [App\Http\Controllers\AdminAdminsController::class, 'edit'])->name("admins.edit");
         Route::patch('/admins/{admin}',[App\Http\Controllers\AdminAdminsController::class,'update'])->name('admins.update');
