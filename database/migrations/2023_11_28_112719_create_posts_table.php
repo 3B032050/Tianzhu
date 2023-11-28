@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('web_contents', function (Blueprint $table) {
+        Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('web_id'); //使用者編號
-            $table->foreign('web_id')->references('id')->on('web_hierarchies');
-            $table->string('title');
-            $table->longText('content');
+            $table->string('posts_title');
+            $table->string('posts_content');
+            $table->string('file')->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('web_contents');
+        Schema::dropIfExists('posts');
     }
 };
