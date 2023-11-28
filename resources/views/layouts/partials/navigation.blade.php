@@ -1,3 +1,4 @@
+<link rel="stylesheet" type="text/css" href="style.css">
 <header class="page-header">
     <nav>
         <ul class="nav-list">
@@ -29,8 +30,22 @@
                     @endif
                 @else
                 <ul class="nav-item dropdown">
-                    <li><a class="nav-link dropdown-toggle" href='home.php' style="color:black">{{ Auth::user()->name }}</a>
+                    <li>
+                        @if (Auth::check() && Auth::user()->isAdmin())
+                            <a class="nav-link dropdown-toggle" href='home.php' style="color:black">管理員：{{ Auth::user()->name }}</a>
+                        @else
+                            <a class="nav-link dropdown-toggle" href='home.php' style="color:black">{{ Auth::user()->name }}</a>
+                        @endif
                         <ul class="dropdown-content">
+                            <li>
+                                <a class="nav-link" href="{{ route('users.index') }}" style="color:black">{{ __('個人資料') }}</a>
+                            </li>
+                            @if (Auth::check() && Auth::user()->isAdmin())
+                            <li>
+                                <a class="nav-link" href="{{ route('admins.dashboard') }}" style="color:black">{{ __('後台管理') }}</a>
+                            </li>
+                            @endif
+
                             <li><a class="nav-link" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();" style="color:black">{{ __('登出') }}</a>
@@ -42,7 +57,6 @@
                     </li>
                 </ul>
                 @endguest
-
         </ul>
     </nav>
 </header>

@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class Member extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -18,14 +18,9 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'account',
-        'password',
         'name',
-        'sex',
         'email',
-        'birthday',
-        'phone',
-        'address',
+        'password',
     ];
 
     /**
@@ -47,14 +42,4 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-
-    public function isAdmin()
-    {
-        return $this->admin !== null;
-    }
-
-    public function admin()
-    {
-        return $this->hasOne(Admin::class);
-    }
 }
