@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Web_hierarchy;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('index');
+        $webHierarchies = Web_hierarchy::all();
+        $data = [
+            'webHierarchies' => $webHierarchies
+        ];
+        return view('index',$data);
     }
 }

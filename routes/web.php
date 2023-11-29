@@ -41,7 +41,7 @@ Route::group(['middleware' => 'admin'], function(){
         Route::get('/home',[App\Http\Controllers\AdminController::class,'home'])->name('home.index');
 
         Route::get('/web_hierarchies',[App\Http\Controllers\AdminWebHierarchiesController::class,'index'])->name('web_hierarchies.index');
-        Route::get('/web_hierarchies/create',[App\Http\Controllers\AdminWebHierarchiesController::class,'create'])->name('web_hierarchies.create');
+        Route::get('/web_hierarchies/create/{web_id}',[App\Http\Controllers\AdminWebHierarchiesController::class,'create'])->name('web_hierarchies.create');
         Route::post('/web_hierarchies', [App\Http\Controllers\AdminWebHierarchiesController::class, 'store'])->name("web_hierarchies.store");
         Route::get('/web_hierarchies/{web_hierarchy}/edit', [App\Http\Controllers\AdminWebHierarchiesController::class, 'edit'])->name("web_hierarchies.edit");
         Route::patch('/web_hierarchies/{web_hierarchy}',[App\Http\Controllers\AdminWebHierarchiesController::class,'update'])->name('web_hierarchies.update');
@@ -60,7 +60,7 @@ Route::group(['middleware' => 'admin'], function(){
 
         Route::get('/admins',[App\Http\Controllers\AdminAdminsController::class,'index'])->name('admins.index');
         Route::get('/admins/create',[App\Http\Controllers\AdminAdminsController::class,'create'])->name('admins.create');
-        Route::get('/admins/create_selected',[App\Http\Controllers\AdminAdminsController::class,'create'])->name('admins.create_selected');
+        Route::get('/admins/create_selected/{id}',[App\Http\Controllers\AdminAdminsController::class,'create'])->name('admins.create_selected');
         Route::post('/admins', [App\Http\Controllers\AdminAdminsController::class, 'store'])->name("admins.store");
         Route::get('/admins/{admin}/edit', [App\Http\Controllers\AdminAdminsController::class, 'edit'])->name("admins.edit");
         Route::patch('/admins/{admin}',[App\Http\Controllers\AdminAdminsController::class,'update'])->name('admins.update');

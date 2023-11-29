@@ -14,12 +14,19 @@
         @csrf
         <div class="form-group">
             <label for="account" class="form-label">選擇使用者帳號</label>
-            <select id="account" name="account" class="form-control" onclick="{{route('admins.admins.create_selected')}}">
+            <select id="account" name="account" class="form-control" onchange="navigateToRoute(this.value)">
             @foreach($users as $user)
-                <option value="{{$user->account}}">{{$user->account}}</option>
+                <option value="{{ route('admins.admins.create_selected', ['id' => $user->id]) }}">{{ $user->account }}</option>
             @endforeach
             </select>
         </div>
     </form>
 </div>
+<script>
+    function navigateToRoute(selectedUserId) {
+        if (selectedUserId) {
+            window.location.href = selectedUserId;
+        }
+    }
+</script>
 @endsection

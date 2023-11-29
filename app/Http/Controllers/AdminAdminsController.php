@@ -25,12 +25,16 @@ class AdminAdminsController extends Controller
         $users = User::orderBy('id','ASC')->get();
         $data = ['users' => $users];
         return view('admins.admins.create',$data);
+
     }
 
     public function create_selcted(User $user)
     {
-        $user = User::where('account',$user)->get();
-        $data = ['user' => $user];
+        $users = User::orderBy('id','ASC')->get();
+        $user = User::where('id',$user)->get();
+        $data = ['users' => $users,
+            'user' => $user
+        ];
         return view('admins.admins.create_selected',$data);
     }
 

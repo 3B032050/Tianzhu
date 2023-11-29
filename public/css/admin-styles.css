@@ -11699,3 +11699,13 @@ body {
   font-size: 0.75rem;
   border-radius: 0.25rem !important;
 }
+
+.delete-button {
+  background: none;
+  border: none;
+  color: blue; /* Change this to match your hyperlink color */
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 12px; /* Adjust the font size as needed */
+  padding: 0; /* Remove padding to make it compact */
+}

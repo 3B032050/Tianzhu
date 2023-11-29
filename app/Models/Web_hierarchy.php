@@ -12,6 +12,7 @@ class Web_hierarchy extends Model
     protected $fillable = [
         'web_id',
         'parent_id',
+        'title',
     ];
 
     public function web_content()

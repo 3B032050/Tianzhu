@@ -42,33 +42,6 @@
             $controller = App::make('App\Http\Controllers\AdminWebHierarchiesController');
             $controller->web_print($data);
         @endphp
-{{--        @foreach($admins as $admin)--}}
-{{--            <tr>--}}
-{{--                <td style="text-align:left">{{ $admin->id }}</td>--}}
-{{--                <td style="text-align:left">{{ $admin->user_id }}</td>--}}
-{{--                <td>{{ $admin->name }}</td>--}}
-{{--                <td>{{ $admin->position }}--}}
-{{--                @if ($admin->position == '1')--}}
-{{--                    (一般管理員)--}}
-{{--                @elseif ($admin->position == '2')--}}
-{{--                    (高階管理員)--}}
-{{--                @elseif ($admin->position == '3')--}}
-{{--                    (超級管理員)--}}
-{{--                @endif--}}
-{{--                </td>--}}
-{{--                <td>{{ $admin->email }}</td>--}}
-{{--                <td style="text-align:center">--}}
-{{--                    <a href="{{ route('admins.users.edit',$admin->id) }}" class="btn btn-warning btn-sm">編輯</a>--}}
-{{--                </td>--}}
-{{--                <td style="text-align:center">--}}
-{{--                    <form action="{{ route('admins.users.destroy',$admin->id) }}" method="POST">--}}
-{{--                        @method('DELETE')--}}
-{{--                        @csrf--}}
-{{--                        <button type="submit" class="btn btn-danger btn-sm">刪除</button>--}}
-{{--                    </form>--}}
-{{--                </td>--}}
-{{--            </tr>--}}
-{{--        @endforeach--}}
         </tbody>
     </table>
 </div>
