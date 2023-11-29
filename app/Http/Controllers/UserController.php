@@ -28,7 +28,7 @@ class UserController extends Controller
 //        ]);
 
         User::create($request->all());
-        return redirect()->route('admins.users.index');
+        return redirect()->route('users.index');
     }
 
     public function edit(User $user)
@@ -49,7 +49,7 @@ class UserController extends Controller
 //        ]);
 
         $user->update($request->all());
-        return redirect()->route('admins.users.index');
+        return redirect()->route('users.index');
     }
 
     public function destroy(User $user)

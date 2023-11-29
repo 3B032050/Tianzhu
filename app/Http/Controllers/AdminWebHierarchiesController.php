@@ -29,7 +29,18 @@ class AdminWebHierarchiesController extends Controller
             'title' => 'required',
         ]);
 
-        Web_hierarchy::create($request->all());
+        # 判斷如果web_id是否重複
+        $existingWebId = Web_hierarchy::where('web_id', $request->input('web_id'))->exists();
+        if (!$existingWebId)
+        {
+            # 如果web_id沒有重複就輸入至資料庫
+            Web_hierarchy::create($request->all());
+        }
+        else
+        {
+            # 如果web_id重複就不放進資料庫
+            return redirect()->back()->with('error', 'Web ID already exists');
+        }
         return redirect()->route('admins.web_hierarchies.index');
     }
 

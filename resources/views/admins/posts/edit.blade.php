@@ -8,17 +8,17 @@
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item active">編輯文章</li>
     </ol>
-    @include('admin.layouts.shared.errors')
-    <form action="{{ route('admins.posts.update',$post->id) }}" method="POST" role="form">
+    @include('admins.layouts.shared.errors')
+    <form action="{{ route('admins.posts.update',$post->id) }}" method="POST" role="form" enctype="multipart/form-data">
         @method('PATCH')
         @csrf
         <div class="form-group">
-            <label for="title" class="form-label">文章標題</label>
-            <input id="title" name="title" type="text" class="form-control" placeholder="請輸入文章標題" value="{{ old('title',$post->title) }}">
+            <label for="posts_title" class="form-label">文章標題</label>
+            <input id="posts_title" name="posts_title" type="text" class="form-control"  value="{{ old('posts_title',$post->posts_title) }}">
         </div>
         <div class="form-group">
-            <label for="content" class="form-label">文章內容</label>
-            <textarea id="content" name="content" class="form-control" rows="10" placeholder="請輸入文章內容">{{ old('content',$post->content) }}</textarea>
+            <label for="posts_content" class="form-label">文章內容</label>
+            <textarea id="posts_content" name="posts_content" class="form-control" rows="10" >{{ old('posts_content',$post->posts_content) }}</textarea>
         </div>
         <div class="form-group">
             <label for="is_feature" class="form-label">精選?</label>

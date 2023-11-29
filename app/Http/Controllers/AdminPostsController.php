@@ -22,8 +22,8 @@ class AdminPostsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'title' => 'required|max:50',
-            'content' => 'required',
+            'posts_title' => 'required|max:50',
+            'posts_content' => 'required',
             'is_feature' => 'required|boolean',
         ]);
 
@@ -42,9 +42,10 @@ class AdminPostsController extends Controller
     public function update(Request $request, Post $post)
     {
         $this->validate($request,[
-            'title' => 'required|max:50',
-            'content' => 'required',
+            'posts_title' => 'required|max:50',
+            'posts_content' => 'required',
             'is_feature' => 'required|boolean',
+
         ]);
 
         $post->update($request->all());
@@ -57,3 +58,4 @@ class AdminPostsController extends Controller
         return redirect()->route('admins.posts.index');
     }
 }
+

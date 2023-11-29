@@ -2,10 +2,10 @@
 <header class="page-header">
     <nav>
         <ul class="nav-list">
-{{--            @if ($webHierarchies->parent_id == '0')--}}
-                <li class="nav-item"><a class="nav-link" href="{{ url('/') }}" style="color:black">首頁</a></li>
-                <li class="nav-item"><a class="nav-link" href="mailto:antory040512@gmail.com" style="color:black">聯絡我們</a></li>
-                <li class="nav-item"><a class="nav-link" href='history.php' style="color:black">歷史公告</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url('/') }}" style="color:black">天筑精舍</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url('/') }}" style="color:black">天筑精舍簡介</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url('/') }}" style="color:black">最新消息</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url('/') }}" style="color:black">僧伽教育</a></li>
                 <ul class="nav-item dropdown">
                     <li><a class="nav-link dropdown-toggle" href='home.php' style="color:black">弘化利生</a>
                         <ul class="dropdown-content">
@@ -16,7 +16,7 @@
                         </ul>
                     </li>
                 </ul>
-{{--            @endif--}}
+                <li class="nav-item"><a class="nav-link" href="{{ url('/') }}" style="color:black">法會活動</a></li>
                 @guest
                     @if (Route::has('login'))
                         <li class="nav-item">

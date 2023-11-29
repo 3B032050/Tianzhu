@@ -54,14 +54,21 @@ Route::group(['middleware' => 'admin'], function(){
         Route::patch('/users/{user}',[App\Http\Controllers\AdminUsersController::class,'update'])->name('users.update');
         Route::delete('/users/{user}', [App\Http\Controllers\AdminUsersController::class, 'destroy'])->name("users.destroy");
 
-        Route::get('/posts',[App\Http\Controllers\AdminPostsController::class,'index'])->name('posts.index');
-        Route::get('/posts/create',[App\Http\Controllers\AdminPostsController::class,'create'])->name('posts.create');
-        Route::get('/posts/{post}',[App\Http\Controllers\AdminPostsController::class,'update'])->name('posts.update');
+        //公告路由
+        Route::get('posts', [App\Http\Controllers\AdminPostsController::class, 'index'])->name("posts.index");
+        Route::get('posts/create', [App\Http\Controllers\AdminPostsController::class, 'create'])->name("posts.create");
+        Route::post('posts', [App\Http\Controllers\AdminPostsController::class, 'store'])->name("posts.store");
+        Route::get('posts/{post}/edit', [App\Http\Controllers\AdminPostsController::class, 'edit'])->name("posts.edit");
+        Route::patch('posts/{post}', [App\Http\Controllers\AdminPostsController::class, 'update'])->name("posts.update");
+        Route::delete('posts/{post}', [App\Http\Controllers\AdminPostsController::class, 'destroy'])->name("posts.destroy");
 
+
+        //管理員操作路由
         Route::get('/admins',[App\Http\Controllers\AdminAdminsController::class,'index'])->name('admins.index');
         Route::get('/admins/create',[App\Http\Controllers\AdminAdminsController::class,'create'])->name('admins.create');
-        Route::get('/admins/create_selected/{id}',[App\Http\Controllers\AdminAdminsController::class,'create'])->name('admins.create_selected');
+        Route::get('/admins/create_selected/{id}',[App\Http\Controllers\AdminAdminsController::class,'create_selcted'])->name('admins.create_selected');
         Route::post('/admins', [App\Http\Controllers\AdminAdminsController::class, 'store'])->name("admins.store");
+        Route::post('/admins', [App\Http\Controllers\AdminAdminsController::class, 'store_level'])->name("admins.store_level");
         Route::get('/admins/{admin}/edit', [App\Http\Controllers\AdminAdminsController::class, 'edit'])->name("admins.edit");
         Route::patch('/admins/{admin}',[App\Http\Controllers\AdminAdminsController::class,'update'])->name('admins.update');
         Route::delete('/admins/{admin}', [App\Http\Controllers\AdminAdminsController::class, 'destroy'])->name("admins.destroy");

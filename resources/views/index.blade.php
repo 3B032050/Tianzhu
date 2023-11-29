@@ -6,7 +6,7 @@
 <section id="location">
     <div class="wrapper">
         <dic class ="location-info">
-            <h3 class "sub-title">天筑精舍</h3>
+            <h3 class "sub-title">交通資訊</h3>
             <p>
                 地址:335桃園市大溪區內柵路一段98巷54-1號<br>
                 電話:033883257<br>

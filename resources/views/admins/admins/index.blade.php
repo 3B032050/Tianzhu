@@ -13,7 +13,7 @@
 {{--        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>--}}
 {{--    </div>--}}
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <a class="btn btn-success btn-sm" href="{{ route('admins.admins.create') }}">新增用戶</a>
+        <a class="btn btn-success btn-sm" href="{{ route('admins.admins.create') }}">新增管理員</a>
     </div>
     <table class="table">
         <thead>
@@ -34,11 +34,11 @@
                 <td style="text-align:left">{{ $admin->user_id }}</td>
                 <td>{{ $admin->name }}</td>
                 <td>{{ $admin->position }}
-                @if ($admin->position == '1')
+                @if ($admin->position == '3')
                     (一般管理員)
                 @elseif ($admin->position == '2')
                     (高階管理員)
-                @elseif ($admin->position == '3')
+                @elseif ($admin->position == '1')
                     (超級管理員)
                 @endif
                 </td>

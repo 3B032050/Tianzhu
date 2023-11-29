@@ -28,12 +28,14 @@ class AdminAdminsController extends Controller
 
     }
 
-    public function create_selcted(User $user)
+    public function create_selcted($user)
     {
+        //$users = User::doesntHave('admins')->orderBy('id', 'ASC')->get();
         $users = User::orderBy('id','ASC')->get();
-        $user = User::where('id',$user)->get();
+        $user = User::where('id',$user)->first();
         $data = ['users' => $users,
-            'user' => $user
+            'user' => $user,
+
         ];
         return view('admins.admins.create_selected',$data);
     }
@@ -49,6 +51,20 @@ class AdminAdminsController extends Controller
         Admin::create($request->all());
         return redirect()->route('admins.admins.index');
     }
+
+    public function store_level(Request $request)
+    {
+        $user_id = $request->input('user_id');
+        $position = $request->input('position');
+
+
+        Admin::create([
+            'user_id' => $user_id,
+            'position' => $position,
+        ]);
+        return redirect()->route('admins.admins.index');
+    }
+
 
     public function edit(Admin $admin)
     {
