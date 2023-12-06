@@ -44,7 +44,7 @@
                 </td>
                 <td>{{ $admin->email }}</td>
                 <td style="text-align:center">
-                    <a href="{{ route('admins.admins.edit',$admin->id) }}" class="btn btn-secondary btn-sm">編輯</a>
+                    <a href="{{ route('admins.admins.edit',$admin->user_id) }}" class="btn btn-secondary btn-sm">編輯</a>
                 </td>
                 <td style="text-align:center">
                     <form action="{{ route('admins.admins.destroy',$admin->id) }}" method="POST">
