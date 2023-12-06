@@ -35,6 +35,6 @@ class AdminWebContentsController extends Controller
 //        ]);
 
         $web_content->update($request->all());
-        return redirect()->route('admins.contents.index');
+        return redirect()->route('admins.web_contents.index');
     }
 }

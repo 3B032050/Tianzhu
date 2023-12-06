@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('web_contents', function (Blueprint $table) {
             $table->id();
             $table->string('web_id'); //使用者編號
-            $table->foreign('web_id')->references('id')->on('web_hierarchies');
             $table->text('content');
             $table->timestamps();
         });
