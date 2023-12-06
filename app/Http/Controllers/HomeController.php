@@ -12,10 +12,11 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    # 只有已登入的用戶才能訪問
+//    public function __construct()
+//    {
+//        $this->middleware('auth');
+//    }
 
     /**
      * Show the application dashboard.
@@ -24,10 +25,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $webHierarchies = Web_hierarchy::all();
-        $data = [
-            'webHierarchies' => $webHierarchies
-        ];
-        return view('index',$data);
+        return view('index');
     }
 }

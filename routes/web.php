@@ -20,18 +20,22 @@ use App\Http\Controllers\AdminWebHierarchiesController;
 */
 
 //回首頁
-Route::get('/', function () {
-    return view('index');
-});
+//Route::get('/', function () {
+//    return view('index');
+//});
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home.index');
 
 Auth::routes();
 
 //會員資料
-Route::prefix('users')->name('users.')->group(function () {
-    Route::get('/',[App\Http\Controllers\UserController::class,'index'])->name('index');
-    Route::patch('{user}',[App\Http\Controllers\UserController::class,'update'])->name('update');
+Route::group(['middleware' => 'auth'], function() {
+    Route::prefix('users')->name('users.')->group(function () {
+        Route::get('/',[App\Http\Controllers\UserController::class,'index'])->name('index');
+        Route::patch('{user}',[App\Http\Controllers\UserController::class,'update'])->name('update');
+    });
 });
+
 
 //管理員後台管理
 Route::group(['middleware' => 'admin'], function(){
@@ -46,6 +50,13 @@ Route::group(['middleware' => 'admin'], function(){
         Route::get('/web_hierarchies/{web_hierarchy}/edit', [App\Http\Controllers\AdminWebHierarchiesController::class, 'edit'])->name("web_hierarchies.edit");
         Route::patch('/web_hierarchies/{web_hierarchy}',[App\Http\Controllers\AdminWebHierarchiesController::class,'update'])->name('web_hierarchies.update');
         Route::delete('/web_hierarchies/{web_hierarchy}', [App\Http\Controllers\AdminWebHierarchiesController::class, 'destroy'])->name("web_hierarchies.destroy");
+
+        Route::get('/web_contents',[App\Http\Controllers\AdminWebContentsController::class,'index'])->name('web_contents.index');
+        Route::get('/web_contents/create/{web_id}',[App\Http\Controllers\AdminWebContentsController::class,'create'])->name('web_contents.create');
+        Route::post('/web_contents', [App\Http\Controllers\AdminWebContentsController::class, 'store'])->name("web_contents.store");
+        Route::get('/web_contents/{web_content}/edit', [App\Http\Controllers\AdminWebContentsController::class, 'edit'])->name("web_contents.edit");
+        Route::patch('/web_contents/{web_content}',[App\Http\Controllers\AdminWebContentsController::class,'update'])->name('web_contents.update');
+        Route::delete('/web_contents/{web_content}', [App\Http\Controllers\AdminWebContentsController::class, 'destroy'])->name("web_contents.destroy");
 
         Route::get('/users',[App\Http\Controllers\AdminUsersController::class,'index'])->name('users.index');
         Route::get('/users/create',[App\Http\Controllers\AdminUsersController::class,'create'])->name('users.create');

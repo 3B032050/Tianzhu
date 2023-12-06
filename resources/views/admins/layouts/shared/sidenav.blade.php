@@ -8,6 +8,9 @@
                 <a class="nav-link" href="{{ route('admins.web_hierarchies.index') }}">
                     主網頁階層設定
                 </a>
+                <a class="nav-link" href="{{ route('admins.web_contents.index') }}">
+                    主網頁內容設定
+                </a>
                 <a class="nav-link" href="{{ route('admins.users.index') }}">
                     用戶管理
                 </a>

@@ -23,7 +23,6 @@
             <div class="form-group">
                 <label for="position" class="form-label">職級</label>
                 <select id="position" name="position" class="form-control">
-                    <option value="user">使用者</option>
                     <option value=3>一般管理員</option>
                     <option value=2>高階管理員</option>
                 </select>

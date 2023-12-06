@@ -19,4 +19,9 @@ class Web_hierarchy extends Model
     {
         return $this->hasOne(Web_content::class);
     }
+
+    public function children()
+    {
+        return $this->hasMany(Web_hierarchy::class, 'parent_id', 'web_id');
+    }
 }

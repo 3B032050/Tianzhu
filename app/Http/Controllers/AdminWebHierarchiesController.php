@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Web_hierarchy;
+use App\Models\Web_content;
 use Illuminate\Http\Request;
 
 class AdminWebHierarchiesController extends Controller
@@ -35,6 +36,10 @@ class AdminWebHierarchiesController extends Controller
         {
             # 如果web_id沒有重複就輸入至資料庫
             Web_hierarchy::create($request->all());
+            Web_content::create([
+                'web_id' => $request->web_id,
+                'content' => '輸入內容..',
+            ]);
         }
         else
         {
@@ -81,6 +86,9 @@ class AdminWebHierarchiesController extends Controller
         if ($hierarchyToDelete) {
             // Delete the hierarchy
             $hierarchyToDelete->delete();
+
+            // Delete associated Web_content
+            $hierarchyToDelete->webContent()->delete();
 
             // Update the web_id of child hierarchies with greater values
             $parentHierarchies = Web_Hierarchy::where('parent_id', $hierarchyToDelete->parent_id)->get();

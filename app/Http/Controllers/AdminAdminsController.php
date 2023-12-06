@@ -22,7 +22,8 @@ class AdminAdminsController extends Controller
 
     public function create()
     {
-        $users = User::orderBy('id','ASC')->get();
+        $admins = Admin::pluck('user_id')->toArray();
+        $users = User::whereNotIn('id',$admins)->orderBy('id','ASC')->get();
         $data = ['users' => $users];
         return view('admins.admins.create',$data);
 
@@ -30,12 +31,12 @@ class AdminAdminsController extends Controller
 
     public function create_selcted($user)
     {
-        //$users = User::doesntHave('admins')->orderBy('id', 'ASC')->get();
-        $users = User::orderBy('id','ASC')->get();
+        $admins = Admin::pluck('user_id')->toArray();
+        $users = User::whereNotIn('id',$admins)->orderBy('id','ASC')->get();
         $user = User::where('id',$user)->first();
-        $data = ['users' => $users,
+        $data = [
+            'users' => $users,
             'user' => $user,
-
         ];
         return view('admins.admins.create_selected',$data);
     }
