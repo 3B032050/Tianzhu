@@ -67,10 +67,14 @@ class AdminAdminsController extends Controller
     }
 
 
-    public function edit(Admin $admin)
+    public function edit($adminid)
     {
+        $user = User::where('id',$adminid)->first();
+        $admin = Admin::where('user_id',$adminid)->first();
+//        $admin = User::find($admin->user_id);
         $data = [
-            'admin'=> $admin,
+            'admin' => $admin,
+            'user'=> $user,
         ];
         return view('admins.admins.edit',$data);
     }
@@ -82,8 +86,10 @@ class AdminAdminsController extends Controller
 //            'content' => 'required',
 //            'is_feature' => 'required|boolean',
 //        ]);
-
-        $admin->update($request->all());
+        if($request->position=="0")
+            $admin->delete();
+        else
+            $admin->update($request->all());
         return redirect()->route('admins.admins.index');
     }
 

@@ -11,6 +11,7 @@
             <div class="form-group">
                 <label for="account" class="form-label">選擇使用者帳號</label>
                 <select id="account" name="account" class="form-control" onchange="navigateToRoute(this.value)">
+                    <option selected></option>
                     @foreach($users as $user)
                         <option value="{{ route('admins.admins.create_selected', ['id' => $user->id]) }}">{{ $user->account }}</option>
                     @endforeach
