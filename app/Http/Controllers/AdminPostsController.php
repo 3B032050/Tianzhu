@@ -22,8 +22,8 @@ class AdminPostsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'posts_title' => 'required|max:50',
-            'posts_content' => 'required',
+            'title' => 'required|max:50',
+            'content' => 'required',
             'is_feature' => 'required|boolean',
         ]);
 
@@ -42,8 +42,8 @@ class AdminPostsController extends Controller
     public function update(Request $request, Post $post)
     {
         $this->validate($request,[
-            'posts_title' => 'required|max:50',
-            'posts_content' => 'required',
+            'title' => 'required|max:50',
+            'content' => 'required',
             'is_feature' => 'required|boolean',
 
         ]);

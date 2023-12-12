@@ -28,8 +28,9 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($admins as $admin)
+        @foreach($admins as $index => $admin)
             <tr>
+                <td style="text-align:left">{{ $index + 1 }}
                 <td style="text-align:left">{{ $admin->id }}</td>
                 <td style="text-align:left">{{ $admin->user_id }}</td>
                 <td>{{ $admin->name }}</td>
@@ -47,15 +48,24 @@
                     <a href="{{ route('admins.admins.edit',$admin->id) }}" class="btn btn-secondary btn-sm">編輯</a>
                 </td>
                 <td style="text-align:center">
-                    <form action="{{ route('admins.admins.destroy',$admin->id) }}" method="POST">
+                    <form id="deleteForm" action="{{ route('admins.admins.destroy', $admin->id) }}" method="POST">
                         @method('DELETE')
                         @csrf
-                        <button type="submit" class="btn btn-danger btn-sm">刪除</button>
+                        <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete()">刪除</button>
                     </form>
                 </td>
+                <script>
+                    function confirmDelete()
+                    {
+                        if (confirm("確定要刪除管理員{{ $admin->name }}嗎？")) {
+                            document.getElementById('deleteForm').submit();
+                        }
+                    }
+                </script>
             </tr>
         @endforeach
         </tbody>
     </table>
 </div>
+
 @endsection

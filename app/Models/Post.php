@@ -12,15 +12,15 @@ class Post extends Model
     protected $table = 'posts';
 
     protected $fillable = [
-        'posts_title',
-        'posts_content',
+        'title',
+        'content',
         'is_feature',
         'file',
     ];
 
     protected $casts = [
-        'posts_title' => 'string',
-        'posts_content' => 'string',
+        'title' => 'string',
+        'content' => 'string',
         'is_feature' => 'bool',
         'file'=>'string',
     ];
