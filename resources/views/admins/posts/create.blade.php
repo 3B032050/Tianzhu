@@ -21,8 +21,8 @@
             <textarea id="content" name="content" class="form-control" rows="10" placeholder="請輸入文章內容">{{ old('content') }}</textarea>
         </div>
         <div class="form-group">
-            <label for="file" class="form-label">上傳</label>
-            <input id="file" name="file" type="file" class="form-control" rows="10" placeholder="附檔">{{ old('file') }}</input>
+            <label for="file" class="form-label">上傳檔案</label>
+            <input id="file" name="file" type="file" class="form-control" rows="10" placeholder="附檔"></input>
         </div>
         <div class="form-group">
             <label for="is_feature" class="form-label">精選?</label>
