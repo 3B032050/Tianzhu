@@ -14,11 +14,11 @@
         @csrf
         <div class="form-group">
             <label for="title" class="form-label">文章標題</label>
-            <input id="title" name="title" type="text" class="form-control"  value="{{ old('posts_title',$post->posts_title) }}">
+            <input id="title" name="title" type="text" class="form-control"  value="{{ old('title',$post->title) }}">
         </div>
         <div class="form-group">
             <label for="content" class="form-label">文章內容</label>
-            <textarea id="content" name="content" class="form-control" rows="10" >{{ old('posts_content',$post->posts_content) }}</textarea>
+            <textarea id="content" name="content" class="form-control" rows="10" >{{ old('content',$post->content) }}</textarea>
         </div>
         <div class="form-group">
             <label for="is_feature" class="form-label">精選?</label>

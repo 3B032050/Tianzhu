@@ -30,9 +30,9 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($users as $user)
+        @foreach($users as $index => $user)
             <tr>
-                <td style="text-align:left">{{ $user->id }}</td>
+                <td style="text-align:left">{{ $index + 1 }}</td>
                 <td>{{ $user->account }}</td>
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->sex }}</td>
@@ -43,12 +43,20 @@
                     <a href="{{ route('admins.users.edit',$user->id) }}" class="btn btn-secondary btn-sm">編輯</a>
                 </td>
                 <td style="text-align:center">
-                    <form action="{{ route('admins.users.destroy',$user->id) }}" method="POST">
+                    <form id="deleteForm" action="{{ route('admins.users.destroy',$user->id) }}" method="POST">
                         @method('DELETE')
                         @csrf
-                        <button type="submit" class="btn btn-danger btn-sm">刪除</button>
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="confirmDelete()">刪除</button>
                     </form>
                 </td>
+                <script>
+                    function confirmDelete()
+                    {
+                        if (confirm("確定要刪除使用者{{ $user->name }}嗎？")) {
+                            document.getElementById('deleteForm').submit();
+                        }
+                    }
+                </script>
             </tr>
         @endforeach
         </tbody>

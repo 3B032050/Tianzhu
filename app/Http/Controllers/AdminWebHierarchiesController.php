@@ -10,7 +10,7 @@ class AdminWebHierarchiesController extends Controller
 {
     public function index()
     {
-        $web_hierarchies = Web_hierarchy::all();
+        $web_hierarchies = Web_hierarchy::orderby('web_id','ASC')->get();
         $data = ['web_hierarchies' => $web_hierarchies];
         return view('admins.web_hierarchies.index', $data);
     }
@@ -125,6 +125,7 @@ class AdminWebHierarchiesController extends Controller
                 echo method_field('DELETE');
                 echo "<button type='submit'>刪除</button>";
                 echo "</form>";
+                echo "<a href=". route('admins.web_contents.edit',['web_content' => $leaf['web_id']]).">編輯網頁內容</a>";
                 echo "<br>";
 
                 echo "</span>";
