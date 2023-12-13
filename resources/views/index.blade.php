@@ -4,8 +4,27 @@
 
 @section('content')
 <section id="location">
-    <div class="wrapper">
-        <dic class ="location-info">
+    <div class="wrapper" style="text-align:center">
+        <div class ="table">
+            <table class="table"  style="text-align:center">
+                <thead>
+                <tr>
+                    <th scope="col" style="text-align:center">標題</th>
+                    <th scope="col" style="text-align:center">公告時間</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($posts as $post)
+                    <tr>
+                        <td style="text-align:center">{{ $post->posts_title }}</td>
+                        <td style="text-align:center">{{$post->created_at}}</td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
+        <div class ="location-info">
+
             <h3 class "sub-title">交通資訊</h3>
             <p>
                 地址:335桃園市大溪區內柵路一段98巷54-1號<br>
