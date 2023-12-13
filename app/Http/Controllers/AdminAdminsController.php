@@ -5,20 +5,27 @@ namespace App\Http\Controllers;
 use App\Models\Admin;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class AdminAdminsController extends Controller
 {
     public function index()
     {
+        $currentUserId = Auth::id();
+        $positionObject = DB::table('admins')->select('position')->where('user_id', $currentUserId)->first();
+        $position = $positionObject->position;
         $admins = DB::table('admins')
             ->join('users', 'admins.user_id', '=', 'users.id')
-            ->select('admins.*', 'users.name', 'users.email') // 選擇需要的使用者資料
+            ->select('admins.*', 'users.name', 'users.email')
+            ->where('admins.position', '>', $position)
             ->orderBy('admins.id', 'ASC')
             ->get();
+
         $data = ['admins' => $admins];
-        return view('admins.admins.index',$data);
+        return view('admins.admins.index', $data);
     }
+
 
     public function create()
     {
