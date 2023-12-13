@@ -16,7 +16,7 @@
                 <tbody>
                 @foreach($posts as $post)
                     <tr>
-                        <td style="text-align:center">{{ $post->posts_title }}</td>
+                        <td style="text-align:center">{{ $post->title }}</td>
                         <td style="text-align:center">{{$post->created_at}}</td>
                     </tr>
                 @endforeach

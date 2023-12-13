@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Illuminate\Support\Facades\Storage;
 
 class AdminPostsController extends Controller
 {
@@ -25,9 +26,30 @@ class AdminPostsController extends Controller
             'title' => 'required|max:50',
             'content' => 'required',
             'is_feature' => 'required|boolean',
+            'file' => 'required|file|mimes:jpeg,png,pdf,doc,docx,pptx,ppt',
         ]);
+        if ($request->hasFile('file')) {
+            $fileName = $request->file('file')->getClientOriginalName(); // 獲取上傳檔名
+            $request->file('file')->storeAs('public', $fileName); //
+        } else {
+            $fileName = null;
+        }
 
-        Post::create($request->all());
+         Post::create([
+            'title' => $request->input('title'),
+            'content' => $request->input('content'),
+            'is_feature' => $request->input('is_feature'),
+            'file' => $fileName, // 存储文件名
+        ]);
+//        if ($request->hasFile('file'))
+//        {
+//            $filePath = $request->file('file')->store('public');
+//        }
+//        else
+//        {
+//            $filePath = null;
+//        }
+//        Post::create($request->all());
         return redirect()->route('admins.posts.index');
     }
 
@@ -41,14 +63,42 @@ class AdminPostsController extends Controller
 
     public function update(Request $request, Post $post)
     {
+//        $this->validate($request,[
+//            'title' => 'required|max:50',
+//            'content' => 'required',
+//            'is_feature' => 'required|boolean',
+//
+//        ]);
+//
+//        $post->update($request->all());
         $this->validate($request,[
             'title' => 'required|max:50',
             'content' => 'required',
             'is_feature' => 'required|boolean',
+            'file' => 'sometimes|nullable|file|mimes:jpeg,png,pdf,doc,docx,pptx,ppt',
+        ]);
+        if ($request->hasFile('file'))
+        {
+            if ($post->file)
+            {
+                Storage::delete('public/' . $post->file);
+            }
+
+            $newfileName = $request->file('file')->getClientOriginalName(); // 獲取上傳檔名
+            $request->file('file')->storeAs('public', $newfileName);
+            $post->update(['file' => $newfileName]);
+
+        }
+        else {
+            $fileName = null;
+        }
+
+        $post->update([
+            'title' => $request->input('title'),
+            'content' => $request->input('content'),
+            'is_feature' => $request->input('is_feature'),
 
         ]);
-
-        $post->update($request->all());
         return redirect()->route('admins.posts.index');
     }
 

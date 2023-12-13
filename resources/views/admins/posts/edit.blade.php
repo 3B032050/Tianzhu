@@ -27,6 +27,10 @@
                 <option value="1" {{($post->is_feature)?'selected':""}}>是</option>
             </select>
         </div>
+        <div class="form-group">
+            <label for="file" class="form-label">上傳檔案</label>
+            <input id="file" name="file" type="file" class="form-control" rows="10" placeholder="附檔">{{ old('file',$post->file) }}</input>
+        </div>
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
             <button type="submit" class="btn btn-primary btn-sm">儲存</button>
         </div>
