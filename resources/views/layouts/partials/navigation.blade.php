@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-custom">
     <div class="container px-4 px-lg-5">
         <a class="navbar-brand" href="{{ url('/') }}">天筑精舍</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -148,3 +148,8 @@
 {{--        </ul>--}}
 {{--    </nav>--}}
 {{--</header>--}}
+<style>
+.bg-custom {
+background-color: #DEB887; /* Replace with your desired color code */
+}
+</style>
