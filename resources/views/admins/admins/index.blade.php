@@ -19,7 +19,7 @@
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col" style="text-align:left">使用者id</th>
+            <th scope="col" style="text-align:left">管理員id</th>
             <th scope="col" style="text-align:left">姓名</th>
             <th scope="col" style="text-align:left">階級</th>
             <th scope="col" style="text-align:left">電子信箱</th>
@@ -32,7 +32,6 @@
             <tr>
                 <td style="text-align:left">{{ $index + 1 }}
                 <td style="text-align:left">{{ $admin->id }}</td>
-                <td style="text-align:left">{{ $admin->user_id }}</td>
                 <td>{{ $admin->name }}</td>
                 <td>{{ $admin->position }}
                 @if ($admin->position == '3')
