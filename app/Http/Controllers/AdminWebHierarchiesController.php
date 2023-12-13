@@ -87,8 +87,8 @@ class AdminWebHierarchiesController extends Controller
             // Delete the hierarchy
             $hierarchyToDelete->delete();
 
-            // Delete associated Web_content
-            $hierarchyToDelete->webContent()->delete();
+//            // Delete associated Web_content
+//            $hierarchyToDelete->Web_content::delete();
 
             // Update the web_id of child hierarchies with greater values
             $parentHierarchies = Web_Hierarchy::where('parent_id', $hierarchyToDelete->parent_id)->get();
