@@ -3,6 +3,7 @@
 @section('page-title', 'Create article')
 
 @section('page-content')
+    <script src="https://cdn.ckeditor.com/ckeditor5/40.1.0/classic/ckeditor.js"></script>
 <div class="container-fluid px-4">
     <h1 class="mt-4">文章管理</h1>
     <ol class="breadcrumb mb-4">
@@ -18,7 +19,7 @@
         </div>
         <div class="form-group">
             <label for="content" class="form-label">文章內容</label>
-            <textarea id="content" name="content" class="form-control" rows="10" placeholder="請輸入文章內容">{{ old('content') }}</textarea>
+            <textarea id="editor" name="content" class="form-control">{{ old('content')}}</textarea>
         </div>
         <div class="form-group">
             <label for="file" class="form-label">上傳檔案</label>
@@ -36,4 +37,11 @@
         </div>
     </form>
 </div>
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#editor' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+</script>
 @endsection

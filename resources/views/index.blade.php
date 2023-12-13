@@ -4,7 +4,7 @@
 
 @section('content')
 <section id="location">
-    <div class="wrapper" style="text-align:center">
+    <div class="wrapper mx-auto" style="text-align:center">
         <div class ="table">
             <table class="table"  style="text-align:center">
                 <thead>
