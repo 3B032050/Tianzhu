@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Models\Web_hierarchy;
 
@@ -25,6 +26,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('index');
+        $posts = Post::orderBy('created_at','DESC')->get();
+        $data = ['posts' => $posts];
+        return view('index',$data);
+
     }
 }
