@@ -25,6 +25,8 @@ use App\Http\Controllers\AdminWebHierarchiesController;
 //});
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home.index');
+Route::get('/post/{id}', [App\Http\Controllers\PostController::class, 'show'])->name('show');
+Route::get('/post/{id}/{file}', [App\Http\Controllers\PostController::class, 'post_download'])->name('post_download');
 
 Auth::routes();
 

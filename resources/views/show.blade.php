@@ -6,22 +6,27 @@
 <section id="location">
     <div class="wrapper mx-auto" style="text-align:center">
         <div class ="table">
-            <table class="table"  style="text-align:center">
+            <table class="table" style="text-align:center">
                 <thead>
                 <tr>
-                    <th scope="col" style="text-align:center">標題</th>
-
+                    <th scope="col">公告標題</th>
+                    <th scope="col">公告內容</th>
+                    <th scope="col">公告附檔</th>
+                    <th scope="col">公告時間</th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($posts as $post)
-                    <tr>
-                        <td style="text-align:center">
-                            <a href="{{ route('show', $post->id) }}">{{ $post->title }}</a>
-                        </td>
-
-                    </tr>
-                @endforeach
+                <tr>
+                    <td>{{ $post->title }}</td>
+                    <td>{{ $post->content }}</td>
+                    <td>
+                        <a href="{{ route('post_download', ['id' => $post->id, 'file' => $post->file]) }}">
+                            {{ $post->file }}
+                        </a>
+                    </td>
+                    <td>{{ $post->created_at }}</td>
+                </tr>
+                <!-- 可以添加更多的 <tr> 来显示其他的帖子 -->
                 </tbody>
             </table>
         </div>
