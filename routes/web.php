@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminPostsController;
 use App\Http\Controllers\AdminAdminsController;
 use App\Http\Controllers\AdminWebHierarchiesController;
+use App\Http\Controllers\WebController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,8 +26,11 @@ use App\Http\Controllers\AdminWebHierarchiesController;
 //});
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home.index');
+
 Route::get('/post/{id}', [App\Http\Controllers\PostController::class, 'show'])->name('show');
 Route::get('/post/{id}/{file}', [App\Http\Controllers\PostController::class, 'post_download'])->name('post_download');
+Route::get('/web', [App\Http\Controllers\WebController::class, 'index'])->name('web.index');
+
 
 Auth::routes();
 
