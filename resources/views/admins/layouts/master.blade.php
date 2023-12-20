@@ -10,6 +10,14 @@
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
     <link href="{{ asset('css/admin-styles.css') }}" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.ckeditor.com/ckeditor5/40.1.0/classic/ckeditor.js"></script>
+    <style type="text/css">
+        .ck-editor__editable_inline
+        {
+            height: 450px;
+        }
+    </style>
 </head>
 <body class="sb-nav-fixed">
     @include('admins.layouts.shared.navbar')
