@@ -25,6 +25,7 @@
             <th scope="col" style="text-align:left">電子信箱</th>
             <th scope="col" style="text-align:left">生日</th>
             <th scope="col" style="text-align:left">電話</th>
+            <th scope="col" style="text-align:left">權限</th>
             <th scope="col" style="text-align:center">修改</th>
             <th scope="col" style="text-align:center">刪除</th>
         </tr>
@@ -39,6 +40,21 @@
                 <td>{{ $user->email }}</td>
                 <td>{{ $user->birthday }}</td>
                 <td>{{ $user->phone }}</td>
+                @if ($user->isadmin())
+                    <td>
+                        <div style="color:#FF0000;">
+                            @if($user->admin->position == 1)
+                                超級管理員
+                            @elseif($user->admin->position == 2)
+                                高階管理員
+                            @else
+                                一般管理員
+                            @endif
+                        </div>
+                    </td>
+                @else
+                    <td>一般會員</td>
+                @endif
                 <td style="text-align:center">
                     <a href="{{ route('admins.users.edit',$user->id) }}" class="btn btn-secondary btn-sm">編輯</a>
                 </td>
