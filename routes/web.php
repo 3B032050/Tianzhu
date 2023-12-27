@@ -30,7 +30,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/post/{id}', [App\Http\Controllers\PostController::class, 'show'])->name('show');
 Route::get('/post/{id}/{file}', [App\Http\Controllers\PostController::class, 'post_download'])->name('post_download');
-Route::get('/web', [App\Http\Controllers\WebController::class, 'index'])->name('web.index');
+Route::get('/web/{web_id}', [App\Http\Controllers\WebController::class, 'index'])->name('web.index');
 
 //Route::get('/select','TestController@testfunction');
 Route::get('/select', [App\Http\Controllers\AdminAdminsController::class, 'search'])->name("admins.search");
@@ -68,13 +68,15 @@ Route::group(['middleware' => 'admin'], function(){
         Route::get('/web_contents/{web_content}/edit', [App\Http\Controllers\AdminWebContentsController::class, 'edit'])->name("web_contents.edit");
         Route::patch('/web_contents/{web_content}',[App\Http\Controllers\AdminWebContentsController::class,'update'])->name('web_contents.update');
         Route::delete('/web_contents/{web_content}', [App\Http\Controllers\AdminWebContentsController::class, 'destroy'])->name("web_contents.destroy");
+        Route::post('/web_contents/upload', [App\Http\Controllers\AdminWebContentsController::class, 'upload'])->name('web_contents.upload');
 
         Route::get('/users',[App\Http\Controllers\AdminUsersController::class,'index'])->name('users.index');
         Route::get('/users/create',[App\Http\Controllers\AdminUsersController::class,'create'])->name('users.create');
         Route::post('/users', [App\Http\Controllers\AdminUsersController::class, 'store'])->name("users.store");
-        Route::get('/users/{user}/edit', [App\Http\Controllers\AdminUsersController::class, 'edit'])->name("users.edit");
+        Route::get('/use{user}/edit', [App\Http\Controllers\AdminUsersController::class, 'edit'])->name("users.edit");
         Route::patch('/users/{user}',[App\Http\Controllers\AdminUsersController::class,'update'])->name('users.update');
         Route::delete('/users/{user}', [App\Http\Controllers\AdminUsersController::class, 'destroy'])->name("users.destroy");
+        Route::get('/users/search', [App\Http\Controllers\AdminUsersController::class, 'search'])->name('users.search');
 
 
         //公告路由
@@ -87,7 +89,7 @@ Route::group(['middleware' => 'admin'], function(){
 
 
         //管理員操作路由
-        Route::get('/admins',[App\Http\Controllers\AdminAdminsController::class,'index'])->name('admins.index');
+        Route::get('/rs/admins',[App\Http\Controllers\AdminAdminsController::class,'index'])->name('admins.index');
         Route::get('/admins/create',[App\Http\Controllers\AdminAdminsController::class,'create'])->name('admins.create');
         Route::get('/admins/create_selected/{id}',[App\Http\Controllers\AdminAdminsController::class,'create_selcted'])->name('admins.create_selected');
         Route::post('/admins', [App\Http\Controllers\AdminAdminsController::class, 'store'])->name("admins.store");

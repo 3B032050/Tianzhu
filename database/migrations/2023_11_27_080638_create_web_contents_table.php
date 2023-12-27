@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('web_id'); //使用者編號
             $table->text('content');
-            $table->string('image_url')->nullable();
             $table->timestamps();
         });
     }

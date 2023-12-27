@@ -31,33 +31,8 @@ class AdminWebContentsController extends Controller
     {
         $this->validate($request,[
             'content' => 'required',
-//            'image_url' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-
         $web_content = Web_content::where('web_id', $web_id)->first();
-
-//        if (!$web_content) {
-//            // Handle the case where the web_content is not found.
-//            // You might want to redirect back with an error message.
-//            return redirect()->back()->with('error', 'Web Content not found.');
-//        }
-
-        if ($request->hasFile('image_url')) {
-            // Delete the old image from storage
-            if ($web_content->image_url) {
-                Storage::disk('web_images')->delete($web_content->image_url);
-            }
-
-            // Upload the new image
-            $image = $request->file('image_url');
-            $imageName = time().'.'.$image->getClientOriginalExtension();
-
-            // Log the image file name
-            Storage::disk('web_images')->put($imageName, file_get_contents($image));
-
-            // Set the new image URL in the Product instance
-            $web_content->image_url = $imageName;
-        }
 
         // Update the content
         $web_content->content = $request->input('content');
@@ -66,5 +41,22 @@ class AdminWebContentsController extends Controller
         $web_content->save();
 
         return redirect()->route('admins.web_hierarchies.index');
+    }
+
+    public function upload(Request $request)
+    {
+        if ($request->hasFile('upload')) {
+            $originName = $request->file('upload')->getClientOriginalName();
+            $fileName = pathinfo($originName, PATHINFO_FILENAME);
+            $extension = $request->file('upload')->getClientOriginalExtension();
+            $fileName = $fileName . '_' . time() . '.' . $extension;
+
+            // Save the image in the storage/web_images folder
+            Storage::disk('web_images')->put($fileName, file_get_contents($request->file('upload')));
+
+            $url = Storage::disk('web_images')->url($fileName);
+
+            return response()->json(['fileName' => $fileName, 'uploaded'=> 1, 'url' => $url]);
+        }
     }
 }
