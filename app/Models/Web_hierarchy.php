@@ -17,7 +17,7 @@ class Web_hierarchy extends Model
 
     public function web_content()
     {
-        return $this->hasOne(Web_content::class);
+        return $this->hasOne(Web_content::class, 'web_id', 'web_id');
     }
 
     public function children()

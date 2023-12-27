@@ -8,22 +8,42 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                 @foreach($webHierarchies as $webHierarchy)
                     @if($webHierarchy->parent_id == '0')
-                        @if(count($webHierarchy->children) > 0)
-                            <ul class="nav-item dropdown">
-                                <li><a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" href='{{ $webHierarchy->url }}' style="color:black">{{ $webHierarchy->title }}</a>
-                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        @foreach($webHierarchy->children as $child)
-                                            <li><a class="dropdown-item" href="{{ $child->url }}">{{ $child->title }}</a></li>
-                                        @endforeach
-                                    </ul>
-                                </li>
-                            </ul>
-                        @else
+                        <ul class="nav-item">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ $webHierarchy->url }}">{{ $webHierarchy->title }}</a>
+                                <a class="nav-link" href="{{ route('web.index', ['web_id' => $webHierarchy->web_id]) }}" style="color:black">{{ $webHierarchy->title }}</a>
                             </li>
-                        @endif
-
+                            @if(count($webHierarchy->children) > 0)
+                                <li class="nav-item dropdown">
+                                    <div class="dropdown">
+                                        <button class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:black">
+{{--                                            <span class="d-none d-md-inline">{{ $webHierarchy->title }}</span>--}}
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            @foreach($webHierarchy->children as $child)
+                                                <li>
+                                                    <a class="dropdown-item" href="{{ route('web.index', ['web_id' => $child->web_id]) }}">{{ $child->title }}</a>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </li>
+                            @endif
+                        </ul>
+{{--                        @if(count($webHierarchy->children) > 0)--}}
+{{--                            <ul class="nav-item dropdown">--}}
+{{--                                <li><a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" href='{{ route('web.index', ['web_id' => $webHierarchy->web_id]) }}' style="color:black">{{ $webHierarchy->title }}</a>--}}
+{{--                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">--}}
+{{--                                        @foreach($webHierarchy->children as $child)--}}
+{{--                                            <li><a class="dropdown-item" href="{{ route('web.index', ['web_id' => $child->web_id]) }}">{{ $child->title }}</a></li>--}}
+{{--                                        @endforeach--}}
+{{--                                    </ul>--}}
+{{--                                </li>--}}
+{{--                            </ul>--}}
+{{--                        @else--}}
+{{--                            <li class="nav-item">--}}
+{{--                                <a class="nav-link" href="{{ $webHierarchy->url }}">{{ $webHierarchy->title }}</a>--}}
+{{--                            </li>--}}
+{{--                        @endif--}}
                     @endif
                 @endforeach
             </ul>

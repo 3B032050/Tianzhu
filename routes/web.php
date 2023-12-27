@@ -29,7 +29,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/post/{id}', [App\Http\Controllers\PostController::class, 'show'])->name('show');
 Route::get('/post/{id}/{file}', [App\Http\Controllers\PostController::class, 'post_download'])->name('post_download');
-Route::get('/web', [App\Http\Controllers\WebController::class, 'index'])->name('web.index');
+Route::get('/web/{web_id}', [App\Http\Controllers\WebController::class, 'index'])->name('web.index');
 
 
 Auth::routes();

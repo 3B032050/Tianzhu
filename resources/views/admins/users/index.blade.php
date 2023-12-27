@@ -53,15 +53,20 @@
                 <td>{{ $user->phone }}</td>
                 @if ($user->isadmin())
                     <td>
-                        <div style="color:#FF0000;">
-                            @if($user->admin->position == 1)
+                        @if($user->admin->position == 1)
+                            <div style="color:#FF0000;">
                                 超級管理員
-                            @elseif($user->admin->position == 2)
+                            </div>
+                        @elseif($user->admin->position == 2)
+                            <div style="color:#00FF00;">
                                 高階管理員
-                            @else
+                            </div>
+                        @else
+                            <div style="color:#0900FF;">
                                 一般管理員
-                            @endif
-                        </div>
+                            </div>
+                        @endif
+
                     </td>
                 @else
                     <td>一般會員</td>
