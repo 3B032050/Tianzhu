@@ -20,6 +20,9 @@
                 <a class="nav-link" href="{{ route('admins.admins.index') }}">
                     管理員管理
                 </a>
+                <a class="nav-link" href="{{ route('admins.slides.index') }}">
+                    幻燈片設定
+                </a>
             </div>
         </div>
 {{--        <div class="sb-sidenav-footer">--}}

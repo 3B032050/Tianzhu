@@ -105,4 +105,14 @@ class AdminAdminsController extends Controller
         $admin->delete();
         return redirect()->route('admins.admins.index');
     }
+
+    public function search()
+    {
+        return view('selectview');
+//        $user = User::where('account',$request)->first();
+//        $data = [
+//            'user' => $user,
+//        ];
+//        return view('admins.admins.create_selected',$data);
+    }
 }

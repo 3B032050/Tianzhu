@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SlideController;
 use Illuminate\Support\Facades\Route;
 //use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\UserController;
@@ -30,6 +31,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/post/{id}', [App\Http\Controllers\PostController::class, 'show'])->name('show');
 Route::get('/post/{id}/{file}', [App\Http\Controllers\PostController::class, 'post_download'])->name('post_download');
 Route::get('/web', [App\Http\Controllers\WebController::class, 'index'])->name('web.index');
+
+//Route::get('/select','TestController@testfunction');
+Route::get('/select', [App\Http\Controllers\AdminAdminsController::class, 'search'])->name("admins.search");
+
 
 
 Auth::routes();
@@ -71,6 +76,7 @@ Route::group(['middleware' => 'admin'], function(){
         Route::patch('/users/{user}',[App\Http\Controllers\AdminUsersController::class,'update'])->name('users.update');
         Route::delete('/users/{user}', [App\Http\Controllers\AdminUsersController::class, 'destroy'])->name("users.destroy");
 
+
         //公告路由
         Route::get('posts', [App\Http\Controllers\AdminPostsController::class, 'index'])->name("posts.index");
         Route::get('posts/create', [App\Http\Controllers\AdminPostsController::class, 'create'])->name("posts.create");
@@ -90,6 +96,10 @@ Route::group(['middleware' => 'admin'], function(){
         Route::patch('/admins/{admin}',[App\Http\Controllers\AdminAdminsController::class,'update'])->name('admins.update');
         Route::delete('/admins/{admin}', [App\Http\Controllers\AdminAdminsController::class, 'destroy'])->name("admins.destroy");
 
+
+        Route::get('/slides', [App\Http\Controllers\SlideController::class, 'index'])->name('slides.index');
+        Route::get('/slides/create', [App\Http\Controllers\SlideController::class, 'create'])->name('slides.create');
+        Route::post('/slides', [App\Http\Controllers\SlideController::class, 'store'])->name('slides.store');
     });
 });
 
