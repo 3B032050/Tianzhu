@@ -71,6 +71,7 @@ Route::group(['middleware' => 'admin'], function(){
         Route::get('/use{user}/edit', [App\Http\Controllers\AdminUsersController::class, 'edit'])->name("users.edit");
         Route::patch('/users/{user}',[App\Http\Controllers\AdminUsersController::class,'update'])->name('users.update');
         Route::delete('/users/{user}', [App\Http\Controllers\AdminUsersController::class, 'destroy'])->name("users.destroy");
+        Route::get('/users/search', [App\Http\Controllers\AdminUsersController::class, 'search'])->name('users.search');
 
         //公告路由
         Route::get('posts', [App\Http\Controllers\AdminPostsController::class, 'index'])->name("posts.index");

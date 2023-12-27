@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -53,7 +54,33 @@ class AdminUsersController extends Controller
 
     public function destroy(User $user)
     {
+        $admin = Admin::where('user_id', $user->id)->first();
+        if ($admin) {
+            $admin->delete();
+        }
         $user->delete();
         return redirect()->route('admins.users.index');
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+
+        // 搜尋會員資料
+        $users = User::where('account', 'like', "%$query%")
+            ->orWhere('email', 'like', '%' . $query . '%')
+            ->orWhere('name', 'like', '%' . $query . '%')
+            ->orWhere('sex', 'like', '%' . $query . '%')
+            ->orWhere('phone', 'like', '%' . $query . '%')
+//            ->orWhereHas('admin', function ($adminQuery) use ($query) {
+//                $adminQuery->where('position', 'like', '%' . $query . '%');
+//            })
+            ->get();
+
+        // 返回結果
+        return view('admins.users.index', [
+            'users' => $users,
+            'query' => $query,
+        ]);
     }
 }

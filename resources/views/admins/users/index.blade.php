@@ -12,6 +12,17 @@
 {{--        <strong>完成！</strong> 成功儲存用戶--}}
 {{--        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>--}}
 {{--    </div>--}}
+    <div class="container px-4 px-lg-5 mt-2 mb-4">
+        <form action="{{ route('admins.users.search') }}" method="GET" class="d-flex">
+            <input type="text" name="query" class="form-control me-2" placeholder="帳號搜尋...">
+            <button type="submit" class="btn btn-outline-dark">搜尋</button>
+        </form>
+    </div>
+    @if (request()->has('query'))
+        <div class="container px-4 px-lg-5 mt-2 mb-4">
+            查找「{{ request('query') }}」
+        </div>
+    @endif
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
         <a class="btn btn-success btn-sm" href="{{ route('admins.users.create') }}">新增用戶</a>
     </div>
