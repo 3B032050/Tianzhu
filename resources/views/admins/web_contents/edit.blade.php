@@ -27,7 +27,11 @@
         .create( document.querySelector( '#editor' ),{
             ckfinder: {
                 uploadUrl: '{{route('admins.web_contents.upload').'?_token='.csrf_token()}}',
-            }
+            },
+            // plugins: [ MediaEmbed, /* ... */ ],
+            // toolbar: [ 'mediaEmbed', /* ... */ ],
+            // mediaEmbed: {
+            // }
         })
         .catch( error => {
             console.error( error );

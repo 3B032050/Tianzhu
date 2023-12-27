@@ -8,9 +8,10 @@ use Illuminate\Http\Request;
 
 class AdminUsersController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::orderby('id','ASC')->get();
+        $perPage = $request->input('perPage', 10);
+        $users = User::orderby('id','ASC')->paginate($perPage);
         $data = ['users' => $users];
         return view('admins.users.index',$data);
     }
@@ -64,6 +65,7 @@ class AdminUsersController extends Controller
 
     public function search(Request $request)
     {
+        $perPage = $request->input('perPage', 10);
         $query = $request->input('query');
 
         // 搜尋會員資料
@@ -75,7 +77,7 @@ class AdminUsersController extends Controller
 //            ->orWhereHas('admin', function ($adminQuery) use ($query) {
 //                $adminQuery->where('position', 'like', '%' . $query . '%');
 //            })
-            ->get();
+            ->paginate($perPage);
 
         // 返回結果
         return view('admins.users.index', [

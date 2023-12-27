@@ -16,6 +16,7 @@
         "vue": "^3.2.37"
     },
     "dependencies": {
+        "@ckeditor/ckeditor5-media-embed": "^40.2.0",
         "vue-loader": "^15.11.1"
     }
 }

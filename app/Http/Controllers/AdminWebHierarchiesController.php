@@ -121,10 +121,10 @@ class AdminWebHierarchiesController extends Controller
                 echo "<a href='" . route('admins.web_hierarchies.create', ['web_id' => $leaf['web_id']]) . "'><font size='2px'>新增子階層</font></a>&nbsp";
                 echo "<a href='" . route('admins.web_hierarchies.edit', ['web_hierarchy' => $leaf['web_id']]) . "'><font size='2px'>修改</font></a>&nbsp";
                 // Form for deleting hierarchy
-                echo "<form method='POST' action='".route('admins.web_hierarchies.destroy', ['web_hierarchy' => $leaf['web_id']])."' style='display:inline;'>";
+                echo "<form id='deleteForm{$leaf['web_id']}' method='POST' action='".route('admins.web_hierarchies.destroy', ['web_hierarchy' => $leaf['web_id']])."' style='display:inline;'>";
                 echo csrf_field();
                 echo method_field('DELETE');
-                echo "<button type='submit'>刪除</button>";
+                echo "<button type='button' onclick=confirmDelete('{$leaf['web_title']}','{$leaf['web_id']}')>刪除</button>";
                 echo "</form>";
                 echo "<a href=". route('admins.web_contents.edit',['web_content' => $leaf['web_id']]).">編輯網頁內容</a>";
                 echo "<br>";
