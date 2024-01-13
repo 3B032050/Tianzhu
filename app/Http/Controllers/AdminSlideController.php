@@ -67,7 +67,7 @@ class AdminSlideController extends Controller
             // Upload the new image
             $image = $request->file('image_path');
             $imageName = time().'.'.$image->getClientOriginalExtension();
-            
+
             // Log the image file name
             Storage::disk('slides')->put($imageName, file_get_contents($image));
 

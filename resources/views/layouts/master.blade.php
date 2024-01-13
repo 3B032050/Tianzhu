@@ -3,6 +3,9 @@
     <head>
         <meta charset="utf-8">
         <meta viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
+        <meta http-equiv="Pragma" content="no-cache">
+        <meta http-equiv="Expires" content="0">
         <title>@yield('title')</title>
 {{--    <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">--}}
 
@@ -12,7 +15,10 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('style.css') }}">
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
+        <!-- Bootstrap JS（包含 Popper.js） -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
         <link href="library/bootstrap-5/bootstrap.min.css" rel="stylesheet" />
         <script src="library/bootstrap-5/bootstrap.bundle.min.js"></script>
         <script src="library/dselect.js"></script>

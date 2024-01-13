@@ -3,7 +3,6 @@
 @section('page-title', 'Edit article')
 
 @section('page-content')
-    <script src="https://cdn.ckeditor.com/ckeditor5/40.1.0/classic/ckeditor.js"></script>
     <div class="container-fluid px-4">
         <h1 class="mt-4">幻燈片管理</h1>
         <ol class="breadcrumb mb-4">
