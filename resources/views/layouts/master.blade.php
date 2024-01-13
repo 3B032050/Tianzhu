@@ -18,7 +18,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
         <!-- Bootstrap JS（包含 Popper.js） -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
         <link href="library/bootstrap-5/bootstrap.min.css" rel="stylesheet" />
         <script src="library/bootstrap-5/bootstrap.bundle.min.js"></script>
         <script src="library/dselect.js"></script>
@@ -29,5 +29,6 @@
     @include('layouts.partials.footer')
 
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 </body>
 <html>
