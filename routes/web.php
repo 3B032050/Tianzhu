@@ -99,9 +99,12 @@ Route::group(['middleware' => 'admin'], function(){
         Route::delete('/admins/{admin}', [App\Http\Controllers\AdminAdminsController::class, 'destroy'])->name("admins.destroy");
 
 
-        Route::get('/slides', [App\Http\Controllers\SlideController::class, 'index'])->name('slides.index');
-        Route::get('/slides/create', [App\Http\Controllers\SlideController::class, 'create'])->name('slides.create');
-        Route::post('/slides', [App\Http\Controllers\SlideController::class, 'store'])->name('slides.store');
+        Route::get('/slides', [App\Http\Controllers\AdminSlideController::class, 'index'])->name('slides.index');
+        Route::get('/slides/create', [App\Http\Controllers\AdminSlideController::class, 'create'])->name('slides.create');
+        Route::post('/slides', [App\Http\Controllers\AdminSlideController::class, 'store'])->name('slides.store');
+        Route::get('/slides/{slide}/edit', [App\Http\Controllers\AdminSlideController::class, 'edit'])->name("slides.edit");
+        Route::patch('/slides/{slide}',[App\Http\Controllers\AdminSlideController::class,'update'])->name('slides.update');
+        Route::delete('/slides/{slide}', [App\Http\Controllers\AdminSlideController::class, 'destroy'])->name("slides.destroy");
     });
 });
 

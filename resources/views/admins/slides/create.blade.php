@@ -13,10 +13,6 @@
                 <input id="title" name="title" type="text" class="form-control" placeholder="請輸入標題">
             </div>
             <div class="form-group">
-                <label for="description" class="form-label">內容</label>
-                <textarea id="description" name="description" class="form-control"></textarea>
-            </div>
-            <div class="form-group">
                 <label for="image_path" class="form-label">圖片</label>
                 <input id="image_path" name="image_path" type="file" class="form-control" placeholder="請選擇圖片" onchange="previewImage(this);">
                 <img id="image-preview" src="#" alt="圖片預覽" style="display: none; width:200px; height:200px;" >
