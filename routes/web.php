@@ -66,7 +66,7 @@ Route::group(['middleware' => 'admin'], function(){
         Route::get('/users',[App\Http\Controllers\AdminUserController::class,'index'])->name('users.index');
         Route::get('/users/create',[App\Http\Controllers\AdminUserController::class,'create'])->name('users.create');
         Route::post('/users', [App\Http\Controllers\AdminUserController::class, 'store'])->name("users.store");
-        Route::get('/use{user}/edit', [App\Http\Controllers\AdminUserController::class, 'edit'])->name("users.edit");
+        Route::get('/users/{user}/edit', [App\Http\Controllers\AdminUserController::class, 'edit'])->name("users.edit");
         Route::patch('/users/{user}',[App\Http\Controllers\AdminUserController::class,'update'])->name('users.update');
         Route::delete('/users/{user}', [App\Http\Controllers\AdminUserController::class, 'destroy'])->name("users.destroy");
         Route::get('/users/search', [App\Http\Controllers\AdminUserController::class, 'search'])->name('users.search');
