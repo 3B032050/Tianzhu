@@ -105,6 +105,7 @@ Route::group(['middleware' => 'admin'], function(){
         Route::get('/slides/{slide}/edit', [App\Http\Controllers\AdminSlideController::class, 'edit'])->name("slides.edit");
         Route::patch('/slides/{slide}',[App\Http\Controllers\AdminSlideController::class,'update'])->name('slides.update');
         Route::delete('/slides/{slide}', [App\Http\Controllers\AdminSlideController::class, 'destroy'])->name("slides.destroy");
+        Route::patch('/slides/{slide}/update_order', [App\Http\Controllers\AdminSlideController::class, 'update_order'])->name('slides.update_order');
     });
 });
 

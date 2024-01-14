@@ -12,8 +12,8 @@ class AdminSlideController extends Controller
 {
     public function index()
     {
-        $slides = Slide::all();
-        return view('admins.slides.index',compact('slides'));
+        $slides = Slide::orderBy('order')->get();
+        return view('admins.slides.index', compact('slides'));
     }
 
     public function create()
@@ -23,12 +23,6 @@ class AdminSlideController extends Controller
 
     public function store(Request $request)
     {
-
-//        $this->validate($request, [
-//            'title' => 'required',
-//            'image_path' => 'required|image|mimes:jpeg,png,jpg,gif|max:8192',
-//        ]);
-
         $slide = new Slide;
 
         if ($request->hasFile('image_path')) {
@@ -42,6 +36,7 @@ class AdminSlideController extends Controller
         }
 
         $slide->title = $request->input('title');
+        $slide->order = Slide::max('order') + 1; // 取得目前最大 order 值並加 1
         $slide->status = 0;
         $slide->save();
 
@@ -91,6 +86,18 @@ class AdminSlideController extends Controller
         return redirect()->route('admins.slides.index');
     }
 
+    public function update_order(Request $request)
+    {
+        $sortedIds = $request->input('sortedIds');
+        $sortedIdsArray = explode(',', $sortedIds);
+
+        // 更新數據庫中的排序
+        foreach ($sortedIdsArray as $index => $itemId) {
+            Slide::where('id', $itemId)->update(['order' => $index + 1]);
+        }
+
+        return redirect()->route('admins.slides.index');
+    }
 
 
 

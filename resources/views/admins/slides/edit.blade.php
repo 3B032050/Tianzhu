@@ -23,8 +23,8 @@
             <div class="form-group">
                 <label for="status" class="form-label">狀態</label>
                 <select id="status" name="status" class="form-control">
-                    <option value="0" {{ (!$slide->status) ? 'selected' : "" }}>不顯示</option>
-                    <option value="1" {{ ($slide->status) ? 'selected' : "" }}>顯示</option>
+                    <option value="0" {{ (!$slide->status) ? 'selected' : "" }}>顯示</option>
+                    <option value="1" {{ ($slide->status) ? 'selected' : "" }}>不顯示</option>
                 </select>
             </div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">

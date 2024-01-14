@@ -27,7 +27,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $slides = Slide::where('status', 0)->get();
+        $slides = Slide::where('status', 0)->orderBy('order')->get();
         $posts = Post::orderBy('created_at','DESC')->get();
         $data = ['slides'=>$slides,
             'posts' => $posts

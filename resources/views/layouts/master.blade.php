@@ -11,6 +11,8 @@
 
         <link rel="icon" type="image/x-icon" href="{{asset('assets/favicon.ico')}}" />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+
+
         <link href="{{asset('css/homepage-styles.css')}}" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="{{ asset('style.css') }}">
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
@@ -28,6 +30,10 @@
     @yield('content')
     @include('layouts.partials.footer')
 
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <!-- 引入 jQuery UI 库 -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 </body>
