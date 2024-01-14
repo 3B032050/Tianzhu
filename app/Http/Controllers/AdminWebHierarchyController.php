@@ -6,7 +6,7 @@ use App\Models\Web_hierarchy;
 use App\Models\Web_content;
 use Illuminate\Http\Request;
 
-class AdminWebHierarchiesController extends Controller
+class AdminWebHierarchyController extends Controller
 {
     public function index()
     {

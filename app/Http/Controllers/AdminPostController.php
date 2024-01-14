@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use Illuminate\Support\Facades\Storage;
 
-class AdminPostsController extends Controller
+class AdminPostController extends Controller
 {
     public function index()
     {
