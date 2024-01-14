@@ -6,7 +6,7 @@ use App\Models\Admin;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class AdminUsersController extends Controller
+class AdminUserController extends Controller
 {
     public function index(Request $request)
     {

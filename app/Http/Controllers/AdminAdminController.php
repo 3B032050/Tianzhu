@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-class AdminAdminsController extends Controller
+class AdminAdminController extends Controller
 {
     public function index()
     {

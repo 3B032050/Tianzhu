@@ -7,7 +7,7 @@ use App\Models\Web_content;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class AdminWebContentsController extends Controller
+class AdminWebContentController extends Controller
 {
     public function index()
     {
