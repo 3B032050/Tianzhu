@@ -31,19 +31,19 @@
                 </td>
                 <td class="align-middle" style="text-align:center">
                     @if ($slide->status == '1')
-                        (不顯示)
+                        <font color="red">(不顯示)</font>
                     @else
-                        (顯示)
+                        <font color="blue">(顯示)</font>
                     @endif
                 </td>
                 <td class="align-middle" style="text-align:center">
-                    <a href="{{ route('admins.slides.edit',$slide->id) }}" class="btn btn-secondary btn-sm">編輯</a>
+                    <a href="{{ route('admins.slides.edit', $slide->id) }}" class="btn btn-secondary btn-sm">編輯</a>
                 </td>
                 <td class="align-middle" style="text-align:center">
-                    <form class="delete-form" action="{{ route('admins.slides.destroy', $slide->id) }}" method="POST">
+                    <form id="deleteForm{{ $slide->id }}" action="{{ route('admins.slides.destroy', $slide->id) }}" method="POST">
                         @method('DELETE')
                         @csrf
-                        <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('{{ $slide->title }}')">刪除</button>
+                        <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('{{ $slide->title }}', {{ $slide->id }})">刪除</button>
                     </form>
                 </td>
             </tr>
@@ -59,10 +59,10 @@
     </form>
     <script>
         // 提示用户确认删除
-        function confirmDelete(title) {
+        function confirmDelete(title, id) {
             if (confirm('確定要刪除 ' + title + ' 嗎？')) {
                 // 如果用户确认删除，提交表单
-                $(".delete-form").submit(); // Use class selector to select all forms
+                document.getElementById('deleteForm' + id).submit();
             }
         }
     </script>
@@ -104,10 +104,10 @@
                 return $(this).data("id");
             }).get();
 
+            $("#sortableForm input[name='sortedIds']").remove();
 
             // 將排序後的順序填充到一個隱藏的 input 中
             $("#sortableForm").append('<input type="hidden" name="sortedIds" value="' + sortedIds.join(',') + '">');
-
 
 
             // 提交表單

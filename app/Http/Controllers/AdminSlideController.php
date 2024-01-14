@@ -82,18 +82,27 @@ class AdminSlideController extends Controller
 
     public function destroy(Slide $slide)
     {
+//        dd($slide);
         $slide->delete();
         return redirect()->route('admins.slides.index');
     }
 
     public function update_order(Request $request)
     {
+        // 使用 $request->input('sortedIds') 獲取排序的順序
         $sortedIds = $request->input('sortedIds');
-        $sortedIdsArray = explode(',', $sortedIds);
 
-        // 更新數據庫中的排序
-        foreach ($sortedIdsArray as $index => $itemId) {
-            Slide::where('id', $itemId)->update(['order' => $index + 1]);
+        // 確保 $sortedIds 是字符串
+        if (is_string($sortedIds)) {
+            // 使用 explode 函數將字符串拆分成數組
+            $sortedIdsArray = explode(',', $sortedIds);
+
+            // 更新數據庫中的排序
+            foreach ($sortedIdsArray as $index => $itemId) {
+                Slide::where('id', $itemId)->update(['order' => $index + 1]);
+            }
+
+            return redirect()->route('admins.slides.index');
         }
 
         return redirect()->route('admins.slides.index');
