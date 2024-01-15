@@ -46,7 +46,6 @@ class DatabaseSeeder extends Seeder
         Web_content::create([
             'web_id' => '0',
             'content' => '輸入內容..',
-            'image_url' => null,
         ]);
     }
 }
