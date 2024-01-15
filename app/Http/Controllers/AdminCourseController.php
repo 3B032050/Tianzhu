@@ -38,9 +38,12 @@ class AdminCourseController extends Controller
         // 驗證表單輸入
         $request->validate([
             'title' => 'required|string',
+            'method' => 'nullable|max:255',
             'course_category' => 'required|exists:course_categories,id',
-            'course_methods' => 'required',
-            'course_objectives' => 'required',
+            'course_methods' => 'array',
+            'course_objectives' => 'array',
+            'time' => 'nullable|max:255',
+            'note' => 'nullable|max:255',
         ]);
 
         // 創建課程
@@ -65,21 +68,52 @@ class AdminCourseController extends Controller
 
     public function edit(Course $course)
     {
+        $course_categories = CourseCategory::all();
+        $course_methods = CourseMethod::all();
+        $course_objectives = CourseObjective::all();
+
+        $selectedMethods = $course->methods->pluck('id')->toArray();
+        $selectedObjectives = $course->objectives->pluck('id')->toArray();
+
         $data = [
-            'course'=> $course,
+            'course' => $course,
+            'course_categories' => $course_categories,
+            'course_methods' => $course_methods,
+            'course_objectives' => $course_objectives,
+            'selectedMethods' => $selectedMethods,
+            'selectedObjectives' => $selectedObjectives,
         ];
+
         return view('admins.courses.edit',$data);
     }
 
     public function update(Request $request, Course $course)
     {
-//        $this->validate($request,[
-//            'title' => 'required|max:50',
-//            'content' => 'required',
-//            'is_feature' => 'required|boolean',
-//        ]);
+        $request->validate([
+            'title' => 'required|max:50',
+            'method' => 'nullable|max:255',
+            'course_category' => 'required|exists:course_categories,id',
+            'course_methods' => 'array',
+            'course_objectives' => 'array',
+            'time' => 'nullable|max:255',
+            'note' => 'nullable|max:255',
+        ]);
 
-        $course->update($request->all());
+        // Update the Course model
+        $course->update([
+            'title' => $request->input('title'),
+            'method' => $request->input('method'),
+            'course_category_id' => $request->input('course_category'),
+            'time' => $request->input('time'),
+            'note' => $request->input('note'),
+        ]);
+
+        // Sync the related methods
+        $course->methods()->sync($request->input('course_methods', []));
+
+        // Sync the related objectives
+        $course->objectives()->sync($request->input('course_objectives', []));
+
         return redirect()->route('admins.courses.index');
     }
 

@@ -4,54 +4,67 @@
 
 @section('page-content')
 <div class="container-fluid px-4">
-    <h1 class="mt-4">用戶資料管理</h1>
+    <h1 class="mt-4">課程管理管理</h1>
     <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item active">編輯用戶資料</li>
+        <li class="breadcrumb-item active">編輯課程</li>
     </ol>
     @include('admins.layouts.shared.errors')
-    <form action="{{ route('admins.users.update',$user->id) }}" method="POST" role="form">
+    <form action="{{ route('admins.courses.update',$course->id) }}" method="POST" role="form">
         @method('PATCH')
         @csrf
+
         <div class="form-group">
-            <label for="account" class="form-label">帳號</label>
-            <input id="account" name="account" type="text" class="form-control" value="{{ old('account',$user->account) }}" placeholder="請輸入帳號">
+            <label for="title" class="form-label">課程名稱</label>
+            <input id="title" name="title" type="text" class="form-control" value="{{ old('title',$course->title) }}" placeholder="請輸入姓名">
         </div>
+
         <div class="form-group">
-            <label for="name" class="form-label">姓名</label>
-            <input id="name" name="name" type="text" class="form-control" value="{{ old('name',$user->name) }}" placeholder="請輸入姓名">
+            <label for="method" class="form-label">類別</label>
+            <input id="method" name="method" type="text" class="form-control" value="{{ old('method',$course->method) }}" placeholder="非必填">
         </div>
+
         <div class="form-group">
-            <label for="email" class="form-label">信箱</label>
-            <input id="email" name="email" type="text" class="form-control" value="{{ old('email',$user->email) }}" placeholder="請輸入信箱">
-        </div>
-        <div class="form-group">
-            <label for="password" class="form-label">密碼</label>
-            <input id="password" name="password" type="text" class="form-control" value="{{ old('password',$user->password) }}" placeholder="請輸入密碼" readonly>
-        </div>
-        <div class="form-group">
-            <label for="sex" class="form-label">性別</label>
-            <select id="sex" name="sex" class="form-control">
-                @if($user->sex == '男')
-                    <option value="男" selected>男</option>
-                    <option value="女">女</option>
-                @elseif($user->sex == '女')
-                    <option value="男">男</option>
-                    <option value="女" selected>女</option>
-                @endif
+            <label for="course_category">課程分階</label>
+            <select name="course_category" id="course_category" class="form-select">
+                @foreach($course_categories as $category)
+                    <option value="{{ $category->id }}" {{ ($category->id == $course->category_id) ? 'selected' : '' }}>
+                        {{ $category->name }}
+                    </option>
+                @endforeach
             </select>
         </div>
+
         <div class="form-group">
-            <label for="birthday" class="form-label">生日</label>
-            <input id="birthday" name="birthday" type="date" class="form-control" value="{{ old('birthday',$user->birthday) }}" placeholder="請輸入日期">
+            <label for="course_methods">方法</label>
+            <select name="course_methods[]" id="course_methods" class="form-select" multiple>
+                @foreach($course_methods as $method)
+                    <option value="{{ $method->id }}" {{ (in_array($method->id, $selectedMethods)) ? 'selected' : '' }}>
+                        {{ $method->name }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="course_objectives">目標</label>
+            <select name="course_objectives[]" id="course_objectives" class="form-select" multiple>
+                @foreach($course_objectives as $objective)
+                    <option value="{{ $objective->id }}" {{ (in_array($objective->id, $selectedObjectives)) ? 'selected' : '' }}>
+                        {{ $objective->description }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="time" class="form-label">時間</label>
+            <input id="time" name="time" type="text" class="form-control" value="{{ old('time',$course->time) }}" placeholder="非必填">
         </div>
         <div class="form-group">
-            <label for="phone" class="form-label">電話</label>
-            <input id="phone" name="phone" type="text" class="form-control" value="{{ old('phone',$user->phone) }}" placeholder="請輸入電話">
+            <label for="note" class="form-label">備註</label>
+            <input id="note" name="note" type="text" class="form-control" value="{{ old('note',$course->note) }}" placeholder="非必填">
         </div>
-        <div class="form-group">
-            <label for="address" class="form-label">地址</label>
-            <input id="address" name="address" type="text" class="form-control" value="{{ old('address',$user->address) }}" placeholder="請輸入地址">
-        </div>
+
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
             <button type="submit" class="btn btn-primary btn-sm">儲存</button>
         </div>

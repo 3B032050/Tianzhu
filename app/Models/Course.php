@@ -9,6 +9,15 @@ class Course extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'title',
+        'course_category_id',
+        'description',
+        'method',
+        'time',
+        'note',
+    ];
+
     // 這是一對一的關聯，一門課程屬於一個分類
     public function category()
     {

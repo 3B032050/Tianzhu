@@ -17,6 +17,7 @@
             <th scope="col" style="text-align:left">課程名稱</th>
             <th scope="col" style="text-align:left">方式</th>
             <th scope="col" style="text-align:left">目標</th>
+            <th scope="col" style="text-align:left">時間</th>
             <th scope="col" style="text-align:left">備註</th>
         </tr>
         </thead>
@@ -57,6 +58,7 @@
                         @endif
                     @endforeach
                 </td>
+                <td>{{ $course->time }}</td>
                 <td>{{ $course->note }}</td>
                 <td style="text-align:center">
                     <a href="{{ route('admins.courses.edit',$course->id) }}" class="btn btn-secondary btn-sm">編輯</a>
