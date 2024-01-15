@@ -11,13 +11,15 @@
                 <a class="nav-link" href="{{ route('admins.courses.index') }}">
                     僧伽教育
                 </a>
+                <a class="nav-link" href="{{ route('admins.courses.index') }}">
+                    佛門小常識
+                </a>
                 <a class="nav-link" href="{{ route('home.index') }}">
                     活動紀實
                 </a>
                 <a class="nav-link" href="{{ route('admins.posts.index') }}">
                     公告管理
                 </a>
-
                 <a class="nav-link" href="{{ route('admins.slides.index') }}">
                     幻燈片設定
                 </a>

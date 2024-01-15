@@ -30,7 +30,7 @@
         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="{{ asset('storage/slides/1705232115.jpg') }}?v={{ time() }}" class="d-block w-100" style="width: 80vw; height: 500px; object-fit: cover;">
+                    <img src="{{ asset('storage/slides/1705334824.jpg') }}?v={{ time() }}" class="d-block w-100" style="width: 80vw; height: 500px; object-fit: cover;">
                 </div>
             </div>
             <!-- 轮播控制按钮 -->
