@@ -8,14 +8,21 @@
                 <a class="nav-link" href="{{ route('admins.web_hierarchies.index') }}">
                     主網頁階層設定
                 </a>
-{{--                <a class="nav-link" href="{{ route('admins.web_contents.index') }}">--}}
-{{--                    主網頁內容設定--}}
-{{--                </a>--}}
-                <a class="nav-link" href="{{ route('admins.users.index') }}">
-                    用戶管理
+                <a class="nav-link" href="{{ route('admins.courses.index') }}">
+                    僧伽教育
+                </a>
+                <a class="nav-link" href="{{ route('home.index') }}">
+                    活動紀實
                 </a>
                 <a class="nav-link" href="{{ route('admins.posts.index') }}">
                     公告管理
+                </a>
+
+                <a class="nav-link" href="{{ route('admins.slides.index') }}">
+                    幻燈片設定
+                </a>
+                <a class="nav-link" href="{{ route('admins.users.index') }}">
+                    用戶管理
                 </a>
                 <a class="nav-link" href="{{ route('admins.admins.index') }}">
                     管理員管理

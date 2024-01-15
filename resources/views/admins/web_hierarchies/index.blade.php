@@ -37,9 +37,17 @@
                     'web_title'=>$web_hierarchy->title,
                 );
             @endphp
+            <script>
+                function confirmDelete(title,web_id)
+                {
+                    if (confirm("確定要刪除階層「" + title +"」嗎？")) {
+                        document.getElementById('deleteForm' + web_id).submit();
+                    }
+                }
+            </script>
         @endforeach
         @php
-            $controller = App::make('App\Http\Controllers\AdminWebHierarchiesController');
+            $controller = App::make('App\Http\Controllers\AdminWebHierarchyController');
             $controller->web_print($data);
         @endphp
         </tbody>

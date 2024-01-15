@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-class AdminAdminsController extends Controller
+class AdminAdminController extends Controller
 {
     public function index()
     {
@@ -104,5 +104,15 @@ class AdminAdminsController extends Controller
     {
         $admin->delete();
         return redirect()->route('admins.admins.index');
+    }
+
+    public function search()
+    {
+        return view('selectview');
+//        $user = User::where('account',$request)->first();
+//        $data = [
+//            'user' => $user,
+//        ];
+//        return view('admins.admins.create_selected',$data);
     }
 }

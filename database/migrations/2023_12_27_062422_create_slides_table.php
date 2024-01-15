@@ -9,12 +9,14 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('web_contents', function (Blueprint $table) {
+        Schema::create('slides', function (Blueprint $table) {
             $table->id();
-            $table->string('web_id'); //使用者編號
-            $table->text('content');
+            $table->string('title');
+            $table->integer('order');
+            $table->string('image_path');
+            $table->Integer('status');
             $table->timestamps();
         });
     }
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('web_contents');
+        Schema::dropIfExists('slides');
     }
 };

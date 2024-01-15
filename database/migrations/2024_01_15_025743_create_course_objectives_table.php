@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('web_contents', function (Blueprint $table) {
+        Schema::create('course_objectives', function (Blueprint $table) {
             $table->id();
-            $table->string('web_id'); //使用者編號
-            $table->text('content');
+            $table->string('description');
             $table->timestamps();
         });
     }
@@ -24,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('web_contents');
+        Schema::dropIfExists('course_objectives');
     }
 };
