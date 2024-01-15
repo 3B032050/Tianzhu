@@ -71,6 +71,13 @@ Route::group(['middleware' => 'admin'], function(){
         Route::delete('/users/{user}', [App\Http\Controllers\AdminUserController::class, 'destroy'])->name("users.destroy");
         Route::get('/users/search', [App\Http\Controllers\AdminUserController::class, 'search'])->name('users.search');
 
+        Route::get('/courses',[App\Http\Controllers\AdminCourseController::class,'index'])->name('courses.index');
+        Route::get('/courses/create',[App\Http\Controllers\AdminCourseController::class,'create'])->name('courses.create');
+        Route::post('/courses', [App\Http\Controllers\AdminCourseController::class, 'store'])->name("courses.store");
+        Route::get('/courses/{course}/edit', [App\Http\Controllers\AdminCourseController::class, 'edit'])->name("courses.edit");
+        Route::patch('/courses/{course}',[App\Http\Controllers\AdminCourseController::class,'update'])->name('courses.update');
+        Route::delete('/courses/{course}', [App\Http\Controllers\AdminCourseController::class, 'destroy'])->name("courses.destroy");
+        Route::get('/courses/search', [App\Http\Controllers\AdminCourseController::class, 'search'])->name('courses.search');
 
         //公告路由
         Route::get('posts', [App\Http\Controllers\AdminPostController::class, 'index'])->name("posts.index");

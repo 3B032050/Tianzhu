@@ -47,7 +47,7 @@
             </script>
         @endforeach
         @php
-            $controller = App::make('App\Http\Controllers\AdminWebHierarchiesController');
+            $controller = App::make('App\Http\Controllers\AdminWebHierarchyController');
             $controller->web_print($data);
         @endphp
         </tbody>
