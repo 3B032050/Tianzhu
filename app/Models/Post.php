@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Post extends Model
 {
@@ -24,4 +25,8 @@ class Post extends Model
         'is_feature' => 'bool',
         'file'=>'string',
     ];
+    public function post_comments(): HasMany
+    {
+        return $this->hasMany(Post_comment::class);
+    }
 }

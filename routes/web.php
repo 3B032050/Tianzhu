@@ -39,7 +39,12 @@ Route::group(['middleware' => 'auth'], function() {
     Route::prefix('users')->name('users.')->group(function () {
         Route::get('/',[App\Http\Controllers\UserController::class,'index'])->name('index');
         Route::patch('{user}',[App\Http\Controllers\UserController::class,'update'])->name('update');
+        Route::post('/comment', [App\Http\Controllers\PostCommentController::class, 'store'])->name("comment.store");
+        Route::get('/comment/{id}', [App\Http\Controllers\PostCommentController::class, 'edit'])->name('commnet.edit');
+        Route::patch('/comment', [App\Http\Controllers\PostCommentController::class, 'update'])->name('commnet.update');
+        Route::delete('/comment', [App\Http\Controllers\PostCommentController::class, 'destroy'])->name('commnet.destroy');
     });
+
 });
 
 
