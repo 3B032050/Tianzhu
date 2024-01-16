@@ -4,10 +4,12 @@
 
 @section('page-content')
 <div class="container-fluid px-4">
-    <h1 class="mt-4">課程管理管理</h1>
-    <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item active">編輯課程</li>
-    </ol>
+    <div style="margin-top: 10px;">
+        <p style="font-size: 1.8em;">
+            <a href="{{ route('admins.courses.index') }}" class="custom-link"><i class="fa fa-home"></i>僧伽教育</a> &gt;
+            編輯課程 - {{ $course->title }}
+        </p>
+    </div>
     @include('admins.layouts.shared.errors')
     <form action="{{ route('admins.courses.update',$course->id) }}" method="POST" role="form">
         @method('PATCH')

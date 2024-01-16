@@ -4,10 +4,12 @@
 
 @section('page-content')
     <div class="container-fluid px-4">
-        <h1 class="mt-4">課程管理</h1>
-        <ol class="breadcrumb mb-4">
-            <li class="breadcrumb-item active">新增課程</li>
-        </ol>
+        <div style="margin-top: 10px;">
+            <p style="font-size: 1.8em;">
+                <a href="{{ route('admins.courses.index') }}" class="custom-link"><i class="fa fa-home"></i>僧伽教育</a> &gt;
+                新增課程
+            </p>
+        </div>
         @include('admins.layouts.shared.errors')
         <form action="{{ route('admins.courses.store') }}" method="POST" role="form">
             @method('POST')
