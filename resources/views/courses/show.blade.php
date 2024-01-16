@@ -23,16 +23,15 @@
 
                             <div id="courseCollapse{{ $course->id }}" class="collapse" aria-labelledby="courseHeading{{ $course->id }}" data-parent="#coursesAccordion">
                                 <div class="card-body text-start">
-                                    <p class="card-text">類別：{{ $selectedCategory->name }}</p>
                                     <p class="card-text">
-                                        授課方式：<br>
+                                        授課方式<br>
                                         @foreach($course->methods as $index => $method)
                                             {{ ($index+1) }}
                                             {{ $method->name }}<br>
                                         @endforeach
                                     </p>
                                     <p class="card-text">
-                                        授課目標：<br>
+                                        授課目標<br>
                                         @foreach($course->objectives as $objective)
                                             {{ $objective->description }}<br>
                                         @endforeach
