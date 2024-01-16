@@ -170,8 +170,23 @@ Route::group(['middleware' => 'admin'], function(){
         Route::patch('/curriculum_methods/{curriculum_method}',[App\Http\Controllers\AdminCurriculumMethodController::class,'update'])->name('curriculum_methods.update');
         Route::delete('/curriculum_methods/{curriculum_method}', [App\Http\Controllers\AdminCurriculumMethodController::class, 'destroy'])->name("curriculum_methods.destroy");
         Route::get('/curriculum_methods/search', [App\Http\Controllers\AdminCurriculumMethodController::class, 'search'])->name('curriculum_methods.search');
+
+        Route::get('/common_senses',[App\Http\Controllers\AdminCommonSenseController::class,'index'])->name('common_senses.index');
+        Route::get('/common_senses/create',[App\Http\Controllers\AdminCommonSenseController::class,'create'])->name('common_senses.create');
+        Route::post('/common_senses', [App\Http\Controllers\AdminCommonSenseController::class, 'store'])->name("common_senses.store");
+        Route::get('/common_senses/{common_sense}/edit', [App\Http\Controllers\AdminCommonSenseController::class, 'edit'])->name("common_senses.edit");
+        Route::patch('/common_senses/{common_sense}',[App\Http\Controllers\AdminCommonSenseController::class,'update'])->name('common_senses.update');
+        Route::delete('/common_senses/{common_sense}', [App\Http\Controllers\AdminCommonSenseController::class, 'destroy'])->name("common_senses.destroy");
+        Route::get('/common_senses/search', [App\Http\Controllers\AdminCommonSenseController::class, 'search'])->name('common_senses.search');
+
+        Route::get('/common_sense_categories',[App\Http\Controllers\AdminCommonSenseCategoryController::class,'index'])->name('common_sense_categories.index');
+        Route::get('/common_sense_categories/create',[App\Http\Controllers\AdminCommonSenseCategoryController::class,'create'])->name('common_sense_categories.create');
+        Route::post('/common_sense_categories', [App\Http\Controllers\AdminCommonSenseCategoryController::class, 'store'])->name("common_sense_categories.store");
+        Route::get('/common_sense_categories/{common_sense_category}/edit', [App\Http\Controllers\AdminCommonSenseCategoryController::class, 'edit'])->name("common_sense_categories.edit");
+        Route::patch('/common_sense_categories/{common_sense_category}',[App\Http\Controllers\AdminCommonSenseCategoryController::class,'update'])->name('common_sense_categories.update');
+        Route::delete('/common_sense_categories/{common_sense_category}', [App\Http\Controllers\AdminCommonSenseCategoryController::class, 'destroy'])->name("common_sense_categories.destroy");
+        Route::get('/common_sense_categories/search', [App\Http\Controllers\AdminCommonSenseCategoryController::class, 'search'])->name('common_sense_categories.search');
+
     });
 });
-
-
 
