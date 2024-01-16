@@ -27,7 +27,7 @@
             <label for="course_category">課程分階</label>
             <select name="course_category" id="course_category" class="form-select">
                 @foreach($course_categories as $category)
-                    <option value="{{ $category->id }}" {{ ($category->id == $course->category_id) ? 'selected' : '' }}>
+                    <option value="{{ $category->id }}" {{ ($category->id == $course->course_category_id) ? 'selected' : '' }}>
                         {{ $category->name }}
                     </option>
                 @endforeach
