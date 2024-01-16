@@ -28,6 +28,10 @@ Route::get('/web/{web_id}', [App\Http\Controllers\WebController::class, 'index']
 //Route::get('/select','TestController@testfunction');
 Route::get('/select', [App\Http\Controllers\AdminAdminController::class, 'search'])->name("admins.search");
 
+Route::get('/courses', [App\Http\Controllers\CourseController::class, 'overview'])->name('courses.overview');
+Route::get('/courses/{course_category}/show', [App\Http\Controllers\CourseController::class, 'show'])->name('courses.show');
+
+
 
 
 Auth::routes();

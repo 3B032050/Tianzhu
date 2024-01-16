@@ -59,29 +59,16 @@
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li>
-                                    <a class="dropdown-item" href="/">總覽</a>
+                                    <a class="dropdown-item" href="{{ route('courses.overview') }}">總覽</a>
                                 </li>
                                 <li>
                                     <hr class="dropdown-divider"/>
                                 </li>
-                                <li>
-                                    <a class="dropdown-item" href="/">基礎教育</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="/">沙彌淨人</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="/">式叉尼</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="/">大尼新戒</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="/">大尼</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="/">進階培養</a>
-                                </li>
+                                @foreach($courseCategories as $courseCategory)
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('courses.show',$courseCategory->id) }}">{{ $courseCategory->name }}</a>
+                                    </li>
+                                @endforeach
                             </ul>
                         </div>
                     </li>
