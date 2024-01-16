@@ -11,6 +11,9 @@
                 <a class="nav-link" href="{{ route('admins.courses.index') }}">
                     僧伽教育
                 </a>
+                <a class="nav-link" href="{{ route('admins.curricula.index') }}">
+                    居士學佛
+                </a>
                 <a class="nav-link" href="{{ route('admins.courses.index') }}">
                     佛門小常識
                 </a>

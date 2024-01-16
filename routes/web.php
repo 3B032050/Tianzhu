@@ -138,6 +138,38 @@ Route::group(['middleware' => 'admin'], function(){
         Route::patch('/slides/{slide}',[App\Http\Controllers\AdminSlideController::class,'update'])->name('slides.update');
         Route::delete('/slides/{slide}', [App\Http\Controllers\AdminSlideController::class, 'destroy'])->name("slides.destroy");
         Route::patch('/slides/{slide}/update_order', [App\Http\Controllers\AdminSlideController::class, 'update_order'])->name('slides.update_order');
+
+        Route::get('/curricula',[App\Http\Controllers\AdminCurriculumController::class,'index'])->name('curricula.index');
+        Route::get('/curricula/create',[App\Http\Controllers\AdminCurriculumController::class,'create'])->name('curricula.create');
+        Route::post('/curricula', [App\Http\Controllers\AdminCurriculumController::class, 'store'])->name("curricula.store");
+        Route::get('/curricula/{curriculum}/edit', [App\Http\Controllers\AdminCurriculumController::class, 'edit'])->name("curricula.edit");
+        Route::patch('/curricula/{curriculum}',[App\Http\Controllers\AdminCurriculumController::class,'update'])->name('curricula.update');
+        Route::delete('/curricula/{curriculum}', [App\Http\Controllers\AdminCurriculumController::class, 'destroy'])->name("curricula.destroy");
+        Route::get('/curricula/search', [App\Http\Controllers\AdminCurriculumController::class, 'search'])->name('curricula.search');
+
+        Route::get('/curriculum_objectives',[App\Http\Controllers\AdminCurriculumObjectiveController::class,'index'])->name('curriculum_objectives.index');
+        Route::get('/curriculum_objectives/create',[App\Http\Controllers\AdminCurriculumObjectiveController::class,'create'])->name('curriculum_objectives.create');
+        Route::post('/curriculum_objectives', [App\Http\Controllers\AdminCurriculumObjectiveController::class, 'store'])->name("curriculum_objectives.store");
+        Route::get('/curriculum_objectives/{curriculum_objective}/edit', [App\Http\Controllers\AdminCurriculumObjectiveController::class, 'edit'])->name("curriculum_objectives.edit");
+        Route::patch('/curriculum_objectives/{curriculum_objective}',[App\Http\Controllers\AdminCurriculumObjectiveController::class,'update'])->name('curriculum_objectives.update');
+        Route::delete('/curriculum_objectives/{curriculum_objective}', [App\Http\Controllers\AdminCurriculumObjectiveController::class, 'destroy'])->name("curriculum_objectives.destroy");
+        Route::get('/curriculum_objectives/search', [App\Http\Controllers\AdminCurriculumObjectiveController::class, 'search'])->name('curriculum_objectives.search');
+
+        Route::get('/curriculum_categories',[App\Http\Controllers\AdminCurriculumCategoryController::class,'index'])->name('curriculum_categories.index');
+        Route::get('/curriculum_categories/create',[App\Http\Controllers\AdminCurriculumCategoryController::class,'create'])->name('curriculum_categories.create');
+        Route::post('/curriculum_categories', [App\Http\Controllers\AdminCurriculumCategoryController::class, 'store'])->name("curriculum_categories.store");
+        Route::get('/curriculum_categories/{curriculum_category}/edit', [App\Http\Controllers\AdminCurriculumCategoryController::class, 'edit'])->name("curriculum_categories.edit");
+        Route::patch('/curriculum_categories/{curriculum_category}',[App\Http\Controllers\AdminCurriculumCategoryController::class,'update'])->name('curriculum_categories.update');
+        Route::delete('/curriculum_categories/{curriculum_category}', [App\Http\Controllers\AdminCurriculumCategoryController::class, 'destroy'])->name("curriculum_categories.destroy");
+        Route::get('/curriculum_categories/search', [App\Http\Controllers\AdminCurriculumCategoryController::class, 'search'])->name('curriculum_categories.search');
+
+        Route::get('/curriculum_methods',[App\Http\Controllers\AdminCurriculumMethodController::class,'index'])->name('curriculum_methods.index');
+        Route::get('/curriculum_methods/create',[App\Http\Controllers\AdminCurriculumMethodController::class,'create'])->name('curriculum_methods.create');
+        Route::post('/curriculum_methods', [App\Http\Controllers\AdminCurriculumMethodController::class, 'store'])->name("curriculum_methods.store");
+        Route::get('/curriculum_methods/{curriculum_method}/edit', [App\Http\Controllers\AdminCurriculumMethodController::class, 'edit'])->name("curriculum_methods.edit");
+        Route::patch('/curriculum_methods/{curriculum_method}',[App\Http\Controllers\AdminCurriculumMethodController::class,'update'])->name('curriculum_methods.update');
+        Route::delete('/curriculum_methods/{curriculum_method}', [App\Http\Controllers\AdminCurriculumMethodController::class, 'destroy'])->name("curriculum_methods.destroy");
+        Route::get('/curriculum_methods/search', [App\Http\Controllers\AdminCurriculumMethodController::class, 'search'])->name('curriculum_methods.search');
     });
 });
 
