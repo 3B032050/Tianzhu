@@ -40,10 +40,10 @@
                     <a href="{{ route('admins.slides.edit', $slide->id) }}" class="btn btn-secondary btn-sm">編輯</a>
                 </td>
                 <td class="align-middle" style="text-align:center">
-                    <form id="deleteForm{{ $slide->id }}" action="{{ route('admins.slides.destroy', $slide->id) }}" method="POST">
+                    <form id="deleteForm{{ $index + 1 }}" action="{{ route('admins.slides.destroy', $slide->id) }}" method="POST">
                         @method('DELETE')
                         @csrf
-                        <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('{{ $slide->title }}', {{ $slide->id }})">刪除</button>
+                        <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('{{ $slide->title }}', {{ $index + 1 }})">刪除</button>
                     </form>
                 </td>
             </tr>
@@ -60,7 +60,7 @@
     <script>
         // 提示用户确认删除
         function confirmDelete(title, id) {
-            if (confirm('確定要刪除 ' + title + ' 嗎？')) {
+            if (confirm('確定要刪除圖片 ' + id + ' 嗎？')) {
                 // 如果用户确认删除，提交表单
                 document.getElementById('deleteForm' + id).submit();
             }

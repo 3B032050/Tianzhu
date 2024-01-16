@@ -10,7 +10,7 @@
             @csrf
             <div class="form-group">
                 <label for="title" class="form-label">標題</label>
-                <input id="title" name="title" type="text" class="form-control" placeholder="請輸入標題">
+                <input id="title" name="title" type="text" class="form-control" placeholder="非必填">
             </div>
             <div class="form-group">
                 <label for="image_path" class="form-label">圖片</label>
