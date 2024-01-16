@@ -5,7 +5,6 @@
 @section('page-content')
     <div class="container-fluid px-4">
         <h1 class="mt-4">居士學佛</h1>
-{{--        <a class="btn btn-success btn-sm" href="{{ route('admins.course_overviews.edit') }}">編輯總覽</a>--}}
         <a class="btn btn-success btn-sm" href="{{ route('admins.curriculum_categories.index') }}">課程類別</a>
         <a class="btn btn-success btn-sm" href="{{ route('admins.curriculum_methods.index') }}">課程方式</a>
         <a class="btn btn-success btn-sm" href="{{ route('admins.curriculum_objectives.index') }}">課程目標</a>

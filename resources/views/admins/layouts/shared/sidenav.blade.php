@@ -14,7 +14,7 @@
                 <a class="nav-link" href="{{ route('admins.curricula.index') }}">
                     居士學佛
                 </a>
-                <a class="nav-link" href="{{ route('admins.courses.index') }}">
+                <a class="nav-link" href="{{ route('admins.common_senses.index') }}">
                     佛門小常識
                 </a>
                 <a class="nav-link" href="{{ route('admins.course_file.index') }}">
