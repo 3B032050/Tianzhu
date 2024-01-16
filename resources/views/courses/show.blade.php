@@ -33,8 +33,7 @@
                                     </p>
                                     <p class="card-text">
                                         授課目標：<br>
-                                        @foreach($course->objectives as $index => $objective)
-                                            {{ ($index+1) }}
+                                        @foreach($course->objectives as $objective)
                                             {{ $objective->description }}<br>
                                         @endforeach
                                     </p>

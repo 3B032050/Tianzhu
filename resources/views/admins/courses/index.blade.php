@@ -54,8 +54,7 @@
                     @endforeach
                 </td>
                 <td>
-                    @foreach($course->objectives as $index_objective => $objective)
-                        {{ $index_objective + 1 }}
+                    @foreach($course->objectives as $objective)
                         {{ $objective->description }}
                         @if(!$loop->last)
                             <br>
