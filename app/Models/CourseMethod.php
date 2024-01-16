@@ -9,6 +9,10 @@ class CourseMethod extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+    ];
+
     // 這是多對多的關聯，一個方法可能屬於多門課程
     public function courses()
     {

@@ -5,6 +5,9 @@
 @section('page-content')
 <div class="container-fluid px-4">
     <h1 class="mt-4">僧伽教育</h1>
+    <a class="btn btn-success btn-sm" href="{{ route('admins.course_categories.index') }}">課程分階</a>
+    <a class="btn btn-success btn-sm" href="{{ route('admins.course_methods.index') }}">課程方式</a>
+    <a class="btn btn-success btn-sm" href="{{ route('admins.course_objectives.index') }}">課程目標</a>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
         <a class="btn btn-success btn-sm" href="{{ route('admins.courses.create') }}">新增課程</a>
     </div>
@@ -58,8 +61,20 @@
                         @endif
                     @endforeach
                 </td>
-                <td>{{ $course->time }}</td>
-                <td>{{ $course->note }}</td>
+                <td>
+                    @if ($course->time)
+                        {{ $course->time }}
+                    @else
+                        無
+                    @endif
+                </td>
+                <td>
+                    @if ($course->note)
+                        {{ $course->note }}
+                    @else
+                        無
+                    @endif
+                </td>
                 <td style="text-align:center">
                     <a href="{{ route('admins.courses.edit',$course->id) }}" class="btn btn-secondary btn-sm">編輯</a>
                 </td>

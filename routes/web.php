@@ -84,6 +84,30 @@ Route::group(['middleware' => 'admin'], function(){
         Route::delete('/courses/{course}', [App\Http\Controllers\AdminCourseController::class, 'destroy'])->name("courses.destroy");
         Route::get('/courses/search', [App\Http\Controllers\AdminCourseController::class, 'search'])->name('courses.search');
 
+        Route::get('/course_objectives',[App\Http\Controllers\AdminCourseObjectiveController::class,'index'])->name('course_objectives.index');
+        Route::get('/course_objectives/create',[App\Http\Controllers\AdminCourseObjectiveController::class,'create'])->name('course_objectives.create');
+        Route::post('/course_objectives', [App\Http\Controllers\AdminCourseObjectiveController::class, 'store'])->name("course_objectives.store");
+        Route::get('/course_objectives/{course_objective}/edit', [App\Http\Controllers\AdminCourseObjectiveController::class, 'edit'])->name("course_objectives.edit");
+        Route::patch('/course_objectives/{course_objective}',[App\Http\Controllers\AdminCourseObjectiveController::class,'update'])->name('course_objectives.update');
+        Route::delete('/course_objectives/{course_objective}', [App\Http\Controllers\AdminCourseObjectiveController::class, 'destroy'])->name("course_objectives.destroy");
+        Route::get('/course_objectives/search', [App\Http\Controllers\AdminCourseObjectiveController::class, 'search'])->name('course_objectives.search');
+
+        Route::get('/course_categories',[App\Http\Controllers\AdminCourseCategoryController::class,'index'])->name('course_categories.index');
+        Route::get('/course_categories/create',[App\Http\Controllers\AdminCourseCategoryController::class,'create'])->name('course_categories.create');
+        Route::post('/course_categories', [App\Http\Controllers\AdminCourseCategoryController::class, 'store'])->name("course_categories.store");
+        Route::get('/course_categories/{course_category}/edit', [App\Http\Controllers\AdminCourseCategoryController::class, 'edit'])->name("course_categories.edit");
+        Route::patch('/course_categories/{course_category}',[App\Http\Controllers\AdminCourseCategoryController::class,'update'])->name('course_categories.update');
+        Route::delete('/course_categories/{course_category}', [App\Http\Controllers\AdminCourseCategoryController::class, 'destroy'])->name("course_categories.destroy");
+        Route::get('/course_categories/search', [App\Http\Controllers\AdminCourseCategoryController::class, 'search'])->name('course_categories.search');
+
+        Route::get('/course_methods',[App\Http\Controllers\AdminCourseMethodController::class,'index'])->name('course_methods.index');
+        Route::get('/course_methods/create',[App\Http\Controllers\AdminCourseMethodController::class,'create'])->name('course_methods.create');
+        Route::post('/course_methods', [App\Http\Controllers\AdminCourseMethodController::class, 'store'])->name("course_methods.store");
+        Route::get('/course_methods/{course_method}/edit', [App\Http\Controllers\AdminCourseMethodController::class, 'edit'])->name("course_methods.edit");
+        Route::patch('/course_methods/{course_method}',[App\Http\Controllers\AdminCourseMethodController::class,'update'])->name('course_methods.update');
+        Route::delete('/course_methods/{course_method}', [App\Http\Controllers\AdminCourseMethodController::class, 'destroy'])->name("course_methods.destroy");
+        Route::get('/course_methods/search', [App\Http\Controllers\AdminCourseMethodController::class, 'search'])->name('course_methods.search');
+
         //公告路由
         Route::get('posts', [App\Http\Controllers\AdminPostController::class, 'index'])->name("posts.index");
         Route::get('posts/create', [App\Http\Controllers\AdminPostController::class, 'create'])->name("posts.create");
@@ -94,7 +118,7 @@ Route::group(['middleware' => 'admin'], function(){
 
 
         //管理員操作路由
-        Route::get('/rs/admins',[App\Http\Controllers\AdminAdminController::class,'index'])->name('admins.index');
+        Route::get('/admins',[App\Http\Controllers\AdminAdminController::class,'index'])->name('admins.index');
         Route::get('/admins/create',[App\Http\Controllers\AdminAdminController::class,'create'])->name('admins.create');
         Route::get('/admins/create_selected/{id}',[App\Http\Controllers\AdminAdminController::class,'create_selcted'])->name('admins.create_selected');
         Route::post('/admins', [App\Http\Controllers\AdminAdminController::class, 'store'])->name("admins.store");

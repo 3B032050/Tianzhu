@@ -9,6 +9,10 @@ class CourseObjective extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'description',
+    ];
+
     // 這是多對多的關聯，一個目標可能屬於多門課程
     public function courses()
     {
