@@ -124,6 +124,8 @@ Route::group(['middleware' => 'admin'], function(){
         Route::patch('/activities/{activity}',[App\Http\Controllers\AdminActivityController::class,'update'])->name('activities.update');
         Route::delete('/activities/{activity}', [App\Http\Controllers\AdminActivityController::class, 'destroy'])->name("activities.destroy");
         Route::get('/activities/search', [App\Http\Controllers\AdminActivityController::class, 'search'])->name('activities.search');
+        Route::post('/activities/upload', [App\Http\Controllers\AdminActivityController::class, 'upload'])->name('activities.upload');
+
 
         //公告路由
         Route::get('posts', [App\Http\Controllers\AdminPostController::class, 'index'])->name("posts.index");

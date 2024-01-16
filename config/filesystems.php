@@ -70,6 +70,13 @@ return [
             'visibility' => 'public',
         ],
 
+        'activities' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/activities'),
+            'url' => env('APP_URL').':8000/storage/activities',
+            'visibility' => 'public',
+        ],
+
         'slides' => [
             'driver' => 'local',
             'root' => storage_path('app/public/slides'),
