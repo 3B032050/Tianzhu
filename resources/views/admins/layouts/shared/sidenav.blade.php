@@ -17,6 +17,9 @@
                 <a class="nav-link" href="{{ route('admins.courses.index') }}">
                     佛門小常識
                 </a>
+                <a class="nav-link" href="{{ route('admins.course_file.index') }}">
+                    課程講義
+                </a>
                 <a class="nav-link" href="{{ route('home.index') }}">
                     活動紀實
                 </a>

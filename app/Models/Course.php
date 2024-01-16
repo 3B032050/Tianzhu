@@ -23,7 +23,6 @@ class Course extends Model
     {
         return $this->belongsTo(CourseCategory::class, 'course_category_id');
     }
-
     // 這是多對多的關聯，一門課程可能有多個方法
     public function methods()
     {
