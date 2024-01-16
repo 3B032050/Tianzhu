@@ -33,7 +33,7 @@
 
             <div class="form-group">
                 <label for="course_methods">方法</label>
-                <select name="course_methods[]" id="course_methods" class="form-select" multiple>
+                <select name="course_methods[]" id="course_methods" class="form-select" size="{{ count($course_methods) }}" multiple>
                     @foreach($course_methods as $course_method)
                         <option value="{{ $course_method->id }}">{{ $course_method->name }}</option>
                     @endforeach
@@ -42,7 +42,7 @@
 
             <div class="form-group">
                 <label for="course_objectives">目標</label>
-                <select name="course_objectives[]" id="course_objectives" class="form-select" multiple>
+                <select name="course_objectives[]" id="course_objectives" class="form-select" size="{{ count($course_objectives) }}" multiple>
                     @foreach($course_objectives as $course_objective)
                         <option value="{{ $course_objective->id }}">{{ $course_objective->description }}</option>
                     @endforeach
