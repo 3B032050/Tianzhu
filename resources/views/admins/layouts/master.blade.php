@@ -22,6 +22,12 @@
             height: 450px;
         }
     </style>
+    <style>
+        .custom-link {
+            color: black; /* 設置字體顏色為黑色 */
+            text-decoration: none; /* 移除下劃線 */
+        }
+    </style>
 </head>
 <body class="sb-nav-fixed">
     @include('admins.layouts.shared.navbar')

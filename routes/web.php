@@ -76,6 +76,9 @@ Route::group(['middleware' => 'admin'], function(){
         Route::delete('/users/{user}', [App\Http\Controllers\AdminUserController::class, 'destroy'])->name("users.destroy");
         Route::get('/users/search', [App\Http\Controllers\AdminUserController::class, 'search'])->name('users.search');
 
+        Route::get('/course_overviews/edit', [App\Http\Controllers\AdminCourseOverviewController::class, 'edit'])->name("course_overviews.edit");
+        Route::patch('/course_overviews/{course_overview}',[App\Http\Controllers\AdminCourseOverviewController::class,'update'])->name('course_overviews.update');
+
         Route::get('/courses',[App\Http\Controllers\AdminCourseController::class,'index'])->name('courses.index');
         Route::get('/courses/create',[App\Http\Controllers\AdminCourseController::class,'create'])->name('courses.create');
         Route::post('/courses', [App\Http\Controllers\AdminCourseController::class, 'store'])->name("courses.store");
