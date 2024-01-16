@@ -82,6 +82,8 @@ Route::group(['middleware' => 'admin'], function(){
 
         Route::get('/course_overviews/edit', [App\Http\Controllers\AdminCourseOverviewController::class, 'edit'])->name("course_overviews.edit");
         Route::patch('/course_overviews/{course_overview}',[App\Http\Controllers\AdminCourseOverviewController::class,'update'])->name('course_overviews.update');
+        Route::post('/course_overviews/upload', [App\Http\Controllers\AdminCourseOverviewController::class, 'upload'])->name('course_overviews.upload');
+
 
         Route::get('/courses',[App\Http\Controllers\AdminCourseController::class,'index'])->name('courses.index');
         Route::get('/courses/create',[App\Http\Controllers\AdminCourseController::class,'create'])->name('courses.create');
@@ -114,6 +116,14 @@ Route::group(['middleware' => 'admin'], function(){
         Route::patch('/course_methods/{course_method}',[App\Http\Controllers\AdminCourseMethodController::class,'update'])->name('course_methods.update');
         Route::delete('/course_methods/{course_method}', [App\Http\Controllers\AdminCourseMethodController::class, 'destroy'])->name("course_methods.destroy");
         Route::get('/course_methods/search', [App\Http\Controllers\AdminCourseMethodController::class, 'search'])->name('course_methods.search');
+
+        Route::get('/activities',[App\Http\Controllers\AdminActivityController::class,'index'])->name('activities.index');
+        Route::get('/activities/create',[App\Http\Controllers\AdminActivityController::class,'create'])->name('activities.create');
+        Route::post('/activities', [App\Http\Controllers\AdminActivityController::class, 'store'])->name("activities.store");
+        Route::get('/activities/{activity}/edit', [App\Http\Controllers\AdminActivityController::class, 'edit'])->name("activities.edit");
+        Route::patch('/activities/{activity}',[App\Http\Controllers\AdminActivityController::class,'update'])->name('activities.update');
+        Route::delete('/activities/{activity}', [App\Http\Controllers\AdminActivityController::class, 'destroy'])->name("activities.destroy");
+        Route::get('/activities/search', [App\Http\Controllers\AdminActivityController::class, 'search'])->name('activities.search');
 
         //公告路由
         Route::get('posts', [App\Http\Controllers\AdminPostController::class, 'index'])->name("posts.index");

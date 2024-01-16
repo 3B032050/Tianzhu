@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CourseOverview;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AdminCourseOverviewController extends Controller
 {
@@ -35,5 +36,22 @@ class AdminCourseOverviewController extends Controller
 
         $courseOverview->update($request->all());
         return redirect()->route('admins.courses.index');
+    }
+
+    public function upload(Request $request)
+    {
+        if ($request->hasFile('upload')) {
+            $originName = $request->file('upload')->getClientOriginalName();
+            $fileName = pathinfo($originName, PATHINFO_FILENAME);
+            $extension = $request->file('upload')->getClientOriginalExtension();
+            $fileName = $fileName . '_' . time() . '.' . $extension;
+
+            // Save the image in the storage/web_images folder
+            Storage::disk('course_overviews')->put($fileName, file_get_contents($request->file('upload')));
+
+            $url = Storage::disk('course_overviews')->url($fileName);
+
+            return response()->json(['fileName' => $fileName, 'uploaded'=> 1, 'url' => $url]);
+        }
     }
 }
