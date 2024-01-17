@@ -35,10 +35,10 @@ class AdminPostController extends Controller
         } else {
             $fileName = null;
         }
-
+        $content = strip_tags($request->input('content'));
          Post::create([
             'title' => $request->input('title'),
-            'content' => $request->input('content'),
+            'content' => $content,
             'is_feature' => $request->input('is_feature'),
             'file' => $fileName, // 存储文件名
         ]);
@@ -93,10 +93,10 @@ class AdminPostController extends Controller
         else {
             $fileName = null;
         }
-
+        $content = strip_tags($request->input('content'));
         $post->update([
             'title' => $request->input('title'),
-            'content' => $request->input('content'),
+            'content' => $content,
             'is_feature' => $request->input('is_feature'),
 
         ]);
