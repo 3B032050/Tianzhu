@@ -104,7 +104,7 @@
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li>
-                                    <a class="dropdown-item" href="/">活動紀實</a>
+                                    <a class="dropdown-item" href="{{ route('activities.index') }}">活動紀實</a>
                                 </li>
                                 @if (Auth::user())
                                     <li>

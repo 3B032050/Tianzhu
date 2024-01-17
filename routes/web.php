@@ -31,6 +31,9 @@ Route::get('/select', [App\Http\Controllers\AdminAdminController::class, 'search
 Route::get('/courses', [App\Http\Controllers\CourseController::class, 'overview'])->name('courses.overview');
 Route::get('/courses/{course_category}/show', [App\Http\Controllers\CourseController::class, 'show'])->name('courses.show');
 
+Route::get('/activities', [App\Http\Controllers\ActivityController::class, 'index'])->name('activities.index');
+Route::get('/activities/{activity}/show', [App\Http\Controllers\ActivityController::class, 'show'])->name('activities.show');
+
 
 
 

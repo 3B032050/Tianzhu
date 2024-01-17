@@ -24,6 +24,12 @@
         <link href="library/bootstrap-5/bootstrap.min.css" rel="stylesheet" />
         <script src="library/bootstrap-5/bootstrap.bundle.min.js"></script>
         <script src="library/dselect.js"></script>
+        <style>
+            .custom-link {
+                color: black; /* 設置字體顏色為黑色 */
+                text-decoration: none; /* 移除下劃線 */
+            }
+        </style>
 </head>
 <body>
     @include('layouts.partials.navigation')
