@@ -18,6 +18,7 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 
         <!-- Bootstrap JS（包含 Popper.js） -->
 
@@ -33,6 +34,9 @@
 </head>
 <body>
     @include('layouts.partials.navigation')
+    <div style="padding-left: 150px;">
+        @yield('page-path')
+    </div>
     @yield('content')
     @include('layouts.partials.footer')
 

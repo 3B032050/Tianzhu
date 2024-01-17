@@ -2,6 +2,15 @@
 
 @section('title','活動紀實')
 
+@section('page-path')
+    <div>
+        <p style="font-size: 1.2em;">
+            <a href="{{ route('home.index') }}" class="custom-link"><i class="fa fa-home"></i></a> &gt;
+            活動紀實
+        </p>
+    </div>
+@endsection
+
 @section('content')
     <section class="py-5">
         <div class="container text-center">

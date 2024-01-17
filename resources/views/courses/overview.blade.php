@@ -2,6 +2,15 @@
 
 @section('title','天筑精舍')
 
+@section('page-path')
+    <div>
+        <p style="font-size: 1.2em;">
+            <a href="{{ route('home.index') }}" class="custom-link"><i class="fa fa-home"></i></a> &gt;
+            僧伽教育
+        </p>
+    </div>
+@endsection
+
 @section('content')
     <section id="location">
         <div class="wrapper mx-auto" style="text-align:center;">
