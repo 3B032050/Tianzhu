@@ -63,6 +63,13 @@ return [
             'visibility' => 'public',
         ],
 
+        'courses' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/courses'),
+            'url' => env('APP_URL').':8000/storage/courses',
+            'visibility' => 'public',
+        ],
+
         'course_overviews' => [
             'driver' => 'local',
             'root' => storage_path('app/public/course_overviews'),

@@ -66,7 +66,7 @@
                                 </li>
                                 @foreach($courseCategories as $courseCategory)
                                     <li>
-                                        <a class="dropdown-item" href="{{ route('courses.show',$courseCategory->id) }}">{{ $courseCategory->name }}</a>
+                                        <a class="dropdown-item" href="{{ route('courses.by_category',$courseCategory->id) }}">{{ $courseCategory->name }}</a>
                                     </li>
                                 @endforeach
                             </ul>

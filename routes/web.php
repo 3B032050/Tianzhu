@@ -29,7 +29,8 @@ Route::get('/web/{web_id}', [App\Http\Controllers\WebController::class, 'index']
 Route::get('/select', [App\Http\Controllers\AdminAdminController::class, 'search'])->name("admins.search");
 
 Route::get('/courses', [App\Http\Controllers\CourseController::class, 'overview'])->name('courses.overview');
-Route::get('/courses/{course_category}/show', [App\Http\Controllers\CourseController::class, 'show'])->name('courses.show');
+Route::get('/courses/by_category/{course_category}', [App\Http\Controllers\CourseController::class, 'by_category'])->name('courses.by_category');
+Route::get('/courses/by_category/{course_category}/show/{course}', [App\Http\Controllers\CourseController::class, 'show'])->name('courses.show');
 
 Route::get('/activities', [App\Http\Controllers\ActivityController::class, 'index'])->name('activities.index');
 Route::get('/activities/{activity}/show', [App\Http\Controllers\ActivityController::class, 'show'])->name('activities.show');
@@ -95,6 +96,8 @@ Route::group(['middleware' => 'admin'], function(){
         Route::patch('/courses/{course}',[App\Http\Controllers\AdminCourseController::class,'update'])->name('courses.update');
         Route::delete('/courses/{course}', [App\Http\Controllers\AdminCourseController::class, 'destroy'])->name("courses.destroy");
         Route::get('/courses/search', [App\Http\Controllers\AdminCourseController::class, 'search'])->name('courses.search');
+        Route::post('/courses/upload', [App\Http\Controllers\AdminCourseController::class, 'upload'])->name('courses.upload');
+
 
         Route::get('/course_objectives',[App\Http\Controllers\AdminCourseObjectiveController::class,'index'])->name('course_objectives.index');
         Route::get('/course_objectives/create',[App\Http\Controllers\AdminCourseObjectiveController::class,'create'])->name('course_objectives.create');

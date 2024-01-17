@@ -66,10 +66,25 @@
             <label for="note" class="form-label">備註</label>
             <input id="note" name="note" type="text" class="form-control" value="{{ old('note',$course->note) }}" placeholder="非必填">
         </div>
-
+        <div class="form-group">
+            <label for="content" class="form-label">內容</label>
+            <textarea id="editor" name="content" class="form-control">{!! old('content', $course->content) !!}</textarea>
+        </div>
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
             <button type="submit" class="btn btn-primary btn-sm">儲存</button>
         </div>
     </form>
 </div>
+<script src="https://cdn.ckeditor.com/ckeditor5/40.1.0/classic/ckeditor.js"></script>
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#editor' ),{
+            ckfinder: {
+                uploadUrl: '{{route('admins.courses.upload').'?_token='.csrf_token()}}',
+            },
+        })
+        .catch( error => {
+            console.error( error );
+        } );
+</script>
 @endsection

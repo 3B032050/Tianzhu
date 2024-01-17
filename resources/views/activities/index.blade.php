@@ -23,7 +23,7 @@
                     @endforeach
                 </div>
             @else
-                <p>無活動</p>
+                <div align="center"><p>無活動</p></div>
             @endif
         </div>
     </section>
