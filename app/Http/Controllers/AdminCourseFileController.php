@@ -63,7 +63,7 @@ class AdminCourseFileController extends Controller
     {
         $this->validate($request, [
             'title' => 'required|max:25',
-           
+
 
         ]);
 
