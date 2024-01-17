@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('curriculum_category_id');
             $table->string('title');
-            $table->string('description')->nullable();
+            $table->text('content')->nullable();
             $table->string('method')->nullable();
             $table->timestamps();
         });
