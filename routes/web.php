@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommonSenseController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,7 +29,9 @@ Route::get('/web/{web_id}', [App\Http\Controllers\WebController::class, 'index']
 //Route::get('/select','TestController@testfunction');
 Route::get('/select', [App\Http\Controllers\AdminAdminController::class, 'search'])->name("admins.search");
 
-
+Route::get('/common_senses', [App\Http\Controllers\CommonSenseController::class, 'index'])->name('common_senses.index');
+Route::get('/common_senses/{commonSense}/show', [App\Http\Controllers\CommonSenseController::class, 'show'])->name('common_senses.show');
+Route::get('/common_senses/{commonSense}/show_content', [App\Http\Controllers\CommonSenseController::class, 'show_content'])->name('common_senses.show_content');
 
 Auth::routes();
 

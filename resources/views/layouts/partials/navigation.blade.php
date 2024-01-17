@@ -97,7 +97,7 @@
                                     <a class="dropdown-item" href="/">課程講義</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="/">佛門小常識</a>
+                                    <a class="dropdown-item" href="{{ route('common_senses.index') }}">佛門小常識</a>
                                 </li>
                                 <li>
                                     <a class="dropdown-item" href="/">居士學佛</a>
