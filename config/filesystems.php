@@ -97,6 +97,12 @@ return [
             'url' => env('APP_URL').'/storage/slides',
             'visibility' => 'public',
         ],
+        'course_file' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/course_file'),
+            'url' => env('APP_URL').'/storage/course_file',
+            'visibility' => 'public',
+        ],
 
     ],
 

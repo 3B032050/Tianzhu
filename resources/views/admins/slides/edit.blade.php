@@ -4,6 +4,12 @@
 
 @section('page-content')
     <div class="container-fluid px-4">
+        <div style="margin-top: 10px;">
+            <p style="font-size: 1.8em;">
+                <a href="{{ route('admins.slides.index') }}" class="custom-link"><i class="fa fa-home"></i>幻燈片管理</a> &gt;
+                編輯幻燈片
+            </p>
+        </div>
         <h1 class="mt-4">幻燈片管理</h1>
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item active">編輯幻燈片</li>

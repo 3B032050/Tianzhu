@@ -4,6 +4,12 @@
 
 @section('page-content')
     <div class="container-fluid px-4">
+        <div style="margin-top: 10px;">
+            <p style="font-size: 1.8em;">
+                <a href="{{ route('admins.slides.index') }}" class="custom-link"><i class="fa fa-home"></i>幻燈片管理</a> &gt;
+                新增幻燈片
+            </p>
+        </div>
         <h1 class="mt-4">新增幻燈片</h1>
         <form action="{{ route('admins.slides.store') }}" method="POST" role="form" enctype="multipart/form-data">
             @method('POST')
