@@ -7,7 +7,11 @@
         <p style="font-size: 1.2em;">
             <a href="{{ route('home.index') }}" class="custom-link"><i class="fa fa-home"></i></a> &gt;
             <a href="{{ route('courses.overview') }}" class="custom-link">僧伽教育</a> &gt;
-            {{ $selectedCategory->name }}
+            <a href="{{ route('courses.by_category',$selectedCategory->id) }}" class="custom-link">{{ $selectedCategory->name }}</a> &gt;
+            @if (request()->has('query'))
+                查找「{{ request('query') }}」
+                <a class="btn btn-success btn-sm" href="{{ route('courses.by_category',$selectedCategory->id) }}">取消搜尋</a>
+            @endif
         </p>
     </div>
 @endsection

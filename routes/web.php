@@ -30,6 +30,7 @@ Route::get('/select', [App\Http\Controllers\AdminAdminController::class, 'search
 
 Route::get('/courses', [App\Http\Controllers\CourseController::class, 'overview'])->name('courses.overview');
 Route::get('/courses/by_category/{course_category}', [App\Http\Controllers\CourseController::class, 'by_category'])->name('courses.by_category');
+Route::get('/courses/by_category/{course_category}/search', [App\Http\Controllers\CourseController::class, 'search'])->name('courses.by_category_search');
 Route::get('/courses/by_category/{course_category}/show/{course}', [App\Http\Controllers\CourseController::class, 'show'])->name('courses.show');
 
 Route::get('/activities', [App\Http\Controllers\ActivityController::class, 'index'])->name('activities.index');
