@@ -28,6 +28,8 @@ Route::get('/web/{web_id}', [App\Http\Controllers\WebController::class, 'index']
 //Route::get('/select','TestController@testfunction');
 Route::get('/select', [App\Http\Controllers\AdminAdminController::class, 'search'])->name("admins.search");
 
+Route::get('/introductions/{introduction}/show', [App\Http\Controllers\IntroductionController::class, 'show'])->name('introductions.show');
+
 Route::get('/courses', [App\Http\Controllers\CourseController::class, 'overview'])->name('courses.overview');
 Route::get('/courses/by_category/{course_category}', [App\Http\Controllers\CourseController::class, 'by_category'])->name('courses.by_category');
 Route::get('/courses/by_category/{course_category}/search', [App\Http\Controllers\CourseController::class, 'search'])->name('courses.by_category_search');

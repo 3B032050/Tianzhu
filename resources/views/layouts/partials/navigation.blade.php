@@ -38,12 +38,17 @@
                                 <span class="d-none d-md-inline">天筑精舍簡介</span>
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li>
-                                    <a class="dropdown-item" href="/">交通資訊</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="/">緣起與宗旨</a>
-                                </li>
+                                @foreach($introductions as $introduction)
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('introductions.show',$introduction->id) }}">{{ $introduction->title }}</a>
+                                    </li>
+                                @endforeach
+{{--                                <li>--}}
+{{--                                    <a class="dropdown-item" href="/">交通資訊</a>--}}
+{{--                                </li>--}}
+{{--                                <li>--}}
+{{--                                    <a class="dropdown-item" href="/">緣起與宗旨</a>--}}
+{{--                                </li>--}}
                             </ul>
                         </div>
                     </li>
