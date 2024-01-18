@@ -8,6 +8,9 @@
                 <a class="nav-link" href="{{ route('admins.web_hierarchies.index') }}">
                     主網頁階層設定
                 </a>
+                <a class="nav-link" href="{{ route('admins.introductions.index') }}">
+                    天筑精舍簡介
+                </a>
                 <a class="nav-link" href="{{ route('admins.courses.index') }}">
                     僧伽教育
                 </a>

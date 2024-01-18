@@ -85,6 +85,12 @@ Route::group(['middleware' => 'admin'], function(){
         Route::delete('/users/{user}', [App\Http\Controllers\AdminUserController::class, 'destroy'])->name("users.destroy");
         Route::get('/users/search', [App\Http\Controllers\AdminUserController::class, 'search'])->name('users.search');
 
+        Route::get('/introductions', [App\Http\Controllers\AdminIntroductionController::class, 'index'])->name("introductions.index");
+        Route::get('/introductions/traffic', [App\Http\Controllers\AdminIntroductionController::class, 'traffic'])->name("introductions.traffic");
+        Route::get('/introductions/origin', [App\Http\Controllers\AdminIntroductionController::class, 'origin'])->name("introductions.origin");
+        Route::patch('/introductions/{introduction}',[App\Http\Controllers\AdminIntroductionController::class,'update'])->name('introductions.update');
+        Route::post('/introductions/upload', [App\Http\Controllers\AdminIntroductionController::class, 'upload'])->name('introductions.upload');
+
         Route::get('/course_overviews/edit', [App\Http\Controllers\AdminCourseOverviewController::class, 'edit'])->name("course_overviews.edit");
         Route::patch('/course_overviews/{course_overview}',[App\Http\Controllers\AdminCourseOverviewController::class,'update'])->name('course_overviews.update');
         Route::post('/course_overviews/upload', [App\Http\Controllers\AdminCourseOverviewController::class, 'upload'])->name('course_overviews.upload');
