@@ -28,11 +28,13 @@ class CommonSenseController extends Controller
         return view('common_senses.show', $data);
     }
 
-    public function show_content($common_sense_id)
+    public function show_content($common_sense_id,$common_sense_category_id)
     {
+        $selectedCategory = CommonSenseCategory::find($common_sense_category_id);
         $common_sense = CommonSense::where('id', $common_sense_id)->first();
         $data = [
             'common_sense'=> $common_sense,
+            'selectedCategory' => $selectedCategory,
         ];
 
         return view('common_senses.show_content', $data);

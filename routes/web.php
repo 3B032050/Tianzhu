@@ -42,8 +42,7 @@ Route::get('/activities/{activity}/show', [App\Http\Controllers\ActivityControll
 
 Route::get('/common_senses', [App\Http\Controllers\CommonSenseController::class, 'index'])->name('common_senses.index');
 Route::get('/common_senses/{commonSense}/show', [App\Http\Controllers\CommonSenseController::class, 'show'])->name('common_senses.show');
-Route::get('/common_senses/{commonSense}/show_content', [App\Http\Controllers\CommonSenseController::class, 'show_content'])->name('common_senses.show_content');
-
+Route::get('/show_content/{common_sense_id}/{common_sense_category_id}', [App\Http\Controllers\CommonSenseController::class, 'show_content'])->name('common_senses.show_content');
 
 Auth::routes();
 
