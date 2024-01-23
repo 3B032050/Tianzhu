@@ -20,21 +20,20 @@
 
             {{-- Display all posts --}}
             @if(count($categories) > 0)
-                <div class="row">
-                    @foreach($categories as $category)
-                        <div class="col-md-6 mb-4 mx-auto">
+                @foreach($categories as $category)
+                    <div class="row mb-4">
+                        <div class="col-md-6 mx-auto">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title"><a href="{{ route('common_senses.show',$category->id) }}">{{ $category->name }}</a></h5>
+                                    <h5 class="card-title"><a href="{{ route('common_senses.show', $category->id) }}">{{ $category->name }}</a></h5>
                                 </div>
                             </div>
                         </div>
-                    @endforeach
-                </div>
+                    </div>
+                @endforeach
             @else
                 <div align="center"><p>無</p></div>
             @endif
         </div>
     </section>
-
 @endsection

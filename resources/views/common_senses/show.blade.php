@@ -21,7 +21,6 @@
 
             {{-- Display all posts --}}
             @if(count($common_senses) > 0)
-                <div class="row">
                     @foreach($common_senses as $common_sense)
                         <div class="col-md-6 mb-4 mx-auto">
                             <div class="card">
@@ -34,7 +33,6 @@
                             </div>
                         </div>
                     @endforeach
-                </div>
             @else
                 <div align="center"><p>無</p></div>
             @endif
