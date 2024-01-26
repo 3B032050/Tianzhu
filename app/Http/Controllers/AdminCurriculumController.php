@@ -139,6 +139,19 @@ class AdminCurriculumController extends Controller
         return redirect()->route('admins.curricula.index');
     }
 
+    public function status_off(Curriculum $curriculum)
+    {
+        $curriculum->status='0';
+        $curriculum->save();
+        return redirect()->route('admins.curricula.index');
+    }
+    public function status_on(Curriculum $curriculum)
+    {
+        $curriculum->status='1';
+        $curriculum->save();
+        return redirect()->route('admins.curricula.index');
+    }
+
     /**
      * Remove the specified resource from storage.
      */

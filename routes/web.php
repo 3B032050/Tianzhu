@@ -187,6 +187,8 @@ Route::group(['middleware' => 'admin'], function(){
         Route::patch('/curricula/{curriculum}',[App\Http\Controllers\AdminCurriculumController::class,'update'])->name('curricula.update');
         Route::delete('/curricula/{curriculum}', [App\Http\Controllers\AdminCurriculumController::class, 'destroy'])->name("curricula.destroy");
         Route::get('/curricula/search', [App\Http\Controllers\AdminCurriculumController::class, 'search'])->name('curricula.search');
+        Route::patch('/curricula/{curriculum}/status_on',[App\Http\Controllers\AdminCurriculumController::class,'status_on'])->name('curricula.status_on');
+        Route::patch('/curricula/{curriculum}/status_off',[App\Http\Controllers\AdminCurriculumController::class,'status_off'])->name('curricula.status_off');
 
         Route::get('/curriculum_objectives',[App\Http\Controllers\AdminCurriculumObjectiveController::class,'index'])->name('curriculum_objectives.index');
         Route::get('/curriculum_objectives/create',[App\Http\Controllers\AdminCurriculumObjectiveController::class,'create'])->name('curriculum_objectives.create');

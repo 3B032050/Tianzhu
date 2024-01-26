@@ -19,6 +19,7 @@
                 <th scope="col" style="text-align:left">課程名稱</th>
                 <th scope="col" style="text-align:left">方式</th>
                 <th scope="col" style="text-align:left">目標</th>
+                <th scope="col" style="text-align:left">狀態</th>
             </tr>
             </thead>
             <tbody>
@@ -50,6 +51,32 @@
                                 <br>
                             @endif
                         @endforeach
+                    </td>
+                    <td>
+                        @if ($curriculum->status == 0)
+                            <div style="color:#ff3370; font-weight:bold;">
+                                (下架)
+                            </div>
+                        @else
+                            <div style="color:#ffa600; font-weight:bold;">
+                                (上架)
+                            </div>
+                        @endif
+                    </td>
+                    <td>
+                        @if ($curriculum->status == 0)
+                            <form action="{{ route('admins.curricula.status_on',$curriculum->id) }}" method="POST" role="form">
+                                @method('PATCH')
+                                @csrf
+                                <button type="submit" class="btn btn-secondary btn-sm">上架</button>
+                            </form>
+                        @else
+                            <form action="{{ route('admins.curricula.status_off',$curriculum->id) }}" method="POST" role="form">
+                                @method('PATCH')
+                                @csrf
+                                <button type="submit" class="btn btn-secondary btn-sm">下架</button>
+                            </form>
+                        @endif
                     </td>
                     <td style="text-align:center">
                         <a href="{{ route('admins.curricula.edit',$curriculum->id) }}" class="btn btn-secondary btn-sm">編輯</a>
