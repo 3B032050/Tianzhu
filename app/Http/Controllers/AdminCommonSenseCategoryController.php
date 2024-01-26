@@ -32,12 +32,24 @@ class AdminCommonSenseCategoryController extends Controller
      */
     public function store(StoreCommonSenseCategoryRequest $request)
     {
-        $this->validate($request,[
+        // 驗證表單輸入
+        $this->validate($request, [
             'name' => 'required|max:255',
         ]);
 
-        CommonSenseCategory::create($request->all());
-        return redirect()->route('admins.common_sense_categories.index');
+        // 檢查是否已經存在相同名稱的類別
+        $existingCategory = CommonSenseCategory::where('name', $request->input('name'))->first();
+        if ($existingCategory) {
+            return redirect()->route('admins.common_sense_categories.index')->with('error', '類別名稱已經存在。');
+        }
+
+        $common_sense_category = new CommonSenseCategory();
+        $common_sense_category->name = $request->input('name');
+        $common_sense_category->status = 0;
+
+        $common_sense_category->save();
+
+        return redirect()->route('admins.common_sense_categories.index')->with('success', '類別名稱已成功新增。');
     }
 
     /**
@@ -69,6 +81,20 @@ class AdminCommonSenseCategoryController extends Controller
         ]);
 
         $commonSenseCategory->update($request->all());
+        return redirect()->route('admins.common_sense_categories.index');
+    }
+
+
+    public function status_off(CommonSenseCategory $commonSenseCategory)
+    {
+        $commonSenseCategory->status='0';
+        $commonSenseCategory->save();
+        return redirect()->route('admins.common_sense_categories.index');
+    }
+    public function status_on(CommonSenseCategory $commonSenseCategory)
+    {
+        $commonSenseCategory->status='1';
+        $commonSenseCategory->save();
         return redirect()->route('admins.common_sense_categories.index');
     }
 

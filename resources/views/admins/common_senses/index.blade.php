@@ -15,6 +15,7 @@
                 <th scope="col">#</th>
                 <th scope="col" style="text-align:left">類別</th>
                 <th scope="col" style="text-align:left">標題</th>
+                <th scope="col" style="text-align:left">狀態</th>
             </tr>
             </thead>
             <tbody>
@@ -29,6 +30,32 @@
                         @endif
                     </td>
                     <td>{{ $common_sense->title }}</td>
+                    <td>
+                        @if ($common_sense->status == 0)
+                            <div style="color:#ff3370; font-weight:bold;">
+                                (下架)
+                            </div>
+                        @else
+                            <div style="color:#ffa600; font-weight:bold;">
+                                (上架)
+                            </div>
+                        @endif
+                    </td>
+                    <td>
+                        @if ($common_sense->status == 0)
+                            <form action="{{ route('admins.common_senses.status_on',$common_sense->id) }}" method="POST" role="form">
+                                @method('PATCH')
+                                @csrf
+                                <button type="submit" class="btn btn-secondary btn-sm">上架</button>
+                            </form>
+                        @else
+                            <form action="{{ route('admins.common_senses.status_off',$common_sense->id) }}" method="POST" role="form">
+                                @method('PATCH')
+                                @csrf
+                                <button type="submit" class="btn btn-secondary btn-sm">下架</button>
+                            </form>
+                        @endif
+                    </td>
                     <td style="text-align:center">
                         <a href="{{ route('admins.common_senses.edit',$common_sense->id) }}" class="btn btn-secondary btn-sm">編輯</a>
                     </td>

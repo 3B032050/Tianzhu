@@ -61,6 +61,7 @@ class AdminCurriculumController extends Controller
         $curriculum->curriculum_category_id = $request->input('curriculum_category');
         $curriculum->content = $request->input('content');
         $curriculum->method = $request->input('method');
+        $curriculum->status = 0;
 
 
         // 儲存課程

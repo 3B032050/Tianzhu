@@ -51,6 +51,7 @@ class AdminCommonSenseController extends Controller
         $common_sense->title = $request->input('title');
         $common_sense->common_sense_category_id = $request->input('common_sense_category');
         $common_sense->content = $request->input('content');
+        $common_sense->status = 0;
 
 
         $common_sense->save();
@@ -100,6 +101,19 @@ class AdminCommonSenseController extends Controller
             'content' => $request->input('content'),
         ]);
 
+        return redirect()->route('admins.common_senses.index');
+    }
+
+    public function status_off(CommonSense $commonSense)
+    {
+        $commonSense->status='0';
+        $commonSense->save();
+        return redirect()->route('admins.common_senses.index');
+    }
+    public function status_on(CommonSense $commonSense)
+    {
+        $commonSense->status='1';
+        $commonSense->save();
         return redirect()->route('admins.common_senses.index');
     }
 
