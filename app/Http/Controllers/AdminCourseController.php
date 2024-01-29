@@ -47,6 +47,13 @@ class AdminCourseController extends Controller
             'note' => 'nullable|max:255',
         ]);
 
+        $existingCourse = Course::where('title', $request->input('title'))->first();
+        if ($existingCourse) {
+            return redirect()->route('admins.courses.index')
+                ->withErrors(['title' => '課程名稱已存在'])
+                ->withInput($request->all());
+        }
+
         // 創建課程
         $course = new Course();
         $course->title = $request->input('title');
