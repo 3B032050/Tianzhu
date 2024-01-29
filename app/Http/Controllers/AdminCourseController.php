@@ -120,6 +120,18 @@ class AdminCourseController extends Controller
         return redirect()->route('admins.courses.index');
     }
 
+    public function statusOn(Request $request, Course $course)
+    {
+        $course->update(['status' => 1]);
+        return redirect()->route('admins.courses.index');
+    }
+
+    public function statusOff(Request $request, Course $course)
+    {
+        $course->update(['status' => 0]);
+        return redirect()->route('admins.courses.index');
+    }
+
     public function destroy(Course $course)
     {
         $course->delete();

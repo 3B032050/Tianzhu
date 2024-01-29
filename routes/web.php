@@ -107,6 +107,8 @@ Route::group(['middleware' => 'admin'], function(){
         Route::post('/courses', [App\Http\Controllers\AdminCourseController::class, 'store'])->name("courses.store");
         Route::get('/courses/{course}/edit', [App\Http\Controllers\AdminCourseController::class, 'edit'])->name("courses.edit");
         Route::patch('/courses/{course}',[App\Http\Controllers\AdminCourseController::class,'update'])->name('courses.update');
+        Route::patch('/courses/{course}/statusOff', [App\Http\Controllers\AdminCourseController::class, 'statusOff'])->name('courses.statusOff');
+        Route::patch('/courses/{course}/statusOn', [App\Http\Controllers\AdminCourseController::class, 'statusOn'])->name('courses.statusOn');
         Route::delete('/courses/{course}', [App\Http\Controllers\AdminCourseController::class, 'destroy'])->name("courses.destroy");
         Route::get('/courses/search', [App\Http\Controllers\AdminCourseController::class, 'search'])->name('courses.search');
         Route::post('/courses/upload', [App\Http\Controllers\AdminCourseController::class, 'upload'])->name('courses.upload');

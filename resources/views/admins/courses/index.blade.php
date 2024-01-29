@@ -75,6 +75,32 @@
                         無
                     @endif
                 </td>
+                <td>
+                    @if ($course->status == 0)
+                        <div style="color:#FFB233; font-weight:bold;">
+                            (未上架)
+                        </div>
+                    @elseif ($course->status == 1)
+                        <div style="color:#FFB233; font-weight:bold;">
+                            (上架)
+                        </div>
+                    @endif
+                </td>
+                <td style="text-align:center">
+                    @if ($course->status == 0)
+                        <form action="{{ route('admins.courses.statusOn',$course->id) }}" method="POST" role="form">
+                            @method('PATCH')
+                            @csrf
+                            <button type="submit" class="btn btn-secondary btn-sm">上架</button>
+                        </form>
+                    @elseif ($course->status == 1)
+                        <form action="{{ route('admins.courses.statusOff',$course->id) }}" method="POST" role="form">
+                            @method('PATCH')
+                            @csrf
+                            <button type="submit" class="btn btn-secondary btn-sm">下架</button>
+                        </form>
+                    @endif
+                </td>
                 <td style="text-align:center">
                     <a href="{{ route('admins.courses.edit',$course->id) }}" class="btn btn-secondary btn-sm">編輯</a>
                 </td>

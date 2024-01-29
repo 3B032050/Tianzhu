@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('method')->nullable();
             $table->string('time')->nullable();
             $table->string('note')->nullable();
+            $table->string('status')->default(0);
             $table->timestamps();
 //            $table->foreign('course_category_id')->references('id')->on('course_categories')->onDelete('cascade');
         });

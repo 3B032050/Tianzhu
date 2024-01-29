@@ -19,27 +19,31 @@ class CourseController extends Controller
 
     public function by_category(CourseCategory $courseCategory)
     {
-        $selectedCategory = CourseCategory::findOrFail($courseCategory->id);
+        $selectedCategory = CourseCategory::where('id', $courseCategory->id)->firstOrFail();
+        $selectedCategory->courses = $selectedCategory->courses()->where('status', 1)->get();
 
         $data = ['selectedCategory' => $selectedCategory];
 
-        return view('courses.by_category',$data);
+        return view('courses.by_category', $data);
     }
 
-    public function search(CourseCategory $courseCategory,Request $request)
+    public function search(CourseCategory $courseCategory, Request $request)
     {
-        $selectedCategory = CourseCategory::findOrFail($courseCategory->id);
+        $selectedCategory = CourseCategory::where('id', $courseCategory->id)->firstOrFail();
+
         if ($request->input('query')) {
             $query = $request->input('query');
-            $selectedCategory->courses = $selectedCategory->courses
-                ->filter(function ($course) use ($query) {
-                    return strpos($course->title, $query) !== false;
-                });
+            $selectedCategory->courses = $selectedCategory->courses()
+                ->where('status', 1)
+                ->where(function ($queryBuilder) use ($query) {
+                    $queryBuilder->where('title', 'LIKE', '%' . $query . '%');
+                })
+                ->get();
         }
 
         $data = ['selectedCategory' => $selectedCategory];
 
-        return view('courses.by_category_search',$data);
+        return view('courses.by_category_search', $data);
     }
 
     public function show(CourseCategory $courseCategory,Course $course)
