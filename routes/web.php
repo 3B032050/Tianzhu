@@ -91,6 +91,14 @@ Route::group(['middleware' => 'admin'], function(){
         Route::delete('/users/{user}', [App\Http\Controllers\AdminUserController::class, 'destroy'])->name("users.destroy");
         Route::get('/users/search', [App\Http\Controllers\AdminUserController::class, 'search'])->name('users.search');
 
+        Route::get('/user_classifications',[App\Http\Controllers\AdminUserClassificationController::class,'index'])->name('user_classifications.index');
+        Route::get('/user_classifications/create',[App\Http\Controllers\AdminUserClassificationController::class,'create'])->name('user_classifications.create');
+        Route::post('/user_classifications', [App\Http\Controllers\AdminUserClassificationController::class, 'store'])->name("user_classifications.store");
+        Route::get('/user_classifications/{user_classification}/edit', [App\Http\Controllers\AdminUserClassificationController::class, 'edit'])->name("user_classifications.edit");
+        Route::patch('/user_classifications/{user_classification}',[App\Http\Controllers\AdminUserClassificationController::class,'update'])->name('user_classifications.update');
+        Route::delete('/user_classifications/{user_classification}', [App\Http\Controllers\AdminUserClassificationController::class, 'destroy'])->name("user_classifications.destroy");
+        Route::get('/user_classifications/search', [App\Http\Controllers\AdminUserClassificationController::class, 'search'])->name('user_classifications.search');
+
         Route::get('/introductions', [App\Http\Controllers\AdminIntroductionController::class, 'index'])->name("introductions.index");
         Route::get('/introductions/traffic', [App\Http\Controllers\AdminIntroductionController::class, 'traffic'])->name("introductions.traffic");
         Route::get('/introductions/origin', [App\Http\Controllers\AdminIntroductionController::class, 'origin'])->name("introductions.origin");
