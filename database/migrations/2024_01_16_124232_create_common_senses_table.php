@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('common_sense_category_id');
             $table->string('title');
             $table->text('content');
+            $table->integer('status');
             $table->timestamps();
         });
     }

@@ -18,8 +18,7 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col" style="text-align:left">名稱</th>
-            <th scope="col" style="text-align:center">編輯</th>
-            <th scope="col" style="text-align:center">刪除</th>
+            <th scope="col" style="text-align:left">狀態</th>
         </tr>
         </thead>
         <tbody>
@@ -27,6 +26,32 @@
             <tr>
                 <td style="text-align:left">{{ $index + 1 }}</td>
                 <td>{{ $common_sense_category->name }}</td>
+                <td>
+                    @if ($common_sense_category->status == 0)
+                        <div style="color:#ff3370; font-weight:bold;">
+                            (下架)
+                        </div>
+                    @else
+                        <div style="color:#ffa600; font-weight:bold;">
+                            (上架)
+                        </div>
+                    @endif
+                </td>
+                <td>
+                    @if ($common_sense_category->status == 0)
+                        <form action="{{ route('admins.common_sense_categories.status_on',$common_sense_category->id) }}" method="POST" role="form">
+                            @method('PATCH')
+                            @csrf
+                            <button type="submit" class="btn btn-secondary btn-sm">上架</button>
+                        </form>
+                    @else
+                        <form action="{{ route('admins.common_sense_categories.status_off',$common_sense_category->id) }}" method="POST" role="form">
+                            @method('PATCH')
+                            @csrf
+                            <button type="submit" class="btn btn-secondary btn-sm">下架</button>
+                        </form>
+                    @endif
+                </td>
                 <td style="text-align:center">
                     <a href="{{ route('admins.common_sense_categories.edit',$common_sense_category->id) }}" class="btn btn-secondary btn-sm">編輯</a>
                 </td>

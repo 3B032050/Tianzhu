@@ -2,6 +2,15 @@
 
 @section('title','佛門小常識')
 
+@section('page-path')
+    <div>
+        <p style="font-size: 1.2em;">
+            <a href="{{ route('home.index') }}" class="custom-link"><i class="fa fa-home"></i></a> &gt;
+            佛門小常識
+        </p>
+    </div>
+@endsection
+
 @section('content')
     <section class="py-5">
         <div class="container">
@@ -11,21 +20,20 @@
 
             {{-- Display all posts --}}
             @if(count($categories) > 0)
-                <div class="row">
-                    @foreach($categories as $category)
-                        <div class="col-md-6 mb-4 mx-auto">
+                @foreach($categories as $category)
+                    <div class="row mb-4">
+                        <div class="col-md-6 mx-auto">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title"><a href="{{ route('common_senses.show',$category->id) }}">{{ $category->name }}</a></h5>
+                                    <h5 class="card-title"><a href="{{ route('common_senses.show', $category->id) }}">{{ $category->name }}</a></h5>
                                 </div>
                             </div>
                         </div>
-                    @endforeach
-                </div>
+                    </div>
+                @endforeach
             @else
                 <div align="center"><p>無</p></div>
             @endif
         </div>
     </section>
-
 @endsection

@@ -10,7 +10,7 @@ class CommonSenseController extends Controller
 {
     public function index(Request $request)
     {
-        $categories = CommonSenseCategory::all();
+        $categories = CommonSenseCategory::where('status', 1)->get();
 
         return view('common_senses.index', compact('categories'));
     }
@@ -18,7 +18,11 @@ class CommonSenseController extends Controller
     public function show($common_sense_category_id)
     {
         $selectedCategory = CommonSenseCategory::find($common_sense_category_id);
-        $common_senses = CommonSense::where('common_sense_category_id', $common_sense_category_id)->get();
+
+        // 只抓取 status 為 1 的 CommonSense
+        $common_senses = CommonSense::where('common_sense_category_id', $common_sense_category_id)
+            ->where('status', 1)
+            ->get();
 
         $data = [
             'common_senses'=> $common_senses,
@@ -28,11 +32,13 @@ class CommonSenseController extends Controller
         return view('common_senses.show', $data);
     }
 
-    public function show_content($common_sense_id)
+    public function show_content($common_sense_id,$common_sense_category_id)
     {
+        $selectedCategory = CommonSenseCategory::find($common_sense_category_id);
         $common_sense = CommonSense::where('id', $common_sense_id)->first();
         $data = [
             'common_sense'=> $common_sense,
+            'selectedCategory' => $selectedCategory,
         ];
 
         return view('common_senses.show_content', $data);

@@ -61,6 +61,7 @@ class AdminCurriculumController extends Controller
         $curriculum->curriculum_category_id = $request->input('curriculum_category');
         $curriculum->content = $request->input('content');
         $curriculum->method = $request->input('method');
+        $curriculum->status = 0;
 
 
         // 儲存課程
@@ -135,6 +136,19 @@ class AdminCurriculumController extends Controller
         // Sync the related objectives
         $curriculum->objectives()->sync($request->input('curriculum_objectives', []));
 
+        return redirect()->route('admins.curricula.index');
+    }
+
+    public function status_off(Curriculum $curriculum)
+    {
+        $curriculum->status='0';
+        $curriculum->save();
+        return redirect()->route('admins.curricula.index');
+    }
+    public function status_on(Curriculum $curriculum)
+    {
+        $curriculum->status='1';
+        $curriculum->save();
         return redirect()->route('admins.curricula.index');
     }
 

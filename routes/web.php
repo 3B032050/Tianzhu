@@ -42,8 +42,7 @@ Route::get('/activities/{activity}/show', [App\Http\Controllers\ActivityControll
 
 Route::get('/common_senses', [App\Http\Controllers\CommonSenseController::class, 'index'])->name('common_senses.index');
 Route::get('/common_senses/{commonSense}/show', [App\Http\Controllers\CommonSenseController::class, 'show'])->name('common_senses.show');
-Route::get('/common_senses/{commonSense}/show_content', [App\Http\Controllers\CommonSenseController::class, 'show_content'])->name('common_senses.show_content');
-
+Route::get('/show_content/{common_sense_id}/{common_sense_category_id}', [App\Http\Controllers\CommonSenseController::class, 'show_content'])->name('common_senses.show_content');
 
 Auth::routes();
 
@@ -198,6 +197,8 @@ Route::group(['middleware' => 'admin'], function(){
         Route::patch('/curricula/{curriculum}',[App\Http\Controllers\AdminCurriculumController::class,'update'])->name('curricula.update');
         Route::delete('/curricula/{curriculum}', [App\Http\Controllers\AdminCurriculumController::class, 'destroy'])->name("curricula.destroy");
         Route::get('/curricula/search', [App\Http\Controllers\AdminCurriculumController::class, 'search'])->name('curricula.search');
+        Route::patch('/curricula/{curriculum}/status_on',[App\Http\Controllers\AdminCurriculumController::class,'status_on'])->name('curricula.status_on');
+        Route::patch('/curricula/{curriculum}/status_off',[App\Http\Controllers\AdminCurriculumController::class,'status_off'])->name('curricula.status_off');
 
         Route::get('/curriculum_objectives',[App\Http\Controllers\AdminCurriculumObjectiveController::class,'index'])->name('curriculum_objectives.index');
         Route::get('/curriculum_objectives/create',[App\Http\Controllers\AdminCurriculumObjectiveController::class,'create'])->name('curriculum_objectives.create');
@@ -230,6 +231,8 @@ Route::group(['middleware' => 'admin'], function(){
         Route::patch('/common_senses/{common_sense}',[App\Http\Controllers\AdminCommonSenseController::class,'update'])->name('common_senses.update');
         Route::delete('/common_senses/{common_sense}', [App\Http\Controllers\AdminCommonSenseController::class, 'destroy'])->name("common_senses.destroy");
         Route::get('/common_senses/search', [App\Http\Controllers\AdminCommonSenseController::class, 'search'])->name('common_senses.search');
+        Route::patch('/common_senses/{common_sense}/status_on',[App\Http\Controllers\AdminCommonSenseController::class,'status_on'])->name('common_senses.status_on');
+        Route::patch('/common_senses/{common_sense}/status_off',[App\Http\Controllers\AdminCommonSenseController::class,'status_off'])->name('common_senses.status_off');
 
         Route::get('/common_sense_categories',[App\Http\Controllers\AdminCommonSenseCategoryController::class,'index'])->name('common_sense_categories.index');
         Route::get('/common_sense_categories/create',[App\Http\Controllers\AdminCommonSenseCategoryController::class,'create'])->name('common_sense_categories.create');
@@ -238,6 +241,9 @@ Route::group(['middleware' => 'admin'], function(){
         Route::patch('/common_sense_categories/{common_sense_category}',[App\Http\Controllers\AdminCommonSenseCategoryController::class,'update'])->name('common_sense_categories.update');
         Route::delete('/common_sense_categories/{common_sense_category}', [App\Http\Controllers\AdminCommonSenseCategoryController::class, 'destroy'])->name("common_sense_categories.destroy");
         Route::get('/common_sense_categories/search', [App\Http\Controllers\AdminCommonSenseCategoryController::class, 'search'])->name('common_sense_categories.search');
+        Route::patch('/common_sense_categories/{common_sense_category}/status_on',[App\Http\Controllers\AdminCommonSenseCategoryController::class,'status_on'])->name('common_sense_categories.status_on');
+        Route::patch('/common_sense_categories/{common_sense_category}/status_off',[App\Http\Controllers\AdminCommonSenseCategoryController::class,'status_off'])->name('common_sense_categories.status_off');
+
 
     });
 });
