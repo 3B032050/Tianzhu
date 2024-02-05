@@ -13,23 +13,23 @@
             <div class="form-group">
                 <label for="account" class="form-label">選擇使用者帳號</label>
 
-{{--                <select id="nameid" name="account" class="form-control" onchange="navigateToRoute(this.value)">--}}
-{{--                    <option value="" selected disabled>請選擇使用者</option>--}}
+                <select id="nameid" name="account" class="form-control" onchange="navigateToRoute(this.value)">
+                    <option value="" selected disabled>請選擇使用者</option>
 
-{{--                    @foreach($users as $user)--}}
-{{--                        <option value="{{ route('admins.admins.create_selected', ['id' => $user->id]) }}">{{ $user->account }}</option>--}}
-{{--                    @endforeach--}}
-{{--                </select>--}}
-
-                <select class="js-example-basic-single" name="state">
-                    <option value="AL">111</option>
-                    <option value="ML">222</option>
+                    @foreach($users as $user)
+                        <option value="{{ route('admins.admins.create_selected', ['id' => $user->id]) }}">{{ $user->account }}</option>
+                    @endforeach
                 </select>
-                <script>
-                    $(document).ready(function() {
-                        $('.js-example-basic-single').select2();
-                    });
-                </script>
+
+{{--                <select class="js-example-basic-single" name="state">--}}
+{{--                    <option value="AL">111</option>--}}
+{{--                    <option value="ML">222</option>--}}
+{{--                </select>--}}
+{{--                <script>--}}
+{{--                    $(document).ready(function() {--}}
+{{--                        $('.js-example-basic-single').select2();--}}
+{{--                    });--}}
+{{--                </script>--}}
             </div>
         </form>
     </div>
