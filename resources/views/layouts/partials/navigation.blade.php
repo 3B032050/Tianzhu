@@ -63,12 +63,14 @@
                                 <span class="d-none d-md-inline">僧伽教育</span>
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li>
-                                    <a class="dropdown-item" href="{{ route('courses.overview') }}">總覽</a>
-                                </li>
-                                <li>
-                                    <hr class="dropdown-divider"/>
-                                </li>
+                                @if(isset($courseOverview))
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('courses.overview') }}">總覽</a>
+                                    </li>
+                                    <li>
+                                        <hr class="dropdown-divider"/>
+                                    </li>
+                                @endif
                                 @foreach($courseCategories as $courseCategory)
                                     <li>
                                         <a class="dropdown-item" href="{{ route('courses.by_category',$courseCategory->id) }}">{{ $courseCategory->name }}</a>

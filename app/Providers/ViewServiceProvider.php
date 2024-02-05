@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\CourseOverview;
 use App\Models\Introduction;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
@@ -32,6 +33,9 @@ class ViewServiceProvider extends ServiceProvider
 
             $courseCategories = CourseCategory::orderBy('id', 'ASC')->get();
             $view->with('courseCategories', $courseCategories);
+
+            $courseOverview = CourseOverview::where('title','總覽')->first();
+            $view->with('courseOverview', $courseOverview);
         });
     }
 }
