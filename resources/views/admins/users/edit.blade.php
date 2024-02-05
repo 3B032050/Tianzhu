@@ -52,6 +52,16 @@
             <label for="address" class="form-label">地址</label>
             <input id="address" name="address" type="text" class="form-control" value="{{ old('address',$user->address) }}" placeholder="請輸入地址">
         </div>
+        <div class="form-group">
+            <label for="classification" class="form-label">類別</label>
+            <select id="classification" name="classification" class="form-control">
+                @foreach($classifications as $classification)
+                    <option value="{{ $classification->name }}" {{ $user->classification == $classification->id ? 'selected' : '' }}>
+                        {{ $classification->name }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
             <button type="submit" class="btn btn-primary btn-sm">儲存</button>
         </div>
