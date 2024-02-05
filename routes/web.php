@@ -210,6 +210,7 @@ Route::group(['middleware' => 'admin'], function(){
 
         Route::get('/curriculum_categories',[App\Http\Controllers\AdminCurriculumCategoryController::class,'index'])->name('curriculum_categories.index');
         Route::get('/curriculum_categories/create',[App\Http\Controllers\AdminCurriculumCategoryController::class,'create'])->name('curriculum_categories.create');
+        Route::get('/curriculum_categories/{curriculum_category}/create_hierarchy',[App\Http\Controllers\AdminCurriculumCategoryController::class,'create_hierarchy'])->name('curriculum_categories.create_hierarchy');
         Route::post('/curriculum_categories', [App\Http\Controllers\AdminCurriculumCategoryController::class, 'store'])->name("curriculum_categories.store");
         Route::get('/curriculum_categories/{curriculum_category}/edit', [App\Http\Controllers\AdminCurriculumCategoryController::class, 'edit'])->name("curriculum_categories.edit");
         Route::patch('/curriculum_categories/{curriculum_category}',[App\Http\Controllers\AdminCurriculumCategoryController::class,'update'])->name('curriculum_categories.update');

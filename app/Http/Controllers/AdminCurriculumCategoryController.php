@@ -26,16 +26,32 @@ class AdminCurriculumCategoryController extends Controller
         return view('admins.curriculum_categories.create');
     }
 
+    public function create_hierarchy(CurriculumCategory $curriculumCategory)
+    {
+//        $web_hierarchy = CurriculumCategory::where('parent_id',$parent_id)->first();
+        $data = ['curriculumCategory' => $curriculumCategory];
+        return view('admins.curriculum_categories.create_hierarchy', $data);
+    }
+
     /**
      * Store a newly created resource in storage.
      */
     public function store(StoreCurriculumCategoryRequest $request)
     {
-        $this->validate($request,[
+        $this->validate($request, [
             'name' => 'required|max:255',
         ]);
 
-        CurriculumCategory::create($request->all());
+        // Check if parent_id exists in the request
+        if ($request->has('parent_id')) {
+            $requestData = $request->all();
+        } else {
+            $requestData = array_merge($request->all(), ['parent_id' => 0]);
+        }
+
+        // Create the CurriculumCategory
+        CurriculumCategory::create($requestData);
+
         return redirect()->route('admins.curriculum_categories.index');
     }
 

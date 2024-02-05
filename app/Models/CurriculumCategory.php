@@ -11,6 +11,7 @@ class CurriculumCategory extends Model
 
     protected $fillable = [
         'name',
+        'parent_id',
     ];
 
     // 這是反向的一對一關聯，一個分類有一門課程
