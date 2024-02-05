@@ -10,7 +10,7 @@
         @method('POST')
         @csrf
         @php
-            $controller = App::make('App\Http\Controllers\AdminWebHierarchiesController');
+            $controller = App::make('App\Http\Controllers\AdminWebHierarchyController');
             $web_id = $controller->adding($web_hierarchy->web_id);
         @endphp
         <div class="form-group">
