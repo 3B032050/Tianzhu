@@ -16,6 +16,7 @@ class Course extends Model
         'method',
         'time',
         'note',
+        'status',
     ];
 
     // 這是一對一的關聯，一門課程屬於一個分類

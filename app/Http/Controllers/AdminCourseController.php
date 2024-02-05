@@ -47,6 +47,13 @@ class AdminCourseController extends Controller
             'note' => 'nullable|max:255',
         ]);
 
+        $existingCourse = Course::where('title', $request->input('title'))->first();
+        if ($existingCourse) {
+            return redirect()->route('admins.courses.index')
+                ->withErrors(['title' => '課程名稱已存在'])
+                ->withInput($request->all());
+        }
+
         // 創建課程
         $course = new Course();
         $course->title = $request->input('title');
@@ -117,6 +124,18 @@ class AdminCourseController extends Controller
         // Sync the related objectives
         $course->objectives()->sync($request->input('course_objectives', []));
 
+        return redirect()->route('admins.courses.index');
+    }
+
+    public function statusOn(Request $request, Course $course)
+    {
+        $course->update(['status' => 1]);
+        return redirect()->route('admins.courses.index');
+    }
+
+    public function statusOff(Request $request, Course $course)
+    {
+        $course->update(['status' => 0]);
         return redirect()->route('admins.courses.index');
     }
 
