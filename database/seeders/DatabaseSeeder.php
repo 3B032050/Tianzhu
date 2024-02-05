@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             'birthday' => '2023/11/27',
             'phone' => '0987654321',
             'address' => 'Taiwan',
+            'classification' => '',
         ])->each(function ($user) {
             // 創建相對應的管理員資料
             Admin::create([

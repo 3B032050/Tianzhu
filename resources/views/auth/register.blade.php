@@ -101,6 +101,18 @@
                             </div>
                         </div>
 
+                        <div class="row mb-3">
+                            <label for="classification" class="col-md-4 col-form-label text-md-end">{{ __('類別 / Classification') }}</label>
+
+                            <div class="col-md-6">
+                                <select id="classification" class="form-control" name="classification" required autocomplete="current-classification">
+                                    @foreach($classifications as $classification)
+                                        <option value="{{ $classification->name }}">{{ $classification->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">

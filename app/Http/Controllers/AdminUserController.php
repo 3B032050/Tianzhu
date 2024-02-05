@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Admin;
 use App\Models\User;
+use App\Models\UserClassification;
 use Illuminate\Http\Request;
 
 class AdminUserController extends Controller
@@ -18,16 +19,24 @@ class AdminUserController extends Controller
 
     public function create()
     {
-        return view('admins.users.create');
+        $classifications = UserClassification::get();
+        $data = ['classifications' => $classifications];
+        return view('admins.users.create',$data);
     }
 
     public function store(Request $request)
     {
-//        $this->validate($request,[
-//            'title' => 'required|max:50',
-//            'content' => 'required',
-//            'is_feature' => 'required|boolean',
-//        ]);
+        $this->validate($request,[
+            'account' => 'required', 'string', 'max:255',
+            'password' => 'required', 'string', 'min:8', 'confirmed',
+            'name' => 'required', 'string', 'max:255',
+            'sex' => 'required', 'string', 'max:1',
+            'email' => 'required|email|unique:users,email',
+            'birthday' => 'required', 'date',
+            'phone' => 'required', 'string', 'max:10',
+            'address' => 'required', 'string', 'max:255',
+            'classification' => 'required', 'string',
+        ]);
 
         User::create($request->all());
         return redirect()->route('admins.users.index');
@@ -35,19 +44,26 @@ class AdminUserController extends Controller
 
     public function edit(User $user)
     {
+        $classifications = UserClassification::get();
         $data = [
-            'user'=> $user,
+            'user'=> $user, 'classifications' => $classifications,
         ];
         return view('admins.users.edit',$data);
     }
 
     public function update(Request $request, User $user)
     {
-//        $this->validate($request,[
-//            'title' => 'required|max:50',
-//            'content' => 'required',
-//            'is_feature' => 'required|boolean',
-//        ]);
+        $this->validate($request,[
+            'account' => 'required', 'string', 'max:255',
+            'password' => 'required', 'string', 'min:8', 'confirmed',
+            'name' => 'required', 'string', 'max:255',
+            'sex' => 'required', 'string', 'max:1',
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'birthday' => 'required', 'date',
+            'phone' => 'required', 'string', 'max:10',
+            'address' => 'required', 'string', 'max:255',
+            'classification' => 'required', 'string',
+        ]);
 
         $user->update($request->all());
         return redirect()->route('admins.users.index');

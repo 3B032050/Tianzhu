@@ -31,6 +31,7 @@
             <th scope="col" style="text-align:left">電子信箱</th>
             <th scope="col" style="text-align:left">生日</th>
             <th scope="col" style="text-align:left">電話</th>
+            <th scope="col" style="text-align:left">類別</th>
             <th scope="col" style="text-align:left">權限</th>
             <th scope="col" style="text-align:center">修改</th>
             <th scope="col" style="text-align:center">刪除</th>
@@ -46,6 +47,7 @@
                 <td>{{ $user->email }}</td>
                 <td>{{ $user->birthday }}</td>
                 <td>{{ $user->phone }}</td>
+                <td>{{ $user->classification }}</td>
                 @if ($user->isadmin())
                     <td>
                         @if($user->admin->position == 1)
