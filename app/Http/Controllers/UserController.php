@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\UserClassification;
 
 class UserController extends Controller
 {
     public function index()
     {
         $user = User::where('id',auth()->user()->id)->first();
-        $data = ['user' => $user];
+        $classifications = UserClassification::get();
+        $data = ['user' => $user , 'classifications' => $classifications];
         return view('users.index',$data);
     }
 

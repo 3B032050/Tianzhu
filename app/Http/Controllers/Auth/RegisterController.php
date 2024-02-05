@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\UserClassification;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -41,6 +42,13 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+    public function showRegistrationForm()
+    {
+        $classifications = UserClassification::get();
+
+        return view('auth.register', ['classifications' => $classifications]);
+    }
+
     /**
      * Get a validator for an incoming registration request.
      *
@@ -58,6 +66,7 @@ class RegisterController extends Controller
             'birthday' => ['required', 'date',],
             'phone' => ['required', 'string', 'max:10'],
             'address' => ['required', 'string', 'max:255'],
+            'classification' => ['required', 'string'],
         ]);
     }
 
@@ -78,6 +87,7 @@ class RegisterController extends Controller
             'birthday' => $data['birthday'],
             'phone' => $data['phone'],
             'address' => $data['address'],
+            'classification' => $data['classification'],
         ]);
     }
 }

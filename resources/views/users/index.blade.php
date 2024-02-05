@@ -100,10 +100,30 @@
                             <div class="col-md-6">
                                 <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ $user->address }}" required autocomplete="current-password">
 
-                                @error('password')
+                                @error('address')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="classification" class="col-md-4 col-form-label text-md-end">{{ __('類別 / Classification') }}</label>
+
+                            <div class="col-md-6">
+                                <select id="classification" class="form-control @error('classification') is-invalid @enderror" name="classification" required autocomplete="current-classification">
+                                    @foreach($classifications as $classification)
+                                        <option value="{{ $classification->name }}" {{ $user->classification == $classification->id ? 'selected' : '' }}>
+                                            {{ $classification->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+
+                                @error('classification')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
