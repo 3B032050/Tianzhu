@@ -146,6 +146,22 @@ Route::group(['middleware' => 'admin'], function(){
         Route::patch('/coursefile/{coursefile}',[App\Http\Controllers\AdminCourseFileController::class,'update'])->name('course_file.update');
         Route::delete('/coursefile/{coursefile}', [App\Http\Controllers\AdminCourseFileController::class, 'destroy'])->name("course_file.destroy");
 
+        #影音
+        Route::get('/video',[App\Http\Controllers\AdminVideoController::class,'index'])->name('videos.index');
+        Route::get('/video/create',[App\Http\Controllers\AdminVideoController::class,'create'])->name('videos.create');
+        Route::post('/video', [App\Http\Controllers\AdminVideoController::class, 'store'])->name("videos.store");
+        Route::get('/video/{video}/edit', [App\Http\Controllers\AdminVideoController::class, 'edit'])->name("videos.edit");
+        Route::patch('/video/{video}',[App\Http\Controllers\AdminVideoController::class,'update'])->name('videos.update');
+        Route::delete('/video/{video}', [App\Http\Controllers\AdminVideoController::class, 'destroy'])->name("videos.destroy");
+
+        #影音類別
+        Route::get('/video_category',[App\Http\Controllers\AdminVideoCategoryController::class,'index'])->name('video_categories.index');
+        Route::get('/video_category/create',[App\Http\Controllers\AdminVideoCategoryController::class,'create'])->name('video_categories.create');
+        Route::post('/video_category', [App\Http\Controllers\AdminVideoCategoryController::class, 'store'])->name("video_categories.store");
+        Route::get('/video_category/{video_category}/edit', [App\Http\Controllers\AdminVideoCategoryController::class, 'edit'])->name("video_categories.edit");
+        Route::patch('/video_category/{video_category}',[App\Http\Controllers\AdminVideoCategoryController::class,'update'])->name('video_categories.update');
+        Route::delete('/video_category/{video_category}', [App\Http\Controllers\AdminVideoCategoryController::class, 'destroy'])->name("video_categories.destroy");
+
         Route::get('/curricula',[App\Http\Controllers\AdminCurriculumController::class,'index'])->name('curricula.index');
         Route::get('/curricula/create',[App\Http\Controllers\AdminCurriculumController::class,'create'])->name('curricula.create');
         Route::post('/curricula', [App\Http\Controllers\AdminCurriculumController::class, 'store'])->name("curricula.store");

@@ -20,6 +20,9 @@
                 <a class="nav-link" href="{{ route('admins.course_file.index') }}">
                     課程講義
                 </a>
+                <a class="nav-link" href="{{ route('admins.videos.index') }}">
+                    法音流佈
+                </a>
                 <a class="nav-link" href="{{ route('home.index') }}">
                     活動紀實
                 </a>
