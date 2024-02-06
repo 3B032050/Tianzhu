@@ -12,10 +12,11 @@ class Course extends Model
     protected $fillable = [
         'title',
         'course_category_id',
-        'description',
+        'content',
         'method',
         'time',
         'note',
+        'status',
     ];
 
     // 這是一對一的關聯，一門課程屬於一個分類

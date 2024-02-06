@@ -38,12 +38,17 @@
                                 <span class="d-none d-md-inline">天筑精舍簡介</span>
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li>
-                                    <a class="dropdown-item" href="/">交通資訊</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="/">緣起與宗旨</a>
-                                </li>
+                                @foreach($introductions as $introduction)
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('introductions.show',$introduction->id) }}">{{ $introduction->title }}</a>
+                                    </li>
+                                @endforeach
+{{--                                <li>--}}
+{{--                                    <a class="dropdown-item" href="/">交通資訊</a>--}}
+{{--                                </li>--}}
+{{--                                <li>--}}
+{{--                                    <a class="dropdown-item" href="/">緣起與宗旨</a>--}}
+{{--                                </li>--}}
                             </ul>
                         </div>
                     </li>
@@ -58,30 +63,19 @@
                                 <span class="d-none d-md-inline">僧伽教育</span>
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li>
-                                    <a class="dropdown-item" href="/">總覽</a>
-                                </li>
-                                <li>
-                                    <hr class="dropdown-divider"/>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="/">基礎教育</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="/">沙彌淨人</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="/">式叉尼</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="/">大尼新戒</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="/">大尼</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="/">進階培養</a>
-                                </li>
+                                @if(isset($courseOverview))
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('courses.overview') }}">總覽</a>
+                                    </li>
+                                    <li>
+                                        <hr class="dropdown-divider"/>
+                                    </li>
+                                @endif
+                                @foreach($courseCategories as $courseCategory)
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('courses.by_category',$courseCategory->id) }}">{{ $courseCategory->name }}</a>
+                                    </li>
+                                @endforeach
                             </ul>
                         </div>
                     </li>
@@ -97,7 +91,7 @@
                                     <a class="dropdown-item" href="/">課程講義</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="/">佛門小常識</a>
+                                    <a class="dropdown-item" href="{{ route('common_senses.index') }}">佛門小常識</a>
                                 </li>
                                 <li>
                                     <a class="dropdown-item" href="/">居士學佛</a>
@@ -117,7 +111,7 @@
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li>
-                                    <a class="dropdown-item" href="/">活動紀實</a>
+                                    <a class="dropdown-item" href="{{ route('activities.index') }}">活動紀實</a>
                                 </li>
                                 @if (Auth::user())
                                     <li>

@@ -7,6 +7,7 @@ use App\Models\CourseMethod;
 use App\Models\CourseObjective;
 use Illuminate\Http\Request;
 use App\Models\Course;
+use Illuminate\Support\Facades\Storage;
 
 class AdminCourseController extends Controller
 {
@@ -46,9 +47,17 @@ class AdminCourseController extends Controller
             'note' => 'nullable|max:255',
         ]);
 
+        $existingCourse = Course::where('title', $request->input('title'))->first();
+        if ($existingCourse) {
+            return redirect()->route('admins.courses.index')
+                ->withErrors(['title' => '課程名稱已存在'])
+                ->withInput($request->all());
+        }
+
         // 創建課程
         $course = new Course();
         $course->title = $request->input('title');
+        $course->content = $request->input('content');
         $course->course_category_id = $request->input('course_category');
         $course->method = $request->input('method');
         $course->time = $request->input('time');
@@ -102,6 +111,7 @@ class AdminCourseController extends Controller
         // Update the Course model
         $course->update([
             'title' => $request->input('title'),
+            'content' => $request->input('content'),
             'method' => $request->input('method'),
             'course_category_id' => $request->input('course_category'),
             'time' => $request->input('time'),
@@ -117,9 +127,38 @@ class AdminCourseController extends Controller
         return redirect()->route('admins.courses.index');
     }
 
+    public function statusOn(Request $request, Course $course)
+    {
+        $course->update(['status' => 1]);
+        return redirect()->route('admins.courses.index');
+    }
+
+    public function statusOff(Request $request, Course $course)
+    {
+        $course->update(['status' => 0]);
+        return redirect()->route('admins.courses.index');
+    }
+
     public function destroy(Course $course)
     {
         $course->delete();
         return redirect()->route('admins.courses.index');
+    }
+
+    public function upload(Request $request)
+    {
+        if ($request->hasFile('upload')) {
+            $originName = $request->file('upload')->getClientOriginalName();
+            $fileName = pathinfo($originName, PATHINFO_FILENAME);
+            $extension = $request->file('upload')->getClientOriginalExtension();
+            $fileName = $fileName . '_' . time() . '.' . $extension;
+
+            // Save the image in the storage/web_images folder
+            Storage::disk('courses')->put($fileName, file_get_contents($request->file('upload')));
+
+            $url = Storage::disk('courses')->url($fileName);
+
+            return response()->json(['fileName' => $fileName, 'uploaded'=> 1, 'url' => $url]);
+        }
     }
 }

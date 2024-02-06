@@ -22,6 +22,7 @@ return new class extends Migration
             $table->date('birthday');
             $table->integer('phone');
             $table->string('address');
+            $table->string('classification')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommonSenseController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,6 +30,19 @@ Route::get('/web/{web_id}', [App\Http\Controllers\WebController::class, 'index']
 Route::get('/select', [App\Http\Controllers\AdminAdminController::class, 'search'])->name("admins.search");
 
 
+Route::get('/introductions/{introduction}/show', [App\Http\Controllers\IntroductionController::class, 'show'])->name('introductions.show');
+
+Route::get('/courses', [App\Http\Controllers\CourseController::class, 'overview'])->name('courses.overview');
+Route::get('/courses/by_category/{course_category}', [App\Http\Controllers\CourseController::class, 'by_category'])->name('courses.by_category');
+Route::get('/courses/by_category/{course_category}/search', [App\Http\Controllers\CourseController::class, 'search'])->name('courses.by_category_search');
+Route::get('/courses/by_category/{course_category}/show/{course}', [App\Http\Controllers\CourseController::class, 'show'])->name('courses.show');
+
+Route::get('/activities', [App\Http\Controllers\ActivityController::class, 'index'])->name('activities.index');
+Route::get('/activities/{activity}/show', [App\Http\Controllers\ActivityController::class, 'show'])->name('activities.show');
+
+Route::get('/common_senses', [App\Http\Controllers\CommonSenseController::class, 'index'])->name('common_senses.index');
+Route::get('/common_senses/{commonSense}/show', [App\Http\Controllers\CommonSenseController::class, 'show'])->name('common_senses.show');
+Route::get('/show_content/{common_sense_id}/{common_sense_category_id}', [App\Http\Controllers\CommonSenseController::class, 'show_content'])->name('common_senses.show_content');
 
 Auth::routes();
 
@@ -76,16 +90,36 @@ Route::group(['middleware' => 'admin'], function(){
         Route::delete('/users/{user}', [App\Http\Controllers\AdminUserController::class, 'destroy'])->name("users.destroy");
         Route::get('/users/search', [App\Http\Controllers\AdminUserController::class, 'search'])->name('users.search');
 
+        Route::get('/user_classifications',[App\Http\Controllers\AdminUserClassificationController::class,'index'])->name('user_classifications.index');
+        Route::get('/user_classifications/create',[App\Http\Controllers\AdminUserClassificationController::class,'create'])->name('user_classifications.create');
+        Route::post('/user_classifications', [App\Http\Controllers\AdminUserClassificationController::class, 'store'])->name("user_classifications.store");
+        Route::get('/user_classifications/{user_classification}/edit', [App\Http\Controllers\AdminUserClassificationController::class, 'edit'])->name("user_classifications.edit");
+        Route::patch('/user_classifications/{user_classification}',[App\Http\Controllers\AdminUserClassificationController::class,'update'])->name('user_classifications.update');
+        Route::delete('/user_classifications/{user_classification}', [App\Http\Controllers\AdminUserClassificationController::class, 'destroy'])->name("user_classifications.destroy");
+        Route::get('/user_classifications/search', [App\Http\Controllers\AdminUserClassificationController::class, 'search'])->name('user_classifications.search');
+
+        Route::get('/introductions', [App\Http\Controllers\AdminIntroductionController::class, 'index'])->name("introductions.index");
+        Route::get('/introductions/traffic', [App\Http\Controllers\AdminIntroductionController::class, 'traffic'])->name("introductions.traffic");
+        Route::get('/introductions/origin', [App\Http\Controllers\AdminIntroductionController::class, 'origin'])->name("introductions.origin");
+        Route::patch('/introductions/{introduction}',[App\Http\Controllers\AdminIntroductionController::class,'update'])->name('introductions.update');
+        Route::post('/introductions/upload', [App\Http\Controllers\AdminIntroductionController::class, 'upload'])->name('introductions.upload');
+
         Route::get('/course_overviews/edit', [App\Http\Controllers\AdminCourseOverviewController::class, 'edit'])->name("course_overviews.edit");
         Route::patch('/course_overviews/{course_overview}',[App\Http\Controllers\AdminCourseOverviewController::class,'update'])->name('course_overviews.update');
+        Route::post('/course_overviews/upload', [App\Http\Controllers\AdminCourseOverviewController::class, 'upload'])->name('course_overviews.upload');
+
 
         Route::get('/courses',[App\Http\Controllers\AdminCourseController::class,'index'])->name('courses.index');
         Route::get('/courses/create',[App\Http\Controllers\AdminCourseController::class,'create'])->name('courses.create');
         Route::post('/courses', [App\Http\Controllers\AdminCourseController::class, 'store'])->name("courses.store");
         Route::get('/courses/{course}/edit', [App\Http\Controllers\AdminCourseController::class, 'edit'])->name("courses.edit");
         Route::patch('/courses/{course}',[App\Http\Controllers\AdminCourseController::class,'update'])->name('courses.update');
+        Route::patch('/courses/{course}/statusOff', [App\Http\Controllers\AdminCourseController::class, 'statusOff'])->name('courses.statusOff');
+        Route::patch('/courses/{course}/statusOn', [App\Http\Controllers\AdminCourseController::class, 'statusOn'])->name('courses.statusOn');
         Route::delete('/courses/{course}', [App\Http\Controllers\AdminCourseController::class, 'destroy'])->name("courses.destroy");
         Route::get('/courses/search', [App\Http\Controllers\AdminCourseController::class, 'search'])->name('courses.search');
+        Route::post('/courses/upload', [App\Http\Controllers\AdminCourseController::class, 'upload'])->name('courses.upload');
+
 
         Route::get('/course_objectives',[App\Http\Controllers\AdminCourseObjectiveController::class,'index'])->name('course_objectives.index');
         Route::get('/course_objectives/create',[App\Http\Controllers\AdminCourseObjectiveController::class,'create'])->name('course_objectives.create');
@@ -110,6 +144,16 @@ Route::group(['middleware' => 'admin'], function(){
         Route::patch('/course_methods/{course_method}',[App\Http\Controllers\AdminCourseMethodController::class,'update'])->name('course_methods.update');
         Route::delete('/course_methods/{course_method}', [App\Http\Controllers\AdminCourseMethodController::class, 'destroy'])->name("course_methods.destroy");
         Route::get('/course_methods/search', [App\Http\Controllers\AdminCourseMethodController::class, 'search'])->name('course_methods.search');
+
+        Route::get('/activities',[App\Http\Controllers\AdminActivityController::class,'index'])->name('activities.index');
+        Route::get('/activities/create',[App\Http\Controllers\AdminActivityController::class,'create'])->name('activities.create');
+        Route::post('/activities', [App\Http\Controllers\AdminActivityController::class, 'store'])->name("activities.store");
+        Route::get('/activities/{activity}/edit', [App\Http\Controllers\AdminActivityController::class, 'edit'])->name("activities.edit");
+        Route::patch('/activities/{activity}',[App\Http\Controllers\AdminActivityController::class,'update'])->name('activities.update');
+        Route::delete('/activities/{activity}', [App\Http\Controllers\AdminActivityController::class, 'destroy'])->name("activities.destroy");
+        Route::get('/activities/search', [App\Http\Controllers\AdminActivityController::class, 'search'])->name('activities.search');
+        Route::post('/activities/upload', [App\Http\Controllers\AdminActivityController::class, 'upload'])->name('activities.upload');
+
 
         //公告路由
         Route::get('posts', [App\Http\Controllers\AdminPostController::class, 'index'])->name("posts.index");
@@ -169,6 +213,8 @@ Route::group(['middleware' => 'admin'], function(){
         Route::patch('/curricula/{curriculum}',[App\Http\Controllers\AdminCurriculumController::class,'update'])->name('curricula.update');
         Route::delete('/curricula/{curriculum}', [App\Http\Controllers\AdminCurriculumController::class, 'destroy'])->name("curricula.destroy");
         Route::get('/curricula/search', [App\Http\Controllers\AdminCurriculumController::class, 'search'])->name('curricula.search');
+        Route::patch('/curricula/{curriculum}/status_on',[App\Http\Controllers\AdminCurriculumController::class,'status_on'])->name('curricula.status_on');
+        Route::patch('/curricula/{curriculum}/status_off',[App\Http\Controllers\AdminCurriculumController::class,'status_off'])->name('curricula.status_off');
 
         Route::get('/curriculum_objectives',[App\Http\Controllers\AdminCurriculumObjectiveController::class,'index'])->name('curriculum_objectives.index');
         Route::get('/curriculum_objectives/create',[App\Http\Controllers\AdminCurriculumObjectiveController::class,'create'])->name('curriculum_objectives.create');
@@ -180,6 +226,7 @@ Route::group(['middleware' => 'admin'], function(){
 
         Route::get('/curriculum_categories',[App\Http\Controllers\AdminCurriculumCategoryController::class,'index'])->name('curriculum_categories.index');
         Route::get('/curriculum_categories/create',[App\Http\Controllers\AdminCurriculumCategoryController::class,'create'])->name('curriculum_categories.create');
+        Route::get('/curriculum_categories/{curriculum_category}/create_hierarchy',[App\Http\Controllers\AdminCurriculumCategoryController::class,'create_hierarchy'])->name('curriculum_categories.create_hierarchy');
         Route::post('/curriculum_categories', [App\Http\Controllers\AdminCurriculumCategoryController::class, 'store'])->name("curriculum_categories.store");
         Route::get('/curriculum_categories/{curriculum_category}/edit', [App\Http\Controllers\AdminCurriculumCategoryController::class, 'edit'])->name("curriculum_categories.edit");
         Route::patch('/curriculum_categories/{curriculum_category}',[App\Http\Controllers\AdminCurriculumCategoryController::class,'update'])->name('curriculum_categories.update');
@@ -201,6 +248,8 @@ Route::group(['middleware' => 'admin'], function(){
         Route::patch('/common_senses/{common_sense}',[App\Http\Controllers\AdminCommonSenseController::class,'update'])->name('common_senses.update');
         Route::delete('/common_senses/{common_sense}', [App\Http\Controllers\AdminCommonSenseController::class, 'destroy'])->name("common_senses.destroy");
         Route::get('/common_senses/search', [App\Http\Controllers\AdminCommonSenseController::class, 'search'])->name('common_senses.search');
+        Route::patch('/common_senses/{common_sense}/status_on',[App\Http\Controllers\AdminCommonSenseController::class,'status_on'])->name('common_senses.status_on');
+        Route::patch('/common_senses/{common_sense}/status_off',[App\Http\Controllers\AdminCommonSenseController::class,'status_off'])->name('common_senses.status_off');
 
         Route::get('/common_sense_categories',[App\Http\Controllers\AdminCommonSenseCategoryController::class,'index'])->name('common_sense_categories.index');
         Route::get('/common_sense_categories/create',[App\Http\Controllers\AdminCommonSenseCategoryController::class,'create'])->name('common_sense_categories.create');
@@ -209,6 +258,9 @@ Route::group(['middleware' => 'admin'], function(){
         Route::patch('/common_sense_categories/{common_sense_category}',[App\Http\Controllers\AdminCommonSenseCategoryController::class,'update'])->name('common_sense_categories.update');
         Route::delete('/common_sense_categories/{common_sense_category}', [App\Http\Controllers\AdminCommonSenseCategoryController::class, 'destroy'])->name("common_sense_categories.destroy");
         Route::get('/common_sense_categories/search', [App\Http\Controllers\AdminCommonSenseCategoryController::class, 'search'])->name('common_sense_categories.search');
+        Route::patch('/common_sense_categories/{common_sense_category}/status_on',[App\Http\Controllers\AdminCommonSenseCategoryController::class,'status_on'])->name('common_sense_categories.status_on');
+        Route::patch('/common_sense_categories/{common_sense_category}/status_off',[App\Http\Controllers\AdminCommonSenseCategoryController::class,'status_off'])->name('common_sense_categories.status_off');
+
 
     });
 });

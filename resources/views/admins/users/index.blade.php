@@ -5,13 +5,7 @@
 @section('page-content')
 <div class="container-fluid px-4">
     <h1 class="mt-4">用戶資料管理</h1>
-{{--    <ol class="breadcrumb mb-4">--}}
-{{--        <li class="breadcrumb-item active">用戶一覽表</li>--}}
-{{--    </ol>--}}
-{{--    <div class="alert alert-success alert-dismissible" role="alert" id="liveAlert">--}}
-{{--        <strong>完成！</strong> 成功儲存用戶--}}
-{{--        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>--}}
-{{--    </div>--}}
+    <a class="btn btn-success btn-sm" href="{{ route('admins.user_classifications.index') }}">用戶分類</a>
     <div class="container px-4 px-lg-5 mt-2 mb-4">
         <form action="{{ route('admins.users.search') }}" method="GET" class="d-flex">
             <input type="text" name="query" class="form-control me-2" placeholder="帳號搜尋...">
@@ -37,6 +31,7 @@
             <th scope="col" style="text-align:left">電子信箱</th>
             <th scope="col" style="text-align:left">生日</th>
             <th scope="col" style="text-align:left">電話</th>
+            <th scope="col" style="text-align:left">類別</th>
             <th scope="col" style="text-align:left">權限</th>
             <th scope="col" style="text-align:center">修改</th>
             <th scope="col" style="text-align:center">刪除</th>
@@ -52,6 +47,7 @@
                 <td>{{ $user->email }}</td>
                 <td>{{ $user->birthday }}</td>
                 <td>{{ $user->phone }}</td>
+                <td>{{ $user->classification }}</td>
                 @if ($user->isadmin())
                     <td>
                         @if($user->admin->position == 1)

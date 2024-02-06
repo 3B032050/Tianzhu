@@ -9,7 +9,7 @@
         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 @foreach($slides as $index => $slide)
-                    <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
+                    <div class="carousel-item {{ $index == 0 ? 'active' : '' }}" data-index="{{ $index }}">
                         <img src="{{ asset('storage/slides/' . $slide->image_path) }}?v={{ time() }}" class="d-block w-100" alt="{{ $slide->title }}" style="width: 80vw; height: 500px; object-fit: cover;">
                     </div>
                 @endforeach
@@ -25,12 +25,14 @@
             </button>
         </div>
         <br><br>
+        <!-- 顯示當前幻燈片索引的元素 -->
+        <div id="currentSlideIndex"></div>
     @else
         <!-- 如果沒有幻燈片，顯示預設的圖片 -->
         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="{{ asset('storage/slides/1705334824.jpg') }}?v={{ time() }}" class="d-block w-100" style="width: 80vw; height: 500px; object-fit: cover;">
+                    <img src="{{ asset('images/1705423957.jpg') }}?v={{ time() }}" class="d-block w-100" style="width: 80vw; height: 500px; object-fit: cover;">
                 </div>
             </div>
             <!-- 轮播控制按钮 -->
@@ -82,10 +84,17 @@
 {{--            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3620.1942296287816!2d121.27671427444545!3d24.85721504538914!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3468176912c5eaa7%3A0x46b0f53d5ae5cb0!2z5aSp562R57K-6IiN!5e0!3m2!1szh-TW!2stw!4v1696680829001!5m2!1szh-TW!2stw" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>--}}
 {{--        </div>--}}
 
-<script>
-    var myCarousel = new bootstrap.Carousel(document.getElementById('carouselExampleControls'), {
-        interval: 3200,  // 调整切换间隔时间
-        wrap: true,
-    });
-</script>
+    <script>
+        var myCarousel = new bootstrap.Carousel(document.getElementById('carouselExampleControls'), {
+            interval: 3200,  // 调整切换间隔时间
+            wrap: true,
+        });
+
+        // 監聽 Bootstrap Carousel 的 slide 事件，更新當前幻燈片的索引
+        $('#carouselExampleControls').on('slide.bs.carousel', function (e) {
+            var currentSlideIndex = $(e.relatedTarget).data('index');
+            // 更新顯示當前幻燈片索引的元素
+            $('#currentSlideIndex').text('Current Slide Index: ' + currentSlideIndex);
+        });
+    </script>
 @endsection

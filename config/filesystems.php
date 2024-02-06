@@ -63,6 +63,34 @@ return [
             'visibility' => 'public',
         ],
 
+        'introductions' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/introductions'),
+            'url' => env('APP_URL').':8000/storage/introductions',
+            'visibility' => 'public',
+        ],
+
+        'courses' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/courses'),
+            'url' => env('APP_URL').':8000/storage/courses',
+            'visibility' => 'public',
+        ],
+
+        'course_overviews' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/course_overviews'),
+            'url' => env('APP_URL').':8000/storage/course_overviews',
+            'visibility' => 'public',
+        ],
+
+        'activities' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/activities'),
+            'url' => env('APP_URL').':8000/storage/activities',
+            'visibility' => 'public',
+        ],
+
         'slides' => [
             'driver' => 'local',
             'root' => storage_path('app/public/slides'),

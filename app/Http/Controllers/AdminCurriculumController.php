@@ -49,6 +49,7 @@ class AdminCurriculumController extends Controller
         $request->validate([
             'title' => 'required|string',
             'method' => 'nullable|max:255',
+            'content' => 'required',
             'curriculum_category' => 'required|exists:curriculum_categories,id',
             'curriculum_methods' => 'array',
             'curriculum_objectives' => 'array',
@@ -58,7 +59,10 @@ class AdminCurriculumController extends Controller
         $curriculum = new Curriculum();
         $curriculum->title = $request->input('title');
         $curriculum->curriculum_category_id = $request->input('curriculum_category');
+        $curriculum->content = $request->input('content');
         $curriculum->method = $request->input('method');
+        $curriculum->status = 0;
+
 
         // 儲存課程
         $curriculum->save();
@@ -112,17 +116,17 @@ class AdminCurriculumController extends Controller
         $request->validate([
             'title' => 'required|max:50',
             'method' => 'nullable|max:255',
+            'content' => 'required',
             'curriculum_category' => 'required|exists:curriculum_categories,id',
             'curriculum_methods' => 'array',
             'curriculum_objectives' => 'array',
-            'time' => 'nullable|max:255',
-            'note' => 'nullable|max:255',
         ]);
 
         // Update the Course model
         $curriculum->update([
             'title' => $request->input('title'),
             'method' => $request->input('method'),
+            'content' => $request->input('content'),
             'curriculum_category_id' => $request->input('curriculum_category'),
         ]);
 
@@ -132,6 +136,19 @@ class AdminCurriculumController extends Controller
         // Sync the related objectives
         $curriculum->objectives()->sync($request->input('curriculum_objectives', []));
 
+        return redirect()->route('admins.curricula.index');
+    }
+
+    public function status_off(Curriculum $curriculum)
+    {
+        $curriculum->status='0';
+        $curriculum->save();
+        return redirect()->route('admins.curricula.index');
+    }
+    public function status_on(Curriculum $curriculum)
+    {
+        $curriculum->status='1';
+        $curriculum->save();
         return redirect()->route('admins.curricula.index');
     }
 

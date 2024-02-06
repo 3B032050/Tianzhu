@@ -12,10 +12,8 @@ class Curriculum extends Model
     protected $fillable = [
         'title',
         'course_category_id',
-        'description',
+        'content',
         'method',
-        'time',
-        'note',
     ];
 
     public function category()
