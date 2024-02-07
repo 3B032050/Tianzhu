@@ -27,10 +27,20 @@
         <div class="form-group">
             <label for="curriculum_category">課程類別</label>
             <select name="curriculum_category" id="curriculum_category" class="form-select">
-                @foreach($curriculum_categories as $category)
-                    <option value="{{ $category->id }}" {{ ($category->id == $curriculum->category_id) ? 'selected' : '' }}>
-                        {{ $category->name }}
-                    </option>
+                @foreach($curriculum_categories as $curriculumCategory)
+                    @if($curriculumCategory->parent_id == 0)
+                        <option value="{{ $curriculumCategory->id }}"  {{ ($curriculumCategory->id == $curriculum->category_id) ? 'selected' : '' }}>{{ $curriculumCategory->name }}</option>
+                        @foreach($curriculum_categories as $subCategory)
+                            @if($subCategory->parent_id == $curriculumCategory->id)
+                                <option value="{{ $subCategory->id }}"  {{ ($subCategory->id == $curriculum->category_id) ? 'selected' : '' }}>&nbsp&nbsp- {{ $subCategory->name }}</option>
+                                @foreach($curriculum_categories as $thirdCategory)
+                                    @if($thirdCategory->parent_id == $subCategory->id)
+                                        <option value="{{ $thirdCategory->id }}"  {{ ($thirdCategory->id == $curriculum->category_id) ? 'selected' : '' }}>&nbsp&nbsp&nbsp-- {{ $thirdCategory->name }}</option>
+                                    @endif
+                                @endforeach
+                            @endif
+                        @endforeach
+                    @endif
                 @endforeach
             </select>
         </div>

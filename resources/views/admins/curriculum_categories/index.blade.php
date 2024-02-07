@@ -62,7 +62,7 @@
                         @if($subCategory->parent_id == $curriculumCategory->id)
                             <tr>
                                 <td style="text-align:left">{{ $indexCounter }}.{{ $subIndexCounter++ }}</td>
-                                <td style="padding-left: 30px;">{{ $subCategory->name }}</td>
+                                <td style="padding-left: 70px;">{{ $subCategory->name }}</td>
                                 <td style="text-align:center">
                                     <a href="{{ route('admins.curriculum_categories.create_hierarchy',$subCategory->id) }}" class="btn btn-secondary btn-sm">新增子類別</a>
                                 </td>
@@ -93,7 +93,7 @@
                                 @if($thirdCategory->parent_id == $subCategory->id)
                                     <tr>
                                         <td style="text-align:left">{{ $indexCounter }}.{{ $subIndexCounter }}.{{ $thirdIndexCounter++ }}</td>
-                                        <td style="padding-left: 60px;">{{ $thirdCategory->name }}</td>
+                                        <td style="padding-left: 130px;">{{ $thirdCategory->name }}</td>
                                         <td style="text-align:center">
                                             <!-- 如果需要新增第4層的連結，可以在這裡添加 -->
                                         </td>

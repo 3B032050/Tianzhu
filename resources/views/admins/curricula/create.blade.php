@@ -26,11 +26,25 @@
             <div class="form-group">
                 <label for="curriculum_category">課程類別</label>
                 <select name="curriculum_category" id="curriculum_category" class="form-select">
-                    @foreach($curriculum_categories as $curriculum_category)
-                        <option value="{{ $curriculum_category->id }}">{{ $curriculum_category->name }}</option>
+                    <option value="">請選擇課程類別</option>
+                    @foreach($curriculum_categories as $curriculumCategory)
+                        @if($curriculumCategory->parent_id == 0)
+                            <option value="{{ $curriculumCategory->id }}">{{ $curriculumCategory->name }}</option>
+                            @foreach($curriculum_categories as $subCategory)
+                                @if($subCategory->parent_id == $curriculumCategory->id)
+                                    <option value="{{ $subCategory->id }}">&nbsp&nbsp- {{ $subCategory->name }}</option>
+                                    @foreach($curriculum_categories as $thirdCategory)
+                                        @if($thirdCategory->parent_id == $subCategory->id)
+                                            <option value="{{ $thirdCategory->id }}">&nbsp&nbsp&nbsp-- {{ $thirdCategory->name }}</option>
+                                        @endif
+                                    @endforeach
+                                @endif
+                            @endforeach
+                        @endif
                     @endforeach
                 </select>
             </div>
+
 
             <div class="form-group">
                 <label for="curriculum_methods">方法</label>
@@ -67,5 +81,3 @@
             } );
     </script>
 @endsection
-
-
