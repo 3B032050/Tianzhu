@@ -12,7 +12,16 @@
         <form action="{{ route('admins.course_file.update',['coursefile' => $coursefile->id]) }}" method="POST" role="form" enctype="multipart/form-data">
             @method('PATCH')
             @csrf
-
+            <div class="form-group">
+                <label for="course_file_category_id">課程講義類別</label>
+                <select name="course_file_category_id" id="course_file_category_id" class="form-select" >
+                    @foreach($course_file_categories as $course_file_category)
+                        <option value="{{ $course_file_category->id }}" {{ $coursefile->video_category_id == $course_file_category->id ? 'selected' : '' }}>
+                            {{$course_file_category->course_file_category_name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
             <div class="form-group">
                 <label for="title" class="form-label">課程名稱</label>
                 <input id="title" name="title" type="text" class="form-control" value="{{ old('title',$coursefile->title) }}" >

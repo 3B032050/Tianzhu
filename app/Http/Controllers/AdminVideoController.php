@@ -39,8 +39,9 @@ class AdminVideoController extends Controller
     }
     public function edit(Video $video)
     {
+        $video_categories = Video_category::orderby('id','ASC')->get();
         $data = [
-            'video'=> $video,
+            'video'=> $video,'video_categories'=>$video_categories,
         ];
         return view('admins.videos.edit',$data);
     }

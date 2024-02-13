@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CourseFile;
+use App\Models\CourseFileCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -18,7 +19,9 @@ class AdminCourseFileController extends Controller
 
     public function create(Request $request)
     {
-        return view('admins.course_file.create');
+        $course_file_categories =CourseFileCategory::orderby('id','ASC')->get();
+        $data = ['course_file_categories' => $course_file_categories];
+        return view('admins.course_file.create',$data);
     }
 
     public function store(Request $request)
@@ -42,7 +45,7 @@ class AdminCourseFileController extends Controller
             // 更新下面的字段，将文件名存储到数据库而不是整个文件对象
             $coursefile->file = $fileName;
         }
-
+        $coursefile->course_file_category_id = $request->course_file_category_id;
         $coursefile->title = $request->title;
 
         $coursefile->save();
@@ -52,8 +55,9 @@ class AdminCourseFileController extends Controller
 
     public function edit(CourseFile $coursefile)
     {
+        $course_file_categories =CourseFileCategory::orderby('id','ASC')->get();
         $data = [
-            'coursefile'=> $coursefile
+            'coursefile'=> $coursefile,'course_file_categories' => $course_file_categories
         ];
         return view('admins.course_file.edit',$data);
     }

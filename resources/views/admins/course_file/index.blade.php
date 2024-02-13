@@ -5,6 +5,7 @@
 @section('page-content')
 <div class="container-fluid px-4">
     <h1 class="mt-4">課程講義</h1>
+    <a class="btn btn-success btn-sm" href="{{ route('admins.course_file_categories.index') }}">課程講義類別</a>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
         <a class="btn btn-success btn-sm" href="{{ route('admins.course_file.create') }}">新增課程</a>
     </div>

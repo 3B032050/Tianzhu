@@ -12,7 +12,16 @@
         <form action="{{ route('admins.videos.update',['video' => $video->id]) }}" method="POST" role="form" enctype="multipart/form-data">
             @method('PATCH')
             @csrf
-
+            <div class="form-group">
+                <label for="video_category_id" class="form-label">選擇影音類別</label>
+                <select id="video_category_id" name="video_category_id" class="form-control">
+                    @foreach($video_categories as $video_category)
+                        <option value="{{ $video_category->id }}" {{ $video->video_category_id == $video_category->id ? 'selected' : '' }}>
+                            {{$video_category->category_name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
             <div class="form-group">
                 <label for="video_url" class="form-label">影音連結</label>
                 <input id="video_url" name="video_url" type="url" class="form-control" value="{{ old('video_url',$video->video_url) }}" >

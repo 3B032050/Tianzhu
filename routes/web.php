@@ -190,6 +190,14 @@ Route::group(['middleware' => 'admin'], function(){
         Route::patch('/coursefile/{coursefile}',[App\Http\Controllers\AdminCourseFileController::class,'update'])->name('course_file.update');
         Route::delete('/coursefile/{coursefile}', [App\Http\Controllers\AdminCourseFileController::class, 'destroy'])->name("course_file.destroy");
 
+        #課程講義類別
+        Route::get('/course_file_category',[App\Http\Controllers\AdminCourseFileCategoryController::class,'index'])->name('course_file_categories.index');
+        Route::get('/course_file_category/create',[App\Http\Controllers\AdminCourseFileCategoryController::class,'create'])->name('course_file_categories.create');
+        Route::post('/course_file_category', [App\Http\Controllers\AdminCourseFileCategoryController::class, 'store'])->name("course_file_categories.store");
+        Route::get('/course_file_category/{course_file_category}/edit', [App\Http\Controllers\AdminCourseFileCategoryController::class, 'edit'])->name("course_file_categories.edit");
+        Route::patch('/course_file_category/{course_file_category}',[App\Http\Controllers\AdminCourseFileCategoryController::class,'update'])->name('course_file_categories.update');
+        Route::delete('/course_file_category/{course_file_category}', [App\Http\Controllers\AdminCourseFileCategoryController::class, 'destroy'])->name("course_file_categories.destroy");
+
         #影音
         Route::get('/video',[App\Http\Controllers\AdminVideoController::class,'index'])->name('videos.index');
         Route::get('/video/create',[App\Http\Controllers\AdminVideoController::class,'create'])->name('videos.create');

@@ -5,15 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CourseFile extends Model
+class CourseFileCategory extends Model
 {
     use HasFactory;
-    protected $table = 'courses_files';
     protected $fillable = [
-        'course_file_category_id',
-        'title',
-        'file',
+        'course_file_category_name',
+
     ];
-
-
 }
