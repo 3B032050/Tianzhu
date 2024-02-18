@@ -12,4 +12,8 @@ class CourseFileCategory extends Model
         'course_file_category_name',
 
     ];
+    public function coursefiles()
+    {
+        return $this->belongsToMany(CourseFile::class);
+    }
 }

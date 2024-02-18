@@ -14,6 +14,9 @@ class CourseFile extends Model
         'title',
         'file',
     ];
-
+    public function coursefilecategory()
+    {
+        return $this->belongsTo(CourseFileCategory::class, 'course_file_category_id');
+    }
 
 }

@@ -44,6 +44,10 @@ Route::get('/common_senses', [App\Http\Controllers\CommonSenseController::class,
 Route::get('/common_senses/{commonSense}/show', [App\Http\Controllers\CommonSenseController::class, 'show'])->name('common_senses.show');
 Route::get('/show_content/{common_sense_id}/{common_sense_category_id}', [App\Http\Controllers\CommonSenseController::class, 'show_content'])->name('common_senses.show_content');
 
+Route::get('/course_file', [App\Http\Controllers\CourseFileController::class, 'index'])->name('course_file.index');
+Route::get('/course_file/{category}/show', [App\Http\Controllers\CourseFileController::class, 'show'])->name('course_file.show');
+Route::get('/course_file/{id}/{course_file}', [App\Http\Controllers\CourseFileController::class, 'download'])->name('course_file.download');
+
 Auth::routes();
 
 //會員資料

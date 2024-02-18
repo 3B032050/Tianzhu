@@ -88,7 +88,7 @@
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li>
-                                    <a class="dropdown-item" href="/">課程講義</a>
+                                    <a class="dropdown-item" href="{{ route('course_file.index') }}">課程講義</a>
                                 </li>
                                 <li>
                                     <a class="dropdown-item" href="{{ route('common_senses.index') }}">佛門小常識</a>
