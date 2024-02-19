@@ -28,8 +28,8 @@
             </div>
 
             <div class="form-group">
-                <label for="video_content" class="form-label">影音介紹</label>
-                <input id="video_content" name="video_content" type="text" class="form-control" value="{{ old('video_content',$video->video_content) }}" >
+                <label for="video_title" class="form-label">影音標題</label>
+                <input id="video_title" name="video_title" type="text" class="form-control" value="{{ old('video_title',$video->video_title) }}" >
 
             </div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">

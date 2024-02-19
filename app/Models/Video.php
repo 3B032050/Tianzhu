@@ -12,7 +12,9 @@ class Video extends Model
     protected $fillable = [
         'video_category_id',
         'video_url',
-        'video_content',
+        'video_id',
+        'cover_url',
+        'video_title',
     ];
     public function video_category(): BelongsTo
     {
