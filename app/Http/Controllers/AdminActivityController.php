@@ -50,6 +50,18 @@ class AdminActivityController extends Controller
         return redirect()->route('admins.activities.index');
     }
 
+    public function statusOn(Request $request, Activity $activity)
+    {
+        $activity->update(['status' => 1]);
+        return redirect()->route('admins.activities.index');
+    }
+
+    public function statusOff(Request $request, Activity $activity)
+    {
+        $activity->update(['status' => 0]);
+        return redirect()->route('admins.activities.index');
+    }
+
     public function destroy(Activity $activity)
     {
         $activity->delete();

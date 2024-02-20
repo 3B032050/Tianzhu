@@ -9,7 +9,7 @@ class ActivityController extends Controller
 {
     public function index()
     {
-        $activities = Activity::orderBy('id','ASC')->get();
+        $activities = Activity::orderBy('id','ASC')->where('status',1)->get();
         $data = ['activities' => $activities];
 
         return view('activities.index',$data);

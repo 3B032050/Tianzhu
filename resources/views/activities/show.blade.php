@@ -15,7 +15,7 @@
 @section('content')
     <section id="location">
         <div class="wrapper mx-auto" style="text-align:center;">
-            <div class="card" style="width: 60rem; margin: auto;">
+            <div class="card" style="width: 60em; margin: auto;">
                 <h5 class="card-title">{{ $activity->title }}</h5>
                 <div class="card-body text-start">
                     <p class="card-text">{!! $activity->content !!}</p>
