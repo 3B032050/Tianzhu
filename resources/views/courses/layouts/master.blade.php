@@ -30,12 +30,12 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-        <style>
-            .custom-link {
-                color: black; /* 設置字體顏色為黑色 */
-                text-decoration: none; /* 移除下劃線 */
-            }
-        </style>
+{{--        <style>--}}
+{{--            .custom-link {--}}
+{{--                color: black; /* 設置字體顏色為黑色 */--}}
+{{--                text-decoration: none; /* 移除下劃線 */--}}
+{{--            }--}}
+{{--        </style>--}}
 </head>
 <body>
     @include('layouts.partials.navigation')

@@ -150,6 +150,8 @@ Route::group(['middleware' => 'admin'], function(){
         Route::post('/activities', [App\Http\Controllers\AdminActivityController::class, 'store'])->name("activities.store");
         Route::get('/activities/{activity}/edit', [App\Http\Controllers\AdminActivityController::class, 'edit'])->name("activities.edit");
         Route::patch('/activities/{activity}',[App\Http\Controllers\AdminActivityController::class,'update'])->name('activities.update');
+        Route::patch('/activities/{activity}/statusOff', [App\Http\Controllers\AdminActivityController::class, 'statusOff'])->name('activities.statusOff');
+        Route::patch('/activities/{activity}/statusOn', [App\Http\Controllers\AdminActivityController::class, 'statusOn'])->name('activities.statusOn');
         Route::delete('/activities/{activity}', [App\Http\Controllers\AdminActivityController::class, 'destroy'])->name("activities.destroy");
         Route::get('/activities/search', [App\Http\Controllers\AdminActivityController::class, 'search'])->name('activities.search');
         Route::post('/activities/upload', [App\Http\Controllers\AdminActivityController::class, 'upload'])->name('activities.upload');

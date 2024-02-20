@@ -14,6 +14,8 @@
             <th scope="col">#</th>
             <th scope="col" style="text-align:center">活動名稱</th>
             <th scope="col" style="text-align:center">發佈時間</th>
+            <th scope="col" style="text-align:center">狀態</th>
+            <th scope="col" style="text-align:center">上/下架</th>
             <th scope="col" style="text-align:center">編輯</th>
             <th scope="col" style="text-align:center">刪除</th>
         </tr>
@@ -24,6 +26,32 @@
                 <td style="text-align:left">{{$index+1}}</td>
                 <td style="text-align:center">{{$activity->title}}</td>
                 <td style="text-align:center">{{$activity->updated_at}}</td>
+                <td style="text-align:center">
+                    @if ($activity->status == 0)
+                        <div style="color:#FFB233; font-weight:bold;">
+                            (未上架)
+                        </div>
+                    @elseif ($activity->status == 1)
+                        <div style="color:#FFB233; font-weight:bold;">
+                            (上架)
+                        </div>
+                    @endif
+                </td>
+                <td style="text-align:center">
+                    @if ($activity->status == 0)
+                        <form action="{{ route('admins.activities.statusOn',$activity->id) }}" method="POST" role="form">
+                            @method('PATCH')
+                            @csrf
+                            <button type="submit" class="btn btn-secondary btn-sm">上架</button>
+                        </form>
+                    @elseif ($activity->status == 1)
+                        <form action="{{ route('admins.activities.statusOff',$activity->id) }}" method="POST" role="form">
+                            @method('PATCH')
+                            @csrf
+                            <button type="submit" class="btn btn-secondary btn-sm">下架</button>
+                        </form>
+                    @endif
+                </td>
                 <td style="text-align:center">
                     <a href="{{ route('admins.activities.edit',$activity->id) }}" class="btn btn-secondary btn-sm">編輯</a>
                 </td>

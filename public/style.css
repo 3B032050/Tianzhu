@@ -1,20 +1,20 @@
 @charset "utf-8";
-html{
+.html{
     font-size: 100%;
 }
 /*body*/
-body{
+.body{
     background-color: #e5cf261a;
     line-height: 1.7;
     color:#333;
 }
 
-img{
+.img{
     max-width:100%;
 }
 
 /*標題*/
-header {
+.header {
     position: absolute; /* 使用適當的position值 */
     top: 0;
     left: 0;
@@ -26,7 +26,7 @@ header {
     text-align: center;
     z-index: 1000;
 }
-page-header {
+.page-header {
     text-align: center;
     background-color: #e0ba14; /* 設置背景顏色 */
     color: rgb(20, 19, 19); /* 設置文字顏色 */
@@ -52,7 +52,7 @@ page-header {
     color:black;
 }
 
-ul {
+.ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
@@ -64,8 +64,8 @@ ul {
     display: inline-block;
 }
 
- /* 滑鼠懸停時顯示下拉選單 */
- .dropdown:hover .dropdown-content {
+/* 滑鼠懸停時顯示下拉選單 */
+.dropdown:hover .dropdown-content {
     display: block;
 }
 
@@ -89,25 +89,24 @@ ul {
     background-color: #ccc;
 }
 /* 設定標題文字的顏色和字體大小 */
-h1
+.h1
 {
     color: #333;
     font-size: 24px;
 }
 
 /* 設定表格的背景顏色和邊框 */
-table {
+.table {
     margin: 0 auto; /* 水平置中 */
     text-align: left; /* 表格內文字靠左對齊 */
     background-color: #fbc786aa;
     border: 1px solid #1518d6;
     border-radius: 10px;
     padding: 10px;
-
 }
 
 /* 設定表格中的文字大小和間距 */
-td
+.td
 {
     font-size: 16px;
     padding: 10px;
@@ -118,7 +117,7 @@ td
     max-width: 500px;
     max-height: 500px;
 }
-footer {
+.footer {
     position: fixed;
     bottom: 0;
     left: 0;
@@ -156,7 +155,7 @@ footer {
     flex:1;
 }
 
-iframe {
+.iframe {
     width: 100%;
 }
 
