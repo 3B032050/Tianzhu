@@ -48,6 +48,8 @@ Route::get('/course_file', [App\Http\Controllers\CourseFileController::class, 'i
 Route::get('/course_file/{category}/show', [App\Http\Controllers\CourseFileController::class, 'show'])->name('course_file.show');
 Route::get('/course_file/{id}/{course_file}', [App\Http\Controllers\CourseFileController::class, 'download'])->name('course_file.download');
 
+Route::get('/video', [App\Http\Controllers\VideoController::class, 'index'])->name('videos.index');
+Route::get('/course_file/{category}/show', [App\Http\Controllers\CourseFileController::class, 'show'])->name('course_file.show');
 Auth::routes();
 
 //會員資料

@@ -80,11 +80,38 @@ class AdminVideoController extends Controller
     {
         $this->validate($request,[
             'video_category_id' => 'required',
-            'video_url'=> 'required',
+            'video_url' => 'required',
+            'video_title'=> 'required',
+        ]);
+        // 獲取用戶提交連接
+        $videourl = $request->input('video_url');
+
+        // 從連接提取影品id
+        $videoId = $this->extractVideoId($videourl);
+
+        // 發送請請到 YouTube Data API 獲取影品訊息
+        $response = Http::get('https://www.googleapis.com/youtube/v3/videos', [
+            'part' => 'snippet',
+            'id' => $videoId,
+            'key' => env('YOUTUBE_API_KEY')
         ]);
 
-        $video->update($request->all());
+        // 解析 API 響應
+        $videoInfo = $response->json();
+
+        // 提取影品封面片連接
+        $coverUrl = $videoInfo['items'][0]['snippet']['thumbnails']['high']['url'];
+
+        $video->update([
+            'video_category_id' => $request->input('video_category_id'),
+            'video_url' => $videourl,
+            'video_id' => $videoId,
+            'cover_url' => $coverUrl,
+            'video_title' => $request->input('video_title'),
+        ]);
+
         return redirect()->route('admins.videos.index');
+
     }
 
     /**

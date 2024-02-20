@@ -21,11 +21,6 @@
         @foreach($videos as $index => $video)
             <tr>
                 <td style="text-align:left">{{ $index + 1 }}</td>
-                <div>
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ $video->video_id }}" frameborder="0" allowfullscreen></iframe>
-                    <h2>影片標題：{{ $video->video_title }}</h2>
-                </div>
-
                 <td>{{ $video->video_url }}</td>
                 <td>{{ $video->video_title }}</td>
                 <td style="text-align:center">

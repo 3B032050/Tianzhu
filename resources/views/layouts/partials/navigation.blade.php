@@ -97,7 +97,7 @@
                                     <a class="dropdown-item" href="/">居士學佛</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="/">法音流布</a>
+                                    <a class="dropdown-item" href="{{route('videos.index')}}">法音流布</a>
                                 </li>
                             </ul>
                         </div>
