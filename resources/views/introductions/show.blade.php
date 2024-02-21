@@ -19,33 +19,6 @@
                 <div class="card-body text-start">
                     <p class="card-text">{!! $introduction->content !!}</p>
                 </div>
-                <figure class="table">
-                    <table>
-                        <tbody>
-                        <tr>
-                            <td>a</td>
-                            <td>b</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>c</td>
-                            <td><a href="https://www.youtube.com/watch?v=M4mYAPnKALs">d</a></td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>e</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </figure>
             </div>
         </div>
     </section>

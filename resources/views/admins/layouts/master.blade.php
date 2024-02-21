@@ -15,7 +15,7 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <!-- 引入 jQuery UI -->
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="https://cdn.ckeditor.com/ckeditor5/40.1.0/classic/ckeditor.js"></script>
+{{--    <script src="https://cdn.ckeditor.com/ckeditor5/40.1.0/classic/ckeditor.js"></script>--}}
     <style type="text/css">
         .ck-editor__editable_inline
         {
@@ -42,6 +42,5 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="{{ asset('js/admin-scripts.js') }}"></script>
-
 </body>
 </html>
