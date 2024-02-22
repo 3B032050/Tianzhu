@@ -29,13 +29,13 @@
             <select name="curriculum_category" id="curriculum_category" class="form-select">
                 @foreach($curriculum_categories as $curriculumCategory)
                     @if($curriculumCategory->parent_id == 0)
-                        <option value="{{ $curriculumCategory->id }}"  {{ ($curriculumCategory->id == $curriculum->category_id) ? 'selected' : '' }}>{{ $curriculumCategory->name }}</option>
+                        <option value="{{ $curriculumCategory->id }}"  {{ ($curriculumCategory->id == $curriculum->curriculum_category_id) ? 'selected' : '' }}>{{ $curriculumCategory->name }}</option>
                         @foreach($curriculum_categories as $subCategory)
                             @if($subCategory->parent_id == $curriculumCategory->id)
-                                <option value="{{ $subCategory->id }}"  {{ ($subCategory->id == $curriculum->category_id) ? 'selected' : '' }}>&nbsp&nbsp- {{ $subCategory->name }}</option>
+                                <option value="{{ $subCategory->id }}"  {{ ($subCategory->id == $curriculum->curriculum_category_id) ? 'selected' : '' }}>&nbsp&nbsp- {{ $subCategory->name }}</option>
                                 @foreach($curriculum_categories as $thirdCategory)
                                     @if($thirdCategory->parent_id == $subCategory->id)
-                                        <option value="{{ $thirdCategory->id }}"  {{ ($thirdCategory->id == $curriculum->category_id) ? 'selected' : '' }}>&nbsp&nbsp&nbsp-- {{ $thirdCategory->name }}</option>
+                                        <option value="{{ $thirdCategory->id }}"  {{ ($thirdCategory->id == $curriculum->curriculum_category_id) ? 'selected' : '' }}>&nbsp&nbsp&nbsp-- {{ $thirdCategory->name }}</option>
                                     @endif
                                 @endforeach
                             @endif

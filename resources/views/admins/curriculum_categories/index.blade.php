@@ -16,7 +16,7 @@
         <table class="table">
             <thead>
             <tr>
-                <th scope="col">#</th>
+{{--                <th scope="col">#</th>--}}
                 <th scope="col" style="text-align:left">名稱</th>
                 <th scope="col" style="text-align:center">新增子類別</th>
                 <th scope="col" style="text-align:center">編輯</th>
@@ -30,7 +30,7 @@
             @foreach($curriculumCategories as $index => $curriculumCategory)
                 @if($curriculumCategory->parent_id == '0')
                     <tr>
-                        <td style="text-align:left">{{ $indexCounter++ }}</td>
+{{--                        <td style="text-align:left">{{ $indexCounter++ }}</td>--}}
                         <td>{{ $curriculumCategory->name }}</td>
                         <td style="text-align:center">
                             <a href="{{ route('admins.curriculum_categories.create_hierarchy',$curriculumCategory->id) }}" class="btn btn-secondary btn-sm">新增子類別</a>
@@ -61,7 +61,7 @@
                     @foreach($curriculumCategories as $subIndex => $subCategory)
                         @if($subCategory->parent_id == $curriculumCategory->id)
                             <tr>
-                                <td style="text-align:left">{{ $indexCounter }}.{{ $subIndexCounter++ }}</td>
+{{--                                <td style="text-align:left">{{ $indexCounter }}.{{ $subIndexCounter++ }}</td>--}}
                                 <td style="padding-left: 70px;">{{ $subCategory->name }}</td>
                                 <td style="text-align:center">
                                     <a href="{{ route('admins.curriculum_categories.create_hierarchy',$subCategory->id) }}" class="btn btn-secondary btn-sm">新增子類別</a>
@@ -92,7 +92,7 @@
                             @foreach($curriculumCategories as $thirdIndex => $thirdCategory)
                                 @if($thirdCategory->parent_id == $subCategory->id)
                                     <tr>
-                                        <td style="text-align:left">{{ $indexCounter }}.{{ $subIndexCounter }}.{{ $thirdIndexCounter++ }}</td>
+{{--                                        <td style="text-align:left">{{ $indexCounter }}.{{ $subIndexCounter }}.{{ $thirdIndexCounter++ }}</td>--}}
                                         <td style="padding-left: 130px;">{{ $thirdCategory->name }}</td>
                                         <td style="text-align:center">
                                             <!-- 如果需要新增第4層的連結，可以在這裡添加 -->

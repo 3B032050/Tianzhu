@@ -94,7 +94,7 @@
                                     <a class="dropdown-item" href="{{ route('common_senses.index') }}">佛門小常識</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="/">居士學佛</a>
+                                    <a class="dropdown-item" href="{{ route('curricula.index') }}">居士學佛</a>
                                 </li>
                                 <li>
                                     <a class="dropdown-item" href="{{route('videos.index')}}">法音流布</a>

@@ -37,12 +37,17 @@ Route::get('/courses/by_category/{course_category}', [App\Http\Controllers\Cours
 Route::get('/courses/by_category/{course_category}/search', [App\Http\Controllers\CourseController::class, 'search'])->name('courses.by_category_search');
 Route::get('/courses/by_category/{course_category}/show/{course}', [App\Http\Controllers\CourseController::class, 'show'])->name('courses.show');
 
+
+
 Route::get('/activities', [App\Http\Controllers\ActivityController::class, 'index'])->name('activities.index');
 Route::get('/activities/{activity}/show', [App\Http\Controllers\ActivityController::class, 'show'])->name('activities.show');
 
 Route::get('/common_senses', [App\Http\Controllers\CommonSenseController::class, 'index'])->name('common_senses.index');
 Route::get('/common_senses/{commonSense}/show', [App\Http\Controllers\CommonSenseController::class, 'show'])->name('common_senses.show');
 Route::get('/show_content/{common_sense_id}/{common_sense_category_id}', [App\Http\Controllers\CommonSenseController::class, 'show_content'])->name('common_senses.show_content');
+
+Route::get('/curricula', [App\Http\Controllers\CurriculaController::class, 'index'])->name('curricula.index');
+Route::get('/curricula/{curriculum}/show', [App\Http\Controllers\CurriculaController::class, 'show'])->name('curricula.show');
 
 Route::get('/course_file', [App\Http\Controllers\CourseFileController::class, 'index'])->name('course_file.index');
 Route::get('/course_file/{category}/show', [App\Http\Controllers\CourseFileController::class, 'show'])->name('course_file.show');
