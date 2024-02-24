@@ -103,7 +103,12 @@ return [
             'url' => env('APP_URL').'/storage/course_file',
             'visibility' => 'public',
         ],
-
+        'image_prints' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/image_prints'),
+            'url' => env('APP_URL').'/storage/image_prints',
+            'visibility' => 'public',
+        ],
     ],
 
     /*

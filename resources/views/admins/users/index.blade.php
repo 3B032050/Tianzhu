@@ -47,7 +47,13 @@
                 <td>{{ $user->email }}</td>
                 <td>{{ $user->birthday }}</td>
                 <td>{{ $user->phone }}</td>
-                <td>{{ $user->classification }}</td>
+                <td>
+                    @if($user->classification != null)
+                        {{ $user->classification }}
+                    @else
+                        無
+                    @endif
+                </td>
                 @if ($user->isadmin())
                     <td>
                         @if($user->admin->position == 1)

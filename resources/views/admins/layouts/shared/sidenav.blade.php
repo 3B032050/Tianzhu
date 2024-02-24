@@ -35,6 +35,9 @@
                 <a class="nav-link" href="{{ route('admins.slides.index') }}">
                     幻燈片設定
                 </a>
+                <a class="nav-link" href="{{ route('admins.image_prints.index') }}">
+                    圖片列印
+                </a>
                 <a class="nav-link" href="{{ route('admins.users.index') }}">
                     用戶管理
                 </a>
