@@ -23,11 +23,9 @@
                 <a class="nav-link" href="{{ route('admins.course_file.index') }}">
                     課程講義
                 </a>
-
                 <a class="nav-link" href="{{ route('admins.videos.index') }}">
                     法音流佈
                 </a>
-                <a class="nav-link" href="{{ route('home.index') }}">
                 <a class="nav-link" href="{{ route('admins.activities.index') }}">
                     活動紀實
                 </a>
@@ -36,6 +34,9 @@
                 </a>
                 <a class="nav-link" href="{{ route('admins.slides.index') }}">
                     幻燈片設定
+                </a>
+                <a class="nav-link" href="{{ route('admins.image_prints.index') }}">
+                    圖片列印
                 </a>
                 <a class="nav-link" href="{{ route('admins.users.index') }}">
                     用戶管理

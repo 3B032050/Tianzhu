@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('content');
+            $table->longText('content');
             $table->boolean('is_feature')->default(false);
             $table->string('file')->nullable();
             $table->timestamps();

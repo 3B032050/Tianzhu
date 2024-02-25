@@ -68,20 +68,8 @@
             </div>
         </form>
     </div>
-    {{--    <script src="https://cdn.ckeditor.com/ckeditor5/40.1.0/classic/ckeditor.js"></script>--}}
-    {{--    <script>--}}
-    {{--        ClassicEditor--}}
-    {{--            .create( document.querySelector( '#editor' ),{--}}
-    {{--                ckfinder: {--}}
-    {{--                    uploadUrl: '{{route('admins.courses.upload').'?_token='.csrf_token()}}',--}}
-    {{--                },--}}
-    {{--            })--}}
-    {{--            .catch( error => {--}}
-    {{--                console.error( error );--}}
-    {{--            } );--}}
-    {{--    </script>--}}
-
     <script src="https://cdn.ckeditor.com/ckeditor5/41.1.0/super-build/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.1.0/super-build/translations/zh.js"></script>
     <script>
         CKEDITOR.ClassicEditor.create(document.getElementById("editor"), {
             toolbar: {
@@ -103,8 +91,7 @@
                 ],
                 shouldNotGroupWhenFull: true
             },
-            // Changing the language of the interface requires loading the language file using the <script> tag.
-            // language: 'es',
+            language: 'zh',
             list: {
                 properties: {
                     styles: true,
@@ -125,11 +112,13 @@
                 ]
             },
             // https://ckeditor.com/docs/ckeditor5/latest/features/editor-placeholder.html#using-the-editor-configuration
-            placeholder: 'Welcome to CKEditor 5!',
+            placeholder: '輸入文字...',
             // https://ckeditor.com/docs/ckeditor5/latest/features/font.html#configuring-the-font-family-feature
             fontFamily: {
                 options: [
-                    'default',
+                    '預設字體',
+                    '微軟正黑體, Arial, sans-serif',
+                    '標楷體, PMingLiU, sans-serif',
                     'Arial, Helvetica, sans-serif',
                     'Courier New, Courier, monospace',
                     'Georgia, serif',
@@ -137,7 +126,7 @@
                     'Tahoma, Geneva, sans-serif',
                     'Times New Roman, Times, serif',
                     'Trebuchet MS, Helvetica, sans-serif',
-                    'Verdana, Geneva, sans-serif'
+                    'Verdana, Geneva, sans-serif',
                 ],
                 supportAllValues: true
             },
@@ -229,7 +218,10 @@
                 'TableOfContents',
                 'PasteFromOfficeEnhanced',
                 'CaseChange'
-            ]
+            ],
+            ckfinder: {
+                uploadUrl: '{{route('admins.courses.upload').'?_token='.csrf_token()}}',
+            },
         });
     </script>
 @endsection

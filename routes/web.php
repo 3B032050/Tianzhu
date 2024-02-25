@@ -282,7 +282,13 @@ Route::group(['middleware' => 'admin'], function(){
         Route::patch('/common_sense_categories/{common_sense_category}/status_on',[App\Http\Controllers\AdminCommonSenseCategoryController::class,'status_on'])->name('common_sense_categories.status_on');
         Route::patch('/common_sense_categories/{common_sense_category}/status_off',[App\Http\Controllers\AdminCommonSenseCategoryController::class,'status_off'])->name('common_sense_categories.status_off');
 
-
+        Route::get('image_prints', [App\Http\Controllers\AdminImagePrintController::class, 'index'])->name("image_prints.index");
+        Route::get('image_prints/create', [App\Http\Controllers\AdminImagePrintController::class, 'create'])->name("image_prints.create");
+        Route::post('image_prints', [App\Http\Controllers\AdminImagePrintController::class, 'store'])->name("image_prints.store");
+        Route::get('image_prints/{image_print}/preview', [App\Http\Controllers\AdminImagePrintController::class, 'preview'])->name("image_prints.preview");
+        Route::get('image_prints/{image_print}/edit', [App\Http\Controllers\AdminImagePrintController::class, 'edit'])->name("image_prints.edit");
+        Route::patch('image_prints/{image_print}', [App\Http\Controllers\AdminImagePrintController::class, 'update'])->name("image_prints.update");
+        Route::delete('image_prints/{image_print}', [App\Http\Controllers\AdminImagePrintController::class, 'destroy'])->name("image_prints.destroy");
     });
 });
 

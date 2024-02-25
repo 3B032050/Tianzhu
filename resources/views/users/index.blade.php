@@ -114,7 +114,7 @@
                             <div class="col-md-6">
                                 <select id="classification" class="form-control @error('classification') is-invalid @enderror" name="classification" required autocomplete="current-classification">
                                     @foreach($classifications as $classification)
-                                        <option value="{{ $classification->name }}" {{ $user->classification == $classification->id ? 'selected' : '' }}>
+                                        <option value="{{ $classification->name }}" {{ $user->classification == $classification->name ? 'selected' : '' }}>
                                             {{ $classification->name }}
                                         </option>
                                     @endforeach

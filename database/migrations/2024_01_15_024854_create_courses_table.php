@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('course_category_id');
             $table->string('title');
-            $table->text('content')->nullable();
+            $table->longText('content')->nullable();
             $table->string('method')->nullable();
             $table->string('time')->nullable();
             $table->string('note')->nullable();

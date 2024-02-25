@@ -29,14 +29,14 @@
                     <form id="deleteForm{{ $videocategory->id }}" action="{{ route('admins.video_categories.destroy',$videocategory->id) }}" method="POST">
                         @method('DELETE')
                         @csrf
-                        <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('{{ $videocategory->name }}', {{ $videocategory->id }})">刪除</button>
+                        <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('{{ $videocategory->category_name }}', {{ $videocategory->id }})">刪除</button>
                     </form>
                 </td>
                 <script>
-                    function confirmDelete(videocategory, videocateegoryId)
+                    function confirmDelete(videocategoryname, videocategoryId)
                     {
-                        if (confirm("確定要刪除類別「" + videocateegory + "」嗎？")) {
-                            document.getElementById('deleteForm' + videocateegoryId).submit();
+                        if (confirm("確定要刪除類別「" + videocategoryname + "」嗎？")) {
+                            document.getElementById('deleteForm' + videocategoryId).submit();
                         }
                     }
                 </script>
