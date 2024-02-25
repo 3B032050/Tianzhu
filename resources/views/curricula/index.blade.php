@@ -20,38 +20,71 @@
     </div>
     <section class="py-5">
         <div class="container">
-
             @if(count($categories) > 0)
-                <div class="accordion" id="coursesAccordion" style="max-width: 960px; margin: 0 auto;">
+                <div class="accordion" id="coursesAccordion">
                     @foreach($categories as $category)
                         @if($category->parent_id == 0)
-                            <h2 class="mb-0">
-                                <button class="btn btn-link title-link" type="button" data-toggle="collapse" data-target="#courseCollapse{{ $category->id }}" aria-expanded="true" aria-controls="courseCollapse{{ $category->id }}">
-                                    {{ $category->name }}
-                                </button>
-                            </h2>
-                            <hr>
-                                <div id="courseCollapse{{ $category->id }}" class="collapse" aria-labelledby="courseHeading{{ $category->id }}" data-parent="#coursesAccordion">
-                                    <div class="card-body text-start">
+                            <div class="card mb-2">
+                                <div class="card-header" id="heading{{ $category->id }}">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link title-link" type="button" data-toggle="collapse" data-target="#collapse{{ $category->id }}" aria-expanded="true" aria-controls="collapse{{ $category->id }}">
+                                            {{ $category->name }}
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div id="collapse{{ $category->id }}" class="collapse" aria-labelledby="heading{{ $category->id }}" data-parent="#coursesAccordion">
+                                    <div class="card-body">
+                                        @foreach($curricula as $curriculum)
+                                            @if($curriculum->curriculum_category_id == $category->id)
+                                                {{ $curriculum->title }}
+                                                <hr>
+                                            @endif
+                                        @endforeach
                                         @foreach($categories as $childCategory)
                                             @if($childCategory->parent_id == $category->id)
-                                                <div class="card">
-
-                                                        @if(isset($childCategory->children) && !empty($childCategory->children))
-                                                            <button class="btn btn-link title-link" type="button" data-toggle="collapse" data-target="#courseCollapse{{ $childCategory->id }}" aria-expanded="true" aria-controls="courseCollapse{{ $childCategory->id }}">
-                                                                {{ $childCategory->name }}
-                                                            </button>
-                                                        @else
-                                                            {{ $childCategory->name }}
-                                                        @endif
-
-                                                    <div id="courseCollapse{{ $childCategory->id }}" class="collapse" aria-labelledby="courseHeading{{ $childCategory->id }}" data-parent="#courseCollapse{{ $category->id }}">
-                                                        <div class="card-body text-start">
-                                                            @foreach($categories as $grandChildCategory)
-                                                                @if($grandChildCategory->parent_id == $childCategory->id)
-                                                                    <p>{{ $grandChildCategory->name }}</p>
-                                                                @endif
-                                                            @endforeach
+                                                <div class="accordion" id="childAccordion{{ $childCategory->id }}">
+                                                    <div class="card">
+                                                        <div class="card-header" id="heading{{ $childCategory->id }}">
+                                                            <h2 class="mb-0">
+                                                                <button class="btn btn-link title-link" type="button" data-toggle="collapse" data-target="#collapse{{ $childCategory->id }}" aria-expanded="true" aria-controls="collapse{{ $childCategory->id }}">
+                                                                    {{ $childCategory->name }}
+                                                                </button>
+                                                            </h2>
+                                                        </div>
+                                                        <div id="collapse{{ $childCategory->id }}" class="collapse" aria-labelledby="heading{{ $childCategory->id }}" data-parent="#childAccordion{{ $childCategory->id }}">
+                                                            <div class="card-body">
+                                                                @foreach($curricula as $curriculum)
+                                                                    @if($curriculum->curriculum_category_id == $childCategory->id)
+                                                                        {{ $curriculum->title }}
+                                                                        <hr>
+                                                                    @endif
+                                                                @endforeach
+                                                                @foreach($categories as $grandsonCategory)
+                                                                    @if($grandsonCategory->parent_id == $childCategory->id)
+                                                                        <div class="accordion" id="childAccordion{{ $grandsonCategory->id }}">
+                                                                            <div class="card">
+                                                                                <div class="card-header" id="heading{{ $grandsonCategory->id }}">
+                                                                                    <h2 class="mb-0">
+                                                                                        <button class="btn btn-link title-link" type="button" data-toggle="collapse" data-target="#collapse{{ $grandsonCategory->id }}" aria-expanded="true" aria-controls="collapse{{ $grandsonCategory->id }}">
+                                                                                            {{ $grandsonCategory->name }}
+                                                                                        </button>
+                                                                                    </h2>
+                                                                                </div>
+                                                                                <div id="collapse{{ $grandsonCategory->id }}" class="collapse" aria-labelledby="heading{{ $grandsonCategory->id }}" data-parent="#childAccordion{{ $grandsonCategory->id }}">
+                                                                                    <div class="card-body">
+                                                                                        @foreach($curricula as $curriculum)
+                                                                                            @if($curriculum->curriculum_category_id == $grandsonCategory->id)
+                                                                                                {{ $curriculum->title }}
+                                                                                                <hr>
+                                                                                            @endif
+                                                                                        @endforeach
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    @endif
+                                                                @endforeach
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -59,6 +92,7 @@
                                         @endforeach
                                     </div>
                                 </div>
+                            </div>
                         @endif
                     @endforeach
                 </div>
@@ -72,8 +106,8 @@
             var hasSearchResults = {{ count($categories) > 0 ? 'true' : 'false' }};
 
             if (hasSearchResults) {
-                var firstCourse = document.querySelector('.card:first-child');
-                var firstCollapse = firstCourse.querySelector('.collapse');
+                var firstButton = document.querySelector('.title-link:first-child');
+                var firstCollapse = firstButton.nextElementSibling;
 
                 if (firstCollapse) {
                     firstCollapse.classList.add('show');
@@ -85,7 +119,7 @@
             titleButtons.forEach(function(button) {
                 button.addEventListener('click', function() {
                     // Get the parent collapse element
-                    var parentCollapse = this.closest('.card-header').nextElementSibling;
+                    var parentCollapse = this.nextElementSibling;
 
                     // Toggle the 'show' class on the parent collapse element
                     parentCollapse.classList.toggle('show');
