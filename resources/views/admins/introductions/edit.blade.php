@@ -29,7 +29,7 @@
 </div>
 <script src="https://cdn.ckeditor.com/ckeditor5/41.1.0/super-build/ckeditor.js"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/41.1.0/super-build/translations/zh.js"></script>
-<script>
+<script type="module">
     CKEDITOR.ClassicEditor.create(document.getElementById("editor"), {
         toolbar: {
             items: [
@@ -50,6 +50,7 @@
             ],
             shouldNotGroupWhenFull: true
         },
+        extraAllowedContent:  'img[alt,border,width,height,align,vspace,hspace,!src];',
         language: 'zh',
         list: {
             properties: {
@@ -181,6 +182,9 @@
         ckfinder: {
             uploadUrl: '{{route('admins.introductions.upload').'?_token='.csrf_token()}}',
         },
-    });
+    })
+        .catch(error => {
+            console.error(error);
+        });
 </script>
 @endsection
