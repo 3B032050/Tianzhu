@@ -13,13 +13,15 @@
 
 @section('content')
     <div class="container px-4 px-lg-5 mt-2 mb-4">
-        <form action="" method="GET" class="d-flex">
+        <form action="{{ route('curricula.search') }}" method="GET" class="d-flex">
             <input type="text" name="query" class="form-control me-2" placeholder="關鍵字搜尋...">
             <button type="submit" class="btn btn-outline-dark">搜尋</button>
         </form>
     </div>
     <section class="py-5">
         <div class="container">
+            <button id="expandAllBtn" class="btn btn-primary">展開全部</button>&nbsp
+            <button id="collapseAllBtn" class="btn btn-primary">收起全部</button><br><br>
             @if(count($categories) > 0)
                 <div class="accordion" id="coursesAccordion">
                     @foreach($categories as $category)
@@ -126,6 +128,33 @@
                 });
             });
         });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // 點擊展開全部按鈕
+            document.getElementById('expandAllBtn').addEventListener('click', function() {
+                // 遍歷所有折疊面板的父級容器
+                var collapseContainers = document.querySelectorAll('.collapse');
+
+                // 對每個父級容器添加展開類別
+                collapseContainers.forEach(function(container) {
+                    container.classList.add('show');
+                });
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // 點擊收起全部按鈕
+            document.getElementById('collapseAllBtn').addEventListener('click', function() {
+                // 遍歷所有折疊面板的父級容器
+                var collapseContainers = document.querySelectorAll('.collapse');
+
+                // 對每個父級容器移除展開的類別
+                collapseContainers.forEach(function(container) {
+                    container.classList.remove('show');
+                });
+            });
+        });
+
     </script>
     <style>
         .title-link {
