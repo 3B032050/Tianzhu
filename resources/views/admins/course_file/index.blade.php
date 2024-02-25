@@ -15,6 +15,8 @@
             <th scope="col">#</th>
             <th scope="col" style="text-align:left">課程名稱</th>
             <th scope="col" style="text-align:left">課程檔案</th>
+            <th scope="col" style="text-align:left">狀態</th>
+            <th scope="col" style="text-align:left">操作</th>
         </tr>
         </thead>
         <tbody>
@@ -24,9 +26,36 @@
 
                 <td>{{ $coursefile->title }}</td>
                 <td>{{ $coursefile->file }}</td>
+                @if($coursefile->status=='1')
+                    <td style="text-align:center">
+                       上架
+                    </td>
+                @else
+                    <td style="text-align:center; color: red;">
+                        下架
+                    </td>
+                @endif
                 <td style="text-align:center">
                     <a href="{{ route('admins.course_file.edit' ,['coursefile' => $coursefile->id]) }}" class="btn btn-secondary btn-sm">編輯</a>
                 </td>
+                @if($coursefile->status=='1')
+                    <td style="text-align:center">
+                       <form action="{{ route('admins.course_file.statusoff',$coursefile->id) }}" method="POST">
+                            @method('PATCH')
+                            @csrf
+                            <button type="submit" class="btn btn-danger btn-sm">下架</button>
+                        </form>
+                    </td>
+                @else
+                    <td style="text-align:center">
+                        <form action="{{ route('admins.course_file.statuson',$coursefile->id) }}" method="POST">
+                            @method('PATCH')
+                            @csrf
+                            <button type="submit" class="btn btn-danger btn-sm">上架</button>
+                        </form>
+                    </td>
+                @endif
+
                 <td style="text-align:center">
                     <form id="deleteForm{{ $coursefile->id }}" action="{{ route('admins.course_file.destroy',$coursefile->id) }}" method="POST">
                         @method('DELETE')

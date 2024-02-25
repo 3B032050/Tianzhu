@@ -18,7 +18,7 @@ class CourseFileController extends Controller
     public function show(CourseFileCategory $category)
     {
         $selectcoursefilecategory = $category;
-        $coursefiles = CourseFile::where('course_file_category_id', $category->id)
+        $coursefiles = CourseFile::where('status','1')->where('course_file_category_id', $category->id)
             ->get();
         $data = ['coursefiles' => $coursefiles,'selectcoursefilecategory'=>$selectcoursefilecategory];
 

@@ -95,7 +95,18 @@ class AdminCourseFileController extends Controller
 
         return redirect()->route('admins.course_file.index');
     }
-
+    public function statusoff(CourseFile $coursefile)
+    {
+        $coursefile->status='0';
+        $coursefile->save();
+        return back();
+    }
+    public function statuson(CourseFile $coursefile)
+    {
+        $coursefile->status='1';
+        $coursefile->save();
+        return back();
+    }
 
 
     public function destroy(CourseFile $coursefile)

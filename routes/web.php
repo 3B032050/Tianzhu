@@ -203,6 +203,8 @@ Route::group(['middleware' => 'admin'], function(){
         Route::post('/coursefile', [App\Http\Controllers\AdminCourseFileController::class, 'store'])->name("course_file.store");
         Route::get('/coursefile/{coursefile}/edit', [App\Http\Controllers\AdminCourseFileController::class, 'edit'])->name("course_file.edit");
         Route::patch('/coursefile/{coursefile}',[App\Http\Controllers\AdminCourseFileController::class,'update'])->name('course_file.update');
+        Route::patch('/coursefile/{coursefile}/statusoff',[App\Http\Controllers\AdminCourseFileController::class,'statusoff'])->name('course_file.statusoff');
+        Route::patch('/coursefile/{coursefile}/statuson',[App\Http\Controllers\AdminCourseFileController::class,'statuson'])->name('course_file.statuson');
         Route::delete('/coursefile/{coursefile}', [App\Http\Controllers\AdminCourseFileController::class, 'destroy'])->name("course_file.destroy");
 
         #課程講義類別

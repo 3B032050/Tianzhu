@@ -13,6 +13,7 @@ class CourseFile extends Model
         'course_file_category_id',
         'title',
         'file',
+        'status',
     ];
     public function coursefilecategory()
     {
