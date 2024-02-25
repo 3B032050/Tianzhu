@@ -36,7 +36,7 @@
                                     <div class="card-body">
                                         @foreach($curricula as $curriculum)
                                             @if($curriculum->curriculum_category_id == $category->id)
-                                                {{ $curriculum->title }}
+                                                <a href="{{ route('curricula.show', $curriculum->id) }}">{{ $curriculum->title }}</a>
                                                 <hr>
                                             @endif
                                         @endforeach
@@ -55,7 +55,7 @@
                                                             <div class="card-body">
                                                                 @foreach($curricula as $curriculum)
                                                                     @if($curriculum->curriculum_category_id == $childCategory->id)
-                                                                        {{ $curriculum->title }}
+                                                                        <a href="{{ route('curricula.show', $curriculum->id) }}">{{ $curriculum->title }}</a>
                                                                         <hr>
                                                                     @endif
                                                                 @endforeach
@@ -74,7 +74,7 @@
                                                                                     <div class="card-body">
                                                                                         @foreach($curricula as $curriculum)
                                                                                             @if($curriculum->curriculum_category_id == $grandsonCategory->id)
-                                                                                                {{ $curriculum->title }}
+                                                                                                <a href="{{ route('curricula.show', $curriculum->id) }}">{{ $curriculum->title }}</a>
                                                                                                 <hr>
                                                                                             @endif
                                                                                         @endforeach
