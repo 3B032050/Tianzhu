@@ -15,6 +15,7 @@
                 <label for="curriculum_category">選擇課程類別</label>
                 <select name="curriculum_category" id="curriculum_category" class="form-select" onchange="navigateToRoute(this.value)">
                     <option value="" selected disabled>請選擇類別</option>
+                    <option value="{{ route('admins.curricula.index') }}">顯示全部</option>
                     @foreach($curriculumCategories as $curriculumCategory)
                         @if($curriculumCategory->parent_id == 0)
                             <option value="{{ route('admins.curricula.selected',$curriculumCategory->id) }}">{{ $curriculumCategory->name }}</option>

@@ -158,13 +158,13 @@ class AdminCurriculumController extends Controller
     {
         $curriculum->status='0';
         $curriculum->save();
-        return redirect()->route('admins.curricula.index');
+        return back();
     }
     public function status_on(Curriculum $curriculum)
     {
         $curriculum->status='1';
         $curriculum->save();
-        return redirect()->route('admins.curricula.index');
+        return back();
     }
 
     /**

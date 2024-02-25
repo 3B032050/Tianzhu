@@ -274,6 +274,8 @@ Route::group(['middleware' => 'admin'], function(){
         Route::get('/common_senses/search', [App\Http\Controllers\AdminCommonSenseController::class, 'search'])->name('common_senses.search');
         Route::patch('/common_senses/{common_sense}/status_on',[App\Http\Controllers\AdminCommonSenseController::class,'status_on'])->name('common_senses.status_on');
         Route::patch('/common_senses/{common_sense}/status_off',[App\Http\Controllers\AdminCommonSenseController::class,'status_off'])->name('common_senses.status_off');
+        Route::get('/common_senses/selected/{commonSenseCategory}',[App\Http\Controllers\AdminCommonSenseController::class,'selected'])->name('common_senses.selected');
+
 
         Route::get('/common_sense_categories',[App\Http\Controllers\AdminCommonSenseCategoryController::class,'index'])->name('common_sense_categories.index');
         Route::get('/common_sense_categories/create',[App\Http\Controllers\AdminCommonSenseCategoryController::class,'create'])->name('common_sense_categories.create');

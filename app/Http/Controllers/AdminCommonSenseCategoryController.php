@@ -45,7 +45,7 @@ class AdminCommonSenseCategoryController extends Controller
 
         $common_sense_category = new CommonSenseCategory();
         $common_sense_category->name = $request->input('name');
-        $common_sense_category->status = 0;
+        $common_sense_category->status = 1;
 
         $common_sense_category->save();
 

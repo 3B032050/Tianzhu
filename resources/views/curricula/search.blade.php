@@ -47,8 +47,7 @@
             text-decoration: none;
             color: black;
         }
-    </style>
-    <style>
+
         a {
             text-decoration:none;
         }

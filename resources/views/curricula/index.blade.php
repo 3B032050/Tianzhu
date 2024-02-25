@@ -161,5 +161,9 @@
             text-decoration: none;
             color: black;
         }
+
+        a {
+            text-decoration:none;
+        }
     </style>
 @endsection
