@@ -20,4 +20,14 @@ class CurriculaController extends Controller
 
         return view('curricula.index', $data);
     }
+
+    public function show(curriculum $curriculum)
+    {
+        $selectedCategory = CurriculumCategory::where('id',$curriculum->curriculum_category_id	)->first();
+        $curriculum = Curriculum::where('id',$curriculum->id)->first();
+        $data = ['curriculum' => $curriculum,
+            'selectedCategory' => $selectedCategory];
+
+        return view('curricula.show',$data);
+    }
 }
