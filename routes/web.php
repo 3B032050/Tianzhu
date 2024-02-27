@@ -56,6 +56,7 @@ Route::get('/course_file/{category}/show', [App\Http\Controllers\CourseFileContr
 Route::get('/course_file/{id}/{course_file}', [App\Http\Controllers\CourseFileController::class, 'download'])->name('course_file.download');
 
 Route::get('/video', [App\Http\Controllers\VideoController::class, 'index'])->name('videos.index');
+Route::get('/video/search', [App\Http\Controllers\VideoController::class, 'search'])->name('videos.search');
 Route::get('/course_file/{category}/show', [App\Http\Controllers\CourseFileController::class, 'show'])->name('course_file.show');
 Auth::routes();
 
@@ -199,6 +200,7 @@ Route::group(['middleware' => 'admin'], function(){
         Route::patch('/slides/{slide}/update_order', [App\Http\Controllers\AdminSlideController::class, 'update_order'])->name('slides.update_order');
         #課程講義
         Route::get('/coursefile',[App\Http\Controllers\AdminCourseFileController::class,'index'])->name('course_file.index');
+        Route::get('/coursefile/search',[App\Http\Controllers\AdminCourseFileController::class,'search'])->name('course_file.search');
         Route::get('/coursefile/create',[App\Http\Controllers\AdminCourseFileController::class,'create'])->name('course_file.create');
         Route::post('/coursefile', [App\Http\Controllers\AdminCourseFileController::class, 'store'])->name("course_file.store");
         Route::get('/coursefile/{coursefile}/edit', [App\Http\Controllers\AdminCourseFileController::class, 'edit'])->name("course_file.edit");
@@ -218,6 +220,7 @@ Route::group(['middleware' => 'admin'], function(){
         #影音
         Route::get('/video',[App\Http\Controllers\AdminVideoController::class,'index'])->name('videos.index');
         Route::get('/video/create',[App\Http\Controllers\AdminVideoController::class,'create'])->name('videos.create');
+        Route::get('/video/search',[App\Http\Controllers\AdminVideoController::class,'search'])->name('videos.search');
         Route::post('/video', [App\Http\Controllers\AdminVideoController::class, 'store'])->name("videos.store");
         Route::get('/video/{video}/edit', [App\Http\Controllers\AdminVideoController::class, 'edit'])->name("videos.edit");
         Route::patch('/video/{video}',[App\Http\Controllers\AdminVideoController::class,'update'])->name('videos.update');

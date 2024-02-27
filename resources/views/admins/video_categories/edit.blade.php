@@ -4,6 +4,11 @@
 
 @section('page-content')
     <div class="container-fluid px-4">
+        <p style="font-size: 1.8em;">
+            <a href="{{ route('admins.videos.index') }}" class="custom-link"><i class="fa fa-home"></i>法音流佈</a> &gt;
+            <a href="{{ route('admins.video_categories.index') }}" class="custom-link">法音流佈類別</a> &gt;
+            編輯影音類別
+        </p>
         <h1 class="mt-4">影音類別</h1>
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item active">編輯影音類別</li>

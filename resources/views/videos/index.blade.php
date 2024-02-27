@@ -16,6 +16,22 @@
         <div class="container">
             <div class="text-center mb-4">
                 <h2>法音流佈</h2>
+                <div class="container px-4 px-lg-5 mt-2 mb-4">
+                    <form action="{{ route('videos.search') }}" method="GET" class="d-flex">
+                        <select name="category" class="form-select me-2" aria-label="請選擇用標題或類別進行搜尋">
+                            <option value="title">標題</option>
+                            <option value="category">類別</option>
+                        </select>
+                        <input type="text" name="query" class="form-control me-2" placeholder="請輸入搜尋內容..">
+                        <button type="submit" class="btn btn-outline-dark">搜尋</button>
+                    </form>
+                </div>
+                @if (request()->has('query'))
+                    <div class="container px-4 px-lg-5 mt-2 mb-4">
+                        查找「{{ request('query') }}」
+                        <a class="btn btn-success btn-sm" href="{{ route('admins.course_file.search') }}">取消搜尋</a>
+                    </div>
+                @endif
             </div>
             {{-- Display all posts --}}
             @if(count($videos) > 0)
