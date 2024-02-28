@@ -13,6 +13,7 @@
                 <label for="curriculum_category">選擇類別</label>
                 <select name="curriculum_category" id="curriculum_category" class="form-select" onchange="navigateToRoute(this.value)">
                     <option value="" selected disabled>請選擇類別</option>
+                    <option value="{{ route('admins.common_senses.index') }}">顯示全部</option>
                     @foreach($commonSenseCategories as $commonSenseCategory)
                         <option value="{{ route('admins.common_senses.selected',$commonSenseCategory->id) }}">{{ $commonSenseCategory->name }}</option>
                     @endforeach

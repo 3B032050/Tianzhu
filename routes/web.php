@@ -48,6 +48,8 @@ Route::get('/show_content/{common_sense_id}/{common_sense_category_id}', [App\Ht
 
 Route::get('/curricula', [App\Http\Controllers\CurriculaController::class, 'index'])->name('curricula.index');
 Route::get('/curricula/{curriculum}/show', [App\Http\Controllers\CurriculaController::class, 'show'])->name('curricula.show');
+Route::get('/curricula/search', [App\Http\Controllers\CurriculaController::class, 'search'])->name('curricula.search');
+
 
 Route::get('/course_file', [App\Http\Controllers\CourseFileController::class, 'index'])->name('course_file.index');
 Route::get('/course_file/{category}/show', [App\Http\Controllers\CourseFileController::class, 'show'])->name('course_file.show');
@@ -236,6 +238,7 @@ Route::group(['middleware' => 'admin'], function(){
         Route::get('/curricula/search', [App\Http\Controllers\AdminCurriculumController::class, 'search'])->name('curricula.search');
         Route::patch('/curricula/{curriculum}/status_on',[App\Http\Controllers\AdminCurriculumController::class,'status_on'])->name('curricula.status_on');
         Route::patch('/curricula/{curriculum}/status_off',[App\Http\Controllers\AdminCurriculumController::class,'status_off'])->name('curricula.status_off');
+        Route::get('/curricula/selected/{curriculumCategory}',[App\Http\Controllers\AdminCurriculumController::class,'selected'])->name('curricula.selected');
 
         Route::get('/curriculum_objectives',[App\Http\Controllers\AdminCurriculumObjectiveController::class,'index'])->name('curriculum_objectives.index');
         Route::get('/curriculum_objectives/create',[App\Http\Controllers\AdminCurriculumObjectiveController::class,'create'])->name('curriculum_objectives.create');
@@ -271,6 +274,8 @@ Route::group(['middleware' => 'admin'], function(){
         Route::get('/common_senses/search', [App\Http\Controllers\AdminCommonSenseController::class, 'search'])->name('common_senses.search');
         Route::patch('/common_senses/{common_sense}/status_on',[App\Http\Controllers\AdminCommonSenseController::class,'status_on'])->name('common_senses.status_on');
         Route::patch('/common_senses/{common_sense}/status_off',[App\Http\Controllers\AdminCommonSenseController::class,'status_off'])->name('common_senses.status_off');
+        Route::get('/common_senses/selected/{commonSenseCategory}',[App\Http\Controllers\AdminCommonSenseController::class,'selected'])->name('common_senses.selected');
+
 
         Route::get('/common_sense_categories',[App\Http\Controllers\AdminCommonSenseCategoryController::class,'index'])->name('common_sense_categories.index');
         Route::get('/common_sense_categories/create',[App\Http\Controllers\AdminCommonSenseCategoryController::class,'create'])->name('common_sense_categories.create');

@@ -16,9 +16,24 @@ class AdminCurriculumController extends Controller
      */
     public function index()
     {
+        $curriculumCategories = CurriculumCategory::orderBy('id', 'ASC')->get();
         $curricula = Curriculum::orderby('id','ASC')->get();
-        $data = ['curricula' => $curricula];
+        $data = ['curricula' => $curricula,
+        'curriculumCategories' => $curriculumCategories];
         return view('admins.curricula.index',$data);
+    }
+
+    public function selected(CurriculumCategory $curriculumCategory)
+    {
+        $curriculumCategories = CurriculumCategory::orderBy('id', 'ASC')->get();
+        $curricula = Curriculum::where('curriculum_category_id', $curriculumCategory->id)->get();
+
+        $data = [
+            'curricula' => $curricula,
+            'curriculumCategories' => $curriculumCategories
+        ];
+
+        return view('admins.curricula.selected', $data);
     }
 
     /**
@@ -143,13 +158,13 @@ class AdminCurriculumController extends Controller
     {
         $curriculum->status='0';
         $curriculum->save();
-        return redirect()->route('admins.curricula.index');
+        return back();
     }
     public function status_on(Curriculum $curriculum)
     {
         $curriculum->status='1';
         $curriculum->save();
-        return redirect()->route('admins.curricula.index');
+        return back();
     }
 
     /**

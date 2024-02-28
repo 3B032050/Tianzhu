@@ -30,4 +30,19 @@ class CurriculaController extends Controller
 
         return view('curricula.show',$data);
     }
+
+    public function search(Request $request)
+    {
+        if ($request->input('query')) {
+            $query = $request->input('query');
+            $selectedCurricula = Curriculum::where('status', 1)
+                ->where(function ($queryBuilder) use ($query) {
+                    $queryBuilder->where('title', 'LIKE', '%' . $query . '%');
+                })
+                ->get();
+        }
+
+        $data = ['selectedCurricula' => $selectedCurricula];
+        return view('curricula.search', $data);
+    }
 }

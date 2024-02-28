@@ -14,9 +14,24 @@ class AdminCommonSenseController extends Controller
      */
     public function index()
     {
+        $commonSenseCategories = CommonSenseCategory::orderBy('id', 'ASC')->get();
         $common_senses = CommonSense::orderby('id','ASC')->get();
-        $data = ['common_senses' => $common_senses];
+        $data = ['common_senses' => $common_senses,
+        'commonSenseCategories' => $commonSenseCategories];
         return view('admins.common_senses.index',$data);
+    }
+
+    public function selected(CommonSenseCategory $commonSenseCategory)
+    {
+        $commonSenseCategories = CommonSenseCategory::orderBy('id', 'ASC')->get();
+        $common_senses = CommonSense::where('common_sense_category_id', $commonSenseCategory->id)->get();
+
+        $data = [
+            'common_senses' => $common_senses,
+            'commonSenseCategories' => $commonSenseCategories
+        ];
+
+        return view('admins.common_senses.selected', $data);
     }
 
     /**
@@ -108,13 +123,13 @@ class AdminCommonSenseController extends Controller
     {
         $commonSense->status='0';
         $commonSense->save();
-        return redirect()->route('admins.common_senses.index');
+        return back();
     }
     public function status_on(CommonSense $commonSense)
     {
         $commonSense->status='1';
         $commonSense->save();
-        return redirect()->route('admins.common_senses.index');
+        return back();
     }
 
     /**
