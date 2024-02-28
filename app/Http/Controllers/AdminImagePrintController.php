@@ -98,28 +98,29 @@ class AdminImagePrintController extends Controller
             $fileName = 'output_' . $member->id . '.jpg';
             $image->save(storage_path('app/public/image_prints/' . $fileName));
         }
+        $data = [ 'images' => $images ];
 
         // 將所有圖片顯示在網頁上
-        return view('admins.image_prints.preview', compact('images'));
+        return view('admins.image_prints.preview',$data);
     }
 
-//    public function downloadMembers(Request $request)
-//    {
-//        $members = User::all();
-//        $zip = new \ZipArchive();
-//        $zipFileName = 'members_images.zip';
-//        $zipFilePath = public_path($zipFileName);
-//
-//        if ($zip->open($zipFilePath, \ZipArchive::CREATE | \ZipArchive::OVERWRITE) === true) {
-//            foreach ($members as $key => $member) {
-//                $imagePath = public_path('path/to/your/output/' . $member->name . '_card.jpg');
-//                $zip->addFile($imagePath, 'member_' . ($key + 1) . '_card.jpg');
-//            }
-//            $zip->close();
-//        }
-//
-//        return response()->download($zipFilePath)->deleteFileAfterSend(true);
-//    }
+    public function downloadMembers(Request $request)
+    {
+        $members = User::all();
+        $zip = new \ZipArchive();
+        $zipFileName = 'members_images.zip';
+        $zipFilePath = public_path($zipFileName);
+
+        if ($zip->open($zipFilePath, \ZipArchive::CREATE | \ZipArchive::OVERWRITE) === true) {
+            foreach ($members as $key => $member) {
+                $imagePath = public_path('path/to/your/output/' . $member->name . '_card.jpg');
+                $zip->addFile($imagePath, 'member_' . ($key + 1) . '_card.jpg');
+            }
+            $zip->close();
+        }
+
+        return response()->download($zipFilePath)->deleteFileAfterSend(true);
+    }
 
     public function update(Request $request, ImagePrint $imagePrint)
     {

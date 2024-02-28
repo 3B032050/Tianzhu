@@ -84,4 +84,19 @@ class AdminActivityController extends Controller
             return response()->json(['fileName' => $fileName, 'uploaded'=> 1, 'url' => $url]);
         }
     }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+
+        // 搜尋活動
+        $activities = Activity::where('title', 'like', "%$query%")
+            ->get();
+
+        // 返回結果
+        return view('admins.activities.index', [
+            'activities' => $activities,
+            'query' => $query,
+        ]);
+    }
 }
