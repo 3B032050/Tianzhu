@@ -17,7 +17,7 @@
             @csrf
             <div class="form-group">
                 <label for="parent_id" class="form-label">父類別</label>
-                <input id="parent_id" name="parent_id" type="text" class="form-control" value="{{ $curriculumCategory->id }}" readonly>
+                <input id="parent_id" name="parent_id" type="text" class="form-control" value="{{ $curriculumCategory->name }}" readonly>
             </div>
             <div class="form-group">
                 <label for="name" class="form-label">類別名稱</label>

@@ -15,6 +15,40 @@ class CommonSenseController extends Controller
         return view('common_senses.index', compact('categories'));
     }
 
+    public function search(Request $request)
+    {
+        $selectedCommonSenses = [];
+
+        if ($request->input('query')) {
+            $query = $request->input('query');
+            $searchOption = $request->input('search_option');
+
+            // 根據用戶選擇的選項來進行搜尋
+            if ($searchOption == 'title') {
+                $selectedCommonSenses = CommonSense::where('status', 1)
+                    ->where('title', 'LIKE', '%' . $query . '%')
+                    ->get();
+            } elseif ($searchOption == 'content') {
+                $selectedCommonSenses = CommonSense::where('status', 1)
+                    ->where('content', 'LIKE', '%' . $query . '%')
+                    ->get();
+            }
+        }
+
+        $data = ['selectedCommonSenses' => $selectedCommonSenses];
+        return view('common_senses.search', $data);
+    }
+
+    public function show_search_content($common_sense_id)
+    {
+        $common_sense = CommonSense::where('id', $common_sense_id)->first();
+        $data = [
+            'common_sense'=> $common_sense,
+        ];
+
+        return view('common_senses.show_search_content', $data);
+    }
+
     public function show($common_sense_category_id)
     {
         $selectedCategory = CommonSenseCategory::find($common_sense_category_id);
@@ -44,8 +78,5 @@ class CommonSenseController extends Controller
         return view('common_senses.show_content', $data);
     }
 
-    public function search(Request $request)
-    {
 
-    }
 }
