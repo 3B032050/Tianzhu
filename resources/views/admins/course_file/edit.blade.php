@@ -4,6 +4,12 @@
 
 @section('page-content')
     <div class="container-fluid px-4">
+        <div style="margin-top: 10px;">
+            <p style="font-size: 1.8em;">
+                <a href="{{ route('admins.course_file.index') }}" class="custom-link"><i class="fa fa-home"></i>課程講義</a> &gt;
+                編輯課程講義
+            </p>
+        </div>
         <h1 class="mt-4">課程講義</h1>
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item active">編輯課程講義</li>

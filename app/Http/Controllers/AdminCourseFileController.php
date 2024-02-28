@@ -95,12 +95,47 @@ class AdminCourseFileController extends Controller
 
         return redirect()->route('admins.course_file.index');
     }
-
+    public function statusoff(CourseFile $coursefile)
+    {
+        $coursefile->status='0';
+        $coursefile->save();
+        return back();
+    }
+    public function statuson(CourseFile $coursefile)
+    {
+        $coursefile->status='1';
+        $coursefile->save();
+        return back();
+    }
 
 
     public function destroy(CourseFile $coursefile)
     {
         $coursefile->delete();
         return redirect()->route('admins.course_file.index');
+    }
+    public function search(Request $request)
+    {
+        $searchTerm = $request->input('query');
+        $category = $request->input('category');
+        $perPage = $request->input('perPage', 10);
+
+        $query = CourseFile::with('coursefilecategory');
+
+        if ($category == 'title') {
+            $query->where('title', 'like', "%$searchTerm%");
+        } elseif ($category == 'category') {
+            $query->whereHas('coursefilecategory', function ($query) use ($searchTerm) {
+                $query->where('course_file_category_name', 'like', "%$searchTerm%");
+            });
+        }
+
+        $coursefiles = $query->orderBy('id', 'ASC')->paginate($perPage);
+
+        return view('admins.course_file.index', [
+            'coursefiles' => $coursefiles,
+            'query' => $searchTerm,
+            'category' => $category,
+        ]);
     }
 }

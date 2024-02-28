@@ -138,4 +138,28 @@ class AdminVideoController extends Controller
             return null;
         }
     }
+    public function search(Request $request)
+    {
+        $searchTerm = $request->input('query');
+        $category = $request->input('category');
+        $perPage = $request->input('perPage', 10);
+
+        $query = Video::with('video_category');
+
+        if ($category == 'title') {
+            $query->where('video_title', 'like', "%$searchTerm%");
+        } elseif ($category == 'category') {
+            $query->whereHas('video_category', function ($query) use ($searchTerm) {
+                $query->where('category_name', 'like', "%$searchTerm%");
+            });
+        }
+
+        $coursefiles = $query->orderBy('id', 'ASC')->paginate($perPage);
+
+        return view('admins.videos.index', [
+            'videos' => $coursefiles,
+            'query' => $searchTerm,
+            'category' => $category,
+        ]);
+    }
 }

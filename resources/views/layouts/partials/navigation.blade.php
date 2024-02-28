@@ -54,7 +54,7 @@
                     </li>
                 </ul>
                 <li class="nav-item">
-                    <a class="nav-link" href="/" style="color:black">最新消息</a>
+                    <a class="nav-link" href="{{ route('posts.index') }}" style="color:black">最新消息</a>
                 </li>
                 <ul class="nav-item">
                     <li class="nav-item dropdown">

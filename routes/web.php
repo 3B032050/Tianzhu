@@ -22,8 +22,9 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home.index');
 
-Route::get('/post/{id}', [App\Http\Controllers\PostController::class, 'show'])->name('show');
-Route::get('/post/{id}/{file}', [App\Http\Controllers\PostController::class, 'post_download'])->name('post_download');
+Route::get('/post', [App\Http\Controllers\PostController::class, 'index'])->name('posts.index');
+Route::get('/post/{id}', [App\Http\Controllers\PostController::class, 'show'])->name('posts.show');
+Route::get('/post/{id}/{file}', [App\Http\Controllers\PostController::class, 'post_download'])->name('posts.post_download');
 Route::get('/web/{web_id}', [App\Http\Controllers\WebController::class, 'index'])->name('web.index');
 
 //Route::get('/select','TestController@testfunction');
@@ -45,6 +46,10 @@ Route::get('/activities/{activity}/show', [App\Http\Controllers\ActivityControll
 Route::get('/common_senses', [App\Http\Controllers\CommonSenseController::class, 'index'])->name('common_senses.index');
 Route::get('/common_senses/{commonSense}/show', [App\Http\Controllers\CommonSenseController::class, 'show'])->name('common_senses.show');
 Route::get('/show_content/{common_sense_id}/{common_sense_category_id}', [App\Http\Controllers\CommonSenseController::class, 'show_content'])->name('common_senses.show_content');
+Route::get('/common_senses/search', [App\Http\Controllers\CommonSenseController::class, 'search'])->name('common_senses.search');
+Route::get('/common_senses/{common_sense_id}/show_search_content.blade.php', [App\Http\Controllers\CommonSenseController::class, 'show_search_content'])->name('common_senses.show_search_content.blade.php');
+
+
 
 Route::get('/curricula', [App\Http\Controllers\CurriculaController::class, 'index'])->name('curricula.index');
 Route::get('/curricula/{curriculum}/show', [App\Http\Controllers\CurriculaController::class, 'show'])->name('curricula.show');
@@ -56,6 +61,7 @@ Route::get('/course_file/{category}/show', [App\Http\Controllers\CourseFileContr
 Route::get('/course_file/{id}/{course_file}', [App\Http\Controllers\CourseFileController::class, 'download'])->name('course_file.download');
 
 Route::get('/video', [App\Http\Controllers\VideoController::class, 'index'])->name('videos.index');
+Route::get('/video/search', [App\Http\Controllers\VideoController::class, 'search'])->name('videos.search');
 Route::get('/course_file/{category}/show', [App\Http\Controllers\CourseFileController::class, 'show'])->name('course_file.show');
 Auth::routes();
 
@@ -172,7 +178,10 @@ Route::group(['middleware' => 'admin'], function(){
 
         //公告路由
         Route::get('posts', [App\Http\Controllers\AdminPostController::class, 'index'])->name("posts.index");
+        Route::get('posts/search', [App\Http\Controllers\AdminPostController::class, 'search'])->name("posts.search");
         Route::get('posts/create', [App\Http\Controllers\AdminPostController::class, 'create'])->name("posts.create");
+        Route::patch('posts/{post}/statuson', [App\Http\Controllers\AdminPostController::class, 'statuson'])->name("posts.statuson");
+        Route::patch('posts/{post}/statusoff', [App\Http\Controllers\AdminPostController::class, 'statusoff'])->name("posts.statusoff");
         Route::post('posts', [App\Http\Controllers\AdminPostController::class, 'store'])->name("posts.store");
         Route::get('posts/{post}/edit', [App\Http\Controllers\AdminPostController::class, 'edit'])->name("posts.edit");
         Route::patch('posts/{post}', [App\Http\Controllers\AdminPostController::class, 'update'])->name("posts.update");
@@ -189,6 +198,8 @@ Route::group(['middleware' => 'admin'], function(){
         Route::patch('/admins/{admin}',[App\Http\Controllers\AdminAdminController::class,'update'])->name('admins.update');
         Route::delete('/admins/{admin}', [App\Http\Controllers\AdminAdminController::class, 'destroy'])->name("admins.destroy");
 
+        Route::get('/permissions',[App\Http\Controllers\AdminPermissionController::class,'index'])->name('permissions.index');
+
 
         Route::get('/slides', [App\Http\Controllers\AdminSlideController::class, 'index'])->name('slides.index');
         Route::get('/slides/create', [App\Http\Controllers\AdminSlideController::class, 'create'])->name('slides.create');
@@ -199,10 +210,13 @@ Route::group(['middleware' => 'admin'], function(){
         Route::patch('/slides/{slide}/update_order', [App\Http\Controllers\AdminSlideController::class, 'update_order'])->name('slides.update_order');
         #課程講義
         Route::get('/coursefile',[App\Http\Controllers\AdminCourseFileController::class,'index'])->name('course_file.index');
+        Route::get('/coursefile/search',[App\Http\Controllers\AdminCourseFileController::class,'search'])->name('course_file.search');
         Route::get('/coursefile/create',[App\Http\Controllers\AdminCourseFileController::class,'create'])->name('course_file.create');
         Route::post('/coursefile', [App\Http\Controllers\AdminCourseFileController::class, 'store'])->name("course_file.store");
         Route::get('/coursefile/{coursefile}/edit', [App\Http\Controllers\AdminCourseFileController::class, 'edit'])->name("course_file.edit");
         Route::patch('/coursefile/{coursefile}',[App\Http\Controllers\AdminCourseFileController::class,'update'])->name('course_file.update');
+        Route::patch('/coursefile/{coursefile}/statusoff',[App\Http\Controllers\AdminCourseFileController::class,'statusoff'])->name('course_file.statusoff');
+        Route::patch('/coursefile/{coursefile}/statuson',[App\Http\Controllers\AdminCourseFileController::class,'statuson'])->name('course_file.statuson');
         Route::delete('/coursefile/{coursefile}', [App\Http\Controllers\AdminCourseFileController::class, 'destroy'])->name("course_file.destroy");
 
         #課程講義類別
@@ -216,6 +230,7 @@ Route::group(['middleware' => 'admin'], function(){
         #影音
         Route::get('/video',[App\Http\Controllers\AdminVideoController::class,'index'])->name('videos.index');
         Route::get('/video/create',[App\Http\Controllers\AdminVideoController::class,'create'])->name('videos.create');
+        Route::get('/video/search',[App\Http\Controllers\AdminVideoController::class,'search'])->name('videos.search');
         Route::post('/video', [App\Http\Controllers\AdminVideoController::class, 'store'])->name("videos.store");
         Route::get('/video/{video}/edit', [App\Http\Controllers\AdminVideoController::class, 'edit'])->name("videos.edit");
         Route::patch('/video/{video}',[App\Http\Controllers\AdminVideoController::class,'update'])->name('videos.update');
@@ -294,6 +309,8 @@ Route::group(['middleware' => 'admin'], function(){
         Route::get('image_prints/{image_print}/edit', [App\Http\Controllers\AdminImagePrintController::class, 'edit'])->name("image_prints.edit");
         Route::patch('image_prints/{image_print}', [App\Http\Controllers\AdminImagePrintController::class, 'update'])->name("image_prints.update");
         Route::delete('image_prints/{image_print}', [App\Http\Controllers\AdminImagePrintController::class, 'destroy'])->name("image_prints.destroy");
+
+
     });
 });
 

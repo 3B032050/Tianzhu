@@ -8,6 +8,12 @@ use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
+    public function index()
+    {
+        $posts = Post::where('status','1')->orderBy('created_at','DESC')->get();
+        $data = ['posts' => $posts];
+        return view('posts.index',$data);
+    }
 
     public function show(Post $post)
     {
@@ -15,7 +21,7 @@ class PostController extends Controller
         $data = ['post' => $post];
 
 
-        return view('show',$data);
+        return view('posts.show',$data);
     }
     public function post_download(Request $request)
     {

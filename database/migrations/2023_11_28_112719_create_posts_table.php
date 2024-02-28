@@ -17,6 +17,7 @@ return new class extends Migration
             $table->longText('content');
             $table->boolean('is_feature')->default(false);
             $table->string('file')->nullable();
+            $table->string('status')->default('0');
             $table->timestamps();
         });
     }

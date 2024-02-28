@@ -4,34 +4,31 @@
 
 @section('content')
 <section id="location">
-    <div class="wrapper mx-auto" style="text-align:center">
-        <div class ="table">
-            <table class="table" style="text-align:center">
-                <thead>
-                <tr>
-                    <th scope="col">公告標題</th>
-                    <th scope="col">公告內容</th>
-                    <th scope="col">公告附檔</th>
-                    <th scope="col">公告時間</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>{{ $post->title }}</td>
-                    <td>{{ $post->content }}</td>
-                    <td>
-                        <a href="{{ route('post_download', ['id' => $post->id, 'file' => $post->file]) }}">
-                            {{ $post->file }}
-                        </a>
-                    </td>
-                    <td>{{ $post->created_at }}</td>
-                </tr>
-                <!-- 可以添加更多的 <tr> 来显示其他的帖子 -->
-                </tbody>
-            </table>
+    <div class="wrapper mx-auto" style="text-align:center;">
+        <div class="card" style="width: 60rem; margin: auto;">
+            <div class="card-body text-start">
+                <h5 class="card-title">公告標題: {{ $post->title }}</h5>
+                <p class="card-text"> {{ $post->content }}</p>
+            </div>
+            <div class="card-footer">
+                <th scope="col">公告附檔</th>
+                <td>
+                    <a href="{{ route('posts.post_download', ['id' => $post->id, 'file' => $post->file]) }}">
+                        {{ $post->file }}
+                    </a>
+                </td>
+                <th scope="col">公告時間</th>
+                <td>{{ $post->created_at }}</td>
+            </div>
         </div>
+    </div>
 
-{{--        <div class="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8">--}}
+
+
+
+
+
+    {{--        <div class="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8">--}}
 {{--            <form method="POST" action="{{ route('users.comment.store') }}">--}}
 {{--                @csrf--}}
 {{--                <textarea--}}
