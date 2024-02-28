@@ -7,7 +7,7 @@
         <p style="font-size: 1.2em;">
             <a href="{{ route('home.index') }}" class="custom-link"><i class="fa fa-home"></i></a> &gt;
             <a href="{{ route('common_senses.index') }}" class="custom-link">佛門小常識</a> >
-            <a href="{{ route('common_senses.show',$selectedCategory->id) }}" class="custom-link">{{ $selectedCategory->name }}</a> >
+            {{ $common_sense->title }} >
             內容
         </p>
     </div>

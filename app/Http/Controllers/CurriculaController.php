@@ -33,13 +33,21 @@ class CurriculaController extends Controller
 
     public function search(Request $request)
     {
-        if ($request->input('query')) {
+        if ($request->has('query')) {
             $query = $request->input('query');
-            $selectedCurricula = Curriculum::where('status', 1)
-                ->where(function ($queryBuilder) use ($query) {
-                    $queryBuilder->where('title', 'LIKE', '%' . $query . '%');
-                })
-                ->get();
+            $searchOption = $request->input('search_option', 'title');
+
+            $selectedCurricula = Curriculum::where('status', 1);
+
+            if ($searchOption === 'title') {
+                $selectedCurricula->where('title', 'LIKE', '%' . $query . '%');
+            } elseif ($searchOption === 'content') {
+                $selectedCurricula->where('content', 'LIKE', '%' . $query . '%');
+            }
+
+            $selectedCurricula = $selectedCurricula->get();
+        } else {
+            $selectedCurricula = [];
         }
 
         $data = ['selectedCurricula' => $selectedCurricula];

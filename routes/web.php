@@ -45,6 +45,10 @@ Route::get('/activities/{activity}/show', [App\Http\Controllers\ActivityControll
 Route::get('/common_senses', [App\Http\Controllers\CommonSenseController::class, 'index'])->name('common_senses.index');
 Route::get('/common_senses/{commonSense}/show', [App\Http\Controllers\CommonSenseController::class, 'show'])->name('common_senses.show');
 Route::get('/show_content/{common_sense_id}/{common_sense_category_id}', [App\Http\Controllers\CommonSenseController::class, 'show_content'])->name('common_senses.show_content');
+Route::get('/common_senses/search', [App\Http\Controllers\CommonSenseController::class, 'search'])->name('common_senses.search');
+Route::get('/common_senses/{common_sense_id}/show_search_content.blade.php', [App\Http\Controllers\CommonSenseController::class, 'show_search_content'])->name('common_senses.show_search_content.blade.php');
+
+
 
 Route::get('/curricula', [App\Http\Controllers\CurriculaController::class, 'index'])->name('curricula.index');
 Route::get('/curricula/{curriculum}/show', [App\Http\Controllers\CurriculaController::class, 'show'])->name('curricula.show');
@@ -189,6 +193,8 @@ Route::group(['middleware' => 'admin'], function(){
         Route::patch('/admins/{admin}',[App\Http\Controllers\AdminAdminController::class,'update'])->name('admins.update');
         Route::delete('/admins/{admin}', [App\Http\Controllers\AdminAdminController::class, 'destroy'])->name("admins.destroy");
 
+        Route::get('/permissions',[App\Http\Controllers\AdminPermissionController::class,'index'])->name('permissions.index');
+
 
         Route::get('/slides', [App\Http\Controllers\AdminSlideController::class, 'index'])->name('slides.index');
         Route::get('/slides/create', [App\Http\Controllers\AdminSlideController::class, 'create'])->name('slides.create');
@@ -294,6 +300,8 @@ Route::group(['middleware' => 'admin'], function(){
         Route::get('image_prints/{image_print}/edit', [App\Http\Controllers\AdminImagePrintController::class, 'edit'])->name("image_prints.edit");
         Route::patch('image_prints/{image_print}', [App\Http\Controllers\AdminImagePrintController::class, 'update'])->name("image_prints.update");
         Route::delete('image_prints/{image_print}', [App\Http\Controllers\AdminImagePrintController::class, 'destroy'])->name("image_prints.destroy");
+
+
     });
 });
 
