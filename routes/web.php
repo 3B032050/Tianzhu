@@ -22,8 +22,9 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home.index');
 
-Route::get('/post/{id}', [App\Http\Controllers\PostController::class, 'show'])->name('show');
-Route::get('/post/{id}/{file}', [App\Http\Controllers\PostController::class, 'post_download'])->name('post_download');
+Route::get('/post', [App\Http\Controllers\PostController::class, 'index'])->name('posts.index');
+Route::get('/post/{id}', [App\Http\Controllers\PostController::class, 'show'])->name('posts.show');
+Route::get('/post/{id}/{file}', [App\Http\Controllers\PostController::class, 'post_download'])->name('posts.post_download');
 Route::get('/web/{web_id}', [App\Http\Controllers\WebController::class, 'index'])->name('web.index');
 
 //Route::get('/select','TestController@testfunction');
@@ -173,7 +174,10 @@ Route::group(['middleware' => 'admin'], function(){
 
         //公告路由
         Route::get('posts', [App\Http\Controllers\AdminPostController::class, 'index'])->name("posts.index");
+        Route::get('posts/search', [App\Http\Controllers\AdminPostController::class, 'search'])->name("posts.search");
         Route::get('posts/create', [App\Http\Controllers\AdminPostController::class, 'create'])->name("posts.create");
+        Route::patch('posts/{post}/statuson', [App\Http\Controllers\AdminPostController::class, 'statuson'])->name("posts.statuson");
+        Route::patch('posts/{post}/statusoff', [App\Http\Controllers\AdminPostController::class, 'statusoff'])->name("posts.statusoff");
         Route::post('posts', [App\Http\Controllers\AdminPostController::class, 'store'])->name("posts.store");
         Route::get('posts/{post}/edit', [App\Http\Controllers\AdminPostController::class, 'edit'])->name("posts.edit");
         Route::patch('posts/{post}', [App\Http\Controllers\AdminPostController::class, 'update'])->name("posts.update");

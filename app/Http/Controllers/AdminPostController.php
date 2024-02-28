@@ -41,6 +41,7 @@ class AdminPostController extends Controller
             'content' => $content,
             'is_feature' => $request->input('is_feature'),
             'file' => $fileName, // 存储文件名
+             'status'=>'0',
         ]);
 //        if ($request->hasFile('file'))
 //        {
@@ -107,6 +108,33 @@ class AdminPostController extends Controller
     {
         $post->delete();
         return redirect()->route('admins.posts.index');
+    }
+    public function statusoff(Post $post)
+    {
+        $post->status='0';
+        $post->save();
+        return back();
+    }
+    public function statuson(Post $post)
+    {
+        $post->status = '1';
+        $post->save();
+        return back();
+    }
+    public function search(Request $request)
+    {
+        $searchTerm = $request->input('query');
+        $perPage = $request->input('perPage', 10);
+
+        $searchTerm->where('title', 'like', "%$searchTerm%");
+
+
+        $posts = $searchTerm->orderBy('id', 'ASC')->paginate($perPage);
+
+        return view('admins.course_file.index', [
+            'posts' => $posts,
+            'query' => $searchTerm,
+        ]);
     }
 }
 

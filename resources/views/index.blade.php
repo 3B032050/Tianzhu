@@ -48,27 +48,27 @@
         <br><br>
     @endif
 
-    <div class="wrapper mx-auto" style="text-align:center">
-        <div class ="table">
-            <table class="table"  style="text-align:center">
-                <thead>
-                <tr>
-                    <th scope="col" style="text-align:center">標題</th>
+{{--    <div class="wrapper mx-auto" style="text-align:center">--}}
+{{--        <div class ="table">--}}
+{{--            <table class="table"  style="text-align:center">--}}
+{{--                <thead>--}}
+{{--                <tr>--}}
+{{--                    <th scope="col" style="text-align:center">標題</th>--}}
 
-                </tr>
-                </thead>
-                <tbody>
-                @foreach($posts as $post)
-                    <tr>
-                        <td style="text-align:center">
-                            <a href="{{ route('show', $post->id) }}">{{ $post->title }}</a>
-                        </td>
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
-        </div>
-    </div>
+{{--                </tr>--}}
+{{--                </thead>--}}
+{{--                <tbody>--}}
+{{--                @foreach($posts as $post)--}}
+{{--                    <tr>--}}
+{{--                        <td style="text-align:center">--}}
+{{--                            <a href="{{ route('show', $post->id) }}">{{ $post->title }}</a>--}}
+{{--                        </td>--}}
+{{--                    </tr>--}}
+{{--                @endforeach--}}
+{{--                </tbody>--}}
+{{--            </table>--}}
+{{--        </div>--}}
+{{--    </div>--}}
 
 
 
