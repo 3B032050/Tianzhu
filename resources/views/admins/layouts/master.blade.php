@@ -19,6 +19,7 @@
     <style type="text/css">
         .ck-editor__editable_inline
         {
+            width: 960px;
             height: 450px;
         }
     </style>
@@ -43,6 +44,6 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-{{--    <script src="{{ asset('js/admin-scripts.js') }}"></script>--}}
+    <script src="{{ asset('js/admin-scripts.js') }}"></script>
 </body>
 </html>
