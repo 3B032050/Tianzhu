@@ -14,7 +14,32 @@ class AdminCourseController extends Controller
     public function index(Request $request)
     {
         $courses = Course::orderby('id','ASC')->get();
-        $data = ['courses' => $courses];
+        $course_categories = CourseCategory::get();
+        $data = ['courses' => $courses , 'course_categories' => $course_categories];
+        return view('admins.courses.index',$data);
+    }
+
+    public function search(Request $request)
+    {
+        $course_categories = CourseCategory::get();
+        $query = $request->input('query');
+        $category = $request->input('category');
+
+
+        if ($category != 'all')
+        {
+            $courses = Course::where('course_category_id', 'like', "%$category%")
+                ->where('title','like',"%$query%")
+                ->get();
+        }
+        else
+        {
+            $courses = Course::where('title', 'like', "%$query%")
+                ->get();
+        }
+
+        $data = ['course_categories' => $course_categories , 'courses' => $courses , 'query' => $query , 'category' => $category];
+
         return view('admins.courses.index',$data);
     }
 

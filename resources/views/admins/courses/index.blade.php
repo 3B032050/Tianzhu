@@ -9,6 +9,24 @@
     <a class="btn btn-success btn-sm" href="{{ route('admins.course_categories.index') }}">課程分階</a>
     <a class="btn btn-success btn-sm" href="{{ route('admins.course_methods.index') }}">課程方式</a>
     <a class="btn btn-success btn-sm" href="{{ route('admins.course_objectives.index') }}">課程目標</a>
+    <div class="container px-4 px-lg-5 mt-2 mb-4">
+        <form action="{{ route('admins.courses.search') }}" method="GET" class="d-flex">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="category">類別</label>
+                </div>
+                <select class="form-select" id="category" name="category">
+                    <option value="all" selected>所有</option>
+                    @foreach($course_categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <input type="text" name="query" class="form-control me-2" placeholder="課程搜尋...">
+            <button type="submit" class="btn btn-outline-dark">搜尋</button>
+        </form>
+    </div>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
         <a class="btn btn-success btn-sm" href="{{ route('admins.courses.create') }}">新增課程</a>
     </div>
