@@ -27,7 +27,7 @@ class AdminPostController extends Controller
             'title' => 'required|max:50',
             'content' => 'required',
             'is_feature' => 'required|boolean',
-            'file' => 'required|file|mimes:jpeg,png,pdf,doc,docx,pptx,ppt',
+            'file' => 'file|mimes:jpeg,png,pdf,doc,docx,pptx,ppt',
         ]);
         if ($request->hasFile('file')) {
             $fileName = $request->file('file')->getClientOriginalName(); // 獲取上傳檔名

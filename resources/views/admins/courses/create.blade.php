@@ -35,20 +35,22 @@
 
             <div class="form-group">
                 <label for="course_methods">方法</label>
-                <select name="course_methods[]" id="course_methods" class="form-select" size="{{ count($course_methods) }}" multiple>
-                    @foreach($course_methods as $course_method)
-                        <option value="{{ $course_method->id }}">{{ $course_method->name }}</option>
-                    @endforeach
-                </select>
+                @foreach($course_methods as $course_method)
+                    <div class="form-check">
+                        <input type="checkbox" name="course_methods[]" id="method_{{ $course_method->id }}" value="{{ $course_method->id }}" class="form-check-input">
+                        <label for="method_{{ $course_method->id }}" class="form-check-label">{{ $course_method->name }}</label>
+                    </div>
+                @endforeach
             </div>
 
             <div class="form-group">
                 <label for="course_objectives">目標</label>
-                <select name="course_objectives[]" id="course_objectives" class="form-select" size="{{ count($course_objectives) }}" multiple>
-                    @foreach($course_objectives as $course_objective)
-                        <option value="{{ $course_objective->id }}">{{ $course_objective->description }}</option>
-                    @endforeach
-                </select>
+                @foreach($course_objectives as $course_objective)
+                    <div class="form-check">
+                        <input type="checkbox" name="course_objectives[]" id="objective_{{ $course_objective->id }}" value="{{ $course_objective->id }}" class="form-check-input">
+                        <label for="objective_{{ $course_objective->id }}" class="form-check-label">{{ $course_objective->description }}</label>
+                    </div>
+                @endforeach
             </div>
 
             <div class="form-group">

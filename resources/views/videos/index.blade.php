@@ -29,7 +29,7 @@
                 @if (request()->has('query'))
                     <div class="container px-4 px-lg-5 mt-2 mb-4">
                         查找「{{ request('query') }}」
-                        <a class="btn btn-success btn-sm" href="{{ route('admins.course_file.search') }}">取消搜尋</a>
+                        <a class="btn btn-success btn-sm" href="{{ route('videos.index') }}">取消搜尋</a>
                     </div>
                 @endif
             </div>
