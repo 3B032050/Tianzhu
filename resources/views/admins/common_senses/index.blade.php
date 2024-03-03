@@ -29,6 +29,9 @@
                 <th scope="col" style="text-align:left">類別</th>
                 <th scope="col" style="text-align:left">標題</th>
                 <th scope="col" style="text-align:left">狀態</th>
+                <th scope="col" style="text-align:center">發佈</th>
+                <th scope="col" style="text-align:center">編輯</th>
+                <th scope="col" style="text-align:center">刪除</th>
             </tr>
             </thead>
             <tbody>
@@ -46,26 +49,26 @@
                     <td>
                         @if ($common_sense->status == 0)
                             <div style="color:#ff3370; font-weight:bold;">
-                                (下架)
+                                (未發佈)
                             </div>
                         @else
                             <div style="color:#ffa600; font-weight:bold;">
-                                (上架)
+                                (已發佈)
                             </div>
                         @endif
                     </td>
-                    <td>
+                    <td style="text-align:center">
                         @if ($common_sense->status == 0)
                             <form action="{{ route('admins.common_senses.status_on',$common_sense->id) }}" method="POST" role="form">
                                 @method('PATCH')
                                 @csrf
-                                <button type="submit" class="btn btn-secondary btn-sm">上架</button>
+                                <button type="submit" class="btn btn-secondary btn-sm">發佈</button>
                             </form>
                         @else
                             <form action="{{ route('admins.common_senses.status_off',$common_sense->id) }}" method="POST" role="form">
                                 @method('PATCH')
                                 @csrf
-                                <button type="submit" class="btn btn-secondary btn-sm">下架</button>
+                                <button type="submit" class="btn btn-secondary btn-sm">取消發佈</button>
                             </form>
                         @endif
                     </td>

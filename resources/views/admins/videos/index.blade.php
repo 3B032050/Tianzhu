@@ -37,6 +37,8 @@
             <th scope="col" style="text-align:left">影音路徑</th>
             <th scope="col" style="text-align:left">影音預覽</th>
             <th scope="col" style="text-align:left">影音標題</th>
+            <th scope="col" style="text-align:center">編輯</th>
+            <th scope="col" style="text-align:center">刪除</th>
         </tr>
         </thead>
         <tbody>

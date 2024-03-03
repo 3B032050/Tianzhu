@@ -40,11 +40,14 @@
             <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col" style="text-align:left">類別</th>
-                <th scope="col" style="text-align:left">課程名稱</th>
-                <th scope="col" style="text-align:left">方式</th>
-                <th scope="col" style="text-align:left">目標</th>
-                <th scope="col" style="text-align:left">狀態</th>
+                <th scope="col" style="width: 8%; text-align:left">類別</th>
+                <th scope="col" style="width: 10%; text-align:left">課程名稱</th>
+                <th scope="col" style="width: 25%; text-align:left">方式</th>
+                <th scope="col" style="width: 25%; text-align:left">目標</th>
+                <th scope="col" style="width: 8%; text-align:left">狀態</th>
+                <th scope="col" style="text-align:center">發佈</th>
+                <th scope="col" style="text-align:center">編輯</th>
+                <th scope="col" style="text-align:center">刪除</th>
             </tr>
             </thead>
             <tbody>
@@ -80,26 +83,26 @@
                     <td>
                         @if ($curriculum->status == 0)
                             <div style="color:#ff3370; font-weight:bold;">
-                                (下架)
+                                (未發布)
                             </div>
                         @else
                             <div style="color:#ffa600; font-weight:bold;">
-                                (上架)
+                                (已發佈)
                             </div>
                         @endif
                     </td>
-                    <td>
+                    <td style="text-align:center">
                         @if ($curriculum->status == 0)
                             <form action="{{ route('admins.curricula.status_on',$curriculum->id) }}" method="POST" role="form">
                                 @method('PATCH')
                                 @csrf
-                                <button type="submit" class="btn btn-secondary btn-sm">上架</button>
+                                <button type="submit" class="btn btn-secondary btn-sm">發佈</button>
                             </form>
                         @else
                             <form action="{{ route('admins.curricula.status_off',$curriculum->id) }}" method="POST" role="form">
                                 @method('PATCH')
                                 @csrf
-                                <button type="submit" class="btn btn-secondary btn-sm">下架</button>
+                                <button type="submit" class="btn btn-secondary btn-sm">取消發佈</button>
                             </form>
                         @endif
                     </td>
