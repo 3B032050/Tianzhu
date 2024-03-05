@@ -41,7 +41,10 @@ class AdminPostController extends Controller
             'content' => $content,
             'is_feature' => $request->input('is_feature'),
             'file' => $fileName, // 存储文件名
-             'status'=>'0',
+             'status'=>$request->input('status'),
+
+' .
+    '
         ]);
 //        if ($request->hasFile('file'))
 //        {
