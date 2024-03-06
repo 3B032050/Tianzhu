@@ -6,6 +6,7 @@ use App\Models\CommonSense;
 use App\Http\Requests\StoreCommonSenseRequest;
 use App\Http\Requests\UpdateCommonSenseRequest;
 use App\Models\CommonSenseCategory;
+use Illuminate\Support\Facades\Auth;
 
 class AdminCommonSenseController extends Controller
 {
@@ -68,6 +69,8 @@ class AdminCommonSenseController extends Controller
         $common_sense->content = $request->input('content');
         $common_sense->status = 0;
 
+        $adminId = Auth::user()->admin->id;
+        $common_sense->last_modified_by = $adminId;
 
         $common_sense->save();
 
@@ -109,11 +112,13 @@ class AdminCommonSenseController extends Controller
             'content' => 'required',
         ]);
 
+        $adminId = Auth::user()->admin->id;
 
         $commonSense->update([
             'title' => $request->input('title'),
             'common_sense_category_id' => $request->input('common_sense_category'),
             'content' => $request->input('content'),
+            'last_modified_by' => $adminId,
         ]);
 
         return redirect()->route('admins.common_senses.index');

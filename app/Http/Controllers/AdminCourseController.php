@@ -7,6 +7,7 @@ use App\Models\CourseMethod;
 use App\Models\CourseObjective;
 use Illuminate\Http\Request;
 use App\Models\Course;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class AdminCourseController extends Controller
@@ -88,6 +89,9 @@ class AdminCourseController extends Controller
         $course->time = $request->input('time');
         $course->note = $request->input('note');
 
+        $adminId = Auth::user()->admin->id;
+        $course->last_modified_by = $adminId;
+
         // 儲存課程
         $course->save();
 
@@ -133,6 +137,8 @@ class AdminCourseController extends Controller
             'note' => 'nullable|max:255',
         ]);
 
+        $adminId = Auth::user()->admin->id;
+
         // Update the Course model
         $course->update([
             'title' => $request->input('title'),
@@ -141,6 +147,7 @@ class AdminCourseController extends Controller
             'course_category_id' => $request->input('course_category'),
             'time' => $request->input('time'),
             'note' => $request->input('note'),
+            'last_modified_by' => $adminId,
         ]);
 
         // Sync the related methods

@@ -42,8 +42,9 @@
                 <th scope="col">#</th>
                 <th scope="col" style="width: 8%; text-align:left">類別</th>
                 <th scope="col" style="width: 10%; text-align:left">課程名稱</th>
-                <th scope="col" style="width: 25%; text-align:left">方式</th>
-                <th scope="col" style="width: 25%; text-align:left">目標</th>
+                <th scope="col" style="width: 15%; text-align:left">方式</th>
+                <th scope="col" style="width: 15%; text-align:left">目標</th>
+                <th scope="col" style="width: 13%; text-align:left">最新修改管理員</th>
                 <th scope="col" style="width: 8%; text-align:left">狀態</th>
                 <th scope="col" style="text-align:center">發佈</th>
                 <th scope="col" style="text-align:center">編輯</th>
@@ -79,6 +80,13 @@
                                 <br>
                             @endif
                         @endforeach
+                    </td>
+                    <td>
+                        @if($curriculum->lastModifiedByAdmin)
+                            {{ $curriculum->lastModifiedByAdmin->user->name }}
+                        @else
+                            無
+                        @endif
                     </td>
                     <td>
                         @if ($curriculum->status == 0)

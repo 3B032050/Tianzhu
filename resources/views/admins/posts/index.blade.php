@@ -31,6 +31,7 @@
             <th scope="col">#</th>
             <th scope="col" style="text-align:left">標題</th>
             <th scope="col" style="text-align:left">公告時間</th>
+            <th scope="col" style="width: 13%; text-align:left">最新修改管理員</th>
             <th scope="col" style="text-align:left">狀態</th>
             <th scope="col" style="text-align:center">發佈</th>
             <th scope="col" style="text-align:center">編輯</th>
@@ -43,6 +44,13 @@
                 <td>{{$index+1}}</td>
                 <td>{{$post->title}}</td>
                 <td>{{$post->created_at}}</td>
+                <td>
+                    @if($post->lastModifiedByAdmin)
+                        {{ $post->lastModifiedByAdmin->user->name }}
+                    @else
+                        無
+                    @endif
+                </td>
                 @if($post->status=='1')
                     <td>
                         <div style="color:#ffa600; font-weight:bold;">

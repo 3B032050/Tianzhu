@@ -25,6 +25,7 @@
             <th scope="col" style="text-align:left">姓名</th>
             <th scope="col" style="text-align:left">階級</th>
             <th scope="col" style="text-align:left">電子信箱</th>
+            <th scope="col" style="width: 13%; text-align:left">加入的管理員</th>
             <th scope="col" style="text-align:center">修改</th>
             <th scope="col" style="text-align:center">刪除</th>
         </tr>
@@ -45,6 +46,13 @@
                 @endif
                 </td>
                 <td>{{ $admin->email }}</td>
+                <td>
+                    @if($admin->lastModifiedByAdmin)
+                        {{ $admin->lastModifiedByAdmin->user->name }}
+                    @else
+                        無
+                    @endif
+                </td>
                 <td style="text-align:center">
                     <a href="{{ route('admins.admins.edit',$admin->user_id) }}" class="btn btn-secondary btn-sm">編輯</a>
                 </td>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CurriculumMethod;
 use App\Http\Requests\StoreCurriculumMethodRequest;
 use App\Http\Requests\UpdateCurriculumMethodRequest;
+use Illuminate\Support\Facades\Auth;
 
 class AdminCurriculumMethodController extends Controller
 {
@@ -35,7 +36,8 @@ class AdminCurriculumMethodController extends Controller
             'name' => 'required|max:255',
         ]);
 
-        CurriculumMethod::create($request->all());
+        $adminId = Auth::user()->admin->id;
+        CurriculumMethod::create(array_merge($request->all(), ['last_modified_by' => $adminId]));
         return redirect()->route('admins.curriculum_methods.index');
     }
 
@@ -67,7 +69,8 @@ class AdminCurriculumMethodController extends Controller
             'name' => 'required|max:255',
         ]);
 
-        $curriculumMethod->update($request->all());
+        $adminId = Auth::user()->admin->id;
+        $curriculumMethod->update(array_merge($request->all(), ['last_modified_by' => $adminId]));
         return redirect()->route('admins.curriculum_methods.index');
     }
 

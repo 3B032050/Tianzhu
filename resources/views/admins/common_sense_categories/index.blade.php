@@ -18,6 +18,7 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col" style="text-align:left">名稱</th>
+            <th scope="col" style="width: 13%; text-align:left">最新修改管理員</th>
             <th scope="col" style="text-align:left">狀態</th>
         </tr>
         </thead>
@@ -26,6 +27,13 @@
             <tr>
                 <td style="text-align:left">{{ $index + 1 }}</td>
                 <td>{{ $common_sense_category->name }}</td>
+                <td>
+                    @if($common_sense_category->lastModifiedByAdmin)
+                        {{ $common_sense_category->lastModifiedByAdmin->user->name }}
+                    @else
+                        無
+                    @endif
+                </td>
                 <td>
                     @if ($common_sense_category->status == 0)
                         <div style="color:#ff3370; font-weight:bold;">

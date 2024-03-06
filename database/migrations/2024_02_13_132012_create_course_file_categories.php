@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('course_file_categories', function (Blueprint $table) {
             $table->id();
             $table->string('course_file_category_name');
+            $table->unsignedBigInteger('last_modified_by')->nullable();
             $table->timestamps();
         });
     }

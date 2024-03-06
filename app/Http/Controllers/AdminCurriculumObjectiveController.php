@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CurriculumObjective;
 use App\Http\Requests\StoreCurriculumObjectiveRequest;
 use App\Http\Requests\UpdateCurriculumObjectiveRequest;
+use Illuminate\Support\Facades\Auth;
 
 class AdminCurriculumObjectiveController extends Controller
 {
@@ -35,7 +36,8 @@ class AdminCurriculumObjectiveController extends Controller
             'description' => 'required|max:255',
         ]);
 
-        CurriculumObjective::create($request->all());
+        $adminId = Auth::user()->admin->id;
+        CurriculumObjective::create(array_merge($request->all(), ['last_modified_by' => $adminId]));
         return redirect()->route('admins.curriculum_objectives.index');
     }
 
@@ -67,7 +69,8 @@ class AdminCurriculumObjectiveController extends Controller
             'description' => 'required|max:255',
         ]);
 
-        $curriculumObjective->update($request->all());
+        $adminId = Auth::user()->admin->id;
+        $curriculumObjective->update(array_merge($request->all(), ['last_modified_by' => $adminId]));
         return redirect()->route('admins.curriculum_objectives.index');
     }
 

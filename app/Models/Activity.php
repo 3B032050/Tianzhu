@@ -12,6 +12,12 @@ class Activity extends Model
     protected $fillable = [
         'title',
         'content',
-        'status'
+        'status',
+        'last_modified_by',
     ];
+
+    public function lastModifiedByAdmin()
+    {
+        return $this->belongsTo(Admin::class, 'last_modified_by')->with('user');
+    }
 }

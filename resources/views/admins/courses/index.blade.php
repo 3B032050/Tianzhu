@@ -39,8 +39,9 @@
             <th scope="col" style="width: 10%; text-align:left">課程名稱</th>
             <th scope="col" style="width: 15%; text-align:left">方式</th>
             <th scope="col" style="width: 15%; text-align:left">目標</th>
-            <th scope="col" style="width: 5%; text-align:left">時間</th>
-            <th scope="col" style="width: 8%; text-align:left">備註</th>
+            <th scope="col" style="width: 13%; text-align:left">最新修改管理員</th>
+{{--            <th scope="col" style="width: 5%; text-align:left">時間</th>--}}
+{{--            <th scope="col" style="width: 8%; text-align:left">備註</th>--}}
             <th scope="col" style="width: 8%; text-align:left">狀態</th>
             <th scope="col" style="text-align:center">發佈</th>
             <th scope="col" style="text-align:center">編輯</th>
@@ -84,19 +85,26 @@
                     @endforeach
                 </td>
                 <td>
-                    @if ($course->time)
-                        {{ $course->time }}
+                    @if($course->lastModifiedByAdmin)
+                        {{ $course->lastModifiedByAdmin->user->name }}
                     @else
                         無
                     @endif
                 </td>
-                <td>
-                    @if ($course->note)
-                        {{ $course->note }}
-                    @else
-                        無
-                    @endif
-                </td>
+{{--                <td>--}}
+{{--                    @if ($course->time)--}}
+{{--                        {{ $course->time }}--}}
+{{--                    @else--}}
+{{--                        無--}}
+{{--                    @endif--}}
+{{--                </td>--}}
+{{--                <td>--}}
+{{--                    @if ($course->note)--}}
+{{--                        {{ $course->note }}--}}
+{{--                    @else--}}
+{{--                        無--}}
+{{--                    @endif--}}
+{{--                </td>--}}
                 <td>
                     @if ($course->status == 0)
                         <div style="color:#ff3370; font-weight:bold;">

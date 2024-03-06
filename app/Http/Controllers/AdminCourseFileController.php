@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CourseFile;
 use App\Models\CourseFileCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class AdminCourseFileController extends Controller
@@ -48,6 +49,9 @@ class AdminCourseFileController extends Controller
         $coursefile->course_file_category_id = $request->course_file_category_id;
         $coursefile->title = $request->title;
 
+        $adminId = Auth::user()->admin->id;
+        $coursefile->last_modified_by = $adminId;
+
         $coursefile->save();
 
         return redirect()->route('admins.course_file.index');
@@ -90,6 +94,8 @@ class AdminCourseFileController extends Controller
             $coursefile->file = $fileName;
         }
         $coursefile->title = $request->title;
+        $adminId = Auth::user()->admin->id;
+        $coursefile->last_modified_by = $adminId;
 
         $coursefile->save();
 

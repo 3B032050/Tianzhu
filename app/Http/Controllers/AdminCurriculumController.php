@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateCurriculumRequest;
 use App\Models\CurriculumCategory;
 use App\Models\CurriculumMethod;
 use App\Models\CurriculumObjective;
+use Illuminate\Support\Facades\Auth;
 
 class AdminCurriculumController extends Controller
 {
@@ -78,6 +79,8 @@ class AdminCurriculumController extends Controller
         $curriculum->method = $request->input('method');
         $curriculum->status = 0;
 
+        $adminId = Auth::user()->admin->id;
+        $curriculum->last_modified_by = $adminId;
 
         // 儲存課程
         $curriculum->save();
@@ -137,12 +140,14 @@ class AdminCurriculumController extends Controller
             'curriculum_objectives' => 'array',
         ]);
 
+        $adminId = Auth::user()->admin->id;
         // Update the Course model
         $curriculum->update([
             'title' => $request->input('title'),
             'method' => $request->input('method'),
             'content' => $request->input('content'),
             'curriculum_category_id' => $request->input('curriculum_category'),
+            'last_modified_by' => $adminId,
         ]);
 
         // Sync the related methods

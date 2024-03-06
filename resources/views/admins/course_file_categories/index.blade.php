@@ -20,14 +20,21 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col" style="text-align:left">課程講義類別名稱</th>
+            <th scope="col" style="width: 13%; text-align:left">最新修改管理員</th>
         </tr>
         </thead>
         <tbody>
         @foreach($course_file_categories as $index => $course_file_category)
             <tr>
                 <td style="text-align:left">{{ $index + 1 }}</td>
-
                 <td>{{ $course_file_category->course_file_category_name }}</td>
+                <td>
+                    @if($course_file_category->lastModifiedByAdmin)
+                        {{ $course_file_category->lastModifiedByAdmin->user->name }}
+                    @else
+                        無
+                    @endif
+                </td>
                 <td style="text-align:center">
                     <a href="{{ route('admins.course_file_categories.edit' ,['course_file_category' => $course_file_category->id]) }}" class="btn btn-secondary btn-sm">編輯</a>
                 </td>

@@ -18,6 +18,7 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col" style="text-align:left">目標</th>
+            <th scope="col" style="width: 13%; text-align:left">最新修改管理員</th>
             <th scope="col" style="text-align:center">編輯</th>
             <th scope="col" style="text-align:center">刪除</th>
         </tr>
@@ -27,6 +28,13 @@
             <tr>
                 <td style="text-align:left">{{ $index + 1 }}</td>
                 <td>{{ $curriculumObjective->description }}</td>
+                <td>
+                    @if($curriculumObjective->lastModifiedByAdmin)
+                        {{ $curriculumObjective->lastModifiedByAdmin->user->name }}
+                    @else
+                        無
+                    @endif
+                </td>
                 <td style="text-align:center">
                     <a href="{{ route('admins.curriculum_objectives.edit',$curriculumObjective->id) }}" class="btn btn-secondary btn-sm">編輯</a>
                 </td>

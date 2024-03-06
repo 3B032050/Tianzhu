@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class AdminPostController extends Controller
@@ -36,15 +37,14 @@ class AdminPostController extends Controller
             $fileName = null;
         }
         $content = strip_tags($request->input('content'));
-         Post::create([
+        $adminId = Auth::user()->admin->id;
+        Post::create([
             'title' => $request->input('title'),
             'content' => $content,
             'is_feature' => $request->input('is_feature'),
             'file' => $fileName, // 存储文件名
-             'status'=>$request->input('status'),
-
-' .
-    '
+            'status'=>$request->input('status'),
+            'last_modified_by' => $adminId,
         ]);
 //        if ($request->hasFile('file'))
 //        {
@@ -98,11 +98,12 @@ class AdminPostController extends Controller
             $fileName = null;
         }
         $content = strip_tags($request->input('content'));
+        $adminId = Auth::user()->admin->id;
         $post->update([
             'title' => $request->input('title'),
             'content' => $content,
             'is_feature' => $request->input('is_feature'),
-
+            'last_modified_by' => $adminId,
         ]);
         return redirect()->route('admins.posts.index');
     }

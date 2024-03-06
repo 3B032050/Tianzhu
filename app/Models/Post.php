@@ -18,6 +18,7 @@ class Post extends Model
         'is_feature',
         'file',
         'status',
+        'last_modified_by',
     ];
 
     protected $casts = [
@@ -29,5 +30,10 @@ class Post extends Model
     public function post_comments(): HasMany
     {
         return $this->hasMany(Post_comment::class);
+    }
+
+    public function lastModifiedByAdmin()
+    {
+        return $this->belongsTo(Admin::class, 'last_modified_by')->with('user');
     }
 }

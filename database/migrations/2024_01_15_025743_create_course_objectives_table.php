@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('course_objectives', function (Blueprint $table) {
             $table->id();
             $table->string('description');
+            $table->unsignedBigInteger('last_modified_by')->nullable();
             $table->timestamps();
         });
     }

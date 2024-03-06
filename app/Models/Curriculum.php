@@ -14,6 +14,7 @@ class Curriculum extends Model
         'course_category_id',
         'content',
         'method',
+        'last_modified_by',
     ];
 
     public function category()
@@ -31,5 +32,10 @@ class Curriculum extends Model
     public function objectives()
     {
         return $this->belongsToMany(CurriculumObjective::class, 'curriculum_objective_relationship', 'curriculum_id', 'objective_id');
+    }
+
+    public function lastModifiedByAdmin()
+    {
+        return $this->belongsTo(Admin::class, 'last_modified_by')->with('user');
     }
 }

@@ -37,6 +37,7 @@
             <th scope="col" style="text-align:left">課程名稱</th>
             <th scope="col" style="text-align:left">課程類別</th>
             <th scope="col" style="text-align:left">課程檔案</th>
+            <th scope="col" style="width: 13%; text-align:left">最新修改管理員</th>
             <th scope="col" style="text-align:left">狀態</th>
             <th scope="col" style="text-align:center">發佈</th>
             <th scope="col" style="text-align:center">編輯</th>
@@ -51,6 +52,13 @@
                 <td>{{ $coursefile->title }}</td>
                 <td>{{ $coursefile->coursefilecategory->course_file_category_name }}</td>
                 <td>{{ $coursefile->file }}</td>
+                <td>
+                    @if($coursefile->lastModifiedByAdmin)
+                        {{ $coursefile->lastModifiedByAdmin->user->name }}
+                    @else
+                        無
+                    @endif
+                </td>
                 @if($coursefile->status=='0')
                     <td>
                         <div style="color:#ff3370; font-weight:bold;">

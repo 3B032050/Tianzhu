@@ -26,6 +26,7 @@
             <th scope="col">#</th>
             <th scope="col" style="text-align:left">活動名稱</th>
             <th scope="col" style="text-align:left">發佈時間</th>
+            <th scope="col" style="width: 13%; text-align:left">最新修改管理員</th>
             <th scope="col" style="text-align:left">狀態</th>
             <th scope="col" style="text-align:center">發佈</th>
             <th scope="col" style="text-align:center">編輯</th>
@@ -38,6 +39,13 @@
                 <td style="text-align:left">{{$index+1}}</td>
                 <td style="text-align:left">{{$activity->title}}</td>
                 <td style="text-align:left">{{$activity->updated_at}}</td>
+                <td>
+                    @if($activity->lastModifiedByAdmin)
+                        {{ $activity->lastModifiedByAdmin->user->name }}
+                    @else
+                        無
+                    @endif
+                </td>
                 <td style="text-align:left">
                     @if ($activity->status == 0)
                         <div style="color:#ff3370; font-weight:bold;">

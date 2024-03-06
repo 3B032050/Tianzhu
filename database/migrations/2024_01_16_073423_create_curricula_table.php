@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('content')->nullable();
             $table->string('method')->nullable();
             $table->integer('status');
+            $table->unsignedBigInteger('last_modified_by')->nullable();
             $table->timestamps();
         });
     }

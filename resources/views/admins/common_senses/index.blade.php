@@ -28,6 +28,7 @@
                 <th scope="col">#</th>
                 <th scope="col" style="text-align:left">類別</th>
                 <th scope="col" style="text-align:left">標題</th>
+                <th scope="col" style="width: 13%; text-align:left">最新修改管理員</th>
                 <th scope="col" style="text-align:left">狀態</th>
                 <th scope="col" style="text-align:center">發佈</th>
                 <th scope="col" style="text-align:center">編輯</th>
@@ -46,6 +47,13 @@
                         @endif
                     </td>
                     <td>{{ $common_sense->title }}</td>
+                    <td>
+                        @if($common_sense->lastModifiedByAdmin)
+                            {{ $common_sense->lastModifiedByAdmin->user->name }}
+                        @else
+                            無
+                        @endif
+                    </td>
                     <td>
                         @if ($common_sense->status == 0)
                             <div style="color:#ff3370; font-weight:bold;">

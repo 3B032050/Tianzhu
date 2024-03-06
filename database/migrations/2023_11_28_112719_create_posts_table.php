@@ -18,6 +18,7 @@ return new class extends Migration
             $table->boolean('is_feature')->default(false);
             $table->string('file')->nullable();
             $table->string('status')->default('0');
+            $table->unsignedBigInteger('last_modified_by')->nullable();
             $table->timestamps();
         });
     }

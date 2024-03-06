@@ -37,6 +37,7 @@
             <th scope="col" style="text-align:left">影音路徑</th>
             <th scope="col" style="text-align:left">影音預覽</th>
             <th scope="col" style="text-align:left">影音標題</th>
+            <th scope="col" style="width: 13%; text-align:left">最新修改管理員</th>
             <th scope="col" style="text-align:center">編輯</th>
             <th scope="col" style="text-align:center">刪除</th>
         </tr>
@@ -50,6 +51,13 @@
                     <iframe width="300" height="200" src="https://www.youtube.com/embed/{{ $video->video_id }}" frameborder="0" allowfullscreen></iframe>
                 </td>
                 <td>{{ $video->video_title }}</td>
+                <td>
+                    @if($video->lastModifiedByAdmin)
+                        {{ $video->lastModifiedByAdmin->user->name }}
+                    @else
+                        無
+                    @endif
+                </td>
                 <td style="text-align:center">
                     <a href="{{ route('admins.videos.edit' ,['video' => $video->id]) }}" class="btn btn-secondary btn-sm">編輯</a>
                 </td>

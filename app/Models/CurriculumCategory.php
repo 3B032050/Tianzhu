@@ -12,11 +12,17 @@ class CurriculumCategory extends Model
     protected $fillable = [
         'name',
         'parent_id',
+        'last_modified_by',
     ];
 
     // 這是反向的一對一關聯，一個分類有一門課程
     public function curricula()
     {
         return $this->hasMany(Curriculum::class, 'curriculum_category_id');
+    }
+
+    public function lastModifiedByAdmin()
+    {
+        return $this->belongsTo(Admin::class, 'last_modified_by')->with('user');
     }
 }

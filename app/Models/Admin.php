@@ -13,11 +13,17 @@ class Admin extends Model
         'id',
         'user_id',
         'position',
+        'last_modified_by',
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function lastModifiedByAdmin()
+    {
+        return $this->belongsTo(Admin::class, 'last_modified_by')->with('user');
     }
 }
 
