@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Video_category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminVideoCategoryController extends Controller
 {
@@ -27,7 +28,8 @@ class AdminVideoCategoryController extends Controller
             'category_name' => 'required|max:255',
         ]);
 
-        Video_category::create($request->all());
+        $adminId = Auth::user()->admin->id;
+        Video_category::create(array_merge($request->all(), ['last_modified_by' => $adminId]));
         return redirect()->route('admins.video_categories.index');
     }
     public function edit(Video_category $video_category)
@@ -47,7 +49,8 @@ class AdminVideoCategoryController extends Controller
             'category_name' => 'required|max:255',
         ]);
 
-        $video_category->update($request->all());
+        $adminId = Auth::user()->admin->id;
+        $video_category->update(array_merge($request->all(), ['last_modified_by' => $adminId]));
         return redirect()->route('admins.video_categories.index');
     }
 

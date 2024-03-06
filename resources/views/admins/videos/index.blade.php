@@ -23,7 +23,7 @@
     @if (request()->has('query'))
         <div class="container px-4 px-lg-5 mt-2 mb-4">
             查找「{{ request('query') }}」
-            <a class="btn btn-success btn-sm" href="{{ route('admins.course_file.search') }}">取消搜尋</a>
+            <a class="btn btn-success btn-sm" href="{{ route('admins.videos.index') }}">取消搜尋</a>
         </div>
     @endif
     <a class="btn btn-success btn-sm" href="{{ route('admins.video_categories.index') }}">影音類別</a>
@@ -37,6 +37,9 @@
             <th scope="col" style="text-align:left">影音路徑</th>
             <th scope="col" style="text-align:left">影音預覽</th>
             <th scope="col" style="text-align:left">影音標題</th>
+            <th scope="col" style="width: 13%; text-align:left">最新修改管理員</th>
+            <th scope="col" style="text-align:center">編輯</th>
+            <th scope="col" style="text-align:center">刪除</th>
         </tr>
         </thead>
         <tbody>
@@ -48,6 +51,13 @@
                     <iframe width="300" height="200" src="https://www.youtube.com/embed/{{ $video->video_id }}" frameborder="0" allowfullscreen></iframe>
                 </td>
                 <td>{{ $video->video_title }}</td>
+                <td>
+                    @if($video->lastModifiedByAdmin)
+                        {{ $video->lastModifiedByAdmin->user->name }}
+                    @else
+                        無
+                    @endif
+                </td>
                 <td style="text-align:center">
                     <a href="{{ route('admins.videos.edit' ,['video' => $video->id]) }}" class="btn btn-secondary btn-sm">編輯</a>
                 </td>

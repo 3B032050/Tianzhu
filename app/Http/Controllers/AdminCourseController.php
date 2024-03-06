@@ -7,6 +7,7 @@ use App\Models\CourseMethod;
 use App\Models\CourseObjective;
 use Illuminate\Http\Request;
 use App\Models\Course;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class AdminCourseController extends Controller
@@ -14,7 +15,32 @@ class AdminCourseController extends Controller
     public function index(Request $request)
     {
         $courses = Course::orderby('id','ASC')->get();
-        $data = ['courses' => $courses];
+        $course_categories = CourseCategory::get();
+        $data = ['courses' => $courses , 'course_categories' => $course_categories];
+        return view('admins.courses.index',$data);
+    }
+
+    public function search(Request $request)
+    {
+        $course_categories = CourseCategory::get();
+        $query = $request->input('query');
+        $category = $request->input('category');
+
+
+        if ($category != 'all')
+        {
+            $courses = Course::where('course_category_id', 'like', "%$category%")
+                ->where('title','like',"%$query%")
+                ->get();
+        }
+        else
+        {
+            $courses = Course::where('title', 'like', "%$query%")
+                ->get();
+        }
+
+        $data = ['course_categories' => $course_categories , 'courses' => $courses , 'query' => $query , 'category' => $category];
+
         return view('admins.courses.index',$data);
     }
 
@@ -63,6 +89,9 @@ class AdminCourseController extends Controller
         $course->time = $request->input('time');
         $course->note = $request->input('note');
 
+        $adminId = Auth::user()->admin->id;
+        $course->last_modified_by = $adminId;
+
         // 儲存課程
         $course->save();
 
@@ -108,6 +137,8 @@ class AdminCourseController extends Controller
             'note' => 'nullable|max:255',
         ]);
 
+        $adminId = Auth::user()->admin->id;
+
         // Update the Course model
         $course->update([
             'title' => $request->input('title'),
@@ -116,6 +147,7 @@ class AdminCourseController extends Controller
             'course_category_id' => $request->input('course_category'),
             'time' => $request->input('time'),
             'note' => $request->input('note'),
+            'last_modified_by' => $adminId,
         ]);
 
         // Sync the related methods

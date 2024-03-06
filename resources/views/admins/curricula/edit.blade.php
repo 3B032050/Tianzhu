@@ -47,24 +47,22 @@
 
         <div class="form-group">
             <label for="curriculum_methods">方法</label>
-            <select name="curriculum_methods[]" id="curriculum_methods" class="form-select" multiple>
-                @foreach($curriculum_methods as $method)
-                    <option value="{{ $method->id }}" {{ (in_array($method->id, $selectedMethods)) ? 'selected' : '' }}>
-                        {{ $method->name }}
-                    </option>
-                @endforeach
-            </select>
+            @foreach($curriculum_methods as $method)
+                <div class="form-check">
+                    <input type="checkbox" name="curriculum_methods[]" id="curriculum_method_{{ $method->id }}" value="{{ $method->id }}" class="form-check-input" {{ (in_array($method->id, $selectedMethods)) ? 'checked' : '' }}>
+                    <label for="curriculum_method_{{ $method->id }}" class="form-check-label">{{ $method->name }}</label>
+                </div>
+            @endforeach
         </div>
 
         <div class="form-group">
             <label for="curriculum_objectives">目標</label>
-            <select name="curriculum_objectives[]" id="curriculum_objectives" class="form-select" multiple>
-                @foreach($curriculum_objectives as $objective)
-                    <option value="{{ $objective->id }}" {{ (in_array($objective->id, $selectedObjectives)) ? 'selected' : '' }}>
-                        {{ $objective->description }}
-                    </option>
-                @endforeach
-            </select>
+            @foreach($curriculum_objectives as $objective)
+                <div class="form-check">
+                    <input type="checkbox" name="curriculum_objectives[]" id="curriculum_objective_{{ $objective->id }}" value="{{ $objective->id }}" class="form-check-input" {{ (in_array($objective->id, $selectedObjectives)) ? 'checked' : '' }}>
+                    <label for="curriculum_objective_{{ $objective->id }}" class="form-check-label">{{ $objective->description }}</label>
+                </div>
+            @endforeach
         </div>
 
         <div class="form-group">

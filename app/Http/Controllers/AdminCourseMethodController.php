@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CourseMethod;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminCourseMethodController extends Controller
 {
@@ -25,7 +26,8 @@ class AdminCourseMethodController extends Controller
             'name' => 'required|max:255',
         ]);
 
-        CourseMethod::create($request->all());
+        $adminId = Auth::user()->admin->id;
+        CourseMethod::create(array_merge($request->all(), ['last_modified_by' => $adminId]));
         return redirect()->route('admins.course_methods.index');
     }
 
@@ -43,7 +45,8 @@ class AdminCourseMethodController extends Controller
             'name' => 'required|max:255',
         ]);
 
-        $courseMethod->update($request->all());
+        $adminId = Auth::user()->admin->id;
+        $courseMethod->update(array_merge($request->all(), ['last_modified_by' => $adminId]));
         return redirect()->route('admins.course_methods.index');
     }
 

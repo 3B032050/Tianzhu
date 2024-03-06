@@ -19,11 +19,9 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <!-- 引入 jQuery UI -->
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-{{--    <script src="https://cdn.ckeditor.com/ckeditor5/40.1.0/classic/ckeditor.js"></script>--}}
     <style type="text/css">
         .ck-editor__editable_inline
         {
-            width: 960px;
             height: 450px;
         }
     </style>
@@ -33,9 +31,6 @@
             text-decoration: none; /* 移除下劃線 */
         }
     </style>
-    <link rel=”stylesheet” href=”http://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css”>
-
-    <link href=”css/bootstrap-switch/bootstrap-switch.css” rel=”stylesheet”>
 
 </head>
 <body class="sb-nav-fixed">

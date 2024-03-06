@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('video_id');
             $table->string('video_url');
             $table->string('video_title');
+            $table->unsignedBigInteger('last_modified_by')->nullable();
             $table->timestamps();
         });
     }

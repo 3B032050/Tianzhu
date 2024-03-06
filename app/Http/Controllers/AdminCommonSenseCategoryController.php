@@ -6,6 +6,7 @@ use App\Models\CommonSense;
 use App\Models\CommonSenseCategory;
 use App\Http\Requests\StoreCommonSenseCategoryRequest;
 use App\Http\Requests\UpdateCommonSenseCategoryRequest;
+use Illuminate\Support\Facades\Auth;
 
 class AdminCommonSenseCategoryController extends Controller
 {
@@ -47,6 +48,9 @@ class AdminCommonSenseCategoryController extends Controller
         $common_sense_category->name = $request->input('name');
         $common_sense_category->status = 1;
 
+        $adminId = Auth::user()->admin->id;
+        $common_sense_category->last_modified_by = $adminId;
+
         $common_sense_category->save();
 
         return redirect()->route('admins.common_sense_categories.index')->with('success', '類別名稱已成功新增。');
@@ -80,7 +84,8 @@ class AdminCommonSenseCategoryController extends Controller
             'name' => 'required|max:255',
         ]);
 
-        $commonSenseCategory->update($request->all());
+        $adminId = Auth::user()->admin->id;
+        $commonSenseCategory->update(array_merge($request->all(), ['last_modified_by' => $adminId]));
         return redirect()->route('admins.common_sense_categories.index');
     }
 

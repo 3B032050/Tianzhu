@@ -31,10 +31,10 @@
                 <input id="video_url" name="video_url" type="url" class="form-control" value="{{ old('video_url') }}" required>
             </div>
 
-            <div class="form-group">
-                <label for="video_title">影音標題</label>
-                <input id="video_title" name="video_title" type="text" class="form-control" value="{{ old('video_title') }}" >
-            </div>
+{{--            <div class="form-group">--}}
+{{--                <label for="video_title">影音標題</label>--}}
+{{--                <input id="video_title" name="video_title" type="text" class="form-control" value="{{ old('video_title') }}" >--}}
+{{--            </div>--}}
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <button type="submit" class="btn btn-primary btn-sm">儲存</button>
             </div>

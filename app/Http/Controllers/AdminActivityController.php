@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Activity;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class AdminActivityController extends Controller
@@ -27,7 +28,8 @@ class AdminActivityController extends Controller
             'content' => 'required',
         ]);
 
-        Activity::create($request->all());
+        $adminId = Auth::user()->admin->id;
+        Activity::create(array_merge($request->all(), ['last_modified_by' => $adminId]));
         return redirect()->route('admins.activities.index');
     }
 
@@ -46,7 +48,8 @@ class AdminActivityController extends Controller
             'content' => 'required',
         ]);
 
-        $activity->update($request->all());
+        $adminId = Auth::user()->admin->id;
+        $activity->update(array_merge($request->all(), ['last_modified_by' => $adminId]));
         return redirect()->route('admins.activities.index');
     }
 
@@ -83,5 +86,20 @@ class AdminActivityController extends Controller
 
             return response()->json(['fileName' => $fileName, 'uploaded'=> 1, 'url' => $url]);
         }
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+
+        // 搜尋活動
+        $activities = Activity::where('title', 'like', "%$query%")
+            ->get();
+
+        // 返回結果
+        return view('admins.activities.index', [
+            'activities' => $activities,
+            'query' => $query,
+        ]);
     }
 }

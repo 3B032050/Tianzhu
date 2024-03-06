@@ -15,7 +15,8 @@ class AdminAdminController extends Controller
         $currentUserId = Auth::id();
         $positionObject = DB::table('admins')->select('position')->where('user_id', $currentUserId)->first();
         $position = $positionObject->position;
-        $admins = DB::table('admins')
+
+        $admins = Admin::with('lastModifiedByAdmin.user')
             ->join('users', 'admins.user_id', '=', 'users.id')
             ->select('admins.*', 'users.name', 'users.email')
             ->where('admins.position', '>', $position)
@@ -50,12 +51,6 @@ class AdminAdminController extends Controller
 
     public function store(Request $request)
     {
-//        $this->validate($request,[
-//            'title' => 'required|max:50',
-//            'content' => 'required',
-//            'is_feature' => 'required|boolean',
-//        ]);
-
         Admin::create($request->all());
         return redirect()->route('admins.admins.index');
     }
@@ -65,10 +60,11 @@ class AdminAdminController extends Controller
         $user_id = $request->input('user_id');
         $position = $request->input('position');
 
-
+        $adminId = Auth::user()->admin->id;
         Admin::create([
             'user_id' => $user_id,
             'position' => $position,
+            'last_modified_by' => $adminId,
         ]);
         return redirect()->route('admins.admins.index');
     }
@@ -88,15 +84,11 @@ class AdminAdminController extends Controller
 
     public function update(Request $request, Admin $admin)
     {
-//        $this->validate($request,[
-//            'title' => 'required|max:50',
-//            'content' => 'required',
-//            'is_feature' => 'required|boolean',
-//        ]);
         if($request->position=="0")
             $admin->delete();
         else
-            $admin->update($request->all());
+            $adminId = Auth::user()->admin->id;
+            $admin->update(array_merge($request->all(), ['last_modified_by' => $adminId]));
         return redirect()->route('admins.admins.index');
     }
 

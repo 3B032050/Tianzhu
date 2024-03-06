@@ -29,6 +29,7 @@
 </div>
 <script src="https://cdn.ckeditor.com/ckeditor5/41.1.0/super-build/ckeditor.js"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/41.1.0/super-build/translations/zh.js"></script>
+
 <script type="module">
     CKEDITOR.ClassicEditor.create(document.getElementById("editor"), {
         toolbar: {

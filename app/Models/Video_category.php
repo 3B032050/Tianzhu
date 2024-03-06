@@ -11,10 +11,15 @@ class Video_category extends Model
     use HasFactory;
     protected $fillable = [
         'category_name',
-
+        'last_modified_by',
     ];
     public function video(): HasMany
     {
         return $this->hasMany(Video::class);
+    }
+
+    public function lastModifiedByAdmin()
+    {
+        return $this->belongsTo(Admin::class, 'last_modified_by')->with('user');
     }
 }

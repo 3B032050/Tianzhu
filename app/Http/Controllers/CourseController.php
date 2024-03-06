@@ -31,17 +31,25 @@ class CourseController extends Controller
     {
         $selectedCategory = CourseCategory::where('id', $courseCategory->id)->firstOrFail();
 
-        if ($request->input('query')) {
-            $query = $request->input('query');
+        $query = $request->input('query');
+        $searchType = $request->input('search_type');
+
+        if ($query && in_array($searchType, ['title', 'content'])) {
             $selectedCategory->courses = $selectedCategory->courses()
                 ->where('status', 1)
-                ->where(function ($queryBuilder) use ($query) {
-                    $queryBuilder->where('title', 'LIKE', '%' . $query . '%');
+                ->where(function ($queryBuilder) use ($query, $searchType) {
+                    if ($searchType === 'title')
+                    {
+                        $queryBuilder->where('title', 'LIKE', '%' . $query . '%');
+                    }
+                    elseif ($searchType === 'content')
+                    {
+                        $queryBuilder->where('content', 'LIKE', '%' . $query . '%');
+                    }
                 })
                 ->get();
         }
-
-        $data = ['selectedCategory' => $selectedCategory];
+        $data = ['selectedCategory' => $selectedCategory , 'searchType' => $searchType];
 
         return view('courses.by_category_search', $data);
     }

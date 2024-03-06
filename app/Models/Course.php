@@ -17,6 +17,7 @@ class Course extends Model
         'time',
         'note',
         'status',
+        'last_modified_by',
     ];
 
     // 這是一對一的關聯，一門課程屬於一個分類
@@ -34,5 +35,10 @@ class Course extends Model
     public function objectives()
     {
         return $this->belongsToMany(CourseObjective::class, 'course_objective_relationship', 'course_id', 'objective_id');
+    }
+
+    public function lastModifiedByAdmin()
+    {
+        return $this->belongsTo(Admin::class, 'last_modified_by')->with('user');
     }
 }

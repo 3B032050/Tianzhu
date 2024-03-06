@@ -26,7 +26,7 @@
                             <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('姓名 / Name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $user->name }}" required autocomplete="name" autofocus>
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $user->name }}" required autocomplete="name" placeholder="必填" autofocus>
 
                                 @error('name')
                                 <span class="invalid-feedback" role="alert">
@@ -40,7 +40,7 @@
                             <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('信箱 / Email') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $user->email }}" required autocomplete="email" autofocus>
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $user->email }}" required autocomplete="email" placeholder="必填" autofocus>
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -70,7 +70,7 @@
                             <label for="birthday" class="col-md-4 col-form-label text-md-end">{{ __('生日 / Birthday') }}</label>
 
                             <div class="col-md-6">
-                                <input id="birthday" type="text" class="form-control @error('birthday') is-invalid @enderror" name="birthday" value="{{ $user->birthday }}" required autocomplete="current-password">
+                                <input id="birthday" type="date" class="form-control @error('birthday') is-invalid @enderror" name="birthday" value="{{ $user->birthday }}" required autocomplete="current-password">
 
                                 @error('birthday')
                                 <span class="invalid-feedback" role="alert">
@@ -84,9 +84,23 @@
                             <label for="phone" class="col-md-4 col-form-label text-md-end">{{ __('電話 / Phone') }}</label>
 
                             <div class="col-md-6">
-                                <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ $user->phone }}" required autocomplete="current-password">
+                                <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ $user->phone }}" required autocomplete="current-password" placeholder="必填">
 
                                 @error('phone')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="cityline" class="col-md-4 col-form-label text-md-end">{{ __('市內電話 / Cityline') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="cityline" type="text" class="form-control @error('cityline') is-invalid @enderror" name="cityline" value="{{ $user->cityline }}" autocomplete="current-cityline" placeholder="選填">
+
+                                @error('cityline')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -98,7 +112,7 @@
                             <label for="address" class="col-md-4 col-form-label text-md-end">{{ __('地址 / Address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ $user->address }}" required autocomplete="current-password">
+                                <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ $user->address }}" autocomplete="current-address" placeholder="選填">
 
                                 @error('address')
                                 <span class="invalid-feedback" role="alert">

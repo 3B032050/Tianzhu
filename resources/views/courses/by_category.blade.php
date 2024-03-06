@@ -14,9 +14,29 @@
 
 @section('content')
     <div class="container px-4 px-lg-5 mt-2 mb-4">
-        <form action="{{ route('courses.by_category_search',$selectedCategory->id) }}" method="GET" class="d-flex">
-            <input type="text" name="query" class="form-control me-2" placeholder="關鍵字搜尋...">
-            <button type="submit" class="btn btn-outline-dark">搜尋</button>
+        <form action="{{ route('courses.by_category_search', $selectedCategory->id) }}" method="GET">
+            <div class="row">
+                <div class="col-md-6">
+                    <input type="text" name="query" class="form-control me-2" placeholder="關鍵字搜尋...">
+                </div>
+                <div class="col-md-6">
+                    <button type="submit" class="btn btn-outline-dark">搜尋</button>
+                </div>
+            </div>
+
+            <div class="row mt-2">
+                <div class="col-md-6">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="search_type" id="searchTitle" value="title" checked>
+                        <label class="form-check-label" for="searchTitle">搜尋標題</label>
+                    </div>
+
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="search_type" id="searchContent" value="content">
+                        <label class="form-check-label" for="searchContent">搜尋內文</label>
+                    </div>
+                </div>
+            </div>
         </form>
     </div>
     <section class="py-5">

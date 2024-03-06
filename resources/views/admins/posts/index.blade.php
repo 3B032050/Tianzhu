@@ -29,37 +29,47 @@
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col" style="text-align:center">標題</th>
-            <th scope="col" style="text-align:center">公告時間</th>
+            <th scope="col" style="text-align:left">標題</th>
+            <th scope="col" style="text-align:left">公告時間</th>
+            <th scope="col" style="width: 13%; text-align:left">最新修改管理員</th>
             <th scope="col" style="text-align:left">狀態</th>
+            <th scope="col" style="text-align:center">發佈</th>
             <th scope="col" style="text-align:center">編輯</th>
-            <th scope="col" style="text-align:left">操作</th>
+            <th scope="col" style="text-align:center">刪除</th>
         </tr>
         </thead>
         <tbody>
         @foreach($posts as $index => $post)
             <tr>
-                <td style="text-align:left">{{$index+1}}</td>
-                <td style="text-align:center">{{$post->title}}</td>
-                <td style="text-align:center">{{$post->created_at}}</td>
+                <td>{{$index+1}}</td>
+                <td>{{$post->title}}</td>
+                <td>{{$post->created_at}}</td>
+                <td>
+                    @if($post->lastModifiedByAdmin)
+                        {{ $post->lastModifiedByAdmin->user->name }}
+                    @else
+                        無
+                    @endif
+                </td>
                 @if($post->status=='1')
-                    <td style="text-align:center">
-                        上架
+                    <td>
+                        <div style="color:#ffa600; font-weight:bold;">
+                            (已發佈)
+                        </div>
                     </td>
                 @else
-                    <td style="text-align:center; color: red;">
-                        下架
+                    <td>
+                        <div style="color:#ff3370; font-weight:bold;">
+                            (未發佈)
+                        </div>
                     </td>
                 @endif
-                <td style="text-align:center">
-                    <a href="{{ route('admins.posts.edit',$post->id) }}" class="btn btn-secondary btn-sm">編輯</a>
-                </td>
                 @if($post->status=='1')
                     <td style="text-align:center">
                         <form action="{{ route('admins.posts.statusoff',$post->id) }}" method="POST">
                             @method('PATCH')
                             @csrf
-                            <button type="submit" class="btn btn-danger btn-sm">下架</button>
+                            <button type="submit" class="btn btn-secondary btn-sm">取消發佈</button>
                         </form>
                     </td>
                 @else
@@ -67,10 +77,13 @@
                         <form action="{{ route('admins.posts.statuson',$post->id) }}" method="POST">
                             @method('PATCH')
                             @csrf
-                            <button type="submit" class="btn btn-danger btn-sm">上架</button>
+                            <button type="submit" class="btn btn-secondary btn-sm">發佈</button>
                         </form>
                     </td>
                 @endif
+                <td style="text-align:center">
+                    <a href="{{ route('admins.posts.edit',$post->id) }}" class="btn btn-secondary btn-sm">編輯</a>
+                </td>
                 <td style="text-align:center">
                     <form id="deleteForm" action="{{ route('admins.posts.destroy',$post->id) }}" method="POST">
                         @method('DELETE')

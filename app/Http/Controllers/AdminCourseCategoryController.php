@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CourseCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminCourseCategoryController extends Controller
 {
@@ -25,7 +26,8 @@ class AdminCourseCategoryController extends Controller
             'name' => 'required|max:255',
         ]);
 
-        CourseCategory::create($request->all());
+        $adminId = Auth::user()->admin->id;
+        CourseCategory::create(array_merge($request->all(), ['last_modified_by' => $adminId]));
         return redirect()->route('admins.course_categories.index');
     }
 
@@ -43,7 +45,8 @@ class AdminCourseCategoryController extends Controller
             'name' => 'required|max:255',
         ]);
 
-        $courseCategory->update($request->all());
+        $adminId = Auth::user()->admin->id;
+        $courseCategory->update(array_merge($request->all(), ['last_modified_by' => $adminId]));
         return redirect()->route('admins.course_categories.index');
     }
 

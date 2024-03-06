@@ -18,6 +18,7 @@
             <tr>
 {{--                <th scope="col">#</th>--}}
                 <th scope="col" style="text-align:left">名稱</th>
+                <th scope="col" style="width: 13%; text-align:left">最新修改管理員</th>
                 <th scope="col" style="text-align:center">新增子類別</th>
                 <th scope="col" style="text-align:center">編輯</th>
                 <th scope="col" style="text-align:center">刪除</th>
@@ -32,6 +33,13 @@
                     <tr>
 {{--                        <td style="text-align:left">{{ $indexCounter++ }}</td>--}}
                         <td>{{ $curriculumCategory->name }}</td>
+                        <td>
+                            @if($curriculumCategory->lastModifiedByAdmin)
+                                {{ $curriculumCategory->lastModifiedByAdmin->user->name }}
+                            @else
+                                無
+                            @endif
+                        </td>
                         <td style="text-align:center">
                             <a href="{{ route('admins.curriculum_categories.create_hierarchy',$curriculumCategory->id) }}" class="btn btn-secondary btn-sm">新增子類別</a>
                         </td>

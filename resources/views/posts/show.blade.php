@@ -10,16 +10,20 @@
                 <h5 class="card-title">公告標題: {{ $post->title }}</h5>
                 <p class="card-text"> {{ $post->content }}</p>
             </div>
+            @if($post->file)
             <div class="card-footer">
-                <th scope="col">公告附檔</th>
-                <td>
-                    <a href="{{ route('posts.post_download', ['id' => $post->id, 'file' => $post->file]) }}">
-                        {{ $post->file }}
-                    </a>
-                </td>
-                <th scope="col">公告時間</th>
-                <td>{{ $post->created_at }}</td>
+                <table>
+                    <th scope="col">公告附檔</th>
+                    <td>
+                        <a href="{{ route('posts.post_download', ['id' => $post->id, 'file' => $post->file]) }}">
+                            {{ $post->file }}
+                        </a>
+                    </td>
+                    <th scope="col">公告時間</th>
+                    <td>{{ $post->created_at }}</td>
+                </table>
             </div>
+            @endif
         </div>
     </div>
 

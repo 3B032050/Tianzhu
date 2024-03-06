@@ -14,10 +14,15 @@ class CourseFile extends Model
         'title',
         'file',
         'status',
+        'last_modified_by',
     ];
     public function coursefilecategory()
     {
         return $this->belongsTo(CourseFileCategory::class, 'course_file_category_id');
     }
 
+    public function lastModifiedByAdmin()
+    {
+        return $this->belongsTo(Admin::class, 'last_modified_by')->with('user');
+    }
 }

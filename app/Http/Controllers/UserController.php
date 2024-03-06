@@ -44,11 +44,16 @@ class UserController extends Controller
 
     public function update(Request $request, User $user)
     {
-//        $this->validate($request,[
-//            'title' => 'required|max:50',
-//            'content' => 'required',
-//            'is_feature' => 'required|boolean',
-//        ]);
+        $this->validate($request,[
+            'name' => ['required', 'string', 'max:255'],
+            'sex' => ['required', 'string', 'max:1'],
+            'email' => ['required', 'email', 'unique:users,email,' . $user->id],
+            'birthday' => ['required', 'date',],
+            'phone' => ['required', 'string', 'max:10'],
+            'cityline' => ['max:10'],
+            'address' => ['max:255'],
+            'classification' => ['required', 'string'],
+        ]);
 
         $user->update($request->all());
         return redirect()->route('users.index');

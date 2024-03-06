@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Video;
 use App\Models\Video_category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 
@@ -33,7 +34,6 @@ class AdminVideoController extends Controller
         $this->validate($request,[
             'video_category_id' => 'required',
             'video_url' => 'required',
-            'video_title'=> 'required',
 
         ]);
         // 獲取用戶提交連接
@@ -54,13 +54,17 @@ class AdminVideoController extends Controller
 
         // 提取影品封面片連接
         $coverUrl = $videoInfo['items'][0]['snippet']['thumbnails']['high']['url'];
+        $videoTitle = $videoInfo['items'][0]['snippet']['title'];
+
+        $adminId = Auth::user()->admin->id;
         // 構件包含所有數據的字組
         Video::create([
             'video_category_id' => $request->input('video_category_id'),
             'video_url' => $videourl,
             'video_id'=>$videoId,
             'cover_url' => $coverUrl,
-            'video_title'=>$request->video_title,
+            'video_title' => $videoTitle,
+            'last_modified_by' => $adminId,
         ]);
         return redirect()->route('admins.videos.index');
     }
@@ -81,7 +85,6 @@ class AdminVideoController extends Controller
         $this->validate($request,[
             'video_category_id' => 'required',
             'video_url' => 'required',
-            'video_title'=> 'required',
         ]);
         // 獲取用戶提交連接
         $videourl = $request->input('video_url');
@@ -101,13 +104,16 @@ class AdminVideoController extends Controller
 
         // 提取影品封面片連接
         $coverUrl = $videoInfo['items'][0]['snippet']['thumbnails']['high']['url'];
+        $videoTitle = $videoInfo['items'][0]['snippet']['title'];
 
+        $adminId = Auth::user()->admin->id;
         $video->update([
             'video_category_id' => $request->input('video_category_id'),
             'video_url' => $videourl,
             'video_id' => $videoId,
             'cover_url' => $coverUrl,
-            'video_title' => $request->input('video_title'),
+            'video_title' => $videoTitle,
+            'last_modified_by' => $adminId,
         ]);
 
         return redirect()->route('admins.videos.index');

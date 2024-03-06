@@ -20,6 +20,7 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col" style="text-align:left">影音類別名稱</th>
+            <th scope="col" style="width: 13%; text-align:left">最新修改管理員</th>
         </tr>
         </thead>
         <tbody>
@@ -28,6 +29,13 @@
                 <td style="text-align:left">{{ $index + 1 }}</td>
 
                 <td>{{ $videocategory->category_name }}</td>
+                <td>
+                    @if($videocategory->lastModifiedByAdmin)
+                        {{ $videocategory->lastModifiedByAdmin->user->name }}
+                    @else
+                        無
+                    @endif
+                </td>
                 <td style="text-align:center">
                     <a href="{{ route('admins.video_categories.edit' ,['video_category' => $videocategory->id]) }}" class="btn btn-secondary btn-sm">編輯</a>
                 </td>

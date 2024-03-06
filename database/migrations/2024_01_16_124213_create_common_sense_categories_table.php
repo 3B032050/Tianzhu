@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->integer('status');
+            $table->unsignedBigInteger('last_modified_by')->nullable();
             $table->timestamps();
         });
     }

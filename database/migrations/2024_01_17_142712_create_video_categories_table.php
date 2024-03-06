@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('video_categories', function (Blueprint $table) {
             $table->id();
             $table->string('category_name');
+            $table->unsignedBigInteger('last_modified_by')->nullable();
             $table->timestamps();
         });
     }

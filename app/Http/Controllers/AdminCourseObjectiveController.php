@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CourseObjective;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminCourseObjectiveController extends Controller
 {
@@ -25,7 +26,8 @@ class AdminCourseObjectiveController extends Controller
             'description' => 'required|max:255',
         ]);
 
-        CourseObjective::create($request->all());
+        $adminId = Auth::user()->admin->id;
+        CourseObjective::create(array_merge($request->all(), ['last_modified_by' => $adminId]));
         return redirect()->route('admins.course_objectives.index');
     }
 
@@ -43,7 +45,8 @@ class AdminCourseObjectiveController extends Controller
             'description' => 'required|max:255',
         ]);
 
-        $courseObjective->update($request->all());
+        $adminId = Auth::user()->admin->id;
+        $courseObjective->update(array_merge($request->all(), ['last_modified_by' => $adminId]));
         return redirect()->route('admins.course_objectives.index');
     }
 

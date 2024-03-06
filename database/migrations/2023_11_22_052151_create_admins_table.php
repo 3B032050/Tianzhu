@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id'); //使用者編號
             $table->foreign('user_id')->references('id')->on('users');
             $table->integer('position');
+            $table->unsignedBigInteger('last_modified_by')->nullable();
             $table->timestamps();
         });
     }

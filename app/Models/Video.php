@@ -15,9 +15,15 @@ class Video extends Model
         'video_id',
         'cover_url',
         'video_title',
+        'last_modified_by',
     ];
     public function video_category(): BelongsTo
     {
         return $this->belongsTo(Video_category::class);
+    }
+
+    public function lastModifiedByAdmin()
+    {
+        return $this->belongsTo(Admin::class, 'last_modified_by')->with('user');
     }
 }

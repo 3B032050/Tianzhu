@@ -13,10 +13,16 @@ class CommonSense extends Model
         'common_sense_category_id',
         'title',
         'content',
+        'last_modified_by',
     ];
 
     public function category()
     {
         return $this->belongsTo(CommonSenseCategory::class, 'common_sense_category_id');
+    }
+
+    public function lastModifiedByAdmin()
+    {
+        return $this->belongsTo(Admin::class, 'last_modified_by')->with('user');
     }
 }

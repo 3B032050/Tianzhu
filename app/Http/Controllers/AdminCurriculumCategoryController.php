@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CurriculumCategory;
 use App\Http\Requests\StoreCurriculumCategoryRequest;
 use App\Http\Requests\UpdateCurriculumCategoryRequest;
+use Illuminate\Support\Facades\Auth;
 
 class AdminCurriculumCategoryController extends Controller
 {
@@ -49,8 +50,9 @@ class AdminCurriculumCategoryController extends Controller
             $requestData = array_merge($request->all(), ['parent_id' => 0]);
         }
 
+        $adminId = Auth::user()->admin->id;
         // Create the CurriculumCategory
-        CurriculumCategory::create($requestData);
+        CurriculumCategory::create(array_merge($requestData, ['last_modified_by' => $adminId]));
 
         return redirect()->route('admins.curriculum_categories.index');
     }
@@ -83,7 +85,8 @@ class AdminCurriculumCategoryController extends Controller
             'name' => 'required|max:255',
         ]);
 
-        $curriculumCategory->update($request->all());
+        $adminId = Auth::user()->admin->id;
+        $curriculumCategory->update(array_merge($request->all(), ['last_modified_by' => $adminId]));
         return redirect()->route('admins.curriculum_categories.index');
     }
 

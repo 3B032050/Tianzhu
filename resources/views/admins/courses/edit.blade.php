@@ -38,24 +38,22 @@
 
         <div class="form-group">
             <label for="course_methods">方法</label>
-            <select name="course_methods[]" id="course_methods" class="form-select" size="{{ count($course_methods) }}" multiple>
-                @foreach($course_methods as $method)
-                    <option value="{{ $method->id }}" {{ (in_array($method->id, $selectedMethods)) ? 'selected' : '' }}>
-                        {{ $method->name }}
-                    </option>
-                @endforeach
-            </select>
+            @foreach($course_methods as $method)
+                <div class="form-check">
+                    <input type="checkbox" name="course_methods[]" id="method_{{ $method->id }}" value="{{ $method->id }}" class="form-check-input" {{ (in_array($method->id, $selectedMethods)) ? 'checked' : '' }}>
+                    <label for="method_{{ $method->id }}" class="form-check-label">{{ $method->name }}</label>
+                </div>
+            @endforeach
         </div>
 
         <div class="form-group">
             <label for="course_objectives">目標</label>
-            <select name="course_objectives[]" id="course_objectives" class="form-select" size="{{ count($course_objectives) }}" multiple>
-                @foreach($course_objectives as $objective)
-                    <option value="{{ $objective->id }}" {{ (in_array($objective->id, $selectedObjectives)) ? 'selected' : '' }}>
-                        {{ $objective->description }}
-                    </option>
-                @endforeach
-            </select>
+            @foreach($course_objectives as $objective)
+                <div class="form-check">
+                    <input type="checkbox" name="course_objectives[]" id="objective_{{ $objective->id }}" value="{{ $objective->id }}" class="form-check-input" {{ (in_array($objective->id, $selectedObjectives)) ? 'checked' : '' }}>
+                    <label for="objective_{{ $objective->id }}" class="form-check-label">{{ $objective->description }}</label>
+                </div>
+            @endforeach
         </div>
 
         <div class="form-group">
