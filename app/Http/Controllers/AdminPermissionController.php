@@ -60,6 +60,22 @@ class AdminPermissionController extends Controller
         //
     }
 
+    public function on(UpdatePermissionRequest $request, Permission $permission)
+    {
+        $permission->status = 1;
+        $permission->save();
+
+        return redirect()->route('admins.permissions.index');
+    }
+
+    public function off(UpdatePermissionRequest $request, Permission $permission)
+    {
+        $permission->status = 0;
+        $permission->save();
+
+        return redirect()->route('admins.permissions.index');
+    }
+
     /**
      * Remove the specified resource from storage.
      */

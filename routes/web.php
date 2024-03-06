@@ -199,6 +199,8 @@ Route::group(['middleware' => 'admin'], function(){
         Route::delete('/admins/{admin}', [App\Http\Controllers\AdminAdminController::class, 'destroy'])->name("admins.destroy");
 
         Route::get('/permissions',[App\Http\Controllers\AdminPermissionController::class,'index'])->name('permissions.index');
+        Route::patch('/permissions/on/{permission}', [App\Http\Controllers\AdminPermissionController::class, 'on'])->name('permissions.on');
+        Route::patch('/permissions/off/{permission}', [App\Http\Controllers\AdminPermissionController::class, 'off'])->name('permissions.off');
 
 
         Route::get('/slides', [App\Http\Controllers\AdminSlideController::class, 'index'])->name('slides.index');
