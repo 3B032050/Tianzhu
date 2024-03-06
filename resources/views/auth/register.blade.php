@@ -17,7 +17,7 @@
                         <div class="row mb-3">
                             <label for="account" class="col-md-4 col-form-label text-md-end">{{ __('帳號 / Account') }}</label>
                             <div class="col-md-6">
-                                <input id="account" type="text" class="form-control @error('account') is-invalid @enderror" name="account" value="{{ old('account') }}" required autocomplete="account" autofocus>
+                                <input id="account" type="text" class="form-control @error('account') is-invalid @enderror" name="account" value="{{ old('account') }}" required autocomplete="account" placeholder="必填" autofocus>
 
                                 @error('account')
                                     <span class="invalid-feedback" role="alert">
@@ -31,7 +31,7 @@
                             <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('密碼 / Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="必填">
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -45,7 +45,7 @@
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('確認密碼 / Confirm') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="必填">
                             </div>
                         </div>
 
@@ -53,7 +53,7 @@
                             <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('姓名 / Name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autocomplete="name">
+                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autocomplete="name" placeholder="必填">
                             </div>
                         </div>
 
@@ -70,7 +70,7 @@
                             <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('電子信箱 / Email') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="必填">
 
                                 @error('email')
                                 <span class="invalid-feedback" role="alert">
@@ -88,16 +88,23 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="phone" class="col-md-4 col-form-label text-md-end">{{ __('手機號碼 / Name') }}</label>
+                            <label for="phone" class="col-md-4 col-form-label text-md-end">{{ __('手機號碼 / Phone') }}</label>
                             <div class="col-md-6">
-                                <input id="phone" type="text" class="form-control" name="phone" value="{{ old('phone') }}" required autocomplete="phone">
+                                <input id="phone" type="text" class="form-control" name="phone" value="{{ old('phone') }}" required autocomplete="phone" placeholder="必填">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="cityline" class="col-md-4 col-form-label text-md-end">{{ __('市內電話 / Cityline') }}</label>
+                            <div class="col-md-6">
+                                <input id="cityline" type="text" class="form-control" name="cityline" value="{{ old('cityline') }}" placeholder="選填">
                             </div>
                         </div>
 
                         <div class="row mb-3">
                             <label for="address" class="col-md-4 col-form-label text-md-end">{{ __('地址 / Address') }}</label>
                             <div class="col-md-6">
-                                <input id="address" type="text" class="form-control" name="address" value="{{ old('address') }}" >
+                                <input id="address" type="text" class="form-control" name="address" value="{{ old('address') }}" placeholder="選填">
                             </div>
                         </div>
 

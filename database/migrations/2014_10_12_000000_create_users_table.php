@@ -20,8 +20,9 @@ return new class extends Migration
             $table->string('password');
             $table->string('sex');
             $table->date('birthday');
-            $table->integer('phone');
-            $table->string('address');
+            $table->string('phone');
+            $table->string('cityline')->nullable();
+            $table->string('address')->nullable();
             $table->string('classification')->nullable();
             $table->rememberToken();
             $table->timestamps();
