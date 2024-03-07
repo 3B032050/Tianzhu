@@ -47,11 +47,5 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="{{ asset('js/admin-scripts.js') }}"></script>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="js/bootstrap-switch/highlight.js"></script>
-    <script src="js/bootstrap-switch/bootstrap-switch.js"></script>
-    <script src="js/bootstrap-switch/main.js"></script>
 </body>
 </html>
