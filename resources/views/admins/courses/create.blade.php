@@ -34,7 +34,7 @@
             </div>
 
             <div class="form-group">
-                <label for="course_methods">方法</label>
+                <label for="course_methods"><div class="section-title">方法</div></label>
                 @foreach($course_methods as $course_method)
                     <div class="form-check">
                         <input type="checkbox" name="course_methods[]" id="method_{{ $course_method->id }}" value="{{ $course_method->id }}" class="form-check-input">
@@ -43,8 +43,10 @@
                 @endforeach
             </div>
 
+            <div class="vertical-space"></div>
+
             <div class="form-group">
-                <label for="course_objectives">目標</label>
+                <label for="course_objectives"><div class="section-title">目標</div></label>
                 @foreach($course_objectives as $course_objective)
                     <div class="form-check">
                         <input type="checkbox" name="course_objectives[]" id="objective_{{ $course_objective->id }}" value="{{ $course_objective->id }}" class="form-check-input">
@@ -226,4 +228,14 @@
             },
         });
     </script>
+    <style>
+        .section-title {
+            font-size: 18px; /* 設定字體大小為18像素，你可以根據需要調整 */
+            font-weight: bold; /* 將字體設置為粗體 */
+            margin-bottom: 10px; /* 設定底部間隔為10像素，你可以根據需要調整 */
+        }
+        .vertical-space {
+            height: 40px; /* 設定垂直間隔的高度，你可以根據需要調整 */
+        }
+    </style>
 @endsection

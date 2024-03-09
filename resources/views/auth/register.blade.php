@@ -15,7 +15,7 @@
                         @csrf
 
                         <div class="row mb-3">
-                            <label for="account" class="col-md-4 col-form-label text-md-end">{{ __('帳號 / Account') }}</label>
+                            <label for="account" class="col-md-4 col-form-label text-md-end"><span class="required">*</span>{{ __('帳號 / Account') }}</label>
                             <div class="col-md-6">
                                 <input id="account" type="text" class="form-control @error('account') is-invalid @enderror" name="account" value="{{ old('account') }}" required autocomplete="account" placeholder="必填" autofocus>
 
@@ -28,7 +28,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('密碼 / Password') }}</label>
+                            <label for="password" class="col-md-4 col-form-label text-md-end"><span class="required">*</span>{{ __('密碼 / Password') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="必填">
@@ -42,7 +42,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('確認密碼 / Confirm') }}</label>
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end"><span class="required">*</span>{{ __('確認密碼 / Confirm') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="必填">
@@ -50,7 +50,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('姓名 / Name') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-end"><span class="required">*</span>{{ __('姓名 / Name') }}</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autocomplete="name" placeholder="必填">
@@ -58,7 +58,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="sex" class="col-md-4 col-form-label text-md-end">{{ __('性別 / Gender') }}</label>
+                            <label for="sex" class="col-md-4 col-form-label text-md-end"><span class="required">*</span>{{ __('性別 / Gender') }}</label>
 
                             <div class="col-md-6">
                                 男<input id="sex" type="radio" name="sex" value="{{ '男' }}" required autocomplete="sex" checked="checked">
@@ -67,7 +67,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('電子信箱 / Email') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-end"><span class="required">*</span>{{ __('電子信箱 / Email') }}</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="必填">
@@ -81,14 +81,14 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="birthday" class="col-md-4 col-form-label text-md-end">{{ __('生日 / Birthday') }}</label>
+                            <label for="birthday" class="col-md-4 col-form-label text-md-end"><span class="required">*</span>{{ __('生日 / Birthday') }}</label>
                             <div class="col-md-6">
                                 <input id="birthday" type="date" class="form-control" name="birthday" value="{{ old('birthday') }}" required autocomplete="birthday">
                             </div>
                         </div>
 
                         <div class="row mb-3">
-                            <label for="phone" class="col-md-4 col-form-label text-md-end">{{ __('手機號碼 / Phone') }}</label>
+                            <label for="phone" class="col-md-4 col-form-label text-md-end"><span class="required">*</span>{{ __('手機號碼 / Phone') }}</label>
                             <div class="col-md-6">
                                 <input id="phone" type="text" class="form-control" name="phone" value="{{ old('phone') }}" required autocomplete="phone" placeholder="必填">
                             </div>
@@ -109,7 +109,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="classification" class="col-md-4 col-form-label text-md-end">{{ __('類別 / Classification') }}</label>
+                            <label for="classification" class="col-md-4 col-form-label text-md-end"><span class="required">*</span>{{ __('類別 / Classification') }}</label>
 
                             <div class="col-md-6">
                                 <select id="classification" class="form-control" name="classification" required autocomplete="current-classification">
@@ -134,4 +134,12 @@
     </div>
 </div>
 </section>
+<style>
+    .required {
+        color: red;
+        margin-left: 5px;
+        font-weight: bold;
+    }
+</style>
+
 @endsection
