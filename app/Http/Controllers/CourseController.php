@@ -19,8 +19,9 @@ class CourseController extends Controller
 
     public function by_category(CourseCategory $courseCategory)
     {
-        $selectedCategory = CourseCategory::where('id', $courseCategory->id)->firstOrFail();
-        $selectedCategory->courses = $selectedCategory->courses()->where('status', 1)->get();
+        $selectedCategory = CourseCategory::with(['courses' => function ($query) {
+            $query->where('status', 1)->orderBy('order_by', 'asc');
+        }])->where('id', $courseCategory->id)->firstOrFail();
 
         $data = ['selectedCategory' => $selectedCategory];
 
@@ -38,18 +39,17 @@ class CourseController extends Controller
             $selectedCategory->courses = $selectedCategory->courses()
                 ->where('status', 1)
                 ->where(function ($queryBuilder) use ($query, $searchType) {
-                    if ($searchType === 'title')
-                    {
+                    if ($searchType === 'title') {
                         $queryBuilder->where('title', 'LIKE', '%' . $query . '%');
-                    }
-                    elseif ($searchType === 'content')
-                    {
+                    } elseif ($searchType === 'content') {
                         $queryBuilder->where('content', 'LIKE', '%' . $query . '%');
                     }
                 })
+                ->orderBy('order_by')
                 ->get();
         }
-        $data = ['selectedCategory' => $selectedCategory , 'searchType' => $searchType];
+
+        $data = ['selectedCategory' => $selectedCategory, 'searchType' => $searchType];
 
         return view('courses.by_category_search', $data);
     }

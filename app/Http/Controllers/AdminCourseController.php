@@ -20,6 +20,21 @@ class AdminCourseController extends Controller
         return view('admins.courses.index',$data);
     }
 
+    public function by_category()
+    {
+        $courseCategories = CourseCategory::orderBy('order_by')->get();
+        $data = ['courseCategories' => $courseCategories];
+        return view('admins.courses.by_category', $data);
+    }
+
+    public function order_by(Request $request, $courseCategoryId)
+    {
+        $courseCategory = CourseCategory::findOrFail($courseCategoryId);
+        $courses = Course::where('course_category_id', $courseCategoryId)->orderBy('order_by', 'ASC')->get();
+        $data = ['courses' => $courses, 'courseCategory' => $courseCategory];
+        return view('admins.courses.order_by', $data);
+    }
+
     public function search(Request $request)
     {
         $course_categories = CourseCategory::get();
@@ -91,6 +106,10 @@ class AdminCourseController extends Controller
 
         $adminId = Auth::user()->admin->id;
         $course->last_modified_by = $adminId;
+
+        $maxOrderBy = Course::where('course_category_id', $request->input('course_category'))->max('order_by');
+        $courseOrderBy = $maxOrderBy + 1;
+        $course->order_by = $courseOrderBy;
 
         // 儲存課程
         $course->save();
@@ -192,5 +211,28 @@ class AdminCourseController extends Controller
 
             return response()->json(['fileName' => $fileName, 'uploaded'=> 1, 'url' => $url]);
         }
+    }
+
+    public function update_order(Request $request)
+    {
+        // 使用 $request->input('sortedIds') 獲取排序的順序
+        $sortedIds = $request->input('sortedIds');
+
+        // 確保 $sortedIds 是字符串
+        if (is_string($sortedIds)) {
+            // 使用 explode 函數將字符串拆分成數組
+            $sortedIdsArray = explode(',', $sortedIds);
+
+            // 更新數據庫中的排序
+            foreach ($sortedIdsArray as $index => $itemId) {
+                Course::where('id', $itemId)->update(['order_by' => $index + 1]);
+            }
+
+            $courseCategoryId = Course::find($sortedIdsArray[0])->course_category_id;
+
+            return redirect()->route('admins.courses.order_by', ['courseCategoryId' => $courseCategoryId]);
+        }
+
+        return redirect()->route('admins.courses.by_category');
     }
 }

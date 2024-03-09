@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('note')->nullable();
             $table->string('status')->default(0);
             $table->unsignedBigInteger('last_modified_by')->nullable();
+            $table->unsignedBigInteger('order_by');
             $table->timestamps();
 //            $table->foreign('last_modified_by')->references('id')->on('users')->onDelete('set null');
 //            $table->foreign('course_category_id')->references('id')->on('course_categories')->onDelete('cascade');

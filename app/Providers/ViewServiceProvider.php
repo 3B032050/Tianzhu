@@ -25,17 +25,20 @@ class ViewServiceProvider extends ServiceProvider
     public function boot(): void
     {
         View::composer('*', function ($view) {
-            $webHierarchies = Web_hierarchy::all();
-            $view->with('webHierarchies', $webHierarchies);
+            # 只顯示在非後台頁面
+            if (!request()->is('admins/*')) {
+                $webHierarchies = Web_hierarchy::all();
+                $view->with('webHierarchies', $webHierarchies);
 
-            $introductions = Introduction::orderBy('id', 'ASC')->get();
-            $view->with('introductions', $introductions);
+                $introductions = Introduction::orderBy('id', 'ASC')->get();
+                $view->with('introductions', $introductions);
 
-            $courseCategories = CourseCategory::orderBy('id', 'ASC')->get();
-            $view->with('courseCategories', $courseCategories);
+                $courseCategories = CourseCategory::orderBy('order_by')->get();
+                $view->with('courseCategories', $courseCategories);
 
-            $courseOverview = CourseOverview::where('title','總覽')->first();
-            $view->with('courseOverview', $courseOverview);
+                $courseOverview = CourseOverview::where('title', '總覽')->first();
+                $view->with('courseOverview', $courseOverview);
+            }
         });
     }
 }

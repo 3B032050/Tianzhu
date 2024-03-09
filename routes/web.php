@@ -129,6 +129,8 @@ Route::group(['middleware' => 'admin'], function(){
 
 
         Route::get('/courses',[App\Http\Controllers\AdminCourseController::class,'index'])->name('courses.index');
+        Route::get('/courses/by_category',[App\Http\Controllers\AdminCourseController::class,'by_category'])->name('courses.by_category');
+        Route::get('/courses/order_by/{courseCategoryId}',[App\Http\Controllers\AdminCourseController::class,'order_by'])->name('courses.order_by');
         Route::get('/courses/create',[App\Http\Controllers\AdminCourseController::class,'create'])->name('courses.create');
         Route::post('/courses', [App\Http\Controllers\AdminCourseController::class, 'store'])->name("courses.store");
         Route::get('/courses/{course}/edit', [App\Http\Controllers\AdminCourseController::class, 'edit'])->name("courses.edit");
@@ -138,7 +140,7 @@ Route::group(['middleware' => 'admin'], function(){
         Route::delete('/courses/{course}', [App\Http\Controllers\AdminCourseController::class, 'destroy'])->name("courses.destroy");
         Route::get('/courses/search', [App\Http\Controllers\AdminCourseController::class, 'search'])->name('courses.search');
         Route::post('/courses/upload', [App\Http\Controllers\AdminCourseController::class, 'upload'])->name('courses.upload');
-
+        Route::patch('/courses/{course}/update_order', [App\Http\Controllers\AdminCourseController::class, 'update_order'])->name('courses.update_order');
 
         Route::get('/course_objectives',[App\Http\Controllers\AdminCourseObjectiveController::class,'index'])->name('course_objectives.index');
         Route::get('/course_objectives/create',[App\Http\Controllers\AdminCourseObjectiveController::class,'create'])->name('course_objectives.create');
@@ -148,13 +150,15 @@ Route::group(['middleware' => 'admin'], function(){
         Route::delete('/course_objectives/{course_objective}', [App\Http\Controllers\AdminCourseObjectiveController::class, 'destroy'])->name("course_objectives.destroy");
         Route::get('/course_objectives/search', [App\Http\Controllers\AdminCourseObjectiveController::class, 'search'])->name('course_objectives.search');
 
-        Route::get('/course_categories',[App\Http\Controllers\AdminCourseCategoryController::class,'index'])->name('course_categories.index');
+        Route::get('/course_categories/index',[App\Http\Controllers\AdminCourseCategoryController::class,'index'])->name('course_categories.index');
+        Route::get('/course_categories/order_by',[App\Http\Controllers\AdminCourseCategoryController::class,'order_by'])->name('course_categories.order_by');
         Route::get('/course_categories/create',[App\Http\Controllers\AdminCourseCategoryController::class,'create'])->name('course_categories.create');
         Route::post('/course_categories', [App\Http\Controllers\AdminCourseCategoryController::class, 'store'])->name("course_categories.store");
         Route::get('/course_categories/{course_category}/edit', [App\Http\Controllers\AdminCourseCategoryController::class, 'edit'])->name("course_categories.edit");
         Route::patch('/course_categories/{course_category}',[App\Http\Controllers\AdminCourseCategoryController::class,'update'])->name('course_categories.update');
         Route::delete('/course_categories/{course_category}', [App\Http\Controllers\AdminCourseCategoryController::class, 'destroy'])->name("course_categories.destroy");
         Route::get('/course_categories/search', [App\Http\Controllers\AdminCourseCategoryController::class, 'search'])->name('course_categories.search');
+        Route::patch('/course_categories/{course_category}/update_order', [App\Http\Controllers\AdminCourseCategoryController::class, 'update_order'])->name('course_categories.update_order');
 
         Route::get('/course_methods',[App\Http\Controllers\AdminCourseMethodController::class,'index'])->name('course_methods.index');
         Route::get('/course_methods/create',[App\Http\Controllers\AdminCourseMethodController::class,'create'])->name('course_methods.create');
