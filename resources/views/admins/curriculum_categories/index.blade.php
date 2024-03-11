@@ -7,7 +7,7 @@
         <div style="margin-top: 10px;">
             <p style="font-size: 1.8em;">
                 <a href="{{ route('admins.curricula.index') }}" class="custom-link"><i class="fa fa-home"></i>居士學佛</a> &gt;
-                課程類別
+                課程類別(最多可建立三階)
             </p>
         </div>
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
@@ -71,6 +71,13 @@
                             <tr>
 {{--                                <td style="text-align:left">{{ $indexCounter }}.{{ $subIndexCounter++ }}</td>--}}
                                 <td style="padding-left: 70px;">{{ $subCategory->name }}</td>
+                                <td>
+                                    @if($curriculumCategory->lastModifiedByAdmin)
+                                        {{ $curriculumCategory->lastModifiedByAdmin->user->name }}
+                                    @else
+                                        無
+                                    @endif
+                                </td>
                                 <td style="text-align:center">
                                     <a href="{{ route('admins.curriculum_categories.create_hierarchy',$subCategory->id) }}" class="btn btn-secondary btn-sm">新增子類別</a>
                                 </td>
@@ -102,6 +109,13 @@
                                     <tr>
 {{--                                        <td style="text-align:left">{{ $indexCounter }}.{{ $subIndexCounter }}.{{ $thirdIndexCounter++ }}</td>--}}
                                         <td style="padding-left: 130px;">{{ $thirdCategory->name }}</td>
+                                        <td>
+                                            @if($curriculumCategory->lastModifiedByAdmin)
+                                                {{ $curriculumCategory->lastModifiedByAdmin->user->name }}
+                                            @else
+                                                無
+                                            @endif
+                                        </td>
                                         <td style="text-align:center">
                                             <!-- 如果需要新增第4層的連結，可以在這裡添加 -->
                                         </td>
