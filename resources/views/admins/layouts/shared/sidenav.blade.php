@@ -907,6 +907,7 @@
                     <div class="collapse" id="collapseAdmins" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                             <a class="nav-link" href="{{ route('admins.admins.index') }}">檢視所有管理員</a>
+                            <a class="nav-link" href="{{ route('admins.permissions.index') }}">權限管理</a>
     {{--                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#usersCollapseClassifications" aria-expanded="false" aria-controls="usersCollapseClassifications">--}}
     {{--                            管理員權限--}}
     {{--                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>--}}
