@@ -7,7 +7,7 @@
     <div style="margin-top: 10px;">
         <p style="font-size: 1.8em;">
             <a href="{{ route('admins.courses.index') }}" class="custom-link"><i class="fa fa-home"></i>僧伽教育</a> &gt;
-            前台課程分階排序
+            前台課程分階排序 (可拖動進行排序更換)
         </p>
     </div>
     <table class="table" id="sortable-list">
