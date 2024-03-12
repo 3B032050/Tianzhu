@@ -12,8 +12,9 @@
 {{--        <strong>完成！</strong> 成功儲存用戶--}}
 {{--        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>--}}
 {{--    </div>--}}
+    @if(Auth::user()->admin->position == 1)
     <a class="btn btn-success btn-sm" href="{{ route('admins.permissions.index') }}">權限管理</a><br><br>
-
+    @endif
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
         <a class="btn btn-success btn-sm" href="{{ route('admins.admins.create') }}">新增管理員</a>
     </div>
