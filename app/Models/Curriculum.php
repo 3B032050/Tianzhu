@@ -14,6 +14,7 @@ class Curriculum extends Model
         'course_category_id',
         'content',
         'method',
+        'status',
         'last_modified_by',
         'order_by',
     ];

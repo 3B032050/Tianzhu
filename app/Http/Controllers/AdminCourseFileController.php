@@ -48,6 +48,7 @@ class AdminCourseFileController extends Controller
         }
         $coursefile->course_file_category_id = $request->course_file_category_id;
         $coursefile->title = $request->title;
+        $coursefile->status = $request->input('status');
 
         $adminId = Auth::user()->admin->id;
         $coursefile->last_modified_by = $adminId;
@@ -94,6 +95,7 @@ class AdminCourseFileController extends Controller
             $coursefile->file = $fileName;
         }
         $coursefile->title = $request->title;
+        $coursefile->status = $request->input('status');
         $adminId = Auth::user()->admin->id;
         $coursefile->last_modified_by = $adminId;
 
@@ -103,12 +105,16 @@ class AdminCourseFileController extends Controller
     }
     public function statusoff(CourseFile $coursefile)
     {
+        $adminId = Auth::user()->admin->id;
+        $coursefile->last_modified_by = $adminId;
         $coursefile->status='0';
         $coursefile->save();
         return back();
     }
     public function statuson(CourseFile $coursefile)
     {
+        $adminId = Auth::user()->admin->id;
+        $coursefile->last_modified_by = $adminId;
         $coursefile->status='1';
         $coursefile->save();
         return back();

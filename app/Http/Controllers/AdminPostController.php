@@ -103,6 +103,7 @@ class AdminPostController extends Controller
             'title' => $request->input('title'),
             'content' => $content,
             'is_feature' => $request->input('is_feature'),
+            'status'=>$request->input('status'),
             'last_modified_by' => $adminId,
         ]);
         return redirect()->route('admins.posts.index');
@@ -116,12 +117,20 @@ class AdminPostController extends Controller
     public function statusoff(Post $post)
     {
         $post->status='0';
+
+        $adminId = Auth::user()->admin->id;
+        $post->last_modified_by = $adminId;
+
         $post->save();
         return back();
     }
     public function statuson(Post $post)
     {
         $post->status = '1';
+
+        $adminId = Auth::user()->admin->id;
+        $post->last_modified_by = $adminId;
+
         $post->save();
         return back();
     }

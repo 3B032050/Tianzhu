@@ -94,7 +94,7 @@ class AdminCurriculumController extends Controller
         $curriculum->curriculum_category_id = $request->input('curriculum_category');
         $curriculum->content = $request->input('content');
         $curriculum->method = $request->input('method');
-        $curriculum->status = 0;
+        $curriculum->status = $request->input('status');
 
         $adminId = Auth::user()->admin->id;
         $curriculum->last_modified_by = $adminId;
@@ -168,6 +168,7 @@ class AdminCurriculumController extends Controller
             'method' => $request->input('method'),
             'content' => $request->input('content'),
             'curriculum_category_id' => $request->input('curriculum_category'),
+            'status' => $request->input('status'),
             'last_modified_by' => $adminId,
         ]);
 
@@ -182,12 +183,16 @@ class AdminCurriculumController extends Controller
 
     public function status_off(Curriculum $curriculum)
     {
+        $adminId = Auth::user()->admin->id;
+        $curriculum->last_modified_by = $adminId;
         $curriculum->status='0';
         $curriculum->save();
         return back();
     }
     public function status_on(Curriculum $curriculum)
     {
+        $adminId = Auth::user()->admin->id;
+        $curriculum->last_modified_by = $adminId;
         $curriculum->status='1';
         $curriculum->save();
         return back();

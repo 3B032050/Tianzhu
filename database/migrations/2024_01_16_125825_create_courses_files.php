@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('course_file_category_id');
             $table->string('title');
             $table->string('file');
-            $table->string('status')->default('1');
+            $table->string('status')->default('0');
             $table->unsignedBigInteger('last_modified_by')->nullable();
             $table->timestamps();
         });

@@ -103,6 +103,7 @@ class AdminCourseController extends Controller
         $course->method = $request->input('method');
         $course->time = $request->input('time');
         $course->note = $request->input('note');
+        $course->status = $request->input('status');
 
         $adminId = Auth::user()->admin->id;
         $course->last_modified_by = $adminId;
@@ -166,6 +167,7 @@ class AdminCourseController extends Controller
             'course_category_id' => $request->input('course_category'),
             'time' => $request->input('time'),
             'note' => $request->input('note'),
+            'status' => $request->input('status'),
             'last_modified_by' => $adminId,
         ]);
 
@@ -180,13 +182,15 @@ class AdminCourseController extends Controller
 
     public function statusOn(Request $request, Course $course)
     {
-        $course->update(['status' => 1]);
+        $adminId = Auth::user()->admin->id;
+        $course->update(['status' => 1, 'last_modified_by' => $adminId]);
         return redirect()->route('admins.courses.index');
     }
 
     public function statusOff(Request $request, Course $course)
     {
-        $course->update(['status' => 0]);
+        $adminId = Auth::user()->admin->id;
+        $course->update(['status' => 0, 'last_modified_by' => $adminId]);
         return redirect()->route('admins.courses.index');
     }
 

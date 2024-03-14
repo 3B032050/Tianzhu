@@ -23,8 +23,13 @@
                 <input id="image_path" name="image_path" type="file" class="form-control" placeholder="請選擇圖片" onchange="previewImage(this);">
                 <img id="image-preview" src="#" alt="圖片預覽" style="display: none; width:200px; height:200px;" >
             </div>
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <button type="submit" class="btn btn-primary btn-sm">儲存</button>
+            <div class="d-flex justify-content-end mt-3">
+                <div class="me-4">
+                    <button type="submit" name="status" value="1" class="btn btn-primary btn-sm">暫存幻燈片</button>
+                </div>
+                <div>
+                    <button type="submit" name="status" value="0" class="btn btn-primary btn-sm">立即發佈</button>
+                </div>
             </div>
         </form>
     </div>
