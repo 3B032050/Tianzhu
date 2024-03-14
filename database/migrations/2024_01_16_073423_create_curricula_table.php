@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('method')->nullable();
             $table->integer('status');
             $table->unsignedBigInteger('last_modified_by')->nullable();
+            $table->unsignedBigInteger('order_by');
             $table->timestamps();
         });
     }

@@ -45,6 +45,7 @@
                             <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                                 <a class="nav-link" href="{{ route('admins.courses.index') }}">檢視所有課程</a>
                                 <a class="nav-link" href="{{ route('admins.course_overviews.edit') }}">編輯總覽</a>
+                                <a class="nav-link" href="{{ route('admins.courses.by_category') }}">檢視課程排序</a>
                                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#coursesCollapseCategories" aria-expanded="false" aria-controls="coursesCollapseCategories">
                                     課程分階
                                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
@@ -53,6 +54,7 @@
                                     <nav class="sb-sidenav-menu-nested nav">
                                         <a class="nav-link" href="{{ route('admins.course_categories.index') }}">檢視所有分階</a>
                                         <a class="nav-link" href="{{ route('admins.course_categories.create') }}">新增課程分階</a>
+                                        <a class="nav-link" href="{{ route('admins.course_categories.order_by') }}">檢視分階排序</a>
                                     </nav>
                                 </div>
 
@@ -367,6 +369,7 @@
                             <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                                 <a class="nav-link" href="{{ route('admins.courses.index') }}">檢視所有課程</a>
                                 <a class="nav-link" href="{{ route('admins.course_overviews.edit') }}">編輯總覽</a>
+                                <a class="nav-link" href="{{ route('admins.courses.by_category') }}">檢視課程排序</a>
                                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#coursesCollapseCategories" aria-expanded="false" aria-controls="coursesCollapseCategories">
                                     課程分階
                                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
@@ -375,6 +378,7 @@
                                     <nav class="sb-sidenav-menu-nested nav">
                                         <a class="nav-link" href="{{ route('admins.course_categories.index') }}">檢視所有分階</a>
                                         <a class="nav-link" href="{{ route('admins.course_categories.create') }}">新增課程分階</a>
+                                        <a class="nav-link" href="{{ route('admins.course_categories.order_by') }}">檢視分階排序</a>
                                     </nav>
                                 </div>
 
@@ -415,6 +419,7 @@
                         <div class="collapse" id="collapseCurricula" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                                 <a class="nav-link" href="{{ route('admins.curricula.index') }}">檢視所有課程</a>
+                                <a class="nav-link" href="{{ route('admins.curricula.by_category') }}">檢視課程排序</a>
                                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#curriculaCollapseCategories" aria-expanded="false" aria-controls="curriculaCollapseCategories">
                                     課程分類
                                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
@@ -423,6 +428,7 @@
                                     <nav class="sb-sidenav-menu-nested nav">
                                         <a class="nav-link" href="{{ route('admins.curriculum_categories.index') }}">檢視所有分類</a>
                                         <a class="nav-link" href="{{ route('admins.curriculum_categories.create') }}">新增課程分類</a>
+                                        <a class="nav-link" href="{{ route('admins.curriculum_categories.order_by') }}">檢視分類排序</a>
                                     </nav>
                                 </div>
 
@@ -679,6 +685,7 @@
                         <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                             <a class="nav-link" href="{{ route('admins.courses.index') }}">檢視所有課程</a>
                             <a class="nav-link" href="{{ route('admins.course_overviews.edit') }}">編輯總覽</a>
+                            <a class="nav-link" href="{{ route('admins.courses.by_category') }}">檢視課程排序</a>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#coursesCollapseCategories" aria-expanded="false" aria-controls="coursesCollapseCategories">
                                 課程分階
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
@@ -687,6 +694,7 @@
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="{{ route('admins.course_categories.index') }}">檢視所有分階</a>
                                     <a class="nav-link" href="{{ route('admins.course_categories.create') }}">新增課程分階</a>
+                                    <a class="nav-link" href="{{ route('admins.course_categories.order_by') }}">檢視分階排序</a>
                                 </nav>
                             </div>
 
@@ -722,6 +730,7 @@
                     <div class="collapse" id="collapseCurricula" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                             <a class="nav-link" href="{{ route('admins.curricula.index') }}">檢視所有課程</a>
+                            <a class="nav-link" href="{{ route('admins.curricula.by_category') }}">檢視課程排序</a>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#curriculaCollapseCategories" aria-expanded="false" aria-controls="curriculaCollapseCategories">
                                 課程分類
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
@@ -730,6 +739,7 @@
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="{{ route('admins.curriculum_categories.index') }}">檢視所有分類</a>
                                     <a class="nav-link" href="{{ route('admins.curriculum_categories.create') }}">新增課程分類</a>
+                                    <a class="nav-link" href="{{ route('admins.curriculum_categories.order_by') }}">檢視分類排序</a>
                                 </nav>
                             </div>
 

@@ -9,6 +9,8 @@ use App\Models\CurriculumCategory;
 use App\Models\CurriculumMethod;
 use App\Models\CurriculumObjective;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+
 
 class AdminCurriculumController extends Controller
 {
@@ -22,6 +24,21 @@ class AdminCurriculumController extends Controller
         $data = ['curricula' => $curricula,
         'curriculumCategories' => $curriculumCategories];
         return view('admins.curricula.index',$data);
+    }
+
+    public function by_category()
+    {
+        $curriculumCategories = CurriculumCategory::orderBy('order_by')->get();
+        $data = ['curriculumCategories' => $curriculumCategories];
+        return view('admins.curricula.by_category', $data);
+    }
+
+    public function order_by(Request $request, $curriculumCategoryId)
+    {
+        $curriculumCategory = CurriculumCategory::findOrFail($curriculumCategoryId);
+        $curricula = Curriculum::where('curriculum_category_id', $curriculumCategoryId)->orderBy('order_by', 'ASC')->get();
+        $data = ['curricula' => $curricula, 'curriculumCategory' => $curriculumCategory];
+        return view('admins.curricula.order_by', $data);
     }
 
     public function selected(CurriculumCategory $curriculumCategory)
@@ -81,6 +98,10 @@ class AdminCurriculumController extends Controller
 
         $adminId = Auth::user()->admin->id;
         $curriculum->last_modified_by = $adminId;
+
+        $maxOrderBy = Curriculum::where('curriculum_category_id', $request->input('curriculum_category'))->max('order_by');
+        $curriculumOrderBy = $maxOrderBy + 1;
+        $curriculum->order_by = $curriculumOrderBy;
 
         // 儲存課程
         $curriculum->save();
@@ -179,5 +200,28 @@ class AdminCurriculumController extends Controller
     {
         $curriculum->delete();
         return redirect()->route('admins.curricula.index');
+    }
+
+    public function update_order(Request $request)
+    {
+        // 使用 $request->input('sortedIds') 獲取排序的順序
+        $sortedIds = $request->input('sortedIds');
+
+        // 確保 $sortedIds 是字符串
+        if (is_string($sortedIds)) {
+            // 使用 explode 函數將字符串拆分成數組
+            $sortedIdsArray = explode(',', $sortedIds);
+
+            // 更新數據庫中的排序
+            foreach ($sortedIdsArray as $index => $itemId) {
+                Curriculum::where('id', $itemId)->update(['order_by' => $index + 1]);
+            }
+
+            $curriculumCategoryId = Curriculum::find($sortedIdsArray[0])->curriculum_category_id;
+
+            return redirect()->route('admins.curricula.order_by', ['curriculumCategoryId' => $curriculumCategoryId]);
+        }
+
+        return redirect()->route('admins.curricula.by_category');
     }
 }

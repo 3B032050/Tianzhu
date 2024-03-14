@@ -15,6 +15,7 @@ class Curriculum extends Model
         'content',
         'method',
         'last_modified_by',
+        'order_by',
     ];
 
     public function category()

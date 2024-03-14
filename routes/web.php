@@ -251,6 +251,8 @@ Route::group(['middleware' => 'admin'], function(){
         Route::delete('/video_category/{video_category}', [App\Http\Controllers\AdminVideoCategoryController::class, 'destroy'])->name("video_categories.destroy");
 
         Route::get('/curricula',[App\Http\Controllers\AdminCurriculumController::class,'index'])->name('curricula.index');
+        Route::get('/curricula/by_category',[App\Http\Controllers\AdminCurriculumController::class,'by_category'])->name('curricula.by_category');
+        Route::get('/curricula/order_by/{curriculumCategoryId}',[App\Http\Controllers\AdminCurriculumController::class,'order_by'])->name('curricula.order_by');
         Route::get('/curricula/create',[App\Http\Controllers\AdminCurriculumController::class,'create'])->name('curricula.create');
         Route::post('/curricula', [App\Http\Controllers\AdminCurriculumController::class, 'store'])->name("curricula.store");
         Route::get('/curricula/{curriculum}/edit', [App\Http\Controllers\AdminCurriculumController::class, 'edit'])->name("curricula.edit");
@@ -260,6 +262,8 @@ Route::group(['middleware' => 'admin'], function(){
         Route::patch('/curricula/{curriculum}/status_on',[App\Http\Controllers\AdminCurriculumController::class,'status_on'])->name('curricula.status_on');
         Route::patch('/curricula/{curriculum}/status_off',[App\Http\Controllers\AdminCurriculumController::class,'status_off'])->name('curricula.status_off');
         Route::get('/curricula/selected/{curriculumCategory}',[App\Http\Controllers\AdminCurriculumController::class,'selected'])->name('curricula.selected');
+        Route::patch('/curricula/{curriculum}/update_order', [App\Http\Controllers\AdminCurriculumController::class, 'update_order'])->name('curricula.update_order');
+
 
         Route::get('/curriculum_objectives',[App\Http\Controllers\AdminCurriculumObjectiveController::class,'index'])->name('curriculum_objectives.index');
         Route::get('/curriculum_objectives/create',[App\Http\Controllers\AdminCurriculumObjectiveController::class,'create'])->name('curriculum_objectives.create');
@@ -270,6 +274,7 @@ Route::group(['middleware' => 'admin'], function(){
         Route::get('/curriculum_objectives/search', [App\Http\Controllers\AdminCurriculumObjectiveController::class, 'search'])->name('curriculum_objectives.search');
 
         Route::get('/curriculum_categories',[App\Http\Controllers\AdminCurriculumCategoryController::class,'index'])->name('curriculum_categories.index');
+        Route::get('/curriculum_categories/order_by',[App\Http\Controllers\AdminCurriculumCategoryController::class,'order_by'])->name('curriculum_categories.order_by');
         Route::get('/curriculum_categories/create',[App\Http\Controllers\AdminCurriculumCategoryController::class,'create'])->name('curriculum_categories.create');
         Route::get('/curriculum_categories/{curriculum_category}/create_hierarchy',[App\Http\Controllers\AdminCurriculumCategoryController::class,'create_hierarchy'])->name('curriculum_categories.create_hierarchy');
         Route::post('/curriculum_categories', [App\Http\Controllers\AdminCurriculumCategoryController::class, 'store'])->name("curriculum_categories.store");
@@ -277,6 +282,8 @@ Route::group(['middleware' => 'admin'], function(){
         Route::patch('/curriculum_categories/{curriculum_category}',[App\Http\Controllers\AdminCurriculumCategoryController::class,'update'])->name('curriculum_categories.update');
         Route::delete('/curriculum_categories/{curriculum_category}', [App\Http\Controllers\AdminCurriculumCategoryController::class, 'destroy'])->name("curriculum_categories.destroy");
         Route::get('/curriculum_categories/search', [App\Http\Controllers\AdminCurriculumCategoryController::class, 'search'])->name('curriculum_categories.search');
+        Route::patch('/curriculum_categories/{curriculum_category}/update_order', [App\Http\Controllers\AdminCurriculumCategoryController::class, 'update_order'])->name('curriculum_categories.update_order');
+
 
         Route::get('/curriculum_methods',[App\Http\Controllers\AdminCurriculumMethodController::class,'index'])->name('curriculum_methods.index');
         Route::get('/curriculum_methods/create',[App\Http\Controllers\AdminCurriculumMethodController::class,'create'])->name('curriculum_methods.create');

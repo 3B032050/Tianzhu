@@ -13,6 +13,7 @@ class CurriculumCategory extends Model
         'name',
         'parent_id',
         'last_modified_by',
+        'order_by',
     ];
 
     // 這是反向的一對一關聯，一個分類有一門課程
