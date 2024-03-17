@@ -13,6 +13,7 @@ class CommonSense extends Model
         'common_sense_category_id',
         'title',
         'content',
+        'status',
         'last_modified_by',
     ];
 

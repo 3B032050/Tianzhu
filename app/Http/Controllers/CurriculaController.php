@@ -11,7 +11,7 @@ class CurriculaController extends Controller
     public function index(Request $request)
     {
         $categories = CurriculumCategory::orderBy('parent_id','DESC')->get();
-        $curricula = Curriculum::where('status', 1)->get();
+        $curricula = Curriculum::where('status', 1)->orderBy('order_by', 'asc')->get();
 
         $data = [
             'categories'=> $categories,
@@ -40,9 +40,9 @@ class CurriculaController extends Controller
             $selectedCurricula = Curriculum::where('status', 1);
 
             if ($searchOption === 'title') {
-                $selectedCurricula->where('title', 'LIKE', '%' . $query . '%');
+                $selectedCurricula->where('title', 'LIKE', '%' . $query . '%')->orderBy('order_by', 'asc');
             } elseif ($searchOption === 'content') {
-                $selectedCurricula->where('content', 'LIKE', '%' . $query . '%');
+                $selectedCurricula->where('content', 'LIKE', '%' . $query . '%')->orderBy('order_by', 'asc');
             }
 
             $selectedCurricula = $selectedCurricula->get();

@@ -18,6 +18,7 @@ class Course extends Model
         'note',
         'status',
         'last_modified_by',
+        'order_by',
     ];
 
     // 這是一對一的關聯，一門課程屬於一個分類

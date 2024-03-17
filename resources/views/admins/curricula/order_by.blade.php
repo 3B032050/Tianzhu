@@ -6,9 +6,9 @@
 <div class="container-fluid px-4">
     <div style="margin-top: 10px;">
         <p style="font-size: 1.8em;">
-            <a href="{{ route('admins.courses.index') }}" class="custom-link"><i class="fa fa-home"></i>僧伽教育</a> &gt;
-            <a href="{{ route('admins.courses.by_category') }}" class="custom-link">課程類別</a> &gt;
-            {{ $courseCategory->name }} 課程前台排序 (可拖動進行排序更換)
+            <a href="{{ route('admins.curricula.index') }}" class="custom-link"><i class="fa fa-home"></i>僧伽教育</a> &gt;
+            <a href="{{ route('admins.curricula.by_category') }}" class="custom-link">課程類別</a> &gt;
+            {{ $curriculumCategory->name }} 課程前台排序 (可拖動進行排序更換)
         </p>
     </div>
     <table class="table" id="sortable-list">
@@ -22,25 +22,25 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($courses as $index => $course)
+        @foreach($curricula as $index => $curriculum)
 
-            <tr data-id="{{ $course->id }}">
+            <tr data-id="{{ $curriculum->id }}">
                 <td>{{ $index + 1 }}</td>
-                <td>{{ $course->title }}</td>
+                <td>{{ $curriculum->title }}</td>
                 <td  class="align-middle" style="text-align:center">
-                    <a href="{{ route('admins.courses.edit',$course->id) }}" class="btn btn-secondary btn-sm">編輯</a>
+                    <a href="{{ route('admins.curricula.edit',$curriculum->id) }}" class="btn btn-secondary btn-sm">編輯</a>
                 </td>
                 <td class="align-middle" style="text-align:center">
-                    <form id="deleteForm{{ $course->id }}" action="{{ route('admins.courses.destroy',$course->id) }}" method="POST">
+                    <form id="deleteForm{{ $curriculum->id }}" action="{{ route('admins.curricula.destroy',$curriculum->id) }}" method="POST">
                         @method('DELETE')
                         @csrf
-                        <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('{{ $course->name }}', {{ $course->id }})">刪除</button>
+                        <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('{{ $curriculum->name }}', {{ $curriculum->id }})">刪除</button>
                     </form>
                 </td>
                 <script>
                     function confirmDelete(name, id)
                     {
-                        if (confirm("確定要刪除課程分階「" + name + "」嗎？")) {
+                        if (confirm("確定要刪除課程類別「" + name + "」嗎？")) {
                             document.getElementById('deleteForm' + id).submit();
                         }
                     }
@@ -50,7 +50,7 @@
         </tbody>
     </table>
 
-    <form action="{{ route('admins.courses.update_order','sortedIds') }}" method="POST" role="form" enctype="multipart/form-data" id="sortableForm">
+    <form action="{{ route('admins.curricula.update_order','sortedIds') }}" method="POST" role="form" enctype="multipart/form-data" id="sortableForm">
         @method('PATCH')
         @csrf
     </form>

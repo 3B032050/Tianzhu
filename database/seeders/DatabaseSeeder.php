@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Permission;
 use App\Models\Web_content;
 use Illuminate\Database\Seeder;
 use App\Models\User;
@@ -48,5 +49,38 @@ class DatabaseSeeder extends Seeder
             'web_id' => '0',
             'content' => '輸入內容..',
         ]);
+
+        $items = [
+            ['position' => 2, 'function' => "天筑精舍簡介",'status' => '1'],
+            ['position' => 2, 'function' => "僧伽教育", 'status' => '1',],
+            ['position' => 2, 'function' => "居士學佛", 'status' => '1',],
+            ['position' => 2, 'function' => "佛門小常識", 'status' => '1',],
+            ['position' => 2, 'function' => "課程講義", 'status' => '1',],
+            ['position' => 2, 'function' => "法音流佈", 'status' => '1',],
+            ['position' => 2, 'function' => "活動紀實", 'status' => '1',],
+            ['position' => 2, 'function' => "公告管理", 'status' => '1',],
+            ['position' => 2, 'function' => "幻燈片設定", 'status' => '1',],
+            ['position' => 2, 'function' => "圖片列印", 'status' => '1',],
+            ['position' => 2, 'function' => "用戶管理", 'status' => '1',],
+            ['position' => 2, 'function' => "管理員管理", 'status' => '1',],
+
+            ['position' => 3, 'function' => "天筑精舍簡介", 'status' => '1',],
+            ['position' => 3, 'function' => "僧伽教育", 'status' => '1',],
+            ['position' => 3, 'function' => "居士學佛", 'status' => '1',],
+            ['position' => 3, 'function' => "佛門小常識", 'status' => '1',],
+            ['position' => 3, 'function' => "課程講義", 'status' => '1',],
+            ['position' => 3, 'function' => "法音流佈", 'status' => '1',],
+            ['position' => 3, 'function' => "活動紀實", 'status' => '1',],
+            ['position' => 3, 'function' => "公告管理", 'status' => '1',],
+            ['position' => 3, 'function' => "幻燈片設定", 'status' => '1',],
+            ['position' => 3, 'function' => "圖片列印", 'status' => '1',],
+            ['position' => 3, 'function' => "用戶管理", 'status' => '1',],
+            ['position' => 3, 'function' => "管理員管理", 'status' => '1',],
+        ];
+
+        foreach ($items as $item) {
+            Permission::create($item);
+        }
+
     }
 }

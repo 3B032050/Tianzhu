@@ -67,7 +67,7 @@ class AdminCommonSenseController extends Controller
         $common_sense->title = $request->input('title');
         $common_sense->common_sense_category_id = $request->input('common_sense_category');
         $common_sense->content = $request->input('content');
-        $common_sense->status = 0;
+        $common_sense->status = $request->input('status');
 
         $adminId = Auth::user()->admin->id;
         $common_sense->last_modified_by = $adminId;
@@ -118,6 +118,7 @@ class AdminCommonSenseController extends Controller
             'title' => $request->input('title'),
             'common_sense_category_id' => $request->input('common_sense_category'),
             'content' => $request->input('content'),
+            'status' => $request->input('status'),
             'last_modified_by' => $adminId,
         ]);
 
@@ -126,12 +127,16 @@ class AdminCommonSenseController extends Controller
 
     public function status_off(CommonSense $commonSense)
     {
+        $adminId = Auth::user()->admin->id;
+        $commonSense->last_modified_by = $adminId;
         $commonSense->status='0';
         $commonSense->save();
         return back();
     }
     public function status_on(CommonSense $commonSense)
     {
+        $adminId = Auth::user()->admin->id;
+        $commonSense->last_modified_by = $adminId;
         $commonSense->status='1';
         $commonSense->save();
         return back();

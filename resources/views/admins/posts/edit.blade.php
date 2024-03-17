@@ -41,9 +41,17 @@
             <label for="file" class="form-label">上傳檔案</label>
             <input id="file" name="file" type="file" class="form-control" rows="10" placeholder="附檔">{{ old('file',$post->file) }}</input>
         </div>
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <button type="submit" class="btn btn-primary btn-sm">儲存</button>
+        <div class="d-flex justify-content-end mt-3">
+            <div class="me-4">
+                <button type="submit" name="status" value="0" class="btn btn-primary btn-sm">暫存公告</button>
+            </div>
+            <div>
+                <button type="submit" name="status" value="1" class="btn btn-primary btn-sm">立即發佈</button>
+            </div>
         </div>
+{{--        <div class="d-grid gap-2 d-md-flex justify-content-md-end">--}}
+{{--            <button type="submit" class="btn btn-primary btn-sm">儲存</button>--}}
+{{--        </div>--}}
     </form>
 </div>
 <script src="https://cdn.ckeditor.com/ckeditor5/41.1.0/super-build/ckeditor.js"></script>

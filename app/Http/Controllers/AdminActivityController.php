@@ -55,12 +55,16 @@ class AdminActivityController extends Controller
 
     public function statusOn(Request $request, Activity $activity)
     {
+        $adminId = Auth::user()->admin->id;
+        $activity->last_modified_by = $adminId;
         $activity->update(['status' => 1]);
         return redirect()->route('admins.activities.index');
     }
 
     public function statusOff(Request $request, Activity $activity)
     {
+        $adminId = Auth::user()->admin->id;
+        $activity->last_modified_by = $adminId;
         $activity->update(['status' => 0]);
         return redirect()->route('admins.activities.index');
     }
