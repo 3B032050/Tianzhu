@@ -43,7 +43,7 @@
             <tr>
                 <td>{{$index+1}}</td>
                 <td>{{$post->title}}</td>
-                <td>{{$post->created_at}}</td>
+                <td>{{$post->announce_date}}</td>
                 <td>
                     @if($post->lastModifiedByAdmin)
                         {{ $post->lastModifiedByAdmin->user->name }}
@@ -73,13 +73,19 @@
                         </form>
                     </td>
                 @else
-                    <td style="text-align:center">
-                        <form action="{{ route('admins.posts.statuson',$post->id) }}" method="POST">
-                            @method('PATCH')
-                            @csrf
-                            <button type="submit" class="btn btn-secondary btn-sm">發佈</button>
-                        </form>
-                    </td>
+                    @if($post->announce_date <= $nowdate)
+                        <td style="text-align:center">
+                            <form action="{{ route('admins.posts.statuson', $post->id) }}" method="POST">
+                                @method('PATCH')
+                                @csrf
+                                <button type="submit" class="btn btn-secondary btn-sm">發佈</button>
+                            </form>
+                        </td>
+                    @else
+                        <td style="text-align:center">
+                            <button type="button" class="btn btn-secondary btn-sm" onclick="alert('此公告未到發佈時間，無法發佈。')">發佈</button>
+                        </td>
+                    @endif
                 @endif
                 <td style="text-align:center">
                     <a href="{{ route('admins.posts.edit',$post->id) }}" class="btn btn-secondary btn-sm">編輯</a>

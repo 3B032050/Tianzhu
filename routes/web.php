@@ -63,6 +63,8 @@ Route::get('/course_file/{id}/{course_file}', [App\Http\Controllers\CourseFileCo
 Route::get('/video', [App\Http\Controllers\VideoController::class, 'index'])->name('videos.index');
 Route::get('/video/search', [App\Http\Controllers\VideoController::class, 'search'])->name('videos.search');
 Route::get('/course_file/{category}/show', [App\Http\Controllers\CourseFileController::class, 'show'])->name('course_file.show');
+
+
 Auth::routes();
 
 //會員資料

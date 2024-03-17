@@ -10,11 +10,13 @@ class Kernel extends ConsoleKernel
     /**
      * Define the application's command schedule.
      */
+
     protected function schedule(Schedule $schedule): void
     {
         // $schedule->command('inspire')->hourly();
+        $schedule->call('App\Http\Controllers\AdminPostController@Automaticloading')->everyMinute();
+           // 每小時執行一次
     }
-
     /**
      * Register the commands for the application.
      */
