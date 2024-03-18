@@ -30,7 +30,7 @@
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
         <a class="btn btn-success btn-sm" href="{{ route('admins.videos.create') }}">新增影音</a>
     </div>
-    <table class="table">
+    <table class="table" id="sortable-list">
         <thead>
         <tr>
             <th scope="col">#</th>
@@ -80,5 +80,46 @@
         @endforeach
         </tbody>
     </table>
+    <form action="{{ route('admins.videos.update_order','sortedIds') }}" method="POST" role="form" enctype="multipart/form-data" id="sortableForm">
+        @method('PATCH')
+        @csrf
+    </form>
+    <style>
+        #sortable-list {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        #sortable-list tbody tr {
+            cursor: grab;
+            background-color: #eee;
+            margin-bottom: 5px;
+        }
+    </style>
+    <script>
+        $("#saveOrderBtn").click(function () {
+            console.log("保存排序按鈕被點擊");
+        });
+
+        $(document).ready(function () {
+            $("#sortable-list tbody").sortable({
+                handle: 'td',
+                update: function (event, ui) {
+                    saveNewOrder();
+                }
+            }).disableSelection();
+        });
+    </script>
+    <script>
+        function saveNewOrder() {
+            var sortedIds = $("#sortable-list tbody tr").map(function () {
+                return $(this).data("id");
+            }).get();
+            $("#sortableForm input[name='sortedIds']").remove();
+            $("#sortableForm").append('<input type="hidden" name="sortedIds" value="' + sortedIds.join(',') + '">');
+            $("#sortableForm").submit();
+        }
+    </script>
 </div>
 @endsection

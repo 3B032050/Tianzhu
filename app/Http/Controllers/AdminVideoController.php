@@ -168,4 +168,24 @@ class AdminVideoController extends Controller
             'category' => $category,
         ]);
     }
+    public function update_order(Request $request)
+    {
+        // 使用 $request->input('sortedIds') 獲取排序的順序
+        $sortedIds = $request->input('sortedIds');
+
+        // 確保 $sortedIds 是字符串
+        if (is_string($sortedIds)) {
+            // 使用 explode 函數將字符串拆分成數組
+            $sortedIdsArray = explode(',', $sortedIds);
+
+            // 更新數據庫中的排序
+            foreach ($sortedIdsArray as $index => $itemId) {
+                Video::where('id', $itemId)->update(['order_video_id' => $index + 1]);
+            }
+
+            return redirect()->route('admins.videos.index');
+        }
+
+        return redirect()->route('admins.videos.index');
+    }
 }

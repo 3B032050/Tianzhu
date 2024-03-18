@@ -37,16 +37,31 @@
                 <option value="1">是</option>
             </select>
         </div>
-        <div class="d-flex justify-content-end mt-3">
-            <div class="me-4">
-                <button type="submit" name="status" value="0" class="btn btn-primary btn-sm">暫存公告</button>
+        <div class="form-group">
+            <label for="announce_date" class="form-label">公告時間</label>
+            <input id="announce_date" name="announce_date" type="date" class="form-control" rows="10" value="{{ \Carbon\Carbon::now()->format('Y-m-d') }}"></input>
+        </div>
+        <div class="button-container">
+            <div id="publish_button" style="display: block;" class="publish-button">
+                <button type="submit" name="status" value="1" class="btn btn-primary btn-sm">直接發佈</button>
             </div>
-            <div>
-                <button type="submit" name="status" value="1" class="btn btn-primary btn-sm">立即發佈</button>
+            <div class="save-button">
+                <button type="submit" name="status" value="0" class="btn btn-primary btn-sm">儲存</button>
             </div>
         </div>
     </form>
 </div>
+    <script>
+        document.getElementById('announce_date').addEventListener('change', function() {
+            var selectedDate = new Date(this.value);
+            var currentday = new Date();
+            if (selectedDate.getTime() === currentday.getTime()) {
+                document.getElementById('publish_button').style.display = 'block';
+            } else {
+                document.getElementById('publish_button').style.display = 'none';
+            }
+        });
+    </script>
     <script src="https://cdn.ckeditor.com/ckeditor5/41.1.0/super-build/ckeditor.js"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/41.1.0/super-build/translations/zh.js"></script>
     <script type="module">
@@ -207,4 +222,14 @@
                 console.error(error);
             });
     </script>
+<style>
+    .button-container {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .publish-button, .save-button {
+        margin-left: 10px; /* 在按鈕之間增加間距 */
+    }
+</style>
 @endsection

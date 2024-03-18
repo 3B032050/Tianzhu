@@ -63,6 +63,8 @@ Route::get('/course_file/{id}/{course_file}', [App\Http\Controllers\CourseFileCo
 Route::get('/video', [App\Http\Controllers\VideoController::class, 'index'])->name('videos.index');
 Route::get('/video/search', [App\Http\Controllers\VideoController::class, 'search'])->name('videos.search');
 Route::get('/course_file/{category}/show', [App\Http\Controllers\CourseFileController::class, 'show'])->name('course_file.show');
+
+
 Auth::routes();
 
 //會員資料
@@ -241,6 +243,7 @@ Route::group(['middleware' => 'admin'], function(){
         Route::get('/video/{video}/edit', [App\Http\Controllers\AdminVideoController::class, 'edit'])->name("videos.edit");
         Route::patch('/video/{video}',[App\Http\Controllers\AdminVideoController::class,'update'])->name('videos.update');
         Route::delete('/video/{video}', [App\Http\Controllers\AdminVideoController::class, 'destroy'])->name("videos.destroy");
+        Route::patch('/video/{video}/update_order',[App\Http\Controllers\AdminVideoController::class,'update_order'])->name('videos.update_order');
 
         #影音類別
         Route::get('/video_category',[App\Http\Controllers\AdminVideoCategoryController::class,'index'])->name('video_categories.index');
@@ -249,6 +252,7 @@ Route::group(['middleware' => 'admin'], function(){
         Route::get('/video_category/{video_category}/edit', [App\Http\Controllers\AdminVideoCategoryController::class, 'edit'])->name("video_categories.edit");
         Route::patch('/video_category/{video_category}',[App\Http\Controllers\AdminVideoCategoryController::class,'update'])->name('video_categories.update');
         Route::delete('/video_category/{video_category}', [App\Http\Controllers\AdminVideoCategoryController::class, 'destroy'])->name("video_categories.destroy");
+        Route::patch('/video_category/{video_category}/update_order',[App\Http\Controllers\AdminVideoCategoryController::class,'update_order'])->name('video_categories.update_order');
 
         Route::get('/curricula',[App\Http\Controllers\AdminCurriculumController::class,'index'])->name('curricula.index');
         Route::get('/curricula/by_category',[App\Http\Controllers\AdminCurriculumController::class,'by_category'])->name('curricula.by_category');

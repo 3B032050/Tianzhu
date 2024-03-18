@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('file')->nullable();
             $table->string('status')->default('0');
             $table->unsignedBigInteger('last_modified_by')->nullable();
+            $table->date('announce_date');
             $table->timestamps();
         });
     }

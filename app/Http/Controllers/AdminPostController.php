@@ -6,14 +6,18 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
 
 class AdminPostController extends Controller
 {
     public function index()
     {
+        $nowdate = Carbon::now();
         $posts = Post::orderBy('created_at','DESC')->get();
-        $data = ['posts' => $posts];
+        $data = ['posts' => $posts,'nowdate'=>$nowdate];
+       // dd($nowdate);
         return view('admins.posts.index',$data);
+
     }
 
 
@@ -24,11 +28,13 @@ class AdminPostController extends Controller
 
     public function store(Request $request)
     {
+        $nowdate = Carbon::now();
         $this->validate($request,[
             'title' => 'required|max:50',
             'content' => 'required',
             'is_feature' => 'required|boolean',
             'file' => 'file|mimes:jpeg,png,pdf,doc,docx,pptx,ppt',
+            'announce_date' => 'required|date',
         ]);
         if ($request->hasFile('file')) {
             $fileName = $request->file('file')->getClientOriginalName(); // 獲取上傳檔名
@@ -45,6 +51,7 @@ class AdminPostController extends Controller
             'file' => $fileName, // 存储文件名
             'status'=>$request->input('status'),
             'last_modified_by' => $adminId,
+            'announce_date'=>$request->input('announce_date'),
         ]);
 //        if ($request->hasFile('file'))
 //        {
@@ -148,6 +155,17 @@ class AdminPostController extends Controller
             'posts' => $posts,
             'query' => $searchTerm,
         ]);
+    }
+    public  function Automaticloading (): \Illuminate\Http\RedirectResponse
+    {
+        $currentday = Carbon::now();
+        $posts = Post::where('announce_date', '<=', now())->where('status', '0')->get();;
+        foreach($posts as $index => $post)
+        {
+            $post->update(['status' => '1']);
+
+        }
+        return redirect()->route('admins.posts.index');
     }
 }
 

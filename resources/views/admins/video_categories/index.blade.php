@@ -7,7 +7,7 @@
     <div style="margin-top: 10px;">
         <p style="font-size: 1.8em;">
             <a href="{{ route('admins.videos.index') }}" class="custom-link"><i class="fa fa-home"></i>法音流佈</a> >
-           法音類別
+           法音類別 (可拖動進行排序更換)
         </p>
     </div>
     <h1 class="mt-4">影音類別</h1>
@@ -15,7 +15,7 @@
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
         <a class="btn btn-success btn-sm" href="{{ route('admins.video_categories.create') }}">新增影音類別</a>
     </div>
-    <table class="table">
+    <table class="table" id="sortable-list">
         <thead>
         <tr>
             <th scope="col">#</th>
@@ -46,6 +46,7 @@
                         <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('{{ $videocategory->category_name }}', {{ $videocategory->id }})">刪除</button>
                     </form>
                 </td>
+
                 <script>
                     function confirmDelete(videocategoryname, videocategoryId)
                     {
@@ -58,5 +59,46 @@
         @endforeach
         </tbody>
     </table>
+    <form action="{{ route('admins.video_categories.update_order','sortedIds') }}" method="POST" role="form" enctype="multipart/form-data" id="sortableForm">
+        @method('PATCH')
+        @csrf
+    </form>
+    <style>
+        #sortable-list {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        #sortable-list tbody tr {
+            cursor: grab;
+            background-color: #eee;
+            margin-bottom: 5px;
+        }
+    </style>
+    <script>
+        $("#saveOrderBtn").click(function () {
+            console.log("保存排序按鈕被點擊");
+        });
+
+        $(document).ready(function () {
+            $("#sortable-list tbody").sortable({
+                handle: 'td',
+                update: function (event, ui) {
+                    saveNewOrder();
+                }
+            }).disableSelection();
+        });
+    </script>
+    <script>
+        function saveNewOrder() {
+            var sortedIds = $("#sortable-list tbody tr").map(function () {
+                return $(this).data("id");
+            }).get();
+            $("#sortableForm input[name='sortedIds']").remove();
+            $("#sortableForm").append('<input type="hidden" name="sortedIds" value="' + sortedIds.join(',') + '">');
+            $("#sortableForm").submit();
+        }
+    </script>
 </div>
 @endsection

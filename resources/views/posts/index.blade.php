@@ -29,7 +29,7 @@
                         <td style="text-align:center">
                             <a href="{{ route('posts.show', $post->id) }}">{{ $post->title }}</a>
                         </td>
-                        <td>{{ $post->created_at }}</td>
+                        <td>{{ $post->announce_date }}</td>
                     </tr>
                 @endforeach
                 </tbody>
