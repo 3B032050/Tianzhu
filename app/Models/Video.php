@@ -10,6 +10,7 @@ class Video extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'order_video_id',
         'video_category_id',
         'video_url',
         'video_id',
@@ -17,6 +18,14 @@ class Video extends Model
         'video_title',
         'last_modified_by',
     ];
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($video) {
+            $video->sorting_order = Video::max('order_video_id') + 1;
+        });
+    }
     public function video_category(): BelongsTo
     {
         return $this->belongsTo(Video_category::class);
