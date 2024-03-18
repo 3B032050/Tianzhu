@@ -44,7 +44,7 @@
         </thead>
         <tbody>
         @foreach($videos as $index => $video)
-            <tr>
+            <tr data-id="{{ $video->id }}">
                 <td style="text-align:left">{{ $index + 1 }}</td>
                 <td>{{ $video->video_url }}</td>
                 <td>

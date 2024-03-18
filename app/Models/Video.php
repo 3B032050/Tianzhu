@@ -23,7 +23,7 @@ class Video extends Model
         parent::boot();
 
         static::creating(function ($video) {
-            $video->sorting_order = Video::max('order_video_id') + 1;
+            $video->order_video_id = Video::max('order_video_id') + 1;
         });
     }
     public function video_category(): BelongsTo

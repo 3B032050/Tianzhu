@@ -25,7 +25,7 @@
         </thead>
         <tbody>
         @foreach($videoCategories as $index => $videocategory)
-            <tr>
+            <tr data-id="{{ $videocategory->id }}">
                 <td style="text-align:left">{{ $index + 1 }}</td>
 
                 <td>{{ $videocategory->category_name }}</td>
