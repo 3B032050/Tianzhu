@@ -799,7 +799,7 @@
                         <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                             <a class="nav-link" href="{{ route('admins.course_file.index') }}">檢視所有講義</a>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#courseFilesCollapseCategories" aria-expanded="false" aria-controls="courseFilesCollapseCategories">
-                                小常識分類
+                                講義分類
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="courseFilesCollapseCategories" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">

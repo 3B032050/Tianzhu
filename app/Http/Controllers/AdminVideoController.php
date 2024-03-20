@@ -14,10 +14,12 @@ class AdminVideoController extends Controller
 {
     public function index()
     {
+
         $videos = Video::join('video_categories', 'videos.video_category_id', '=', 'video_categories.id')
             ->orderBy('video_categories.order_category_id', 'ASC')
             ->orderBy('videos.order_video_id', 'ASC')
             ->get();
+
         $data = ['videos' => $videos];
         return view('admins.videos.index', $data);
     }
