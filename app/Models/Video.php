@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\DB;
 
 class Video extends Model
 {
@@ -18,12 +19,16 @@ class Video extends Model
         'video_title',
         'last_modified_by',
     ];
+
+
+
+
     protected static function boot()
     {
         parent::boot();
 
         static::creating(function ($video) {
-            $video->sorting_order = Video::max('order_video_id') + 1;
+            $video->order_video_id = Video::max('order_video_id') + 1;
         });
     }
     public function video_category(): BelongsTo

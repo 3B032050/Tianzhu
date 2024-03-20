@@ -194,6 +194,7 @@
                         </a>
                         <div class="collapse" id="collapseVideos" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                <a class="nav-link" href="{{ route('admins.videos.order') }}">檢視影音排序</a>
                                 <a class="nav-link" href="{{ route('admins.videos.index') }}">檢視所有影音</a>
                                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#videosCollapseCategories" aria-expanded="false" aria-controls="videosCollapseCategories">
                                     影音分類

@@ -6,6 +6,7 @@ use App\Models\Video;
 use App\Models\Video_category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 
@@ -13,9 +14,28 @@ class AdminVideoController extends Controller
 {
     public function index()
     {
-        $videos = Video::orderBy('id', 'ASC')->get();
+        $videos = Video::join('video_categories', 'videos.video_category_id', '=', 'video_categories.id')
+            ->orderBy('video_categories.order_category_id', 'ASC')
+            ->orderBy('videos.order_video_id', 'ASC')
+            ->get();
         $data = ['videos' => $videos];
         return view('admins.videos.index', $data);
+    }
+    public function order()
+    {
+        $video_categories = Video_category::orderby('id','ASC')->get();
+        $videos = Video::join('video_categories', 'videos.video_category_id', '=', 'video_categories.id')
+            ->orderBy('video_categories.order_category_id', 'ASC')
+            ->orderBy('videos.order_video_id', 'ASC')
+            ->get();
+        $data = ['videos' => $videos,'video_categories'=>$video_categories];
+        return view('admins.videos.order', $data);
+    }
+    public static function join($table1, $column1, $operator, $table2, $column2, $type = 'inner')
+    {
+        return DB::table($table1)
+            ->join($table2, $column1, $operator, $column2, $type)
+            ->get();
     }
 
     /**
@@ -57,6 +77,7 @@ class AdminVideoController extends Controller
         $videoTitle = $videoInfo['items'][0]['snippet']['title'];
 
         $adminId = Auth::user()->admin->id;
+        $order_video_id =  Video::max('order_video_id') + 1;
         // 構件包含所有數據的字組
         Video::create([
             'video_category_id' => $request->input('video_category_id'),
@@ -65,6 +86,7 @@ class AdminVideoController extends Controller
             'cover_url' => $coverUrl,
             'video_title' => $videoTitle,
             'last_modified_by' => $adminId,
+            'order_video_id' => $order_video_id,
         ]);
         return redirect()->route('admins.videos.index');
     }
@@ -183,9 +205,11 @@ class AdminVideoController extends Controller
                 Video::where('id', $itemId)->update(['order_video_id' => $index + 1]);
             }
 
-            return redirect()->route('admins.videos.index');
+            $videoCategoryId = Video::find($sortedIdsArray[0])->order_category_id;
+
+            return redirect()->route('admins.videos.order', ['videoCategoryId' => $videoCategoryId]);
         }
 
-        return redirect()->route('admins.videos.index');
+        return redirect()->route('admins.videos.order');
     }
 }
