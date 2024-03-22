@@ -55,6 +55,7 @@
                                         <a class="nav-link" href="{{ route('admins.course_categories.index') }}">檢視所有分階</a>
                                         <a class="nav-link" href="{{ route('admins.course_categories.create') }}">新增課程分階</a>
                                         <a class="nav-link" href="{{ route('admins.course_categories.order_by') }}">檢視分階排序</a>
+                                        <a class="nav-link" href="{{ route('admins.course_categories.history') }}">檢視歷史分階</a>
                                     </nav>
                                 </div>
 
@@ -695,6 +696,7 @@
                                     <a class="nav-link" href="{{ route('admins.course_categories.index') }}">檢視所有分階</a>
                                     <a class="nav-link" href="{{ route('admins.course_categories.create') }}">新增課程分階</a>
                                     <a class="nav-link" href="{{ route('admins.course_categories.order_by') }}">檢視分階排序</a>
+                                    <a class="nav-link" href="{{ route('admins.course_categories.history') }}">檢視歷史分階</a>
                                 </nav>
                             </div>
 

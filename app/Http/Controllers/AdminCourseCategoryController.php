@@ -11,9 +11,58 @@ class AdminCourseCategoryController extends Controller
 {
     public function index()
     {
-        $courseCategories = CourseCategory::orderBy('id', 'ASC')->get();
+        $courseCategories = CourseCategory::orderBy('id', 'ASC')->where('status', 1)->get();
+
+        // 获取每个课程类别的最近动作
+        foreach ($courseCategories as $category) {
+            $category->recentActions = $this->getRecentActions($category->id);
+        }
+
         $data = ['courseCategories' => $courseCategories];
         return view('admins.course_categories.index', $data);
+    }
+
+    public function history()
+    {
+        $courseCategories = CourseCategory::orderBy('updated_at', 'DESC')->where('status', -1)->get();
+
+        // 获取每个课程类别的最近动作
+        foreach ($courseCategories as $category) {
+            $category->recentActions = $this->getRecentActions($category->id);
+        }
+
+        $data = ['courseCategories' => $courseCategories];
+        return view('admins.course_categories.history', $data);
+    }
+
+    private function getRecentActions($categoryId)
+    {
+        $courseCategory = CourseCategory::findOrFail($categoryId);
+
+        $recentActions = [
+            $courseCategory->last_1_modified_by,
+            $courseCategory->last_2_modified_by,
+            $courseCategory->last_3_modified_by,
+            $courseCategory->last_4_modified_by,
+            $courseCategory->last_5_modified_by,
+        ];
+
+        $formattedActions = [];
+        foreach ($recentActions as $action) {
+            if ($action) {
+                $actionParts = explode(",", $action);
+                $time = $actionParts[0] ?? '';
+                $user = $actionParts[1] ?? '';
+                $actionContent = $actionParts[2] ?? '';
+                $formattedActions[] = [
+                    'time' => $time,
+                    'user' => $user,
+                    'action' => $actionContent
+                ];
+            }
+        }
+
+        return $formattedActions;
     }
 
     public function order_by()
@@ -34,9 +83,11 @@ class AdminCourseCategoryController extends Controller
             'name' => 'required|max:255',
         ]);
 
-        $order_by = CourseCategory::max('order_by') + 1;
-        $adminId = Auth::user()->admin->id;
-        CourseCategory::create(array_merge($request->all(), ['last_modified_by' => $adminId, 'order_by' => $order_by]));
+        CourseCategory::create(array_merge($request->all(), [
+            'order_by' => CourseCategory::max('order_by') + 1,
+            'last_1_modified_by' => now().",".Auth::user()->name.",新增",
+        ]));
+
         return redirect()->route('admins.course_categories.index');
     }
 
@@ -54,14 +105,44 @@ class AdminCourseCategoryController extends Controller
             'name' => 'required|max:255',
         ]);
 
-        $adminId = Auth::user()->admin->id;
-        $courseCategory->update(array_merge($request->all(), ['last_modified_by' => $adminId]));
+        $courseCategory->last_5_modified_by = $courseCategory->last_4_modified_by;
+        $courseCategory->last_4_modified_by = $courseCategory->last_3_modified_by;
+        $courseCategory->last_3_modified_by = $courseCategory->last_2_modified_by;
+        $courseCategory->last_2_modified_by = $courseCategory->last_1_modified_by;
+        $courseCategory->last_1_modified_by = now().",".Auth::user()->name.",修改";
+
+        $courseCategory->update($request->all());
+
         return redirect()->route('admins.course_categories.index');
     }
 
     public function destroy(CourseCategory $courseCategory)
     {
-        $courseCategory->delete();
+        $courseCategory->status = -1;
+
+        $courseCategory->last_5_modified_by = $courseCategory->last_4_modified_by;
+        $courseCategory->last_4_modified_by = $courseCategory->last_3_modified_by;
+        $courseCategory->last_3_modified_by = $courseCategory->last_2_modified_by;
+        $courseCategory->last_2_modified_by = $courseCategory->last_1_modified_by;
+        $courseCategory->last_1_modified_by = now().",".Auth::user()->name.",刪除";
+
+        $courseCategory->save();
+
+        return redirect()->route('admins.course_categories.index');
+    }
+
+    public function restore(CourseCategory $courseCategory)
+    {
+        $courseCategory->status = 1;
+
+        $courseCategory->last_5_modified_by = $courseCategory->last_4_modified_by;
+        $courseCategory->last_4_modified_by = $courseCategory->last_3_modified_by;
+        $courseCategory->last_3_modified_by = $courseCategory->last_2_modified_by;
+        $courseCategory->last_2_modified_by = $courseCategory->last_1_modified_by;
+        $courseCategory->last_1_modified_by = now().",".Auth::user()->name.",刪除復原";
+
+        $courseCategory->save();
+
         return redirect()->route('admins.course_categories.index');
     }
 

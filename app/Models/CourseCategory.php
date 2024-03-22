@@ -11,7 +11,11 @@ class CourseCategory extends Model
 
     protected $fillable = [
         'name',
-        'last_modified_by',
+        'last_1_modified_by',
+        'last_2_modified_by',
+        'last_3_modified_by',
+        'last_4_modified_by',
+        'last_5_modified_by',
         'order_by',
     ];
 
@@ -19,10 +23,5 @@ class CourseCategory extends Model
     public function courses()
     {
         return $this->hasMany(Course::class, 'course_category_id');
-    }
-
-    public function lastModifiedByAdmin()
-    {
-        return $this->belongsTo(Admin::class, 'last_modified_by')->with('user');
     }
 }

@@ -153,12 +153,15 @@ Route::group(['middleware' => 'admin'], function(){
         Route::get('/course_objectives/search', [App\Http\Controllers\AdminCourseObjectiveController::class, 'search'])->name('course_objectives.search');
 
         Route::get('/course_categories/index',[App\Http\Controllers\AdminCourseCategoryController::class,'index'])->name('course_categories.index');
+        Route::get('/course_categories/history',[App\Http\Controllers\AdminCourseCategoryController::class,'history'])->name('course_categories.history');
         Route::get('/course_categories/order_by',[App\Http\Controllers\AdminCourseCategoryController::class,'order_by'])->name('course_categories.order_by');
         Route::get('/course_categories/create',[App\Http\Controllers\AdminCourseCategoryController::class,'create'])->name('course_categories.create');
         Route::post('/course_categories', [App\Http\Controllers\AdminCourseCategoryController::class, 'store'])->name("course_categories.store");
         Route::get('/course_categories/{course_category}/edit', [App\Http\Controllers\AdminCourseCategoryController::class, 'edit'])->name("course_categories.edit");
-        Route::patch('/course_categories/{course_category}',[App\Http\Controllers\AdminCourseCategoryController::class,'update'])->name('course_categories.update');
-        Route::delete('/course_categories/{course_category}', [App\Http\Controllers\AdminCourseCategoryController::class, 'destroy'])->name("course_categories.destroy");
+        Route::get('/course_categories/{course_category}/action', [App\Http\Controllers\AdminCourseCategoryController::class, 'getRecentActions'])->name("course_categories.action");
+        Route::patch('/course_categories/{course_category}/update',[App\Http\Controllers\AdminCourseCategoryController::class,'update'])->name('course_categories.update');
+        Route::patch('/course_categories/{course_category}/destroy', [App\Http\Controllers\AdminCourseCategoryController::class, 'destroy'])->name("course_categories.destroy");
+        Route::patch('/course_categories/{course_category}/restore', [App\Http\Controllers\AdminCourseCategoryController::class, 'restore'])->name("course_categories.restore");
         Route::get('/course_categories/search', [App\Http\Controllers\AdminCourseCategoryController::class, 'search'])->name('course_categories.search');
         Route::patch('/course_categories/{course_category}/update_order', [App\Http\Controllers\AdminCourseCategoryController::class, 'update_order'])->name('course_categories.update_order');
 

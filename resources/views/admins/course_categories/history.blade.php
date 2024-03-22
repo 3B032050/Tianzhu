@@ -7,11 +7,9 @@
         <div style="margin-top: 10px;">
             <p style="font-size: 1.8em;">
                 <a href="{{ route('admins.courses.index') }}" class="custom-link"><i class="fa fa-home"></i>僧伽教育</a> &gt;
-                課程分階
+                <a href="{{ route('admins.course_categories.index') }}" class="custom-link">課程分階</a> &gt;
+                歷史分階
             </p>
-        </div>
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <a class="btn btn-success btn-sm" href="{{ route('admins.course_categories.create') }}">新增課程分階</a>
         </div>
         <table class="table">
             <thead>
@@ -19,7 +17,7 @@
                 <th scope="col">#</th>
                 <th scope="col" style="text-align:left">名稱</th>
                 <th scope="col" style="width: 25%; text-align:left">最新修改管理員</th>
-                <th scope="col" style="text-align:center">編輯</th>
+{{--                <th scope="col" style="text-align:center">編輯</th>--}}
                 <th scope="col" style="text-align:center">刪除</th>
             </tr>
             </thead>
@@ -44,20 +42,20 @@
                             @endforeach
                         </table>
                     </td>
+{{--                    <td style="text-align:center">--}}
+{{--                        <a href="{{ route('admins.course_categories.edit',$courseCategory->id) }}" class="btn btn-secondary btn-sm">編輯</a>--}}
+{{--                    </td>--}}
                     <td style="text-align:center">
-                        <a href="{{ route('admins.course_categories.edit',$courseCategory->id) }}" class="btn btn-secondary btn-sm">編輯</a>
-                    </td>
-                    <td style="text-align:center">
-                        <form id="deleteForm{{ $courseCategory->id }}" action="{{ route('admins.course_categories.destroy',$courseCategory->id) }}" method="POST">
+                        <form id="deleteForm{{ $courseCategory->id }}" action="{{ route('admins.course_categories.restore',$courseCategory->id) }}" method="POST">
                             @method('PATCH')
                             @csrf
-                            <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('{{ $courseCategory->name }}', {{ $courseCategory->id }})">刪除</button>
+                            <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('{{ $courseCategory->name }}', {{ $courseCategory->id }})">刪除復原</button>
                         </form>
                     </td>
                     <script>
                         function confirmDelete(name, id)
                         {
-                            if (confirm("確定要刪除課程分階「" + name + "」嗎？")) {
+                            if (confirm("確定要復原課程分階「" + name + "」嗎？")) {
                                 document.getElementById('deleteForm' + id).submit();
                             }
                         }
