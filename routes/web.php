@@ -145,11 +145,14 @@ Route::group(['middleware' => 'admin'], function(){
         Route::patch('/courses/{course}/update_order', [App\Http\Controllers\AdminCourseController::class, 'update_order'])->name('courses.update_order');
 
         Route::get('/course_objectives',[App\Http\Controllers\AdminCourseObjectiveController::class,'index'])->name('course_objectives.index');
+        Route::get('/course_objectives/history',[App\Http\Controllers\AdminCourseObjectiveController::class,'history'])->name('course_objectives.history');
         Route::get('/course_objectives/create',[App\Http\Controllers\AdminCourseObjectiveController::class,'create'])->name('course_objectives.create');
         Route::post('/course_objectives', [App\Http\Controllers\AdminCourseObjectiveController::class, 'store'])->name("course_objectives.store");
         Route::get('/course_objectives/{course_objective}/edit', [App\Http\Controllers\AdminCourseObjectiveController::class, 'edit'])->name("course_objectives.edit");
-        Route::patch('/course_objectives/{course_objective}',[App\Http\Controllers\AdminCourseObjectiveController::class,'update'])->name('course_objectives.update');
-        Route::delete('/course_objectives/{course_objective}', [App\Http\Controllers\AdminCourseObjectiveController::class, 'destroy'])->name("course_objectives.destroy");
+        Route::get('/course_objectives/{course_objective}/action', [App\Http\Controllers\AdminCourseObjectiveController::class, 'getRecentActions'])->name("course_objectives.action");
+        Route::patch('/course_objectives/{course_objective}/update',[App\Http\Controllers\AdminCourseObjectiveController::class,'update'])->name('course_objectives.update');
+        Route::patch('/course_objectives/{course_objective}/destroy', [App\Http\Controllers\AdminCourseObjectiveController::class, 'destroy'])->name("course_objectives.destroy");
+        Route::patch('/course_objectives/{course_objective}/restore', [App\Http\Controllers\AdminCourseObjectiveController::class, 'restore'])->name("course_objectives.restore");
         Route::get('/course_objectives/search', [App\Http\Controllers\AdminCourseObjectiveController::class, 'search'])->name('course_objectives.search');
 
         Route::get('/course_categories/index',[App\Http\Controllers\AdminCourseCategoryController::class,'index'])->name('course_categories.index');
@@ -166,11 +169,14 @@ Route::group(['middleware' => 'admin'], function(){
         Route::patch('/course_categories/{course_category}/update_order', [App\Http\Controllers\AdminCourseCategoryController::class, 'update_order'])->name('course_categories.update_order');
 
         Route::get('/course_methods',[App\Http\Controllers\AdminCourseMethodController::class,'index'])->name('course_methods.index');
+        Route::get('/course_methods/history',[App\Http\Controllers\AdminCourseMethodController::class,'history'])->name('course_methods.history');
         Route::get('/course_methods/create',[App\Http\Controllers\AdminCourseMethodController::class,'create'])->name('course_methods.create');
         Route::post('/course_methods', [App\Http\Controllers\AdminCourseMethodController::class, 'store'])->name("course_methods.store");
         Route::get('/course_methods/{course_method}/edit', [App\Http\Controllers\AdminCourseMethodController::class, 'edit'])->name("course_methods.edit");
-        Route::patch('/course_methods/{course_method}',[App\Http\Controllers\AdminCourseMethodController::class,'update'])->name('course_methods.update');
-        Route::delete('/course_methods/{course_method}', [App\Http\Controllers\AdminCourseMethodController::class, 'destroy'])->name("course_methods.destroy");
+        Route::get('/course_methods/{course_method}/action', [App\Http\Controllers\AdminCourseMethodController::class, 'getRecentActions'])->name("course_methods.action");
+        Route::patch('/course_methods/{course_method}/update',[App\Http\Controllers\AdminCourseMethodController::class,'update'])->name('course_methods.update');
+        Route::patch('/course_methods/{course_method}/destroy', [App\Http\Controllers\AdminCourseMethodController::class, 'destroy'])->name("course_methods.destroy");
+        Route::patch('/course_methods/{course_method}/restore', [App\Http\Controllers\AdminCourseMethodController::class, 'restore'])->name("course_methods.restore");
         Route::get('/course_methods/search', [App\Http\Controllers\AdminCourseMethodController::class, 'search'])->name('course_methods.search');
 
         Route::get('/activities',[App\Http\Controllers\AdminActivityController::class,'index'])->name('activities.index');

@@ -13,7 +13,6 @@ class AdminCourseCategoryController extends Controller
     {
         $courseCategories = CourseCategory::orderBy('id', 'ASC')->where('status', 1)->get();
 
-        // 获取每个课程类别的最近动作
         foreach ($courseCategories as $category) {
             $category->recentActions = $this->getRecentActions($category->id);
         }
@@ -26,7 +25,6 @@ class AdminCourseCategoryController extends Controller
     {
         $courseCategories = CourseCategory::orderBy('updated_at', 'DESC')->where('status', -1)->get();
 
-        // 获取每个课程类别的最近动作
         foreach ($courseCategories as $category) {
             $category->recentActions = $this->getRecentActions($category->id);
         }

@@ -11,17 +11,17 @@ class CourseMethod extends Model
 
     protected $fillable = [
         'name',
-        'last_modified_by',
+        'last_1_modified_by',
+        'last_2_modified_by',
+        'last_3_modified_by',
+        'last_4_modified_by',
+        'last_5_modified_by',
+        'status',
     ];
 
     // 這是多對多的關聯，一個方法可能屬於多門課程
     public function courses()
     {
         return $this->belongsToMany(Course::class, 'course_method_relationship', 'method_id', 'course_id');
-    }
-
-    public function lastModifiedByAdmin()
-    {
-        return $this->belongsTo(Admin::class, 'last_modified_by')->with('user');
     }
 }

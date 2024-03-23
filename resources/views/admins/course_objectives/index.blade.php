@@ -29,18 +29,27 @@
                 <td style="text-align:left">{{ $index + 1 }}</td>
                 <td>{{ $courseObjective->description }}</td>
                 <td>
-                    @if($courseObjective->lastModifiedByAdmin)
-                        {{ $courseObjective->lastModifiedByAdmin->user->name }}
-                    @else
-                        無
-                    @endif
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <tr>
+                            <th style="border: 1px solid black;" scope="col">時間(最新)</th>
+                            <th style="border: 1px solid black;" scope="col">修改人</th>
+                            <th style="border: 1px solid black;" scope="col">動作</th>
+                        </tr>
+                        @foreach($courseObjective->recentActions as $action)
+                            <tr>
+                                <td style="border: 1px solid black;">{{ $action['time'] }}</td>
+                                <td style="border: 1px solid black;">{{ $action['user'] }}</td>
+                                <td style="border: 1px solid black;">{{ $action['action'] }}</td>
+                            </tr>
+                        @endforeach
+                    </table>
                 </td>
                 <td style="text-align:center">
                     <a href="{{ route('admins.course_objectives.edit',$courseObjective->id) }}" class="btn btn-secondary btn-sm">編輯</a>
                 </td>
                 <td style="text-align:center">
                     <form id="deleteForm{{ $courseObjective->id }}" action="{{ route('admins.course_objectives.destroy',$courseObjective->id) }}" method="POST">
-                        @method('DELETE')
+                        @method('PATCH')
                         @csrf
                         <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('{{ $courseObjective->description }}', {{ $courseObjective->id }})">刪除</button>
                     </form>

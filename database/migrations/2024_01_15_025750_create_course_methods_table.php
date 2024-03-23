@@ -14,7 +14,12 @@ return new class extends Migration
         Schema::create('course_methods', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedBigInteger('last_modified_by')->nullable();
+            $table->string('last_1_modified_by')->nullable();
+            $table->string('last_2_modified_by')->nullable();
+            $table->string('last_3_modified_by')->nullable();
+            $table->string('last_4_modified_by')->nullable();
+            $table->string('last_5_modified_by')->nullable();
+            $table->string('status')->default('1');
             $table->timestamps();
         });
     }
