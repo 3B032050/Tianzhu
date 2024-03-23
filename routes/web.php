@@ -246,6 +246,7 @@ Route::group(['middleware' => 'admin'], function(){
 
         #影音
         Route::get('/video',[App\Http\Controllers\AdminVideoController::class,'index'])->name('videos.index');
+        Route::get('/video/order',[App\Http\Controllers\AdminVideoController::class,'order'])->name('videos.order');
         Route::get('/video/create',[App\Http\Controllers\AdminVideoController::class,'create'])->name('videos.create');
         Route::get('/video/search',[App\Http\Controllers\AdminVideoController::class,'search'])->name('videos.search');
         Route::post('/video', [App\Http\Controllers\AdminVideoController::class, 'store'])->name("videos.store");

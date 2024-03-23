@@ -6,6 +6,7 @@ use App\Models\Video;
 use App\Http\Requests\StoreVideoRequest;
 use App\Http\Requests\UpdateVideoRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class VideoController extends Controller
 {
@@ -14,9 +15,18 @@ class VideoController extends Controller
      */
     public function index()
     {
-        $videos = Video::orderBy('order_video_id', 'ASC')->get();
+        $videos = Video::join('video_categories', 'videos.video_category_id', '=', 'video_categories.id')
+            ->orderBy('video_categories.order_category_id', 'ASC')
+            ->orderBy('videos.order_video_id', 'ASC')
+            ->get();
         $data = ['videos' => $videos];
         return view('videos.index', $data);
+    }
+    public static function join($table1, $column1, $operator, $table2, $column2, $type = 'inner')
+    {
+        return DB::table($table1)
+            ->join($table2, $column1, $operator, $column2, $type)
+            ->get();
     }
 
     /**
