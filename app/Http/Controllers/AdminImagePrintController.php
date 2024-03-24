@@ -64,46 +64,101 @@ class AdminImagePrintController extends Controller
         return view('admins.image_prints.print',$data);
     }
 
+//    public function preview(ImagePrint $imagePrint)
+//    {
+//        $members = User::all();
+//        $images = [];
+//
+//        foreach ($members as $member) {
+//            $manager = new ImageManager(new Driver());
+//            $image = $manager->read('storage/image_prints/' . $imagePrint->image_url);
+//
+//            $xCoordinate = 120;
+//            $yCoordinate = 310;
+//
+//            $verticalSpacing = 40; //中文间距
+//            $smallVerticalSpacing = 20; //英文间距
+//
+//            // Create a cloned image for each member
+//            $clonedImage = clone $image;
+//
+//            foreach (mb_str_split($member->name, 1, 'UTF-8') as $char) {
+//                $fontSize = 24; // 初始字体大小
+//                $maxWidth = 300; // 设置文字方框最大宽度
+//                $maxHeight = 100; // 设置文字方框最大高度
+//
+//                // Get the bounding box of the text
+//                $bbox = imagettfbbox($fontSize, 0, public_path('fonts/NotoSansTC-Medium.ttf'), $char);
+//
+//                // Calculate the width and height of the text
+//                $textWidth = $bbox[2] - $bbox[0];
+//                $textHeight = $bbox[1] - $bbox[7];
+//
+//                // Draw a rectangle as background with border
+//                $clonedImage->rectangle($xCoordinate - 5, $yCoordinate - $textHeight - 5, $xCoordinate + $textWidth + 5, $yCoordinate + 5, function ($draw) {
+//                    $draw->background('#ffffff'); // 背景颜色
+//                    $draw->border(1, '#000000'); // 边线颜色和宽度
+//                });
+//
+//                // Add text with dynamically adjusted font size
+//                $clonedImage->text($char, $xCoordinate, $yCoordinate, function ($font) use ($char, $fontSize) {
+//                    $font->file(public_path('fonts/NotoSansTC-Medium.ttf'));
+//                    $font->size($fontSize);
+//                    $font->color('#000000');
+//                    if (preg_match('/[\p{Han}]/u', $char)) {
+//                        $font->angle(0);
+//                    } else {
+//                        $font->angle(90);
+//                    }
+//                });
+//
+//                // Adjust the vertical position for the next character
+//                $yCoordinate += (preg_match('/[\p{Han}]/u', $char)) ? $verticalSpacing : $smallVerticalSpacing;
+//            }
+//
+//            // Save the modified image
+//            $fileName = 'output_' . $member->id . '.jpg';
+//            $clonedImage->save(storage_path('app/public/image_prints/' . $fileName));
+//
+//            // Store the image URL for display
+//            $images[] = asset('storage/image_prints/' . $fileName);
+//        }
+//
+//        // Pass image URLs to the view
+//        $data = ['images' => $images];
+//
+//        // Display the images on the webpage
+//        return view('admins.image_prints.preview', $data);
+//    }
+
     public function preview(ImagePrint $imagePrint)
     {
         $members = User::all();
         $images = [];
+        $memberCount = 0; // 計數器，用於每六個人執行一次圖片處理
+
+        // 設定圖片中文字的初始位置
+        $xCoordinate = 195;
+        $yCoordinate = 360;
+        $xCoordinate_yang = 70;
+        $yCoordinate_yang = 360;
+        $xCoordinate_address = 330;
+        $yCoordinate_address = 260;
+        $verticalSpacing = 40; //中文间距
+        $smallVerticalSpacing = 20; //英文间距
+
+        // 初始化圖片管理器
+        $manager = new ImageManager(new Driver());
+        $image = $manager->read('storage/image_prints/' . $imagePrint->image_url);
+        $clonedImage = clone $image;
 
         foreach ($members as $member) {
-            $manager = new ImageManager(new Driver());
-            $image = $manager->read('storage/image_prints/' . $imagePrint->image_url);
-
-            $xCoordinate = 120;
-            $yCoordinate = 310;
-
-            $verticalSpacing = 40; //中文间距
-            $smallVerticalSpacing = 20; //英文间距
-
-            // Create a cloned image for each member
-            $clonedImage = clone $image;
-
+            // 遍歷會員資料並將其印在圖片上
             foreach (mb_str_split($member->name, 1, 'UTF-8') as $char) {
-                $fontSize = 24; // 初始字体大小
-                $maxWidth = 300; // 设置文字方框最大宽度
-                $maxHeight = 100; // 设置文字方框最大高度
-
-                // Get the bounding box of the text
-                $bbox = imagettfbbox($fontSize, 0, public_path('fonts/NotoSansTC-Medium.ttf'), $char);
-
-                // Calculate the width and height of the text
-                $textWidth = $bbox[2] - $bbox[0];
-                $textHeight = $bbox[1] - $bbox[7];
-
-                // Draw a rectangle as background with border
-                $clonedImage->rectangle($xCoordinate - 5, $yCoordinate - $textHeight - 5, $xCoordinate + $textWidth + 5, $yCoordinate + 5, function ($draw) {
-                    $draw->background('#ffffff'); // 背景颜色
-                    $draw->border(1, '#000000'); // 边线颜色和宽度
-                });
-
-                // Add text with dynamically adjusted font size
-                $clonedImage->text($char, $xCoordinate, $yCoordinate, function ($font) use ($char, $fontSize) {
+                // 將會員名稱印在圖片上
+                $clonedImage->text($char, $xCoordinate, $yCoordinate, function ($font) use ($char) {
                     $font->file(public_path('fonts/NotoSansTC-Medium.ttf'));
-                    $font->size($fontSize);
+                    $font->size(24);
                     $font->color('#000000');
                     if (preg_match('/[\p{Han}]/u', $char)) {
                         $font->angle(0);
@@ -111,23 +166,133 @@ class AdminImagePrintController extends Controller
                         $font->angle(90);
                     }
                 });
-
-                // Adjust the vertical position for the next character
+                // 調整文字位置
                 $yCoordinate += (preg_match('/[\p{Han}]/u', $char)) ? $verticalSpacing : $smallVerticalSpacing;
             }
 
-            // Save the modified image
+            foreach (mb_str_split($member->name, 1, 'UTF-8') as $char2) {
+                $fontSize = 24; // 初始字体大小
+
+                $clonedImage->text($char2, $xCoordinate_yang, $yCoordinate_yang, function ($font) use ($char2, $fontSize) {
+                    $font->file(public_path('fonts/NotoSansTC-Medium.ttf'));
+                    $font->size($fontSize);
+                    $font->color('#000000');
+                    if (preg_match('/[\p{Han}]/u', $char2)) {
+                        $font->angle(0);
+                    } else {
+                        $font->angle(90);
+                    }
+                });
+
+                // Adjust the vertical position for the next character
+                $yCoordinate_yang += (preg_match('/[\p{Han}]/u', $char2)) ? $verticalSpacing : $smallVerticalSpacing;
+            }
+
+
+            foreach (mb_str_split($member->address, 1, 'UTF-8') as $char1) {
+                $fontSize = 24; // 初始字体大小
+
+                $clonedImage->text($char1, $xCoordinate_address, $yCoordinate_address, function ($font) use ($char1, $fontSize) {
+                    $font->file(public_path('fonts/NotoSansTC-Medium.ttf'));
+                    $font->size($fontSize);
+                    $font->color('#000000');
+                    if (preg_match('/[\p{Han}]/u', $char1)) {
+                        $font->angle(0);
+                    } else {
+                        $font->angle(90);
+                    }
+                });
+
+                // Adjust the vertical position for the next character
+                $yCoordinate_address += (preg_match('/[\p{Han}]/u', $char1)) ? $verticalSpacing : $smallVerticalSpacing;
+            }
+
+            // 額外的處理，根據您的需求進行修改
+            $xCoordinate += 400;
+            $xCoordinate_yang += 400;
+            $xCoordinate_address += 400;
+
+
+
+            // 增加會員計數
+            $memberCount++;
+
+            if($memberCount < 3 ){
+                $yCoordinate = 360;
+                $yCoordinate_yang = 360;
+                $yCoordinate_address = 260;
+            }
+            else if ($memberCount % 3 === 0) {
+                $xCoordinate = 195;
+                $yCoordinate = 1200;
+                $xCoordinate_yang = 70;
+                $yCoordinate_yang = 1200;
+                $xCoordinate_address = 330;
+                $yCoordinate_address = 1080;
+            }
+            else{
+                $yCoordinate = 1200;
+                $yCoordinate_yang = 1200;
+                $yCoordinate_address = 1080;
+            }
+
+
+            // 每六個會員執行一次處理
+            if ($memberCount % 6 === 0) {
+                $memberCount = 0;
+                // 保存修改後的圖片
+                $fileName = 'output_' . $member->id . '.jpg';
+                $clonedImage->save(storage_path('app/public/image_prints/' . $fileName));
+                // 存儲圖片URL
+                $images[] = asset('storage/image_prints/' . $fileName);
+                // 重置圖片以便下一組會員
+                $clonedImage = clone $image;
+
+                // 重置文字位置
+                $xCoordinate = 195;
+                $yCoordinate = 360;
+                $xCoordinate_yang = 70;
+                $yCoordinate_yang = 360;
+                $xCoordinate_address = 330;
+                $yCoordinate_address = 260;
+            }
+
+
+        }
+        if ($memberCount % 6 !== 0) {
+            // 保存修改後的圖片
             $fileName = 'output_' . $member->id . '.jpg';
             $clonedImage->save(storage_path('app/public/image_prints/' . $fileName));
-
-            // Store the image URL for display
+            // 存儲圖片URL
             $images[] = asset('storage/image_prints/' . $fileName);
         }
 
-        // Pass image URLs to the view
-        $data = ['images' => $images];
+//        $html = '<html><body>';
+//
+//        // 添加圖片
+//        $html .= '<img src="' . 'storage/image_prints/' . $fileName . '" />';
+//
+//        $html .= '</body></html>';
+//
+//        // 使用 dompdf 庫渲染 PDF
+//        $options = new Options();
+//        $options->set('chroot',realpath(''));
+//
+//
+//        $pdf = new Dompdf(['chroot' => __DIR__]);
+//        $pdf->loadHtml($html);
+//
+//        $pdf->setPaper('A4', 'portrait'); // 設置紙張大小和方向
+//
+//        // 渲染 PDF
+//        $pdf->render();
+//
+//        // 將 PDF 寫入文件
+//        $pdf->stream('output.pdf', array('Attachment' => false));
 
-        // Display the images on the webpage
+        // 將圖片URL傳遞給視圖
+        $data = ['images' => $images];
+        // 在網頁上顯示圖片
         return view('admins.image_prints.preview', $data);
     }
 
