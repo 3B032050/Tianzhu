@@ -8,8 +8,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
-use Dompdf\Dompdf as PDF;
-use Dompdf\Options as Options;
+use Dompdf\Dompdf;
+use Dompdf\Options;
+
 
 
 class AdminImagePrintController extends Controller
@@ -270,30 +271,6 @@ class AdminImagePrintController extends Controller
                 // 存儲圖片URL
                 $images[] = asset('storage/image_prints/' . $fileName);
             }
-
-//        $options = new Options();
-//        $options->set('isHtml5ParserEnabled', true); // 啟用 HTML5 解析器
-//        $options->set('isRemoteEnabled', true);
-//        $pdf = new Dompdf($options);
-//
-//        // 添加 PDF 內容
-//        $html = '<html><body>';
-//
-//        // 添加圖片
-//        foreach ($images as $image) {
-//            $html .= '<img src="' . 'storage/image_prints/' . $fileName . '" />';
-//        }
-//
-//        $html .= '</body></html>';
-//
-//        $pdf->loadHtml($html);
-//
-//        // 渲染 PDF
-//        $pdf->render();
-//
-//        // 將 PDF 寫入文件
-//        $pdf->stream('output.pdf', array('Attachment' => 0));
-
         }
         else
         {
@@ -402,36 +379,84 @@ class AdminImagePrintController extends Controller
                 // 存儲圖片URL
                 $images[] = asset('storage/image_prints/' . $fileName);
             }
-
-//        $options = new Options();
-//        $options->set('isHtml5ParserEnabled', true); // 啟用 HTML5 解析器
-//        $options->set('isRemoteEnabled', true);
-//        $pdf = new Dompdf($options);
-//
-//        // 添加 PDF 內容
-//        $html = '<html><body>';
-//
-//        // 添加圖片
-//        foreach ($images as $image) {
-//            $html .= '<img src="' . 'storage/image_prints/' . $fileName . '" />';
-//        }
-//
-//        $html .= '</body></html>';
-//
-//        $pdf->loadHtml($html);
-//
-//        // 渲染 PDF
-//        $pdf->render();
-//
-//        // 將 PDF 寫入文件
-//        $pdf->stream('output.pdf', array('Attachment' => 0));
         }
 
 
         // 將圖片URL傳遞給視圖
         $data = ['images' => $images];
+
         // 在網頁上顯示圖片
         return view('admins.image_prints.preview', $data);
+    }
+
+    public function download()
+    {
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true); // 啟用 HTML5 解析器
+        $options->set('isRemoteEnabled', true);
+        $pdf = new Dompdf($options);
+        // 添加 PDF 內容
+        $html = '<html><body>';
+        $imagePath = public_path('storage/image_prints/');
+        $files = scandir($imagePath);
+
+        $images = [];
+        foreach ($files as $file) {
+            // 檢查檔案是否為圖片檔案
+            $ext = pathinfo($file, PATHINFO_EXTENSION);
+            if (in_array(strtolower($ext), ['jpg', 'jpeg', 'png', 'gif'])) {
+                $images[] = $file;
+            }
+        }
+        foreach ($images as $image) {
+
+            $imagePath = public_path('storage/image_prints/'.$image); // 存儲目錄的路徑
+
+            $imageContent = file_get_contents($imagePath); // 不包含存儲目錄路徑
+            // 將圖片內容轉換為 base64 編碼
+            $base64Image = base64_encode($imageContent);
+            // 添加圖片到 HTML
+            $html .= '<img src="data:image/jpg;base64,' . $base64Image . '"style="width: 100%; height: 100%;" />';
+        }
+
+        $html .= '</body></html>';
+
+        $pdf->loadHtml($html);
+
+        // 渲染 PDF
+        $pdf->render();
+
+        // 將 PDF 寫入文件
+        $pdf->stream('output.pdf', array('Attachment' => 0));
+
+
+//        if ($request->hasFile('image')) {
+//            $image = $request->file('image');
+//            $imageName = time() . '.' . $image->getClientOriginalExtension();
+//            $image->move(public_path('images'), $imageName); // 將圖片保存到 public/images 文件夾中
+//        } else {
+//
+//        }
+//
+//        // 加載 PDF 相關選項
+//        $options = new Options();
+//        $options->set('isHtml5ParserEnabled', true);
+//        $options->set('isRemoteEnabled', true);
+//
+//        // 初始化 Dompdf
+//        $dompdf = new Dompdf($options);
+//
+//        // 動態生成視圖並傳遞圖片路徑
+//        $html = view('admins.image_prints.preview', ['imagePath' => public_path('images/' . $imageName)])->render();
+//
+//        // 載入 HTML 內容
+//        $dompdf->loadHtml($html);
+//
+//        // 渲染 PDF
+//        $dompdf->render();
+//
+//        // 下載 PDF
+//        return $dompdf->stream('preview.pdf');
     }
 
     public function downloadMembers(Request $request)

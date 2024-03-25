@@ -283,7 +283,7 @@
                         <div class="collapse" id="collapseImagePrints" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link" href="{{ route('admins.image_prints.index') }}">檢視所有圖片</a>
-                                <a class="nav-link" href="{{ route('admins.image_prints.create') }}">新增圖片</a>
+{{--                                <a class="nav-link" href="{{ route('admins.image_prints.create') }}">新增圖片</a>--}}
                             </nav>
                         </div>
                     @endif
@@ -609,7 +609,7 @@
                         <div class="collapse" id="collapseImagePrints" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link" href="{{ route('admins.image_prints.index') }}">檢視所有圖片</a>
-                                <a class="nav-link" href="{{ route('admins.image_prints.create') }}">新增圖片</a>
+{{--                                <a class="nav-link" href="{{ route('admins.image_prints.create') }}">新增圖片</a>--}}
                             </nav>
                         </div>
                     @endif
@@ -887,7 +887,7 @@
                     <div class="collapse" id="collapseImagePrints" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
                             <a class="nav-link" href="{{ route('admins.image_prints.index') }}">檢視所有圖片</a>
-                            <a class="nav-link" href="{{ route('admins.image_prints.create') }}">新增圖片</a>
+{{--                            <a class="nav-link" href="{{ route('admins.image_prints.create') }}">新增圖片</a>--}}
                         </nav>
                     </div>
 

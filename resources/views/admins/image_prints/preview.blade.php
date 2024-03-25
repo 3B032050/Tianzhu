@@ -2,32 +2,37 @@
 
 @section('page-title', '預覽圖片')
 
-@section('content')
+@section('page-content')
     <div class="container-fluid px-4">
-        <h1 class="mt-4">影印</h1>
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col" style="text-align:center">圖片</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach ($images as $key => $image)
-                    <?php
-                    // Save the image
-                    $fileName = 'output_' . $key . '.jpg';
-                    $image->save(storage_path('app/public/image_prints/' . $fileName));
-                    // Get the path to the saved image
-                    $imagePath = storage_path('app/public/image_prints/' . $fileName);
-                    ?>
-                    <td style="text-align:center"><img src="{{ asset('storage/image_prints/' . $fileName) }}" alt="Member {{ $key + 1 }}"></td>
-                <br>
-                {{-- <a href="{{ route('admin.members.download', ['key' => $key]) }}">Download Image</a> --}}
-                <br>
+        <div style="margin-top: 10px;">
+            <p style="font-size: 1.8em;">
+                <a href="{{ route('admins.image_prints.index') }}" class="custom-link"><i class="fa fa-home"></i>影印</a> &gt;
+                預覽圖片
+            </p>
+        </div>
+        <h1 class="mt-4">預覽圖片</h1>
+        <form id="downloadForm" action="{{ route('admins.image_prints.download') }}" method="GET">
+            @csrf
+            @foreach($images as $image)
+                <input type="hidden" name="images[]" value="{{ $image }}">
             @endforeach
-            </tbody>
-        </table>
+            <button type="submit" class="btn btn-primary">下載 PDF</button>
+        </form>
+        <div class="row">
+            @foreach($images as $index => $image)
+                @if($index % 2 == 0)
+                    <div class="col-md-6 mb-4">
+                        <img src="{{ $image }}" class="img-fluid" alt="Preview Image">
+                    </div>
+                @else
+                    <div class="col-md-6 mb-4">
+                        <img src="{{ $image }}" class="img-fluid" alt="Preview Image">
+                    </div>
+                    <div class="w-100"></div>
+                    <hr style="border-top: 1px solid #ccc; margin: 20px 0;">
+                @endif
+            @endforeach
+        </div>
     </div>
-
 @endsection
+

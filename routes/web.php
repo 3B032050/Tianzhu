@@ -336,7 +336,7 @@ Route::group(['middleware' => 'admin'], function(){
         Route::get('image_prints/{image_print}/edit', [App\Http\Controllers\AdminImagePrintController::class, 'edit'])->name("image_prints.edit");
         Route::patch('image_prints/{image_print}', [App\Http\Controllers\AdminImagePrintController::class, 'update'])->name("image_prints.update");
         Route::delete('image_prints/{image_print}', [App\Http\Controllers\AdminImagePrintController::class, 'destroy'])->name("image_prints.destroy");
-
+        Route::get('image_prints/download', [App\Http\Controllers\AdminImagePrintController::class, 'download'])->name('image_prints.download');
 
     });
 });
