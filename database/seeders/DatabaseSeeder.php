@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\ImagePrint;
 use App\Models\Permission;
 use App\Models\Web_content;
 use Illuminate\Database\Seeder;
@@ -81,6 +82,16 @@ class DatabaseSeeder extends Seeder
         foreach ($items as $item) {
             Permission::create($item);
         }
+
+        $images = [
+            ['name' => '超薦', 'image_url' => "1711293071.jpg",],
+            ['name' => '消災', 'image_url' => "1711293129.jpg",],
+        ];
+
+        foreach ($images as $image) {
+            ImagePrint::create($image);
+        }
+
 
     }
 }

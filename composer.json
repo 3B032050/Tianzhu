@@ -6,6 +6,8 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
+        "ext-gd": "*",
+        "dompdf/dompdf": "^2.0",
         "guzzlehttp/guzzle": "^7.2",
         "intervention/image": "^3.4",
         "laravel/framework": "^10.10",
@@ -13,8 +15,7 @@
         "laravel/tinker": "^2.8",
         "laravel/ui": "^4.2",
         "league/flysystem-aws-s3-v3": "^3.0",
-        "league/flysystem-path-prefixing": "^3.0",
-      "ext-gd": "*"
+        "league/flysystem-path-prefixing": "^3.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
