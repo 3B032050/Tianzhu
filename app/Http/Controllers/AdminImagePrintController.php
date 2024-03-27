@@ -10,16 +10,26 @@ use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 use Dompdf\Dompdf;
 use Dompdf\Options;
-
+use Illuminate\Support\Facades\File;
 
 
 class AdminImagePrintController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
         $imagePrints = ImagePrint::orderby('id','ASC')->get();
         $data = ['imagePrints' => $imagePrints];
         return view('admins.image_prints.index',$data);
+    }
+
+    public function review(ImagePrint $imagePrint,Request $request)
+    {
+        $imagePrint = $imagePrint->name;
+        $perPage = $request->input('perPage', 10);
+        $users = User::orderby('id','ASC')->paginate($perPage);
+        $data = ['users' => $users,
+            'imagePrint'=>$imagePrint];
+        return view('admins.image_prints.review',$data);
     }
 
     public function create()
@@ -136,6 +146,9 @@ class AdminImagePrintController extends Controller
 
     public function preview(ImagePrint $imagePrint)
     {
+        $imagePath = storage_path('app/public/image_prints/');
+        File::deleteDirectory($imagePath);
+        File::makeDirectory($imagePath);
         if($imagePrint -> name === '超薦')
         {
             $members = User::all();

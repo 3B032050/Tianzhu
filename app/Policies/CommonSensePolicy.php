@@ -6,7 +6,7 @@ use App\Models\CommonSense;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
-class CommonSencePolicy
+class CommonSensePolicy
 {
     /**
      * Determine whether the user can view any models.
