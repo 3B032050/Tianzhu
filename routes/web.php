@@ -43,6 +43,13 @@ Route::get('/courses/by_category/{course_category}/show/{course}', [App\Http\Con
 Route::get('/activities', [App\Http\Controllers\ActivityController::class, 'index'])->name('activities.index');
 Route::get('/activities/{activity}/show', [App\Http\Controllers\ActivityController::class, 'show'])->name('activities.show');
 
+Route::get('/tablets', [App\Http\Controllers\TabletController::class, 'index'])->name('tablets.index');
+Route::get('/tablets/create_blessing', [App\Http\Controllers\TabletController::class, 'create_blessing'])->name('tablets.create_blessing');
+
+Route::get('/tablets/select_delivering_the_decreased', [App\Http\Controllers\TabletController::class, 'select_delivering_the_decreased'])->name('tablets.select_delivering_the_decreased');
+Route::get('/tablets/create_delivering_the_decreased', [App\Http\Controllers\TabletController::class, 'create_delivering_the_decreased'])->name('tablets.create_delivering_the_decreased');
+
+
 Route::get('/common_senses', [App\Http\Controllers\CommonSenseController::class, 'index'])->name('common_senses.index');
 Route::get('/common_senses/{commonSense}/show', [App\Http\Controllers\CommonSenseController::class, 'show'])->name('common_senses.show');
 Route::get('/show_content/{common_sense_id}/{common_sense_category_id}', [App\Http\Controllers\CommonSenseController::class, 'show_content'])->name('common_senses.show_content');

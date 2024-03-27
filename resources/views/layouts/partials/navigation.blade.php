@@ -118,7 +118,7 @@
                                         <a class="dropdown-item" href="/">光明燈登記</a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="/">牌位登記</a>
+                                        <a class="dropdown-item" href="{{ route('tablets.index') }}">牌位登記</a>
                                     </li>
                                 @endif
                             </ul>
