@@ -333,6 +333,8 @@ Route::group(['middleware' => 'admin'], function(){
         Route::get('image_prints/create', [App\Http\Controllers\AdminImagePrintController::class, 'create'])->name("image_prints.create");
         Route::post('image_prints', [App\Http\Controllers\AdminImagePrintController::class, 'store'])->name("image_prints.store");
         Route::get('image_prints/{image_print}/preview', [App\Http\Controllers\AdminImagePrintController::class, 'preview'])->name("image_prints.preview");
+        Route::get('image_prints/{image_print}/review', [App\Http\Controllers\AdminImagePrintController::class, 'review'])->name("image_prints.review");
+
         Route::get('image_prints/{image_print}/edit', [App\Http\Controllers\AdminImagePrintController::class, 'edit'])->name("image_prints.edit");
         Route::patch('image_prints/{image_print}', [App\Http\Controllers\AdminImagePrintController::class, 'update'])->name("image_prints.update");
         Route::delete('image_prints/{image_print}', [App\Http\Controllers\AdminImagePrintController::class, 'destroy'])->name("image_prints.destroy");

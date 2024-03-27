@@ -16,7 +16,7 @@
                             <img src="{{ asset('images/' . $imagePrint->image_url) }}" alt="{{ $imagePrint->name }}" height="450px" width="450px">
                         </div>
                         <div class="card-footer" style="text-align: center;">
-                            <a href="{{ route('admins.image_prints.preview', $imagePrint->id) }}" class="btn btn-secondary btn-sm">影印</a>
+                            <a href="{{ route('admins.image_prints.review', $imagePrint->id) }}" class="btn btn-secondary btn-sm">審核</a>
                         </div>
                     </div>
                 </div>
