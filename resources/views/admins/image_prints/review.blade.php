@@ -4,8 +4,17 @@
 
 @section('page-content')
     <div class="container-fluid px-4">
-        <h1 class="mt-4">{{$imagePrint}}牌位審核</h1>
-        @if($imagePrint == '消災')
+        <div style="margin-top: 10px;">
+            <p style="font-size: 1.8em;">
+                <a href="{{ route('admins.image_prints.index') }}" class="custom-link"><i class="fa fa-home"></i>影印</a> &gt;
+                審核
+            </p>
+        </div>
+        <h1 class="mt-4">{{$imagePrint->name}}牌位審核</h1>
+        @if($imagePrint->name == '消災')
+            <div class="card-footer" style="text-align: center;">
+                <a href="{{ route('admins.image_prints.preview', $imagePrint->id) }}" class="btn btn-secondary btn-sm">影印</a>
+            </div>
             <table class="table">
                 <thead>
                 <tr>
@@ -54,6 +63,9 @@
                 </div>
             </div>
         @else
+            <div class="card-footer" style="text-align: center;">
+                <a href="{{ route('admins.image_prints.preview', $imagePrint->id) }}" class="btn btn-secondary btn-sm">影印</a>
+            </div>
             <table class="table">
                 <thead>
                 <tr>
@@ -91,6 +103,7 @@
                     </tr>
                 @endforeach
                 </tbody>
+
             </table>
             <div class="d-flex justify-content-between align-items-center mt-4">
                 <div class="d-flex align-items-center">
@@ -104,7 +117,6 @@
                 </div>
             </div>
         @endif
-
         <div class="d-flex justify-content-center">
             @if ($users->currentPage() > 1)
                 <a href="{{ $users->previousPageUrl() }}" class="btn btn-secondary">上一頁</a>

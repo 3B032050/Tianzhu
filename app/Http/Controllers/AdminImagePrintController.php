@@ -24,7 +24,6 @@ class AdminImagePrintController extends Controller
 
     public function review(ImagePrint $imagePrint,Request $request)
     {
-        $imagePrint = $imagePrint->name;
         $perPage = $request->input('perPage', 10);
         $users = User::orderby('id','ASC')->paginate($perPage);
         $data = ['users' => $users,
@@ -396,7 +395,8 @@ class AdminImagePrintController extends Controller
 
 
         // 將圖片URL傳遞給視圖
-        $data = ['images' => $images];
+        $data = ['images' => $images,
+        'imagePrint'=>$imagePrint];
 
         // 在網頁上顯示圖片
         return view('admins.image_prints.preview', $data);

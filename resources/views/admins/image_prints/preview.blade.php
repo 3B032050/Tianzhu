@@ -7,6 +7,7 @@
         <div style="margin-top: 10px;">
             <p style="font-size: 1.8em;">
                 <a href="{{ route('admins.image_prints.index') }}" class="custom-link"><i class="fa fa-home"></i>影印</a> &gt;
+                <a href="{{ route('admins.image_prints.review', $imagePrint->id) }}" class="custom-link">{{$imagePrint->name}}牌位審核</a> &gt;
                 預覽圖片
             </p>
         </div>
